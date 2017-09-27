@@ -166,6 +166,16 @@ class RunConfigurationTest: KotlinCodeInsightTestCase() {
         Assert.assertEquals("afterRenameTest.Foo", runConfiguration.MAIN_CLASS_NAME)
     }
 
+    fun testWithModuleForJdk9() {
+        val module = configureModule(moduleDirPath("module"), getTestProject().baseDir!!).module
+        ConfigLibraryUtil.configureKotlinRuntimeAndSdk(module, PluginTestCaseBase.mockJdk9())
+
+        val runConfiguration = createConfigurationFromMain("some.main")
+        val javaParameters = getJavaRunParameters(runConfiguration)
+
+        Assert.assertEquals("MAIN", javaParameters.moduleName)
+    }
+
     private fun doTest(configureRuntime: (Module, Sdk) -> Unit) {
         val baseDir = getTestProject().baseDir!!
         val createModuleResult = configureModule(moduleDirPath("module"), baseDir)
