@@ -25,6 +25,9 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.RootPolicy;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.psi.PsiJavaModule;
+import com.intellij.psi.PsiRequiresStatement;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.cli.common.arguments.K2JSCompilerArguments;
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments;
 import org.jetbrains.kotlin.config.*;
@@ -32,21 +35,19 @@ import org.jetbrains.kotlin.idea.facet.FacetUtilsKt;
 import org.jetbrains.kotlin.idea.facet.KotlinFacet;
 import org.jetbrains.kotlin.idea.framework.JsLibraryStdDetectionUtil;
 import org.jetbrains.kotlin.idea.project.PlatformKt;
+import org.jetbrains.kotlin.idea.util.Java9StructureUtilKt;
 import org.jetbrains.kotlin.idea.versions.KotlinRuntimeLibraryUtilKt;
+import org.jetbrains.kotlin.resolve.jvm.modules.JavaModuleKt;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.stream.StreamSupport;
 
 public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
     public void testNewLibrary_copyJar() {
         doTestOneJavaModule(KotlinWithLibraryConfigurator.FileState.COPY);
-
-        Sdk sdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
-        assertNotNull("Project SDK is not defined", sdk);
-
-        Sdk moduleSdk = ModuleRootManager.getInstance(getModule()).getSdk();
-        assertNotNull("Module SDK is not defined", moduleSdk);
+        assertSDKisSet("1.6");
     }
 
     public void testNewLibrary_doNotCopyJar() {
@@ -244,6 +245,40 @@ public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
         assertEquals("-version -Xallow-kotlin-package -Xskip-metadata-version-check", settings.getCompilerSettings().getAdditionalArguments());
     }
 
+    @SuppressWarnings("ConstantConditions")
+    public void testJava9WithModuleInfo() {
+        checkAddStdlibModule();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void testJava9WithModuleInfoWithStdlibAlready() {
+        checkAddStdlibModule();
+
+        Module module = getModule();
+        PsiJavaModule javaModule = Java9StructureUtilKt.findFirstPsiJavaModule(module);
+        assertNotNull(javaModule);
+
+        long numberOfStdlib = StreamSupport.stream(javaModule.getRequires().spliterator(), false)
+                .filter((statement) -> statement.getModuleName().equals(JavaModuleKt.KOTLIN_STDLIB_MODULE_NAME))
+                .count();
+
+        assertTrue("Only one standard library directive is expected", numberOfStdlib == 1);
+    }
+
+    private void checkAddStdlibModule() {
+        doTestOneJavaModule(KotlinWithLibraryConfigurator.FileState.COPY);
+        assertSDKisSet("9");
+
+        Module module = getModule();
+        PsiJavaModule javaModule = Java9StructureUtilKt.findFirstPsiJavaModule(module);
+        assertNotNull(javaModule);
+
+        PsiRequiresStatement stdlibDirective =
+                Java9StructureUtilKt.findRequireDirective(javaModule, JavaModuleKt.KOTLIN_STDLIB_MODULE_NAME);
+        assertNotNull("Require directive for " + JavaModuleKt.KOTLIN_STDLIB_MODULE_NAME + " is expected",
+                      stdlibDirective);
+    }
+
     private void configureFacetAndCheckJvm(JvmTarget jvmTarget) {
         IdeModifiableModelsProviderImpl modelsProvider = new IdeModifiableModelsProviderImpl(getProject());
         try {
@@ -277,6 +312,16 @@ public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
 
     public void testProjectWithoutFacetWithJvmTarget18() {
         assertEquals(TargetPlatformKind.Jvm.Companion.get(JvmTarget.JVM_1_8), PlatformKt.getTargetPlatform(getModule()));
+    }
+
+    private void assertSDKisSet(@NotNull String versionString) {
+        Sdk sdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
+        assertNotNull("Project SDK is not defined", sdk);
+        assertEquals("Project SDK version is wrong", versionString, sdk.getVersionString());
+
+        Sdk moduleSdk = ModuleRootManager.getInstance(getModule()).getSdk();
+        assertNotNull("Module SDK is not defined", moduleSdk);
+        assertEquals("Module SDK version is wrong", versionString, moduleSdk.getVersionString());
     }
 
     private static class LibraryCountingRootPolicy extends RootPolicy<Integer> {
