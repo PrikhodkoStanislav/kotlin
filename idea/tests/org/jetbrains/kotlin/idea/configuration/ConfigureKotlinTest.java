@@ -18,8 +18,10 @@ package org.jetbrains.kotlin.idea.configuration;
 
 import com.intellij.openapi.externalSystem.service.project.IdeModifiableModelsProviderImpl;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.RootPolicy;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.util.io.FileUtil;
@@ -39,6 +41,12 @@ import java.util.Collections;
 public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
     public void testNewLibrary_copyJar() {
         doTestOneJavaModule(KotlinWithLibraryConfigurator.FileState.COPY);
+
+        Sdk sdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
+        assertNotNull("Project SDK is not defined", sdk);
+
+        Sdk moduleSdk = ModuleRootManager.getInstance(getModule()).getSdk();
+        assertNotNull("Module SDK is not defined", moduleSdk);
     }
 
     public void testNewLibrary_doNotCopyJar() {
