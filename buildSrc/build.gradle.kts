@@ -1,24 +1,27 @@
 
 buildscript {
-    // TODO: find a way to reuse bootstrap.kotlin.* props from the main project
-//    java.util.Properties().also { it.load(java.io.FileInputStream("gradle.properties")) }
-    extra["bootstrap_kotlin_version"] = System.getProperty("bootstrap.kotlin.version") ?: embeddedKotlinVersion
+    val buildSrcKotlinVersion: String by extra(findProperty("buildSrc.kotlin.version")?.toString() ?: embeddedKotlinVersion)
+    extra["buildSrcKotlinRepo"] = findProperty("buildSrc.kotlin.repo")
 
     repositories {
-        System.getProperty("bootstrap.kotlin.repo")?.let {
+        extra["buildSrcKotlinRepo"]?.let {
             maven { setUrl(it) }
         }
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra["bootstrap_kotlin_version"]}")
-        classpath("org.jetbrains.kotlin:kotlin-sam-with-receiver:${rootProject.extra["bootstrap_kotlin_version"]}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$buildSrcKotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-sam-with-receiver:$buildSrcKotlinVersion")
     }
 }
 
+logger.info("buildSrcKotlinVersion: " + extra["buildSrcKotlinVersion"])
+logger.info("buildSrc kotlin compiler version: " + org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION)
+logger.info("buildSrc stdlib version: " + KotlinVersion.CURRENT)
+
 apply {
     plugin("kotlin")
-    plugin("kotlin-sam-with-receiver")
+//    plugin("kotlin-sam-with-receiver")
 }
 
 plugins {
@@ -26,7 +29,7 @@ plugins {
 }
 
 repositories {
-    System.getProperty("bootstrap.kotlin.repo")?.let {
+    extra["buildSrcKotlinRepo"]?.let {
         maven { setUrl(it) }
     }
 //    maven { setUrl("https://repo.gradle.org/gradle/libs-releases-local") }
@@ -39,9 +42,9 @@ dependencies {
 //    compile("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra["bootstrap_kotlin_version"]}")
 }
 
-samWithReceiver {
-    annotation("org.gradle.api.HasImplicitReceiver")
-}
-
-fun Project.`samWithReceiver`(configure: org.jetbrains.kotlin.samWithReceiver.gradle.SamWithReceiverExtension.() -> Unit): Unit =
-        extensions.configure("samWithReceiver", configure)
+//samWithReceiver {
+//    annotation("org.gradle.api.HasImplicitReceiver")
+//}
+//
+//fun Project.`samWithReceiver`(configure: org.jetbrains.kotlin.samWithReceiver.gradle.SamWithReceiverExtension.() -> Unit): Unit =
+//        extensions.configure("samWithReceiver", configure)
