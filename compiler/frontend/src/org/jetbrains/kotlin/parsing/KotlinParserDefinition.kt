@@ -41,6 +41,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtWhenEntry
 import org.jetbrains.kotlin.psi.psiUtil.getNonStrictParentOfType
+import org.jetbrains.kotlin.psi.stubs.elements.KtFileElementType
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementType
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
@@ -60,28 +61,31 @@ class KotlinParserDefinition : ParserDefinition {
 
     override fun createElement(astNode: ASTNode): PsiElement {
         fun printAST(nodes: Array<ASTNode>, depth: Int) {
-            var j = 0;
+            var j = 0
             while (j < nodes.size) {
-                var i = 0;
-                while (i < depth) {
-                    System.out.print("-");
-                    i++;
+                var i = 0
+                while (i <= depth) {
+                    System.out.print("-")
+                    i++
                 }
-                System.out.print(nodes[j].getElementType());
-                System.out.print(nodes[j].getChars());
-                System.out.print("\n");
-                System.out.print("\n");
-                val childs = nodes[j].getChildren(null);
+                System.out.print(nodes[j].getElementType())
+                System.out.print(nodes[j].getChars())
+                System.out.print("\n")
+                System.out.print("\n")
+                val childs = nodes[j].getChildren(null)
                 if (childs != null && childs.size != 0) {
-                    printAST(childs, depth + 1);
+                    printAST(childs, depth + 1)
                 }
-                j++;
+                j++
             }
         }
 
-        ASTNode[] nodes = Array(1, null);
-        nodes.push(astNode);
-        printAST(nodes, 0);
+        if (astNode.getTreeParent().elementType is KtFileElementType) {
+            System.out.print(astNode.getTreeParent().elementType)
+            val nodes: Array<ASTNode> = Array(1) { astNode }
+            printAST(nodes, 0)
+        }
+
         val elementType = astNode.elementType
 
         return when (elementType) {

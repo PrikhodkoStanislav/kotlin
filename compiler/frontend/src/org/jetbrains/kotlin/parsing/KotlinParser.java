@@ -24,7 +24,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 public class KotlinParser implements PsiParser {
@@ -53,13 +52,6 @@ public class KotlinParser implements PsiParser {
             ktParsing.parseFile();
         }
         ASTNode ast = psiBuilder.getTreeBuilt();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonInString = mapper.writeValueAsString(ast);
-            System.out.println(jsonInString);
-        } catch(IOException e) {
-
-        }
         return ast;
     }
 
