@@ -10,12 +10,10 @@ dependencies {
     compile(project(":compiler:resolution"))
     compile(projectDist(":kotlin-script-runtime"))
     compile(commonDep("io.javaslang","javaslang"))
-    compile("com.fasterxml.jackson.core:jackson-core:2.0.2")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.0.2")
+    compile(ideaSdkDeps("gson"))
 }
 
 sourceSets {
     "main" { projectDefault() }
     "test" {}
 }
-

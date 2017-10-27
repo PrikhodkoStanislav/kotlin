@@ -22,9 +22,17 @@ import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IStubFileElementType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.kotlin.KtNodeTypes;
+import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes;
 import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class KotlinParser implements PsiParser {
 
@@ -52,6 +60,10 @@ public class KotlinParser implements PsiParser {
             ktParsing.parseFile();
         }
         ASTNode ast = psiBuilder.getTreeBuilt();
+        if ( ast.getElementType() == KtNodeTypes.KT_FILE && psiFile.getVirtualFile() != null) {
+            AstPrinter astPrinter = new AstPrinter(ast);
+            astPrinter.print();
+        }
         return ast;
     }
 

@@ -60,32 +60,6 @@ class KotlinParserDefinition : ParserDefinition {
     override fun getStringLiteralElements(): TokenSet = KtTokens.STRINGS
 
     override fun createElement(astNode: ASTNode): PsiElement {
-        fun printAST(nodes: Array<ASTNode>, depth: Int) {
-            var j = 0
-            while (j < nodes.size) {
-                var i = 0
-                while (i <= depth) {
-                    System.out.print("-")
-                    i++
-                }
-                System.out.print(nodes[j].getElementType())
-                System.out.print(nodes[j].getChars())
-                System.out.print("\n")
-                System.out.print("\n")
-                val childs = nodes[j].getChildren(null)
-                if (childs != null && childs.size != 0) {
-                    printAST(childs, depth + 1)
-                }
-                j++
-            }
-        }
-
-        if (astNode.getTreeParent().elementType is KtFileElementType) {
-            System.out.print(astNode.getTreeParent().elementType)
-            val nodes: Array<ASTNode> = Array(1) { astNode }
-            printAST(nodes, 0)
-        }
-
         val elementType = astNode.elementType
 
         return when (elementType) {
