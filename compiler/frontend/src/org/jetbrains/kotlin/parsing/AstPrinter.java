@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlin.parsing;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.KtNodeTypes;
 import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider;
 
@@ -37,6 +38,7 @@ public class AstPrinter {
         this.root = root;
     }
 
+    @NotNull
     private JsonArray walk(ArrayList<ASTNode> nodes, JsonArray jsonNodes) {
         for(ASTNode node : nodes) {
             JsonObject jsonNode = new JsonObject();
