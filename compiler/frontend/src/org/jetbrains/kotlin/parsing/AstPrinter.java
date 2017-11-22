@@ -16,9 +16,8 @@
 
 package org.jetbrains.kotlin.parsing;
 
+import com.intellij.lang.ASTNode;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.kotlin.KtNodeTypes;
-import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -58,10 +57,11 @@ public class AstPrinter {
         return jsonNodes;
     }
 
-    public JsonArray print() {
-        JsonArray astJson = this.walk(
-                new ArrayList<ASTNode>(this.root),
-                new JsonArray());
+    public void print() {
+        ArrayList<ASTNode> root = new ArrayList<>();
+        root.add(this.root);
+
+        JsonArray astJson = this.walk(root, new JsonArray());
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
             bw.write(astJson.toString());
