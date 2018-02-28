@@ -6,7 +6,7 @@
 
 # Kotlin Programming Language
 
-**Acadimic version consists intermediate printing of CST (concrete syntax tree)**
+**Academic version consists intermediate printing of CST (concrete syntax tree)**
 
 Welcome to [Kotlin](https://kotlinlang.org/)! Some handy links:
 
