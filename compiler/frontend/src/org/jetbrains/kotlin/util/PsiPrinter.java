@@ -44,6 +44,7 @@ public class PsiPrinter {
         for(ASTNode node : nodes) {
             JsonObject jsonNode = new JsonObject();
             jsonNode.addProperty("type", node.getElementType().toString());
+            jsonNode.addProperty("chars", node.getText());
 
             List<ASTNode> children;
 
