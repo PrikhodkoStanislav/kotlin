@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2017 JetBrains s.r.o.
+ * Copyright 2010-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,38 +14,45 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.parsing;
+package org.jetbrains.kotlin.util;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
 import java.util.Arrays;
+import java.util.List;
 
-public class AstPrinter {
-
-    private static final String FILENAME = "test.json";
-
+public class PsiPrinter {
     private final ASTNode root;
+    private final VirtualFile file;
 
-    public AstPrinter(ASTNode root) {
+    public PsiPrinter(ASTNode root, VirtualFile file) {
         this.root = root;
+        this.file = file;
     }
 
     @NotNull
-    private JsonArray walk(ArrayList<ASTNode> nodes, JsonArray jsonNodes) {
+    private JsonArray walk(List<ASTNode> nodes, JsonArray jsonNodes) {
         for(ASTNode node : nodes) {
             JsonObject jsonNode = new JsonObject();
             jsonNode.addProperty("type", node.getElementType().toString());
 
-            ArrayList<ASTNode> children = new ArrayList<ASTNode>(
-                    Arrays.asList(node.getChildren(null)));
-            if (children.size() != 0) {
+            List<ASTNode> children;
+
+            try {
+                children = Arrays.asList(node.getChildren(null));
+            } catch (ClassCastException e) {
+                children = null;
+            }
+            if (children != null && children.size() != 0) {
                 jsonNode.add(
                         "children",
                         this.walk(children, new JsonArray()));
@@ -58,13 +65,20 @@ public class AstPrinter {
     }
 
     public void print() {
-        ArrayList<ASTNode> root = new ArrayList<>();
+        List<ASTNode> root = new ArrayList<>();
         root.add(this.root);
 
-        JsonArray astJson = this.walk(root, new JsonArray());
+        JsonArray psiJson = this.walk(root, new JsonArray());
+        File psiJsonFile = new File(file.getPath() + ".json");
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
-            bw.write(astJson.toString());
+        try {
+            psiJsonFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(psiJsonFile))) {
+            bw.write(psiJson.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
