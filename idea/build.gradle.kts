@@ -1,6 +1,9 @@
 import org.gradle.jvm.tasks.Jar
 
-apply { plugin("kotlin") }
+plugins {
+    kotlin("jvm")
+    id("jps-compatible")
+}
 
 dependencies {
     testRuntime(intellijDep())
@@ -20,6 +23,7 @@ dependencies {
     compile(project(":compiler:util"))
     compile(project(":kotlin-build-common"))
     compile(project(":compiler:daemon-common"))
+    compile(projectRuntimeJar(":kotlin-daemon-client"))
     compile(project(":kotlin-compiler-runner")) { isTransitive = false }
     compile(project(":compiler:plugin-api"))
     compile(project(":eval4j"))
@@ -34,7 +38,9 @@ dependencies {
     compile(project(":kotlin-script-util")) { isTransitive = false }
 
     compile(commonDep("org.jetbrains.kotlinx", "kotlinx-coroutines-core")) { isTransitive = false }
-    compile("teamcity:markdown")
+    compile(commonDep("org.jetbrains", "markdown"))
+
+    compileOnly(project(":kotlin-daemon-client"))
 
     compileOnly(intellijCoreDep()) { includeJars("intellij-core") }
     compileOnly(intellijDep()) {
@@ -49,7 +55,7 @@ dependencies {
 
     testCompile(project(":kotlin-test:kotlin-test-junit"))
     testCompile(projectTests(":compiler:tests-common"))
-    testCompile(project(":idea:idea-test-framework")) { isTransitive = false }
+    testCompile(projectTests(":idea:idea-test-framework")) { isTransitive = false }
     testCompile(project(":idea:idea-jvm")) { isTransitive = false }
     testCompile(project(":idea:idea-gradle")) { isTransitive = false }
     testCompile(project(":idea:idea-maven")) { isTransitive = false }
@@ -96,11 +102,6 @@ dependencies {
     testRuntime(intellijPluginDep("testng"))
 }
 
-val processResources: Copy by tasks
-processResources.from("../compiler/cli/src") {
-    include("META-INF/extensions/compiler.xml")
-}
-
 sourceSets {
     "main" {
         projectDefault()
@@ -120,9 +121,6 @@ sourceSets {
 projectTest {
     dependsOn(":dist")
     workingDir = rootDir
-    doFirst {
-        systemProperty("idea.home.path", intellijRootDir().canonicalPath)
-    }
 }
 
 testsJar {}

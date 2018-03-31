@@ -1,7 +1,8 @@
 
-apply {
-    plugin("kotlin")
-    plugin("java")
+plugins {
+    java
+    kotlin("jvm")
+    id("jps-compatible")
 }
 
 dependencies {
@@ -11,6 +12,7 @@ dependencies {
     compile(project(":idea:idea-core"))
     compile(project(":idea:idea-android"))
     compile(project(":plugins:uast-kotlin"))
+    compileOnly(project(":kotlin-android-extensions-runtime"))
     compileOnly(intellijCoreDep()) { includeJars("intellij-core") }
     compileOnly(intellijDep()) { includeJars("util", "guava", "openapi", "idea", "asm-all", "annotations", rootProject = rootProject) }
     compileOnly(intellijPluginDep("android")) {

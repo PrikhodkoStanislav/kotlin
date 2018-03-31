@@ -1,5 +1,8 @@
 
-apply { plugin("kotlin") }
+plugins {
+    kotlin("jvm")
+    id("jps-compatible")
+}
 
 dependencies {
     compile(project(":core:util.runtime"))
@@ -20,7 +23,7 @@ dependencies {
 
     testCompile(projectTests(":idea"))
     testCompile(projectTests(":compiler:tests-common"))
-    testCompile(project(":idea:idea-test-framework"))
+    testCompile(projectTests(":idea:idea-test-framework"))
 
     testCompileOnly(intellijDep()) { includeJars("openapi", "idea", "gson", "idea_rt", rootProject = rootProject) }
     testCompileOnly(intellijPluginDep("maven")) { includeJars("maven", "maven-server-api") }
@@ -55,7 +58,4 @@ testsJar()
 
 projectTest {
     workingDir = rootDir
-    doFirst {
-        systemProperty("idea.home.path", intellijRootDir().canonicalPath)
-    }
 }

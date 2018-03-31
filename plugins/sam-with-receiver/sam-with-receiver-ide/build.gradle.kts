@@ -1,7 +1,10 @@
 
 description = "Kotlin SamWithReceiver IDEA Plugin"
 
-apply { plugin("kotlin") }
+plugins {
+    kotlin("jvm")
+    id("jps-compatible")
+}
 
 jvmTarget = "1.6"
 

@@ -27,6 +27,7 @@ import com.intellij.openapi.projectRoots.ex.PathUtilEx
 import org.jetbrains.kotlin.script.KotlinScriptDefinition
 import org.jetbrains.kotlin.script.KotlinScriptDefinitionFromAnnotatedTemplate
 import org.jetbrains.kotlin.script.ScriptDefinitionProvider
+import org.jetbrains.kotlin.script.ScriptTemplatesProvider
 import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlin.utils.addToStdlib.flattenTo
 import java.io.File
@@ -53,7 +54,17 @@ class ScriptDefinitionsManager(private val project: Project): ScriptDefinitionPr
         if (contributor !in definitionsByContributor) error("Unknown contributor: ${contributor.id}")
 
         definitionsByContributor[contributor] = contributor.safeGetDefinitions()
+
         updateDefinitions()
+    }
+
+    fun getDefinitionsBy(contributor: ScriptDefinitionContributor): List<KotlinScriptDefinition> = lock.write {
+        val notLoadedYet = definitions.isEmpty()
+        if (notLoadedYet) return emptyList()
+
+        if (contributor !in definitionsByContributor) error("Unknown contributor: ${contributor.id}")
+
+        return definitionsByContributor[contributor] ?: emptyList()
     }
 
     private fun currentDefinitions(): List<KotlinScriptDefinition> {
@@ -84,7 +95,11 @@ class ScriptDefinitionsManager(private val project: Project): ScriptDefinitionPr
     }
 
     fun reloadScriptDefinitions() = lock.write {
-        definitionsByContributor = getContributors().associateByTo(mutableMapOf(), { it }, { it.safeGetDefinitions() })
+        for (contributor in getContributors()) {
+            val definitions = contributor.safeGetDefinitions()
+            definitionsByContributor[contributor] = definitions
+        }
+
         updateDefinitions()
     }
 

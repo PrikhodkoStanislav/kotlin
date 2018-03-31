@@ -29,11 +29,14 @@ import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluat
 import org.jetbrains.kotlin.resolve.lazy.BodyResolveMode
 
 class ConvertToStringTemplateInspection : IntentionBasedInspection<KtBinaryExpression>(
-        ConvertToStringTemplateIntention::class,
-        { it -> ConvertToStringTemplateIntention.shouldSuggestToConvert(it) }
+    ConvertToStringTemplateIntention::class,
+    { it -> ConvertToStringTemplateIntention.shouldSuggestToConvert(it) }
 )
 
-open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentIntention<KtBinaryExpression>(KtBinaryExpression::class.java, "Convert concatenation to template") {
+open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentIntention<KtBinaryExpression>(
+    KtBinaryExpression::class.java,
+    "Convert concatenation to template"
+) {
     override fun isApplicableTo(element: KtBinaryExpression): Boolean {
         if (!isApplicableToNoParentCheck(element)) return false
 
@@ -51,9 +54,9 @@ open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentInte
         fun shouldSuggestToConvert(expression: KtBinaryExpression): Boolean {
             val entries = buildReplacement(expression).entries
             return entries.none { it is KtBlockStringTemplateEntry }
-                   && !entries.all { it is KtLiteralStringTemplateEntry || it is KtEscapeStringTemplateEntry }
-                   && entries.count { it is KtLiteralStringTemplateEntry } > 1
-                   && !expression.textContains('\n')
+                    && !entries.all { it is KtLiteralStringTemplateEntry || it is KtEscapeStringTemplateEntry }
+                    && entries.count { it is KtLiteralStringTemplateEntry } >= 1
+                    && !expression.textContains('\n')
         }
 
         @JvmStatic
@@ -68,8 +71,7 @@ open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentInte
             return if (left is KtBinaryExpression && isApplicableToNoParentCheck(left)) {
                 val leftRight = buildText(left.right, forceBraces)
                 fold(left.left, leftRight + right, factory)
-            }
-            else {
+            } else {
                 val leftText = buildText(left, forceBraces)
                 factory.createExpression("\"$leftText$right\"") as KtStringTemplateExpression
             }
@@ -85,12 +87,12 @@ open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentInte
                     val type = bindingContext.getType(expression)!!
 
                     if (KotlinBuiltIns.isChar(type)) {
-                        val value = expressionText.removePrefix("'").removeSuffix("'")
-                        return when (value) { // escape double quote and unescape single one
-                            "\"" -> "\\\""
-                            "\\'" -> "'"
-                            else -> value
-                        }
+                        return expressionText
+                            .removePrefix("'")
+                            .removeSuffix("'")
+                            .replace("\"", "\\\"")
+                            .replace("\\'", "'")
+                            .run { if (forceBraces) replace("$", "\\$") else this }
                     }
 
                     val constant = ConstantExpressionEvaluator.getConstant(expression, bindingContext)
@@ -104,16 +106,14 @@ open class ConvertToStringTemplateIntention : SelfTargetingOffsetIndependentInte
                     val base = if (expressionText.startsWith("\"\"\"") && expressionText.endsWith("\"\"\"")) {
                         val unquoted = expressionText.substring(3, expressionText.length - 3)
                         StringUtil.escapeStringCharacters(unquoted)
-                    }
-                    else {
+                    } else {
                         StringUtil.unquoteString(expressionText)
                     }
 
                     if (forceBraces) {
                         if (base.endsWith('$')) {
                             return base.dropLast(1) + "\\$"
-                        }
-                        else {
+                        } else {
                             val lastPart = expression.children.lastOrNull()
                             if (lastPart is KtSimpleNameStringTemplateEntry) {
                                 return base.dropLast(lastPart.textLength) + "\${" + lastPart.text.drop(1) + "}"

@@ -1,7 +1,10 @@
 
 description = "Annotation Processor for Kotlin"
 
-apply { plugin("kotlin") }
+plugins {
+    kotlin("jvm")
+    id("jps-compatible")
+}
 
 dependencies {
     testCompileOnly(intellijCoreDep()) { includeJars("intellij-core") }
@@ -22,15 +25,13 @@ dependencies {
     testCompile(projectTests(":compiler:tests-common"))
     testCompile(commonDep("junit:junit"))
     testCompile(project(":kotlin-annotation-processing-runtime"))
+
+    embeddedComponents(project(":kotlin-annotation-processing-runtime")) { isTransitive = false }
 }
 
 sourceSets {
     "main" { projectDefault() }
     "test" { projectDefault() }
-}
-
-runtimeJar {
-    from(getSourceSetsFrom(":kotlin-annotation-processing-runtime")["main"].output.classesDirs)
 }
 
 testsJar {}
@@ -40,7 +41,10 @@ projectTest {
     dependsOn(":dist")
 }
 
-runtimeJar()
+runtimeJar {
+    fromEmbeddedComponents()
+}
+
 sourcesJar()
 javadocJar()
 
