@@ -5,7 +5,9 @@ plugins {
 description = 'Kotlin Standard Library for JS'
 
 apply plugin: 'kotlin2js'
+apply plugin: 'idea'
 
+configureDist(project)
 configurePublishing(project)
 
 
@@ -58,6 +60,12 @@ configurations {
 dependencies {
     testCompile project(':kotlin-test:kotlin-test-js')
     merger project(":tools:kotlin-stdlib-js-merger")
+}
+
+idea {
+    module {
+        excludeDirs = excludeDirs + files('node_modules')
+    }
 }
 
 createPreprocessorTask(project, "Main", "${projectDir}/../src/kotlin", commonSrcDir)
@@ -118,6 +126,7 @@ compileBuiltinsKotlin2Js {
         metaInfo = false
         outputFile = "${buildDir}/classes/builtins/kotlin.js"
         sourceMap = true
+        sourceMapPrefix = "./"
     }
 }
 
@@ -126,6 +135,8 @@ compileKotlin2Js {
     kotlinOptions {
         outputFile = "${buildDir}/classes/main/kotlin.js"
         sourceMap = true
+        sourceMapPrefix = "./"
+        freeCompilerArgs += [ "-source-map-base-dirs", [builtinsSrcDir, jsSrcDir, commonSrcDir ].join(File.pathSeparator) ]
     }
 }
 
@@ -149,8 +160,10 @@ task compileJs(type: JavaExec) {
     }
 
     main = "org.jetbrains.kotlin.js.FileMergerKt"
-    args = [jsOutputFile, "$rootDir/../", "$jsSrcDir/wrapper.js"] + inputFiles.collect { it.path } +
-           ["$buildDir/classes/builtins/kotlin.js", "$buildDir/classes/main/kotlin.js"]
+    doFirst {
+        args = [jsOutputFile, rootDir, "$jsSrcDir/wrapper.js"] + inputFiles.collect { it.path } +
+               ["$buildDir/classes/builtins/kotlin.js", "$buildDir/classes/main/kotlin.js"]
+    }
     classpath = configurations.merger
 
     doLast {
@@ -172,23 +185,20 @@ task compileJs(type: JavaExec) {
 
         def sourceMapFile = file("${jsOutputFile}.map")
         def sourceMap = new groovy.json.JsonSlurper().parseText(sourceMapFile.text)
-        def sourceMapSourcesBaseDirs = [ "${rootDir}/..", jsSrcJsDir ]
-
-        sourceMap.sourcesContent = sourceMap.sources.collect { sourceName ->
-            sourceMapSourcesBaseDirs.collect { file("$it/$sourceName") }.find { it.exists() && it.name != "kotlin.js" }?.text
-        }
 
         def sourceMapBasePaths = [
-                "js/js.libraries/src/",
-                "libraries/stdlib/js/build/builtin-sources/",
-                "libraries/stdlib/js/build/builtin-sources-for-builtins/",
-                "libraries/stdlib/js/build/builtin-sources-for-builtins/",
-                "libraries/stdlib/js/build/common-sources/"
+                "./",
+                "/js.libraries/src/js/"
         ]
-
         sourceMap.sources = sourceMap.sources.collect { sourcePath ->
             def prefixToRemove = sourceMapBasePaths.find { basePath -> sourcePath.startsWith(basePath) }
             if (prefixToRemove != null) sourcePath.substring(prefixToRemove.length()) else sourcePath
+        }
+
+        def sourceMapSourcesBaseDirs = [ jsSrcDir, builtinsSrcDir2, builtinsSrcDir, commonSrcDir, rootDir ]
+
+        sourceMap.sourcesContent = sourceMap.sources.collect { sourceName ->
+            sourceMapSourcesBaseDirs.collect { file("$it/$sourceName") }.find { it.exists() && it.name != "kotlin.js" }?.text
         }
 
         sourceMapFile.text = groovy.json.JsonOutput.toJson(sourceMap)
@@ -282,6 +292,7 @@ karma {
 
 karmaGenerateConfig.outputs.upToDateWhen { false }
 karmaRun {
+    ignoreExitValue = Boolean.valueOf(ignoreTestFailures)
     dependsOn testClasses
     dependsOn tasks.getByPath(':kotlin-test:kotlin-test-js:testClasses')
 }

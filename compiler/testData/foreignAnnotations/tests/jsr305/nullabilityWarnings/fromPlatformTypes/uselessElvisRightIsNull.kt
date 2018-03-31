@@ -1,5 +1,5 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-// WARNING_FOR_JSR305_ANNOTATIONS
+// JSR305_GLOBAL_REPORT warn
 
 // FILE: J.java
 
@@ -28,7 +28,7 @@ fun test() {
     foo(a)
     val b = JJ.staticNN ?: null
     foo(b)
-    val c = JJJ.staticNNN ?: <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>null<!>
+    val c = JJJ.staticNNN ?: null
     foo(c)
 }
 

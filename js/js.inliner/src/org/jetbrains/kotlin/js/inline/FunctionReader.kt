@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.builtins.isFunctionTypeOrSubtype
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.backend.ast.metadata.*
+import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 import org.jetbrains.kotlin.js.config.JsConfig
 import org.jetbrains.kotlin.js.inline.util.*
 import org.jetbrains.kotlin.js.parser.OffsetToSourceMapping
@@ -77,7 +78,8 @@ class FunctionReader(
             val kotlinVariable: String,
             val specialFunctions: Map<String, SpecialFunction>,
             offsetToSourceMappingProvider: () -> OffsetToSourceMapping,
-            val sourceMap: SourceMap?
+            val sourceMap: SourceMap?,
+            val outputDir: File?
     ) {
         val offsetToSourceMapping by lazy(offsetToSourceMappingProvider)
 
@@ -89,7 +91,7 @@ class FunctionReader(
     private val moduleNameToInfo by lazy {
         val result = HashMultimap.create<String, ModuleInfo>()
 
-        JsLibraryUtils.traverseJsLibraries(config.libraries.map(::File)) { (content, path, sourceMapContent) ->
+        JsLibraryUtils.traverseJsLibraries(config.libraries.map(::File)) { (content, path, sourceMapContent, file) ->
             var current = 0
 
             while (true) {
@@ -131,7 +133,8 @@ class FunctionReader(
                         kotlinVariable = kotlinVariable,
                         specialFunctions = specialFunctions,
                         offsetToSourceMappingProvider = { OffsetToSourceMapping(content) },
-                        sourceMap = sourceMap
+                        sourceMap = sourceMap,
+                        outputDir = file?.parentFile
                 )
 
                 result.put(moduleName, moduleInfo)
@@ -142,6 +145,8 @@ class FunctionReader(
     }
 
     private val moduleNameMap: Map<String, JsExpression>
+    private val shouldRemapPathToRelativeForm = config.shouldGenerateRelativePathsInSourceMap()
+    private val relativePathCalculator = config.configuration[JSConfigurationKeys.OUTPUT_DIR]?.let { RelativePathCalculator(it) }
 
     init {
         moduleNameMap = buildModuleNameMap(fragments)
@@ -228,7 +233,8 @@ class FunctionReader(
         }
 
         val position = info.offsetToSourceMapping[offset]
-        val functionExpr = parseFunction(source, info.filePath, position, offset, ThrowExceptionOnErrorReporter, JsRootScope(JsProgram())) ?:
+        val jsScope = JsRootScope(JsProgram())
+        val functionExpr = parseFunction(source, info.filePath, position, offset, ThrowExceptionOnErrorReporter, jsScope) ?:
                            return null
         functionExpr.fixForwardNameReferences()
         val (function, wrapper) = if (isWrapped) {
@@ -242,7 +248,9 @@ class FunctionReader(
 
         val sourceMap = info.sourceMap
         if (sourceMap != null) {
-            val remapper = SourceMapLocationRemapper(sourceMap)
+            val remapper = SourceMapLocationRemapper(sourceMap) {
+                remapPath(removeRedundantPathPrefix(it), info)
+            }
             remapper.remap(function)
             wrapperStatements?.forEach { remapper.remap(it) }
         }
@@ -254,12 +262,7 @@ class FunctionReader(
         wrapperStatements?.forEach { replaceExternalNames(it, replacements, allDefinedNames) }
         function.markInlineArguments(descriptor)
         markDefaultParams(function)
-
-        for (externalName in (collectReferencedNames(function) - allDefinedNames)) {
-            info.specialFunctions[externalName.ident]?.let {
-                externalName.specialFunction = it
-            }
-        }
+        markSpecialFunctions(function, allDefinedNames, info, jsScope)
 
         val namesWithoutSizeEffects = wrapperStatements.orEmpty().asSequence()
                 .flatMap { collectDefinedNames(it).asSequence() }
@@ -282,6 +285,33 @@ class FunctionReader(
         return FunctionWithWrapper(function, wrapper)
     }
 
+    private fun markSpecialFunctions(function: JsFunction, allDefinedNames: Set<JsName>, info: ModuleInfo, scope: JsScope) {
+        for (externalName in (collectReferencedNames(function) - allDefinedNames)) {
+            info.specialFunctions[externalName.ident]?.let {
+                externalName.specialFunction = it
+            }
+        }
+
+        function.body.accept(object : RecursiveJsVisitor() {
+            override fun visitNameRef(nameRef: JsNameRef) {
+                super.visitNameRef(nameRef)
+                markQualifiedSpecialFunction(nameRef)
+            }
+
+            private fun markQualifiedSpecialFunction(nameRef: JsNameRef) {
+                val qualifier = nameRef.qualifier as? JsNameRef ?: return
+                if (qualifier.ident != info.kotlinVariable || qualifier.qualifier != null) return
+                if (nameRef.name?.specialFunction != null) return
+
+                val specialFunction = specialFunctionsByName[nameRef.ident] ?: return
+                if (nameRef.name == null) {
+                    nameRef.name = scope.declareName(nameRef.ident)
+                }
+                nameRef.name!!.specialFunction = specialFunction
+            }
+        })
+    }
+
     private fun markDefaultParams(function: JsFunction) {
         val paramsByNames = function.parameters.associate { it.name to it }
         for (ifStatement in function.body.statements) {
@@ -300,6 +330,25 @@ class FunctionReader(
 
             param.hasDefaultValue = true
         }
+    }
+
+    private fun removeRedundantPathPrefix(path: String): String {
+        var index = 0
+        while (index + 2 <= path.length && path.substring(index, index + 2) == "./") {
+            index += 2
+            while (index < path.length && path[index] == '/') {
+                ++index
+            }
+        }
+
+        return path.substring(index)
+    }
+
+    private fun remapPath(path: String, info: ModuleInfo): String {
+        if (!shouldRemapPathToRelativeForm) return path
+        val outputDir = info.outputDir ?: return path
+        val calculator = relativePathCalculator ?: return path
+        return calculator.calculateRelativePathTo(File(outputDir, path)) ?: path
     }
 }
 

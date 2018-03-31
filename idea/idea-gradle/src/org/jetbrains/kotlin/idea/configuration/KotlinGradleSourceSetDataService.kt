@@ -33,7 +33,9 @@ import com.intellij.openapi.roots.impl.libraries.LibraryEx
 import com.intellij.openapi.roots.impl.libraries.LibraryImpl
 import com.intellij.openapi.roots.libraries.PersistentLibraryKind
 import com.intellij.util.PathUtil
+import org.jetbrains.kotlin.cli.common.arguments.K2JSCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
+import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.config.CoroutineSupport
 import org.jetbrains.kotlin.config.JvmTarget
 import org.jetbrains.kotlin.config.LanguageFeature
@@ -205,16 +207,21 @@ private fun configureFacetByGradleModule(
         adjustClasspath(kotlinFacet, dependencyClasspath)
     }
 
-    kotlinFacet.configuration.settings.implementedModuleName = getImplementedModuleName(moduleNode, sourceSetName)
+    with(kotlinFacet.configuration.settings) {
+        implementedModuleName = (sourceSetNode ?: moduleNode).implementedModuleName
+        productionOutputPath = getExplicitOutputPath(moduleNode, platformKind, "main")
+        testOutputPath = getExplicitOutputPath(moduleNode, platformKind, "test")
+    }
+
+    kotlinFacet.noVersionAutoAdvance()
 
     return kotlinFacet
 }
 
-private fun getImplementedModuleName(moduleNode: DataNode<ModuleData>, sourceSetName: String?): String? {
-    val baseModuleName = moduleNode.implementedModule?.data?.internalName
-    if (baseModuleName == null || sourceSetName == null) return baseModuleName
-    val delimiter = if(isQualifiedModuleNamesEnabled()) "." else "_"
-    return "$baseModuleName$delimiter$sourceSetName"
+private fun getExplicitOutputPath(moduleNode: DataNode<ModuleData>, platformKind: TargetPlatformKind<*>?, sourceSet: String): String? {
+    if (platformKind !is TargetPlatformKind.JavaScript) return null
+    val k2jsArgumentList = moduleNode.compilerArgumentsBySourceSet?.get(sourceSet)?.currentArguments ?: return null
+    return K2JSCompilerArguments().apply { parseCommandLineArguments(k2jsArgumentList, this) }.outputFile
 }
 
 private fun adjustClasspath(kotlinFacet: KotlinFacet, dependencyClasspath: List<String>) {

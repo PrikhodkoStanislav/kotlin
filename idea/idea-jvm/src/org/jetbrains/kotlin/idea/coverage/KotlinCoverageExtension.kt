@@ -33,16 +33,14 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiNamedElement
 import org.jetbrains.kotlin.fileClasses.JvmFileClassUtil
-import org.jetbrains.kotlin.idea.run.JetRunConfiguration
+import org.jetbrains.kotlin.idea.run.KotlinRunConfiguration
 import org.jetbrains.kotlin.idea.util.application.runReadAction
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 class KotlinCoverageExtension : JavaCoverageEngineExtension() {
-    private val LOG = Logger.getInstance(KotlinCoverageExtension::class.java)
-
-    override fun isApplicableTo(conf: RunConfigurationBase?): Boolean = conf is JetRunConfiguration
+    override fun isApplicableTo(conf: RunConfigurationBase?): Boolean = conf is KotlinRunConfiguration
 
     override fun suggestQualifiedName(sourceFile: PsiFile, classes: Array<out PsiClass>, names: MutableSet<String>): Boolean {
         if (sourceFile is KtFile) {
@@ -55,9 +53,10 @@ class KotlinCoverageExtension : JavaCoverageEngineExtension() {
         return false
     }
 
-    // Implements API added in IDEA 14.1
-    override fun getSummaryCoverageInfo(coverageAnnotator: JavaCoverageAnnotator,
-                               element: PsiNamedElement): PackageAnnotator.ClassCoverageInfo? {
+    override fun getSummaryCoverageInfo(
+        coverageAnnotator: JavaCoverageAnnotator,
+        element: PsiNamedElement
+    ): PackageAnnotator.ClassCoverageInfo? {
         if (element !is KtFile) {
             return null
         }
@@ -67,17 +66,18 @@ class KotlinCoverageExtension : JavaCoverageEngineExtension() {
         return if (qualifiedNames == null) null else totalCoverageForQualifiedNames(coverageAnnotator, qualifiedNames)
     }
 
-    // Implements API added in IDEA 14.1
     override fun keepCoverageInfoForClassWithoutSource(bundle: CoverageSuitesBundle, classFile: File): Boolean {
         // TODO check scope and source roots
         return true  // keep everything, sort it out later
     }
 
-    override fun collectOutputFiles(srcFile: PsiFile,
-                                    output: VirtualFile?,
-                                    testoutput: VirtualFile?,
-                                    suite: CoverageSuitesBundle,
-                                    classFiles: MutableSet<File>): Boolean {
+    override fun collectOutputFiles(
+        srcFile: PsiFile,
+        output: VirtualFile?,
+        testoutput: VirtualFile?,
+        suite: CoverageSuitesBundle,
+        classFiles: MutableSet<File>
+    ): Boolean {
         if (srcFile is KtFile) {
             val fileIndex = ProjectRootManager.getInstance(srcFile.getProject()).fileIndex
             if (fileIndex.isInLibraryClasses(srcFile.getVirtualFile()) ||
@@ -103,15 +103,17 @@ class KotlinCoverageExtension : JavaCoverageEngineExtension() {
             if (existingClassFiles.isEmpty()) {
                 return null
             }
-            LOG.debug("Classfiles: [${existingClassFiles.joinToString { it.name }}]")
+            LOG.debug("ClassFiles: [${existingClassFiles.joinToString { it.name }}]")
             return existingClassFiles.map {
                 val relativePath = VfsUtilCore.getRelativePath(it, outputRoot!!)!!
                 StringUtil.trimEnd(relativePath, ".class").replace("/", ".")
             }
         }
 
-        private fun totalCoverageForQualifiedNames(coverageAnnotator: JavaCoverageAnnotator,
-                                                   qualifiedNames: List<String>): PackageAnnotator.ClassCoverageInfo {
+        private fun totalCoverageForQualifiedNames(
+            coverageAnnotator: JavaCoverageAnnotator,
+            qualifiedNames: List<String>
+        ): PackageAnnotator.ClassCoverageInfo {
             val result = PackageAnnotator.ClassCoverageInfo()
             result.totalClassCount = 0
             qualifiedNames.forEach {
@@ -124,8 +126,7 @@ class KotlinCoverageExtension : JavaCoverageEngineExtension() {
                     result.totalLineCount += classInfo.totalLineCount
                     result.fullyCoveredLineCount += classInfo.fullyCoveredLineCount
                     result.partiallyCoveredLineCount += classInfo.partiallyCoveredLineCount
-                }
-                else {
+                } else {
                     LOG.debug("Found no coverage for $it")
                 }
             }
@@ -138,12 +139,12 @@ class KotlinCoverageExtension : JavaCoverageEngineExtension() {
             if (packageOutputDir == null) return listOf()
 
             val prefixes = collectClassFilePrefixes(file)
-            LOG.debug("Classfile prefixes: [${prefixes.joinToString(", ")}]")
-            return packageOutputDir.children.filter {
-                file -> prefixes.any {
-                (file.name.startsWith(it + "$") && FileUtilRt.getExtension(file.name) == "class") ||
-                file.name == it + ".class"
-            }
+            LOG.debug("ClassFile prefixes: [${prefixes.joinToString(", ")}]")
+            return packageOutputDir.children.filter { packageFile ->
+                prefixes.any {
+                    (packageFile.name.startsWith(it + "$") && FileUtilRt.getExtension(packageFile.name) == "class") ||
+                            packageFile.name == it + ".class"
+                }
             }
         }
 

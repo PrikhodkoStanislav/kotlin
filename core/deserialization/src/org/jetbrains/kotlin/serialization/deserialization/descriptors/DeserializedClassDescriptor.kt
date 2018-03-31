@@ -73,8 +73,8 @@ class DeserializedClassDescriptor(
             (containingDeclaration as? DeserializedClassDescriptor)?.thisAsProtoContainer
     )
 
-    val sinceKotlinInfo: SinceKotlinInfo?
-        get() = SinceKotlinInfo.create(classProto, c.nameResolver, c.sinceKotlinInfoTable)
+    val versionRequirement: VersionRequirement?
+        get() = VersionRequirement.create(classProto, c.nameResolver, c.versionRequirementTable)
 
     override val annotations =
             if (!Flags.HAS_ANNOTATIONS.get(classProto.flags)) {
@@ -194,8 +194,6 @@ class DeserializedClassDescriptor(
         }
 
         override fun getParameters() = parameters()
-
-        override fun isFinal(): Boolean = isFinalClass
 
         override fun isDenotable() = true
 

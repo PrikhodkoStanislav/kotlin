@@ -46,11 +46,7 @@ You also can use [Gradle properties](https://docs.gradle.org/current/userguide/b
 
 ## Building
 
-To build this project, first time you try to build you need to run this:
-
-    ant -f update_dependencies.xml
-
-which will setup the dependencies on
+On the first project configuration gradle will download and setup the dependencies on
 
 * `intellij-core` is a part of command line compiler and contains only necessary APIs.
 * `idea-full` is a full blown IntelliJ IDEA Community Edition to be used in the plugin module.
@@ -73,7 +69,7 @@ on Windows.
 - `install` - build and install all public artifacts into local maven repository
 - `runIde` - build IDEA plugin and run IDEA with it
 - `coreLibsTest` - build and run stdlib, reflect and kotlin-test tests
-- `gradlePluginsTest` - build and run gradle plugin tests
+- `gradlePluginTest` - build and run gradle plugin tests
 - `compilerTest` - build and run all compiler tests
 - `ideaPluginTest` - build and run all IDEA plugin tests
 
@@ -85,7 +81,7 @@ Refer to [libraries/ReadMe.md](libraries/ReadMe.md) for details.
 
 ## Working with the project in IntelliJ IDEA
 
-Working with the Kotlin project requires IntelliJ IDEA 2017.3. You can download an Early Access Preview version of IntelliJ IDEA 2017.3 [here](https://www.jetbrains.com/idea/nextversion/).
+Working with the Kotlin project requires IntelliJ IDEA 2017.3. You can download IntelliJ IDEA 2017.3 [here](https://www.jetbrains.com/idea/download).
 
 To import the project in Intellij choose project directory in Open project dialog. Then, after project opened, Select 
 `File` -> `New...` -> `Module from Existing Sources` in the menu, and select `build.gradle.kts` file in the project's root folder.
@@ -126,11 +122,6 @@ macro to include code from a test function. The benefits of this approach are tw
 Also the [JavaScript translation](https://github.com/JetBrains/kotlin/blob/master/js/ReadMe.md) could really use your help. See the [JavaScript contribution section](https://github.com/JetBrains/kotlin/blob/master/js/ReadMe.md) for more details.
 
 Some of the code in the standard library is created by generating code from templates. See the [README](libraries/stdlib/ReadMe.md) in the stdlib section for how run the code generator. The existing templates can be used as examples for creating new ones.
-
-### Running specific generated tests
-
-If you need to debug a specific generated test, ensure that you have the `Working directory` in your IntelliJ run configuration set
-to the root directory of this project. If you don't, every test you try to run will fail with a `No such file or directory` exception.
 
 ## Submitting patches
 

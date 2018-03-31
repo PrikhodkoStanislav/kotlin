@@ -24,15 +24,15 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.KtNodeTypes;
-import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider;
+import org.jetbrains.kotlin.script.ScriptDefinitionProvider;
 import org.jetbrains.kotlin.util.PsiPrinter;
 
 public class KotlinParser implements PsiParser {
 
-    private final KotlinScriptDefinitionProvider scriptDefinitionProvider;
+    private final ScriptDefinitionProvider scriptDefinitionProvider;
 
     public KotlinParser(Project project) {
-        scriptDefinitionProvider = KotlinScriptDefinitionProvider.getInstance(project);
+        scriptDefinitionProvider = ScriptDefinitionProvider.Companion.getInstance(project);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package org.jetbrains.kotlin.gradle
 
 import org.gradle.api.logging.LogLevel
-import com.intellij.openapi.util.io.FileUtil
 import org.jetbrains.kotlin.gradle.util.*
 import org.junit.After
 import org.junit.AfterClass
@@ -21,7 +20,7 @@ abstract class BaseGradleIT {
 
     @Before
     fun setUp() {
-        workingDir = FileUtil.createTempDirectory("BaseGradleIT", null)
+        workingDir = createTempDir("BaseGradleIT")
         acceptAndroidSdkLicenses()
     }
 
@@ -38,7 +37,7 @@ abstract class BaseGradleIT {
         val sdkLicense = File(sdkLicenses, "android-sdk-license")
         if (!sdkLicense.exists()) {
             sdkLicense.createNewFile()
-            sdkLicense.writeText("8933bad161af4178b1185d1a37fbf41ea5269c55")
+            sdkLicense.writeText("d56f5187479451eabf01fb78af6dfcb131a6481e")
         }
 
         val sdkPreviewLicense = File(sdkLicenses, "android-sdk-preview-license")
@@ -105,7 +104,7 @@ abstract class BaseGradleIT {
         }
 
         private fun createNewWrapperDir(version: String): File =
-                FileUtil.createTempDirectory("GradleWrapper-", version, /* deleteOnExit */ true)
+            createTempDir("GradleWrapper-$version")
                         .apply {
                             File(BaseGradleIT.resourcesRootFile, "GradleWrapper").copyRecursively(this)
                             val wrapperProperties = File(this, "gradle/wrapper/gradle-wrapper.properties")
@@ -146,7 +145,10 @@ abstract class BaseGradleIT {
             val debug: Boolean = false,
             val freeCommandLineArgs: List<String> = emptyList(),
             val kotlinVersion: String = KOTLIN_VERSION,
-            val kotlinDaemonDebugPort: Int? = null)
+            val kotlinDaemonDebugPort: Int? = null,
+            val usePreciseJavaTracking: Boolean? = null,
+            val withBuildCache: Boolean = false
+    )
 
     open inner class Project(
             val projectName: String,
@@ -297,7 +299,7 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertNoWarnings() {
-        val warnings = "w: .*$".toRegex().findAll(output).map { it.groupValues[0] }
+        val warnings = "w: .*".toRegex().findAll(output).map { it.groupValues[0] }
 
         if (warnings.any()) {
             val message = (listOf("Output should not contain any warnings:") + warnings).joinToString(SYSTEM_LINE_SEPARATOR)
@@ -342,8 +344,8 @@ abstract class BaseGradleIT {
     }
 
     fun CompiledProject.assertContainFiles(expected: Iterable<String>, actual: Iterable<String>, messagePrefix: String = ""): CompiledProject {
-        val expectedNormalized = expected.map(FileUtil::normalize).toSortedSet()
-        val actualNormalized = actual.map(FileUtil::normalize).toSortedSet()
+        val expectedNormalized = expected.map(::normalizePath).toSortedSet()
+        val actualNormalized = actual.map(::normalizePath).toSortedSet()
         assertTrue(actualNormalized.containsAll(expectedNormalized), messagePrefix + "expected files: ${expectedNormalized.joinToString()}\n  !in actual files: ${actualNormalized.joinToString()}")
         return this
     }
@@ -404,6 +406,12 @@ abstract class BaseGradleIT {
         }
     }
 
+    val Project.allKotlinFiles: Iterable<File>
+        get() = projectDir.allKotlinFiles()
+
+    fun Project.projectFile(name: String): File =
+        projectDir.getFileByName(name)
+
     fun CompiledProject.assertCompiledJavaSources(
             sources: Iterable<String>,
             weakTesting: Boolean = false
@@ -419,19 +427,35 @@ abstract class BaseGradleIT {
     private fun Project.createGradleTailParameters(options: BuildOptions, params: Array<out String> = arrayOf()): List<String> =
             params.toMutableList().apply {
                 add("--stacktrace")
-                add("--${minLogLevel.name.toLowerCase()}")
+                when (minLogLevel) {
+                    // Do not allow to configure Gradle project with `ERROR` log level (error logs visible on all log levels)
+                    LogLevel.ERROR -> error("Log level ERROR is not supported by Gradle command-line")
+                    // Omit log level argument for default `LIFECYCLE` log level,
+                    // because there is no such command-line option `--lifecycle`
+                    // see https://docs.gradle.org/current/userguide/logging.html#sec:choosing_a_log_level
+                    LogLevel.LIFECYCLE -> Unit
+                    //Command line option for other log levels
+                    else -> add("--${minLogLevel.name.toLowerCase()}")
+                }
                 if (options.daemonOptionSupported) {
                     add(if (options.withDaemon) "--daemon" else "--no-daemon")
                 }
 
                 add("-Pkotlin_version=" + options.kotlinVersion)
                 options.incremental?.let { add("-Pkotlin.incremental=$it") }
+                options.usePreciseJavaTracking?.let { add("-Pkotlin.incremental.usePreciseJavaTracking=$it") }
                 options.androidGradlePluginVersion?.let { add("-Pandroid_tools_version=$it")}
                 if (options.debug) {
                     add("-Dorg.gradle.debug=true")
                 }
                 options.kotlinDaemonDebugPort?.let { port ->
                     add("-Dkotlin.daemon.jvm.options=-agentlib:jdwp=transport=dt_socket\\,server=y\\,suspend=y\\,address=$port")
+                }
+                System.getProperty("maven.repo.local")?.let {
+                    add("-Dmaven.repo.local=$it") // TODO: proper escaping
+                }
+                if (options.withBuildCache) {
+                    add("--build-cache")
                 }
                 addAll(options.freeCommandLineArgs)
             }

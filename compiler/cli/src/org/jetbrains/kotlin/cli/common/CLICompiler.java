@@ -22,6 +22,7 @@ import kotlin.collections.ArraysKt;
 import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.kotlin.analyzer.AnalysisResult;
 import org.jetbrains.kotlin.cli.common.arguments.CommonCompilerArguments;
 import org.jetbrains.kotlin.cli.common.messages.GroupingMessageCollector;
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector;
@@ -69,7 +70,7 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> extends CLI
     @NotNull
     @Override
     public ExitCode execImpl(@NotNull MessageCollector messageCollector, @NotNull Services services, @NotNull A arguments) {
-        GroupingMessageCollector groupingCollector = new GroupingMessageCollector(messageCollector);
+        GroupingMessageCollector groupingCollector = new GroupingMessageCollector(messageCollector, arguments.getAllWarningsAsErrors());
 
         CompilerConfiguration configuration = new CompilerConfiguration();
         configuration.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, groupingCollector);
@@ -127,6 +128,9 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> extends CLI
             }
             return exitCode;
         }
+        catch (AnalysisResult.CompilationErrorException e) {
+            return COMPILATION_ERROR;
+        }
         catch (Throwable t) {
             MessageCollectorUtil.reportException(groupingCollector, t);
             return INTERNAL_ERROR;
@@ -175,8 +179,9 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> extends CLI
             configuration.put(CLIConfigurationKeys.IS_API_VERSION_EXPLICIT, true);
         }
 
+        MessageCollector collector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY);
         if (apiVersion.compareTo(languageVersion) > 0) {
-            configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY).report(
+            collector.report(
                     ERROR,
                     "-api-version (" + apiVersion.getVersionString() + ") cannot be greater than " +
                     "-language-version (" + languageVersion.getVersionString() + ")",
@@ -185,7 +190,7 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> extends CLI
         }
 
         if (!languageVersion.isStable()) {
-            configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY).report(
+            collector.report(
                     STRONG_WARNING,
                     "Language version " + languageVersion.getVersionString() + " is experimental, there are " +
                     "no backwards compatibility guarantees for new language and library features",
@@ -203,19 +208,47 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> extends CLI
             extraLanguageFeatures.put(LanguageFeature.Coroutines, coroutinesState);
         }
 
+        if (arguments.getNewInference()) {
+            extraLanguageFeatures.put(LanguageFeature.NewInference, LanguageFeature.State.ENABLED);
+        }
+
+        if (arguments.getLegacySmartCastAfterTry()) {
+            extraLanguageFeatures.put(LanguageFeature.SoundSmartCastsAfterTry, LanguageFeature.State.DISABLED);
+        }
+
+        if (arguments.getEffectSystem()) {
+            extraLanguageFeatures.put(LanguageFeature.UseCallsInPlaceEffect, LanguageFeature.State.ENABLED);
+            extraLanguageFeatures.put(LanguageFeature.UseReturnsEffect, LanguageFeature.State.ENABLED);
+        }
+
+        if (arguments.getReadDeserializedContracts()) {
+            extraLanguageFeatures.put(LanguageFeature.ReadDeserializedContracts, LanguageFeature.State.ENABLED);
+        }
+
+
+        setupPlatformSpecificLanguageFeatureSettings(extraLanguageFeatures, arguments);
+
         CommonConfigurationKeysKt.setLanguageVersionSettings(configuration, new LanguageVersionSettingsImpl(
                 languageVersion,
                 ApiVersion.createByLanguageVersion(apiVersion),
-                arguments.configureAnalysisFlags(configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)),
+                arguments.configureAnalysisFlags(collector),
                 extraLanguageFeatures
         ));
     }
+
+    protected void setupPlatformSpecificLanguageFeatureSettings(
+            @NotNull Map<LanguageFeature, LanguageFeature.State> extraLanguageFeatures,
+            @NotNull A commandLineArguments
+    ) {
+        // do nothing
+    }
+
+    private static final String kotlinHomeEnvVar = System.getenv(KOTLIN_HOME_ENV_VAR);
 
     @Nullable
     private static KotlinPaths computeKotlinPaths(@NotNull MessageCollector messageCollector, @NotNull CommonCompilerArguments arguments) {
         KotlinPaths paths;
         String kotlinHomeProperty = System.getProperty(KOTLIN_HOME_PROPERTY);
-        String kotlinHomeEnvVar = System.getenv(KOTLIN_HOME_ENV_VAR);
         File kotlinHome =
                 arguments.getKotlinHome() != null ? new File(arguments.getKotlinHome()) :
                 kotlinHomeProperty != null        ? new File(kotlinHomeProperty) :

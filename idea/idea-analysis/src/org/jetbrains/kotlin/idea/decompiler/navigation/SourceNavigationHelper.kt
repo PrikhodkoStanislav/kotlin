@@ -1,17 +1,6 @@
 /*
- * Copyright 2010-2016 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2000-2017 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the license/LICENSE.txt file.
  */
 
 package org.jetbrains.kotlin.idea.decompiler.navigation
@@ -29,9 +18,10 @@ import com.intellij.psi.stubs.StringStubIndexExtension
 import com.intellij.util.containers.ContainerUtil
 import gnu.trove.THashSet
 import org.jetbrains.annotations.TestOnly
-import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
-import org.jetbrains.kotlin.idea.caches.resolve.*
+import org.jetbrains.kotlin.idea.caches.resolve.getBinaryLibrariesModuleInfos
+import org.jetbrains.kotlin.idea.caches.resolve.getLibrarySourcesModuleInfos
+import org.jetbrains.kotlin.idea.caches.resolve.resolveToDescriptorIfAny
 import org.jetbrains.kotlin.idea.decompiler.navigation.MemberMatching.*
 import org.jetbrains.kotlin.idea.stubindex.KotlinFullClassNameIndex
 import org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelFunctionFqnNameIndex
@@ -40,7 +30,6 @@ import org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelTypeAliasFqNameIndex
 import org.jetbrains.kotlin.idea.util.ProjectRootsUtil
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.platform.JavaToKotlinClassMap
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.debugText.getDebugText
 
@@ -175,8 +164,7 @@ object SourceNavigationHelper {
             navigationKind: NavigationKind,
             index: StringStubIndexExtension<T>
     ): T? {
-        val classFqName = entity.fqName!!
-
+        val classFqName = entity.fqName ?: return null
         val scope = targetScope(entity, navigationKind) ?: return null
         return index.get(classFqName.asString(), entity.project, scope).firstOrNull()
     }
@@ -209,20 +197,6 @@ object SourceNavigationHelper {
     ) = sourceClassOrObject.declarations.filterIsInstance(declarationClass).filter {
         declaration ->
         name == declaration.nameAsSafeName
-    }
-
-    fun getOriginalPsiClassOrCreateLightClass(classOrObject: KtClassOrObject): PsiClass? {
-        val fqName = classOrObject.fqName
-        if (fqName != null) {
-            val javaClassId = JavaToKotlinClassMap.mapKotlinToJava(fqName.toUnsafe())
-            if (javaClassId != null) {
-                return JavaPsiFacade.getInstance(classOrObject.project).findClass(
-                        javaClassId.asSingleFqName().asString(),
-                        GlobalSearchScope.allScope(classOrObject.project)
-                )
-            }
-        }
-        return classOrObject.toLightClass()
     }
 
     fun getOriginalClass(classOrObject: KtClassOrObject): PsiClass? {
@@ -275,7 +249,8 @@ object SourceNavigationHelper {
         when (navigationKind) {
             SourceNavigationHelper.NavigationKind.CLASS_FILES_TO_SOURCES -> if (!from.containingKtFile.isCompiled) return from
             SourceNavigationHelper.NavigationKind.SOURCES_TO_CLASS_FILES -> {
-                if (from.containingKtFile.isCompiled) return from
+                val file = from.containingFile
+                if (file is KtFile && file.isCompiled) return from
                 if (!ProjectRootsUtil.isInContent(from, false, true, false, true)) return from
                 if (KtPsiUtil.isLocal(from)) return from
             }

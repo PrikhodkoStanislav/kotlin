@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.builtins.functions.FunctionClassDescriptor
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.js.backend.ast.*
+import org.jetbrains.kotlin.js.backend.ast.metadata.forcedReturnVariable
 import org.jetbrains.kotlin.js.descriptorUtils.hasPrimaryConstructor
 import org.jetbrains.kotlin.js.translate.callTranslator.CallTranslator
 import org.jetbrains.kotlin.js.translate.context.*
@@ -252,8 +253,8 @@ class ClassTranslator private constructor(
         context.addDeclarationStatement(constructorInitializer.makeStmt())
 
         context = context.contextWithScope(constructorInitializer)
-        context.translateAndAliasParameters(constructorDescriptor, constructorInitializer.parameters)
-                .translateFunction(constructor, constructorInitializer)
+                .translateAndAliasParameters(constructorDescriptor, constructorInitializer.parameters)
+        context.translateFunction(constructor, constructorInitializer)
 
         // Translate super/this call
         val superCallGenerators = mutableListOf<(MutableList<JsStatement>) -> Unit>()
@@ -267,20 +268,23 @@ class ClassTranslator private constructor(
         superCallGenerators += { it += instanceVar }
 
         // Add parameter for outer instance
-        val leadingArgs = mutableListOf<JsExpression>()
+        val commonLeadingArgs = mutableListOf<JsExpression>()
 
         if (descriptor.kind == ClassKind.ENUM_CLASS) {
             val nameParamName = JsScope.declareTemporaryName("name")
             val ordinalParamName = JsScope.declareTemporaryName("ordinal")
             constructorInitializer.parameters.addAll(0, listOf(JsParameter(nameParamName), JsParameter(ordinalParamName)))
-            leadingArgs += listOf(nameParamName.makeRef().withDefaultLocation(), ordinalParamName.makeRef().withDefaultLocation())
+            commonLeadingArgs += listOf(nameParamName.makeRef().withDefaultLocation(), ordinalParamName.makeRef().withDefaultLocation())
         }
+
+        val leadingArgs = commonLeadingArgs.toMutableList()
         if (outerClassName != null) {
             constructorInitializer.parameters.add(0, JsParameter(outerClassName))
             leadingArgs += outerClassName.makeRef()
         }
 
         constructorInitializer.parameters += JsParameter(thisName)
+        constructorInitializer.forcedReturnVariable = thisName
 
         // Generate super/this call to insert to beginning of the function
         val resolvedCall = BindingContextUtils.getDelegationConstructorCall(context.bindingContext(), constructorDescriptor)
@@ -299,8 +303,15 @@ class ClassTranslator private constructor(
                 superCallGenerators += {
                     val delegationConstructor = resolvedCall.resultingDescriptor
                     val innerContext = context.innerBlock()
+                    val delegatedLeadingArgs = commonLeadingArgs.toMutableList()
+                    val delegateClass = resolvedCall.resultingDescriptor.constructedClass
+                    if (delegateClass.isInner) {
+                        val delegatedOuterDescriptor = (delegateClass.containingDeclaration as ClassDescriptor).thisAsReceiverParameter
+                        delegatedLeadingArgs += context.getDispatchReceiver(delegatedOuterDescriptor)
+                    }
+
                     val statement = CallTranslator.translate(innerContext, resolvedCall).toInvocationWith(
-                            leadingArgs, delegationConstructor.valueParameters.size, thisNameRef.deepCopy())
+                            delegatedLeadingArgs, delegationConstructor.valueParameters.size, thisNameRef.deepCopy())
                             .source(resolvedCall.call.callElement)
                             .makeStmt()
                     it += innerContext.currentBlock.statements
