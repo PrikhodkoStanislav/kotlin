@@ -202,6 +202,9 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
     )
     var noExceptionOnExplicitEqualsForBoxedNull by FreezableVar(false)
 
+    @Argument(value = "-psi-printing", shortName = "-pp", description = "Whether it is necessary to print PSI tree (PSI tree will be print in JSON file with the same name as the original file and in the same directory)")
+    var psiPrinting: Boolean by FreezableVar(false)
+
     // Paths to output directories for friend modules.
     var friendPaths: Array<String>? by FreezableVar(null)
 

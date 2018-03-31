@@ -16,6 +16,7 @@ dependencies {
     compileOnly(intellijCoreDep()) { includeJars("intellij-core") }
     compileOnly(intellijDep()) { includeJars("annotations", "trove4j", "guava", rootProject = rootProject) }
     jflexPath(commonDep("org.jetbrains.intellij.deps.jflex", "jflex"))
+    compile(ideaSdkDeps("gson"))
 }
 
 sourceSets {
