@@ -105,6 +105,10 @@ fun main(args: Array<String>) {
             model("diagnostics/testsWithJava9")
         }
 
+        testClass<AbstractDiagnosticTestSpec> {
+            model("diagnostics/testsSpec")
+        }
+
         testClass<AbstractMultiPlatformIntegrationTest> {
             model("multiplatform", extension = null, recursive = true, excludeParentDirs = true)
         }
