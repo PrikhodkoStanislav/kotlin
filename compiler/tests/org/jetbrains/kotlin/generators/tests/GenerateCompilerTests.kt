@@ -105,7 +105,7 @@ fun main(args: Array<String>) {
             model("diagnostics/testsWithJava9")
         }
 
-        testClass<AbstractDiagnosticTestSpec> {
+        testClass<AbstractDiagnosticsTestSpec> {
             model("diagnostics/testsSpec")
         }
 
