@@ -21,6 +21,7 @@ where possible options include:
   -language-version <version> Provide source compatibility with specified language version
   -P plugin:<pluginId>:<optionName>=<value>
                              Pass an option to a plugin
+  -psi-printing              Whether it is necessary to print PSI tree (PSI tree will be print in JSON file with the same name as the original file and in the same directory)
   -nowarn                    Generate no warnings
   -verbose                   Enable verbose logging output
   -version                   Display compiler version
