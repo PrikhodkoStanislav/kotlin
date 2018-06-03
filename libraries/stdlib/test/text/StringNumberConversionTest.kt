@@ -1,3 +1,8 @@
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the license/LICENSE.txt file.
+ */
+
 package test.text
 
 import test.*
@@ -148,27 +153,71 @@ class StringNumberConversionTest {
             assertFailsOrNull("   ")
         }
     }
+
+    @Test fun byteToStringWithRadix() {
+        assertEquals("7a", 0x7a.toByte().toString(16))
+        assertEquals("-80", Byte.MIN_VALUE.toString(radix = 16))
+        assertEquals("3v", Byte.MAX_VALUE.toString(radix = 32))
+        assertEquals("-40", Byte.MIN_VALUE.toString(radix = 32))
+
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 37") { 37.toByte().toString(radix = 37) }
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 1") { 1.toByte().toString(radix = 1) }
+    }
+
+    @Test fun shortToStringWithRadix() {
+        assertEquals("7FFF", 0x7FFF.toShort().toString(radix = 16).toUpperCase())
+        assertEquals("-8000", (-0x8000).toShort().toString(radix = 16))
+        assertEquals("-sfs", (-29180).toShort().toString(radix = 32))
+
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 37") { 37.toShort().toString(radix = 37) }
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 1") { 1.toShort().toString(radix = 1) }
+    }
+
+    @Test fun intToStringWithRadix() {
+        assertEquals("-ff", (-255).toString(radix = 16))
+        assertEquals("1100110", 102.toString(radix = 2))
+        assertEquals("kona", 411787.toString(radix = 27))
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 37") { 37.toString(radix = 37) }
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 1") { 1.toString(radix = 1) }
+
+    }
+
+    @Test fun longToStringWithRadix() {
+        assertEquals("7f11223344556677", 0x7F11223344556677.toString(radix = 16))
+        assertEquals("hazelnut", 1356099454469L.toString(radix = 36))
+        assertEquals("-8000000000000000", Long.MIN_VALUE.toString(radix = 16))
+
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 37") { 37L.toString(radix = 37) }
+        assertFailsWith<IllegalArgumentException>("Expected to fail with radix 1") { 1L.toString(radix = 1) }
+    }
 }
 
+internal fun doubleTotalOrderEquals(a: Double?, b: Double?): Boolean = (a as Any?) == b
 
-internal fun <T : Any> compareConversion(convertOrFail: (String) -> T,
-                                        convertOrNull: (String) -> T?,
-                                        equality: (T, T?) -> Boolean = { a, b -> a == b },
-                                        assertions: ConversionContext<T>.() -> Unit) {
+internal fun <T : Any> compareConversion(
+    convertOrFail: (String) -> T,
+    convertOrNull: (String) -> T?,
+    equality: (T, T?) -> Boolean = { a, b -> a == b },
+    assertions: ConversionContext<T>.() -> Unit
+) {
     ConversionContext(convertOrFail, convertOrNull, equality).assertions()
 }
 
 
-internal fun <T : Any> compareConversionWithRadix(convertOrFail: String.(Int) -> T,
-                                                 convertOrNull: String.(Int) -> T?,
-                                                 assertions: ConversionWithRadixContext<T>.() -> Unit) {
+internal fun <T : Any> compareConversionWithRadix(
+    convertOrFail: String.(Int) -> T,
+    convertOrNull: String.(Int) -> T?,
+    assertions: ConversionWithRadixContext<T>.() -> Unit
+) {
     ConversionWithRadixContext(convertOrFail, convertOrNull).assertions()
 }
 
 
-internal class ConversionContext<T: Any>(val convertOrFail: (String) -> T,
-                                        val convertOrNull: (String) -> T?,
-                                        val equality: (T, T?) -> Boolean) {
+internal class ConversionContext<T : Any>(
+    val convertOrFail: (String) -> T,
+    val convertOrNull: (String) -> T?,
+    val equality: (T, T?) -> Boolean
+) {
 
     private fun assertEquals(expected: T, actual: T?, input: String, operation: String) {
         assertTrue(equality(expected, actual), "Expected $operation('$input') to produce $expected but was $actual")
@@ -185,8 +234,10 @@ internal class ConversionContext<T: Any>(val convertOrFail: (String) -> T,
     }
 }
 
-internal class ConversionWithRadixContext<T: Any>(val convertOrFail: (String, Int) -> T,
-                                                 val convertOrNull: (String, Int) -> T?) {
+internal class ConversionWithRadixContext<T : Any>(
+    val convertOrFail: (String, Int) -> T,
+    val convertOrNull: (String, Int) -> T?
+) {
     fun assertProduces(radix: Int, input: String, output: T) {
         assertEquals(output, convertOrFail(input.removeLeadingPlusOnJava6(), radix))
         assertEquals(output, convertOrNull(input, radix))

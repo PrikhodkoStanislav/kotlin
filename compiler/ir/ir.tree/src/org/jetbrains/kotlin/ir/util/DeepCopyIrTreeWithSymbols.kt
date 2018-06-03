@@ -22,16 +22,19 @@ import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.declarations.impl.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.*
+import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
+import org.jetbrains.kotlin.ir.symbols.IrReturnTargetSymbol
+import org.jetbrains.kotlin.ir.symbols.IrReturnableBlockSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.impl.IrAnonymousInitializerSymbolImpl
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import java.util.*
 
-inline fun <reified T : IrElement> T.deepCopyWithSymbols(): T {
+inline fun <reified T : IrElement> T.deepCopyWithSymbols(initialParent: IrDeclarationParent? = null): T {
     val remapper = DeepCopySymbolsRemapper()
     acceptVoid(remapper)
-    return transform(DeepCopyIrTreeWithSymbols(remapper), null).patchDeclarationParents() as T
+    return transform(DeepCopyIrTreeWithSymbols(remapper), null).patchDeclarationParents(initialParent) as T
 }
 
 
@@ -73,6 +76,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             declaration.fileEntry,
             symbolRemapper.getDeclaredFile(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             fileAnnotations.addAll(declaration.fileAnnotations)
             declaration.transformDeclarationsTo(this)
         }
@@ -86,6 +90,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredClass(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             declaration.superClasses.mapTo(superClasses) {
                 symbolRemapper.getReferencedClass(it)
             }
@@ -99,7 +104,9 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             declaration.startOffset, declaration.endOffset,
             mapDeclarationOrigin(declaration.origin),
             declaration.descriptor
-        )
+        ).apply {
+            transformAnnotations(declaration)
+        }
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrSimpleFunction =
         IrFunctionImpl(
@@ -124,12 +131,17 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
 
     private fun <T : IrFunction> T.transformFunctionChildren(declaration: T): T =
         apply {
+            transformAnnotations(declaration)
             declaration.typeParameters.transformTo(typeParameters)
             dispatchReceiverParameter = declaration.dispatchReceiverParameter?.transform()
             extensionReceiverParameter = declaration.extensionReceiverParameter?.transform()
             declaration.valueParameters.transformTo(valueParameters)
             body = declaration.body?.transform()
         }
+
+    private fun IrAnnotationContainer.transformAnnotations(declaration: IrAnnotationContainer) {
+        declaration.annotations.transformTo(annotations)
+    }
 
     override fun visitProperty(declaration: IrProperty): IrProperty =
         IrPropertyImpl(
@@ -140,7 +152,9 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             declaration.backingField?.transform(),
             declaration.getter?.transform(),
             declaration.setter?.transform()
-        )
+        ).apply {
+            transformAnnotations(declaration)
+        }
 
     override fun visitField(declaration: IrField): IrField =
         IrFieldImpl(
@@ -148,6 +162,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredField(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             initializer = declaration.initializer?.transform()
         }
 
@@ -159,7 +174,9 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             declaration.delegate.transform(),
             declaration.getter.transform(),
             declaration.setter?.transform()
-        )
+        ).apply {
+            transformAnnotations(declaration)
+        }
 
     override fun visitEnumEntry(declaration: IrEnumEntry): IrEnumEntry =
         IrEnumEntryImpl(
@@ -167,6 +184,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredEnumEntry(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             correspondingClass = declaration.correspondingClass?.transform()
             initializerExpression = declaration.initializerExpression?.transform()
         }
@@ -186,6 +204,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredVariable(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             initializer = declaration.initializer?.transform()
         }
 
@@ -195,6 +214,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredTypeParameter(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             declaration.superClassifiers.mapTo(superClassifiers) {
                 symbolRemapper.getReferencedClassifier(it)
             }
@@ -206,6 +226,7 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
             mapDeclarationOrigin(declaration.origin),
             symbolRemapper.getDeclaredValueParameter(declaration.symbol)
         ).apply {
+            transformAnnotations(declaration)
             defaultValue = declaration.defaultValue?.transform()
         }
 
@@ -532,9 +553,16 @@ open class DeepCopyIrTreeWithSymbols(private val symbolRemapper: SymbolRemapper)
         IrReturnImpl(
             expression.startOffset, expression.endOffset,
             expression.type,
-            symbolRemapper.getReferencedFunction(expression.returnTargetSymbol),
+            symbolRemapper.getReferencedReturnTarget(expression.returnTargetSymbol),
             expression.value.transform()
         )
+
+    private fun SymbolRemapper.getReferencedReturnTarget(returnTarget: IrReturnTargetSymbol) =
+        when (returnTarget) {
+            is IrFunctionSymbol -> getReferencedFunction(returnTarget)
+            is IrReturnableBlockSymbol -> getReferencedReturnableBlock(returnTarget)
+            else -> throw AssertionError("Unexpected return target: ${returnTarget.javaClass} $returnTarget")
+        }
 
     override fun visitThrow(expression: IrThrow): IrThrow =
         IrThrowImpl(

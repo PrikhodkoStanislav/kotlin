@@ -34,13 +34,19 @@ object Namer {
     val CALL_FUNCTION = "call"
     val APPLY_FUNCTION = "apply"
 
+    val SLICE_FUNCTION = "slice"
+    val CONCAT_FUNCTION = "concat"
+
+    val UNREACHABLE_NAME = "\$unreachable"
+
     val OUTER_FIELD_NAME = "\$outer"
 
     val DELEGATE = "\$delegate"
 
     val ROOT_PACKAGE = "_"
 
-    val RECEIVER_PARAMETER_NAME = "\$receiver"
+    val EXTENSION_RECEIVER_NAME = "\$receiver"
+    val IMPLICIT_RECEIVER_NAME = "this"
     val ANOTHER_THIS_PARAMETER_NAME = "$this"
 
     val THROW_CLASS_CAST_EXCEPTION_FUN_NAME = "throwCCE"

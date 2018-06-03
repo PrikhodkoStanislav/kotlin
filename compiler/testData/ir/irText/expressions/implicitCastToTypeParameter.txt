@@ -39,6 +39,7 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any flags:
   PROPERTY name:asT type:T? visibility:public modality:FINAL flags:val
     FUN name:<get-asT> visibility:public modality:FINAL <T> ($receiver:Foo<T>) returnType:T? flags:inline
+      correspondingProperty: PROPERTY name:asT type:T? visibility:public modality:FINAL flags:val
       TYPE_PARAMETER name:T index:0 variance: upperBounds:[kotlin.Any]
         superClassifiers:
           CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
@@ -63,7 +64,7 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
     TYPE_PARAMETER name:T index:0 variance: upperBounds:[kotlin.Any?]
       superClassifiers:
         CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
-    CONSTRUCTOR visibility:public <> () returnType:Bar<T> flags:
+    CONSTRUCTOR visibility:public <> () returnType:Bar<T> flags:primary
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
         INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
@@ -98,3 +99,4 @@ FILE fqName:<root> fileName:/implicitCastToTypeParameter.kt
       overridden:
         FUN IR_EXTERNAL_DECLARATION_STUB name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:String flags:
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any flags:
+

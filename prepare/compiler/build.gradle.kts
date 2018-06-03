@@ -63,15 +63,17 @@ dependencies {
     proguardLibraryJars(projectDist(":kotlin-stdlib"))
     proguardLibraryJars(projectDist(":kotlin-script-runtime"))
     proguardLibraryJars(projectDist(":kotlin-reflect"))
+    proguardLibraryJars(projectDist(":kotlin-scripting-common"))
+    proguardLibraryJars(projectDist(":kotlin-scripting-jvm"))
 
     compile(project(":kotlin-stdlib"))
     compile(project(":kotlin-script-runtime"))
     compile(project(":kotlin-reflect"))
     fatJarContents(intellijCoreDep()) { includeJars("intellij-core") }
     fatJarContents(intellijDep()) { includeIntellijCoreJarDependencies(project, { !(it.startsWith("jdom") || it.startsWith("log4j")) }) }
-    fatJarContents(intellijDep()) { includeJars("jna-platform") }
+    fatJarContents(intellijDep()) { includeJars("jna-platform", "lz4-java-1.3") }
     fatJarContentsStripServices(intellijDep("jps-standalone")) { includeJars("jps-model") }
-    fatJarContentsStripMetadata(intellijDep()) { includeJars("oromatcher", "jdom", "log4j") }
+    fatJarContentsStripMetadata(intellijDep()) { includeJars("oro-2.0.8", "jdom", "log4j") }
 }
 
 
@@ -106,7 +108,7 @@ val proguard by task<ProGuardTask> {
         System.setProperty("kotlin-compiler-jar", outputJar.canonicalPath)
     }
 
-    libraryjars(proguardLibraryJars)
+    libraryjars(mapOf("filter" to "!META-INF/versions/**"), proguardLibraryJars)
     printconfiguration("$buildDir/compiler.pro.dump")
 }
 

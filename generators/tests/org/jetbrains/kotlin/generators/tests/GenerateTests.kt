@@ -32,7 +32,6 @@ import org.jetbrains.kotlin.android.quickfix.AbstractAndroidQuickFixMultiFileTes
 import org.jetbrains.kotlin.android.synthetic.test.AbstractAndroidBoxTest
 import org.jetbrains.kotlin.android.synthetic.test.AbstractAndroidBytecodeShapeTest
 import org.jetbrains.kotlin.android.synthetic.test.AbstractAndroidSyntheticPropertyDescriptorTest
-import org.jetbrains.kotlin.annotation.AbstractAnnotationProcessorBoxTest
 import org.jetbrains.kotlin.checkers.AbstractJavaAgainstKotlinBinariesCheckerTest
 import org.jetbrains.kotlin.checkers.AbstractJavaAgainstKotlinSourceCheckerTest
 import org.jetbrains.kotlin.checkers.AbstractJsCheckerTest
@@ -52,6 +51,8 @@ import org.jetbrains.kotlin.idea.AbstractSmartSelectionTest
 import org.jetbrains.kotlin.idea.actions.AbstractGotoTestOrCodeActionTest
 import org.jetbrains.kotlin.idea.caches.resolve.AbstractIdeCompiledLightClassTest
 import org.jetbrains.kotlin.idea.caches.resolve.AbstractIdeLightClassTest
+import org.jetbrains.kotlin.idea.caches.resolve.AbstractMultiModuleLineMarkerTest
+import org.jetbrains.kotlin.idea.caches.resolve.AbstractMultiPlatformHighlightingTest
 import org.jetbrains.kotlin.idea.codeInsight.*
 import org.jetbrains.kotlin.idea.codeInsight.generate.AbstractCodeInsightActionTest
 import org.jetbrains.kotlin.idea.codeInsight.generate.AbstractGenerateHashCodeAndEqualsActionTest
@@ -113,6 +114,7 @@ import org.jetbrains.kotlin.idea.maven.configuration.AbstractMavenConfigureProje
 import org.jetbrains.kotlin.idea.navigation.*
 import org.jetbrains.kotlin.idea.parameterInfo.AbstractParameterInfoTest
 import org.jetbrains.kotlin.idea.quickfix.AbstractQuickFixMultiFileTest
+import org.jetbrains.kotlin.idea.quickfix.AbstractQuickFixMultiModuleTest
 import org.jetbrains.kotlin.idea.quickfix.AbstractQuickFixTest
 import org.jetbrains.kotlin.idea.refactoring.AbstractNameSuggestionProviderTest
 import org.jetbrains.kotlin.idea.refactoring.copy.AbstractCopyTest
@@ -548,6 +550,10 @@ fun main(args: Array<String>) {
             model("codeInsight/lineMarker")
         }
 
+        testClass<AbstractMultiModuleLineMarkerTest> {
+            model("multiModuleLineMarker", extension = null, recursive = false)
+        }
+
         testClass<AbstractShortenRefsTest> {
             model("shortenRefs", pattern = KT_WITHOUT_DOTS_IN_NAME)
         }
@@ -637,6 +643,26 @@ fun main(args: Array<String>) {
             model("multiFileHighlighting", recursive = false)
         }
 
+        testClass<AbstractMultiPlatformHighlightingTest> {
+            model("multiModuleHighlighting/multiplatform/", recursive = false, extension = null)
+        }
+
+        testClass<AbstractQuickFixMultiModuleTest> {
+            model("multiModuleQuickFix", recursive = false, extension = null)
+        }
+
+        testClass<AbstractKotlinGotoImplementationMultiModuleTest> {
+            model("navigation/implementations/multiModule", recursive = false, extension = null)
+        }
+
+        testClass<AbstractKotlinGotoRelatedSymbolMultiModuleTest> {
+            model("navigation/relatedSymbols/multiModule", recursive = false, extension = null)
+        }
+
+        testClass<AbstractKotlinGotoSuperMultiModuleTest> {
+            model("navigation/gotoSuper/multiModule", recursive = false, extension = null)
+        }
+
         testClass<AbstractExtractionTest> {
             model("refactoring/introduceVariable", pattern = KT_OR_KTS, testMethod = "doIntroduceVariableTest")
             model("refactoring/extractFunction", pattern = KT_OR_KTS, testMethod = "doExtractFunctionTest")
@@ -713,6 +739,7 @@ fun main(args: Array<String>) {
 
         testClass<AbstractScriptConfigurationHighlightingTest> {
             model("script/definition/highlighting", extension = null, recursive = false)
+            model("script/definition/complex", extension = null, recursive = false, testMethod = "doComplexTest")
         }
 
         testClass<AbstractScriptConfigurationNavigationTest> {
@@ -860,6 +887,10 @@ fun main(args: Array<String>) {
         testClass<AbstractCompletionIncrementalResolveTest> {
             model("incrementalResolve")
         }
+
+        testClass<AbstractMultiPlatformCompletionTest> {
+            model("multiPlatform", recursive = false, extension = null)
+        }
     }
 
     //TODO: move these tests into idea-completion module
@@ -982,12 +1013,6 @@ fun main(args: Array<String>) {
 
         testClass<AbstractParcelBytecodeListingTest> {
             model("parcel/codegen")
-        }
-    }
-
-    testGroup("plugins/annotation-collector/test", "plugins/annotation-collector/testData") {
-        testClass<AbstractAnnotationProcessorBoxTest> {
-            model("collectToFile", recursive = false, extension = null)
         }
     }
 

@@ -6,22 +6,19 @@
 package org.jetbrains.kotlin.ir.backend.js.transformers.irToJs
 
 import org.jetbrains.kotlin.ir.backend.js.utils.JsGenerationContext
-import org.jetbrains.kotlin.ir.backend.js.utils.constructedClassName
-import org.jetbrains.kotlin.ir.backend.js.utils.isPrimary
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.js.backend.ast.JsFunction
-import org.jetbrains.kotlin.js.backend.ast.JsStatement
 
 open class IrFunctionToJsTransformer : BaseIrElementToJsNodeTransformer<JsFunction, JsGenerationContext> {
     override fun visitSimpleFunction(declaration: IrSimpleFunction, context: JsGenerationContext): JsFunction {
-        return translateFunction(declaration, declaration.name, context)
+        val funcName = context.getNameForSymbol(declaration.symbol)
+        return translateFunction(declaration, funcName, context)
     }
 
     override fun visitConstructor(declaration: IrConstructor, context: JsGenerationContext): JsFunction {
-        assert(declaration.symbol.isPrimary)
-        return translateFunction(declaration, declaration.symbol.constructedClassName, context)
+        assert(declaration.isPrimary)
+        val funcName = context.getNameForSymbol(declaration.symbol)
+        return translateFunction(declaration, funcName, context)
     }
-
-
 }

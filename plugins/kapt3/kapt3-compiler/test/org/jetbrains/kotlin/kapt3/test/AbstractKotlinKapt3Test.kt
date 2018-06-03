@@ -208,7 +208,13 @@ open class AbstractClassFileToSourceStubConverterTest : AbstractKotlinKapt3Test(
         @JvmStatic
         fun main(args: Array<String>) {
             if (args.isEmpty()) error("1 argument expected, 0 passed")
-            AbstractClassFileToSourceStubConverterTest().doTest(args[0])
+            val test = AbstractClassFileToSourceStubConverterTest()
+            try {
+                test.setUp()
+                test.doTest(args[0])
+            } finally {
+                test.tearDown()
+            }
         }
     }
 
@@ -285,9 +291,10 @@ abstract class AbstractKotlinKaptContextTest : AbstractKotlinKapt3Test() {
         try {
             kaptContext.doAnnotationProcessing(emptyList(), listOf(JavaKaptContextTest.simpleProcessor()),
                 compileClasspath = PathUtil.getJdkClassesRootsFromCurrentJre() + PathUtil.kotlinPathsForIdeaPlugin.stdlibPath,
-                annotationProcessingClasspath = emptyList(), annotationProcessors = "",
+                annotationProcessingClasspath = emptyList(),
                 sourcesOutputDir = sourceOutputDir, classesOutputDir = sourceOutputDir,
-                                               additionalSources = compilationUnits, withJdk = true)
+                additionalSources = compilationUnits, withJdk = true
+            )
 
             val javaFiles = sourceOutputDir.walkTopDown().filter { it.isFile && it.extension == "java" }
             val actualRaw = javaFiles.sortedBy { it.name }.joinToString(FILE_SEPARATOR) { it.name + ":\n\n" + it.readText() }

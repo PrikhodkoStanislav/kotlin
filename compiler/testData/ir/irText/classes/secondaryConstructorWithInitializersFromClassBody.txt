@@ -3,7 +3,7 @@ FILE fqName:<root> fileName:/secondaryConstructorWithInitializersFromClassBody.k
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:Base flags:
     superClasses:
       CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
-    CONSTRUCTOR visibility:public <> () returnType:Base flags:
+    CONSTRUCTOR visibility:public <> () returnType:Base flags:primary
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
         INSTANCE_INITIALIZER_CALL classDescriptor='Base'
@@ -25,10 +25,11 @@ FILE fqName:<root> fileName:/secondaryConstructorWithInitializersFromClassBody.k
     superClasses:
       CLASS CLASS name:Base modality:OPEN visibility:public flags:
     PROPERTY name:x type:kotlin.Int visibility:public modality:FINAL flags:val
-      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:public
+      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:public flags:final
         EXPRESSION_BODY
           CONST Int type=kotlin.Int value=0
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:TestProperty) returnType:Int flags:
+        correspondingProperty: PROPERTY name:x type:kotlin.Int visibility:public modality:FINAL flags:val
         $this: VALUE_PARAMETER name:<this> type:TestProperty flags:
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='<get-x>(): Int'
@@ -56,8 +57,9 @@ FILE fqName:<root> fileName:/secondaryConstructorWithInitializersFromClassBody.k
     superClasses:
       CLASS CLASS name:Base modality:OPEN visibility:public flags:
     PROPERTY name:x type:kotlin.Int visibility:public modality:FINAL flags:val
-      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:public
+      FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:public flags:final
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:TestInitBlock) returnType:Int flags:
+        correspondingProperty: PROPERTY name:x type:kotlin.Int visibility:public modality:FINAL flags:val
         $this: VALUE_PARAMETER name:<this> type:TestInitBlock flags:
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='<get-x>(): Int'

@@ -31,8 +31,10 @@ import org.jetbrains.kotlin.psi2ir.isConstructorDelegatingToSuper
 import org.jetbrains.kotlin.psi2ir.startOffsetOrUndefined
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
+import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 class FunctionGenerator(declarationGenerator: DeclarationGenerator) : DeclarationGeneratorExtension(declarationGenerator) {
+
     constructor(context: GeneratorContext) : this(DeclarationGenerator(context))
 
     fun generateFunctionDeclaration(ktFunction: KtNamedFunction): IrFunction =
@@ -45,7 +47,7 @@ class FunctionGenerator(declarationGenerator: DeclarationGenerator) : Declaratio
             ktFunction.bodyExpression?.let { generateFunctionBody(it) }
         }
 
-    fun generateLambdaFunctionDeclaration(ktFunction: KtFunctionLiteral): IrFunction =
+    fun generateLambdaFunctionDeclaration(ktFunction: KtFunctionLiteral): IrSimpleFunction =
         declareSimpleFunction(
             ktFunction,
             null,
@@ -55,7 +57,7 @@ class FunctionGenerator(declarationGenerator: DeclarationGenerator) : Declaratio
             generateLambdaBody(ktFunction)
         }
 
-    fun generateFakeOverrideFunction(functionDescriptor: FunctionDescriptor, ktElement: KtElement): IrFunction =
+    fun generateFakeOverrideFunction(functionDescriptor: FunctionDescriptor, ktElement: KtElement): IrSimpleFunction =
         context.symbolTable.declareSimpleFunctionWithOverrides(
             ktElement.startOffsetOrUndefined, ktElement.endOffsetOrUndefined,
             IrDeclarationOrigin.FAKE_OVERRIDE,
@@ -111,7 +113,7 @@ class FunctionGenerator(declarationGenerator: DeclarationGenerator) : Declaratio
     fun generateDefaultAccessorForPrimaryConstructorParameter(
         descriptor: PropertyAccessorDescriptor,
         ktParameter: KtParameter
-    ): IrFunction =
+    ): IrSimpleFunction =
         context.symbolTable.declareSimpleFunctionWithOverrides(
             ktParameter.startOffsetOrUndefined,
             ktParameter.endOffsetOrUndefined,
@@ -198,7 +200,10 @@ class FunctionGenerator(declarationGenerator: DeclarationGenerator) : Declaratio
         ktClassOrObject: KtClassOrObject
     ): IrConstructor =
         declareConstructor(ktClassOrObject, ktClassOrObject.primaryConstructor ?: ktClassOrObject, primaryConstructorDescriptor) {
-            if (primaryConstructorDescriptor.isExpect)
+            if (
+                primaryConstructorDescriptor.isExpect ||
+                DescriptorUtils.isAnnotationClass(primaryConstructorDescriptor.constructedClass)
+            )
                 null
             else
                 generatePrimaryConstructorBody(ktClassOrObject)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
  * that can be found in the license/LICENSE.txt file.
  */
 
@@ -13,28 +13,29 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.annotations.Annotated
 import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.metadata.deserialization.Flags
+import org.jetbrains.kotlin.metadata.deserialization.VersionRequirement
 import org.jetbrains.kotlin.metadata.serialization.Interner
 import org.jetbrains.kotlin.metadata.serialization.MutableTypeTable
 import org.jetbrains.kotlin.metadata.serialization.MutableVersionRequirementTable
-import org.jetbrains.kotlin.metadata.serialization.StringTable
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.protobuf.MessageLite
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.DescriptorUtils.isEnumEntry
+import org.jetbrains.kotlin.resolve.DescriptorUtils.isInterface
 import org.jetbrains.kotlin.resolve.MemberComparator
 import org.jetbrains.kotlin.resolve.RequireKotlinNames
+import org.jetbrains.kotlin.resolve.annotations.hasJvmDefaultAnnotation
 import org.jetbrains.kotlin.resolve.calls.components.isActualParameterWithAnyExpectedDefault
 import org.jetbrains.kotlin.resolve.checkers.KotlinVersionStringAnnotationValueChecker
 import org.jetbrains.kotlin.resolve.constants.EnumValue
 import org.jetbrains.kotlin.resolve.constants.IntValue
 import org.jetbrains.kotlin.resolve.constants.NullValue
 import org.jetbrains.kotlin.resolve.constants.StringValue
+import org.jetbrains.kotlin.resolve.descriptorUtil.isSourceAnnotation
+import org.jetbrains.kotlin.resolve.descriptorUtil.nonSourceAnnotations
 import org.jetbrains.kotlin.serialization.deserialization.ProtoEnumFlags
-import org.jetbrains.kotlin.serialization.deserialization.descriptors.VersionRequirement
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.typeUtil.contains
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 class DescriptorSerializer private constructor(
@@ -141,6 +142,8 @@ class DescriptorSerializer private constructor(
         val requirement = serializeVersionRequirement(classDescriptor)
         if (requirement != null) {
             builder.versionRequirement = requirement
+        } else {
+            writeVersionRequirementForJvmDefaultIfNeeded(classDescriptor, builder)
         }
 
         val versionRequirementTableProto = versionRequirementTable.serialize()
@@ -306,8 +309,7 @@ class DescriptorSerializer private constructor(
         val requirement = serializeVersionRequirement(descriptor)
         if (requirement != null) {
             builder.versionRequirement = requirement
-        }
-        else if (descriptor.isSuspendOrHasSuspendTypesInSignature()) {
+        } else if (descriptor.isSuspendOrHasSuspendTypesInSignature()) {
             builder.versionRequirement = writeVersionRequirement(LanguageFeature.Coroutines)
         }
 
@@ -393,7 +395,9 @@ class DescriptorSerializer private constructor(
             builder.versionRequirement = requirement
         }
 
-        builder.addAllAnnotation(descriptor.annotations.map { extension.annotationSerializer.serializeAnnotation(it) })
+        for (annotation in descriptor.nonSourceAnnotations) {
+            builder.addAnnotation(extension.annotationSerializer.serializeAnnotation(annotation))
+        }
 
         return builder
     }
@@ -499,7 +503,7 @@ class DescriptorSerializer private constructor(
         }
 
         if (type.isSuspendFunctionType) {
-            val functionType = type(transformSuspendFunctionToRuntimeFunctionType(type))
+            val functionType = type(transformSuspendFunctionToRuntimeFunctionType(type, extension.releaseCoroutines()))
             functionType.flags = Flags.getTypeFlags(true)
             return functionType
         }
@@ -615,13 +619,36 @@ class DescriptorSerializer private constructor(
         return builder
     }
 
+    // Interfaces which have @JvmDefault members somewhere in the hierarchy need the compiler 1.2.40+
+    // so that the generated bridges in subclasses would call the super members correctly
+    private fun writeVersionRequirementForJvmDefaultIfNeeded(classDescriptor: ClassDescriptor, builder: ProtoBuf.Class.Builder) {
+        if (
+            isInterface(classDescriptor) &&
+            classDescriptor.unsubstitutedMemberScope.getContributedDescriptors().any {
+                it is CallableMemberDescriptor && it.hasJvmDefaultAnnotation()
+            }
+        ) {
+            builder.versionRequirement = writeVersionRequirement(1, 2, 40, ProtoBuf.VersionRequirement.VersionKind.COMPILER_VERSION)
+        }
+    }
+
     private fun writeVersionRequirement(languageFeature: LanguageFeature): Int {
         val languageVersion = languageFeature.sinceVersion!!
+        return writeVersionRequirement(
+            languageVersion.major, languageVersion.minor, 0,
+            ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION
+        )
+    }
+
+    private fun writeVersionRequirement(major: Int, minor: Int, patch: Int, versionKind: ProtoBuf.VersionRequirement.VersionKind): Int {
         val requirement = ProtoBuf.VersionRequirement.newBuilder().apply {
-            VersionRequirement.Version(languageVersion.major, languageVersion.minor).encode(
-                    writeVersion = { version = it },
-                    writeVersionFull = { versionFull = it }
+            VersionRequirement.Version(major, minor, patch).encode(
+                writeVersion = { version = it },
+                writeVersionFull = { versionFull = it }
             )
+            if (versionKind != defaultInstanceForType.versionKind) {
+                this.versionKind = versionKind
+            }
         }
         return versionRequirementTable[requirement]
     }
@@ -729,14 +756,6 @@ class DescriptorSerializer private constructor(
             return serializer
         }
 
-        @JvmStatic
-        fun serialize(message: MessageLite, stringTable: StringTable): ByteArray {
-            return ByteArrayOutputStream().apply {
-                stringTable.serializeTo(this)
-                message.writeTo(this)
-            }.toByteArray()
-        }
-
         private fun variance(variance: Variance): ProtoBuf.TypeParameter.Variance = when (variance) {
             Variance.INVARIANT -> ProtoBuf.TypeParameter.Variance.INV
             Variance.IN_VARIANCE -> ProtoBuf.TypeParameter.Variance.IN
@@ -749,7 +768,11 @@ class DescriptorSerializer private constructor(
             Variance.OUT_VARIANCE -> ProtoBuf.Type.Argument.Projection.OUT
         }
 
-        private fun hasAnnotations(descriptor: Annotated): Boolean = !descriptor.annotations.isEmpty()
+        private fun hasAnnotations(descriptor: Annotated): Boolean {
+            // Sadly, we can't just return `descriptor.nonSourceAnnotations.isNotEmpty()` because that would not
+            // consider use-site-targeted annotations
+            return descriptor.annotations.getAllAnnotations().filterNot { it.annotation.isSourceAnnotation }.isNotEmpty()
+        }
 
         fun <T : DeclarationDescriptor> sort(descriptors: Collection<T>): List<T> =
                 ArrayList(descriptors).apply {

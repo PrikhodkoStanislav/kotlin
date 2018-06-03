@@ -91,7 +91,7 @@ open class JvmBuiltInsSettings(
 
         val mockSerializableClass = ClassDescriptorImpl(
                 mockJavaIoPackageFragment, Name.identifier("Serializable"), Modality.ABSTRACT, ClassKind.INTERFACE, superTypes,
-                SourceElement.NO_SOURCE, /* isExternal = */ false
+                SourceElement.NO_SOURCE, /* isExternal = */ false, this
         )
 
         mockSerializableClass.initialize(MemberScope.Empty, emptySet(), null)
@@ -137,7 +137,6 @@ open class JvmBuiltInsSettings(
                 setOwner(classDescriptor)
                 setDispatchReceiverParameter(classDescriptor.thisAsReceiverParameter)
                 setPreserveSourceElement()
-                setSubstitution(UnsafeVarianceTypeSubstitution(moduleDescriptor.builtIns))
 
                 val memberStatus = additionalMember.getJdkMethodStatus()
                 when (memberStatus) {

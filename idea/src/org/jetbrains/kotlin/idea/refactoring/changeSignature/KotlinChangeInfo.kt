@@ -264,9 +264,8 @@ open class KotlinChangeInfo(
                     }
                     buffer.append('.')
                 }
+                buffer.append(name)
             }
-
-            buffer.append(name)
         }
 
         buffer.append(getNewParametersSignature(inheritedCallable))
@@ -529,7 +528,7 @@ fun KotlinChangeInfo.getAffectedCallables(): Collection<UsageInfo> = methodDescr
 
 fun ChangeInfo.toJetChangeInfo(
         originalChangeSignatureDescriptor: KotlinMethodDescriptor,
-        resolutionFacade: ResolutionFacade = method.javaResolutionFacade()
+        resolutionFacade: ResolutionFacade
 ): KotlinChangeInfo {
     val method = method as PsiMethod
 

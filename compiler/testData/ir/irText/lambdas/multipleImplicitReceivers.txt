@@ -3,7 +3,7 @@ FILE fqName:<root> fileName:/multipleImplicitReceivers.kt
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:A flags:
     superClasses:
       CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
-    CONSTRUCTOR visibility:private <> () returnType:A flags:
+    CONSTRUCTOR visibility:private <> () returnType:A flags:primary
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
         INSTANCE_INITIALIZER_CALL classDescriptor='A'
@@ -24,7 +24,7 @@ FILE fqName:<root> fileName:/multipleImplicitReceivers.kt
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:B flags:
     superClasses:
       CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
-    CONSTRUCTOR visibility:private <> () returnType:B flags:
+    CONSTRUCTOR visibility:private <> () returnType:B flags:primary
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
         INSTANCE_INITIALIZER_CALL classDescriptor='B'
@@ -47,6 +47,7 @@ FILE fqName:<root> fileName:/multipleImplicitReceivers.kt
       CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Any modality:OPEN visibility:public flags:
     PROPERTY name:foo type:B visibility:public modality:OPEN flags:val
       FUN name:<get-foo> visibility:public modality:OPEN <> ($this:IFoo, $receiver:A) returnType:B flags:
+        correspondingProperty: PROPERTY name:foo type:B visibility:public modality:OPEN flags:val
         $this: VALUE_PARAMETER name:<this> type:IFoo flags:
         $receiver: VALUE_PARAMETER name:<this> type:A flags:
         BLOCK_BODY
