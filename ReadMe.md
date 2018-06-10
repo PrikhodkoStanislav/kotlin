@@ -6,6 +6,8 @@
 
 # Kotlin Programming Language
 
+**Academic version contains intermediate printing of CST (concrete syntax tree; also referred to in intellij platform as PSI)**
+
 Welcome to [Kotlin](https://kotlinlang.org/)! Some handy links:
 
  * [Kotlin Site](https://kotlinlang.org/)
