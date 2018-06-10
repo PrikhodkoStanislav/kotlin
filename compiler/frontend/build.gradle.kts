@@ -17,7 +17,6 @@ dependencies {
     compile(commonDep("io.javaslang","javaslang"))
     compileOnly(intellijCoreDep()) { includeJars("intellij-core") }
     compileOnly(intellijDep()) { includeJars("annotations", "trove4j", "guava", rootProject = rootProject) }
-    compile(ideaSdkDeps("gson"))
 }
 
 sourceSets {
