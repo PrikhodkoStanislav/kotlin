@@ -41,29 +41,24 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
         }
 
-        @TestMetadata("p1s1_pos.kt")
-        public void testP1s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p1s1_pos.kt");
+        @TestMetadata("p2s1_pos.kt")
+        public void testP2s1_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s1_pos.kt");
         }
 
-        @TestMetadata("p1s1_pos.kt")
-        public void testP1s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p1s1_pos.kt");
+        @TestMetadata("p2s3_pos.kt")
+        public void testP2s3_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s3_pos.kt");
         }
 
-        @TestMetadata("p1s1_pos.kt")
-        public void testP1s3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p1s1_pos.kt");
+        @TestMetadata("p3s1_pos.kt")
+        public void testP3s1_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s1_pos.kt");
         }
 
-        @TestMetadata("p1s1_pos.kt")
-        public void testP1s4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p1s1_pos.kt");
-        }
-
-        @TestMetadata("p1s1_pos.kt")
-        public void testP1s5_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p1s1_pos.kt");
+        @TestMetadata("p3s2_pos.kt")
+        public void testP3s2_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s2_pos.kt");
         }
     }
 }
