@@ -86,6 +86,11 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
                 runTest("js/js.translator/testData/box/callableReference/function/classMemberAndNonExtensionCompatibility.kt");
             }
 
+            @TestMetadata("classMemberDirectCache.kt")
+            public void testClassMemberDirectCache() throws Exception {
+                runTest("js/js.translator/testData/box/callableReference/function/classMemberDirectCache.kt");
+            }
+
             @TestMetadata("classMemberFromClass.kt")
             public void testClassMemberFromClass() throws Exception {
                 runTest("js/js.translator/testData/box/callableReference/function/classMemberFromClass.kt");
@@ -194,6 +199,11 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
             @TestMetadata("extensionWithClosure.kt")
             public void testExtensionWithClosure() throws Exception {
                 runTest("js/js.translator/testData/box/callableReference/function/extensionWithClosure.kt");
+            }
+
+            @TestMetadata("functionReferenceName.kt")
+            public void testFunctionReferenceName() throws Exception {
+                runTest("js/js.translator/testData/box/callableReference/function/functionReferenceName.kt");
             }
 
             @TestMetadata("localAndTopLevelExtensions.kt")
@@ -3714,6 +3724,11 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
             runTest("js/js.translator/testData/box/inline/classObject.kt");
         }
 
+        @TestMetadata("continueInLoopWithInlinableCondition.kt")
+        public void testContinueInLoopWithInlinableCondition() throws Exception {
+            runTest("js/js.translator/testData/box/inline/continueInLoopWithInlinableCondition.kt");
+        }
+
         @TestMetadata("dontInlineFunctionCall.kt")
         public void testDontInlineFunctionCall() throws Exception {
             runTest("js/js.translator/testData/box/inline/dontInlineFunctionCall.kt");
@@ -3907,6 +3922,11 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
         @TestMetadata("localInlineFunctionReference.kt")
         public void testLocalInlineFunctionReference() throws Exception {
             runTest("js/js.translator/testData/box/inline/localInlineFunctionReference.kt");
+        }
+
+        @TestMetadata("loopWithInlinableCondition.kt")
+        public void testLoopWithInlinableCondition() throws Exception {
+            runTest("js/js.translator/testData/box/inline/loopWithInlinableCondition.kt");
         }
 
         @TestMetadata("metadataForPublicFunction.kt")

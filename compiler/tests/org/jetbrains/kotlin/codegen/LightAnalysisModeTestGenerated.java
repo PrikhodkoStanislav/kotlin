@@ -11174,6 +11174,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/inlineClasses/callComputablePropertyInsideInlineClass.kt");
         }
 
+        @TestMetadata("callableReferencesWithInlineClasses.kt")
+        public void testCallableReferencesWithInlineClasses() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/callableReferencesWithInlineClasses.kt");
+        }
+
         @TestMetadata("checkBoxUnboxOfArgumentsOnInlinedFunctions.kt")
         public void testCheckBoxUnboxOfArgumentsOnInlinedFunctions() throws Exception {
             runTest("compiler/testData/codegen/box/inlineClasses/checkBoxUnboxOfArgumentsOnInlinedFunctions.kt");
@@ -19425,6 +19430,16 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/sam/kt22906_2.kt");
         }
 
+        @TestMetadata("partialSam.kt")
+        public void testPartialSam() throws Exception {
+            runTest("compiler/testData/codegen/box/sam/partialSam.kt");
+        }
+
+        @TestMetadata("partialSamKT.kt")
+        public void testPartialSamKT() throws Exception {
+            runTest("compiler/testData/codegen/box/sam/partialSamKT.kt");
+        }
+
         @TestMetadata("compiler/testData/codegen/box/sam/constructors")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
@@ -21194,6 +21209,34 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("UnitValue.kt")
         public void testUnitValue() throws Exception {
             runTest("compiler/testData/codegen/box/unit/UnitValue.kt");
+        }
+    }
+
+    @TestMetadata("compiler/testData/codegen/box/unsignedTypes")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class UnsignedTypes extends AbstractLightAnalysisModeTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
+        }
+
+        public void testAllFilesPresentInUnsignedTypes() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/box/unsignedTypes"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.JVM, true);
+        }
+
+        @TestMetadata("checkBasicUnsignedLiterals.kt")
+        public void testCheckBasicUnsignedLiterals() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/checkBasicUnsignedLiterals.kt");
+        }
+
+        @TestMetadata("evaluateConstructorOfUnsignedType.kt")
+        public void testEvaluateConstructorOfUnsignedType() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/evaluateConstructorOfUnsignedType.kt");
+        }
+
+        @TestMetadata("unsignedLiteralsWithSignedOverflow.kt")
+        public void testUnsignedLiteralsWithSignedOverflow() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/unsignedLiteralsWithSignedOverflow.kt");
         }
     }
 
