@@ -24,7 +24,6 @@ class Kotlin2JvmTask : KotlinCompilerBaseTask() {
     override val compilerFqName = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
 
     var includeRuntime: Boolean = true
-    var psiPrinting: Boolean = false
     var moduleName: String? = null
 
     var noReflect: Boolean = false
@@ -73,6 +72,5 @@ class Kotlin2JvmTask : KotlinCompilerBaseTask() {
         if (noStdlib) args.add("-no-stdlib")
         if (noReflect) args.add("-no-reflect")
         if (includeRuntime) args.add("-include-runtime")
-        if (psiPrinting) args.add("-psi-printing")
     }
 }
