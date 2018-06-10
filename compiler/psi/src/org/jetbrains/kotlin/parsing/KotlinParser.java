@@ -25,7 +25,6 @@ import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.KtNodeTypes;
 import org.jetbrains.kotlin.script.ScriptDefinitionProvider;
-import org.jetbrains.kotlin.util.PsiPrinter;
 
 public class KotlinParser implements PsiParser {
 
@@ -53,14 +52,7 @@ public class KotlinParser implements PsiParser {
             ktParsing.parseFile();
         }
 
-        ASTNode psi = psiBuilder.getTreeBuilt();
-
-        if (psi.getElementType() == KtNodeTypes.KT_FILE && psiFile.getVirtualFile() != null) {
-            PsiPrinter psiPrinter = new PsiPrinter(psi, psiFile.getVirtualFile());
-            psiPrinter.print();
-        }
-
-        return psi;
+        return psiBuilder.getTreeBuilt();
     }
 
     @NotNull
