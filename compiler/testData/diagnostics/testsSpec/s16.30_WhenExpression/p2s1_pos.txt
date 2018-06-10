@@ -1,0 +1,8 @@
+package
+
+public fun whenBoolConstsTest(): kotlin.Int
+public fun whenBoolTest(/*0*/ value: kotlin.Boolean): kotlin.Int
+public fun whenIntTest(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun whenNullableBoolSmartCastTest(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun whenNullableBoolTest(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun whenStringTest(/*0*/ value: kotlin.String?): kotlin.Int
