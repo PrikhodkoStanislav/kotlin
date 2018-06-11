@@ -1,0 +1,8 @@
+package
+
+public fun whenIntTest(/*0*/ value: kotlin.Int): kotlin.Int
+public fun whenIntWithTrueCaseTest(/*0*/ value: kotlin.Int): kotlin.Int
+public fun whenIntWithUnrachableCodeTest(/*0*/ value: kotlin.Int): kotlin.Int
+public fun whenWithElseDuplicateTest(): kotlin.Int
+public fun whenWithElseNotLastPositionTest(): kotlin.Int
+public fun whenWithElseOnlyTest(): kotlin.Int
