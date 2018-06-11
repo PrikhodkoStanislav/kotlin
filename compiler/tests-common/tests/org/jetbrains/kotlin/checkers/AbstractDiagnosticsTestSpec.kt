@@ -30,7 +30,7 @@ private data class TestInfo(
 
 abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     private val testInfoRegex =
-        "^.*?/s(?<sectionNumber>(?:\\d+)(?:\\.\\d+)*)_(?<sectionName>[\\w-]+)/p(?<paragraph>\\d+)s(?<sentence>\\d+)_(?<testType>pos|neg)\\.kt$"
+        "^.*?/s(?<sectionNumber>(?:\\d+)(?:\\.\\d+)*):(?<sectionName>[\\w-]+)/(?<paragraph>\\d+):(?<sentence>\\d+)-(?<testType>pos|neg)\\.kt$"
 
     private val specUrl = "file:///Users/victor/IdeaProjects/kotlin-spec/.pages/index.html"
 

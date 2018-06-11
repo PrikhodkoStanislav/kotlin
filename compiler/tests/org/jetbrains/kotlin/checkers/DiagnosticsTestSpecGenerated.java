@@ -29,7 +29,7 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
     }
 
-    @TestMetadata("compiler/testData/diagnostics/testsSpec/s16.30_when-expression")
+    @TestMetadata("compiler/testData/diagnostics/testsSpec/s16.30:when-expression")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class S16_30_when_expression extends AbstractDiagnosticsTestSpec {
@@ -37,48 +37,43 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
         }
 
+        @TestMetadata("2:1-pos.kt")
+        public void test2_1_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2:1-pos.kt");
+        }
+
+        @TestMetadata("2:2-pos.kt")
+        public void test2_2_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2:2-pos.kt");
+        }
+
+        @TestMetadata("2:3-pos.kt")
+        public void test2_3_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2:3-pos.kt");
+        }
+
+        @TestMetadata("3:1-pos.kt")
+        public void test3_1_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:1-pos.kt");
+        }
+
+        @TestMetadata("3:2-pos.kt")
+        public void test3_2_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:2-pos.kt");
+        }
+
+        @TestMetadata("3:3-pos.kt")
+        public void test3_3_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:3-pos.kt");
+        }
+
+        @TestMetadata("3:4-pos.kt")
+        public void test3_4_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:4-pos.kt");
+        }
+
         public void testAllFilesPresentInS16_30_when_expression() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30_when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
-        }
-
-        @TestMetadata("p2s1_pos.kt")
-        public void testP2s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s1_pos.kt");
-        }
-
-        @TestMetadata("p2s2_pos.kt")
-        public void testP2s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s2_pos.kt");
-        }
-
-        @TestMetadata("p2s3_pos.kt")
-        public void testP2s3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s3_pos.kt");
-        }
-
-        @TestMetadata("p3s1_pos.kt")
-        public void testP3s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s1_pos.kt");
-        }
-
-        @TestMetadata("p3s2_pos.kt")
-        public void testP3s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s2_pos.kt");
-        }
-
-        @TestMetadata("p3s3_pos.kt")
-        public void testP3s3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s3_pos.kt");
-        }
-
-        @TestMetadata("p3s4_pos.kt")
-        public void testP3s4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s4_pos.kt");
-        }
-
-        @TestMetadata("pnsn_pos.kt")
-        public void testPnsn_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/pnsn_pos.kt");
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30:when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
         }
     }
 }
