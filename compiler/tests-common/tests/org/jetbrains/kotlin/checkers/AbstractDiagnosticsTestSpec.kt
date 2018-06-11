@@ -30,9 +30,9 @@ private data class TestInfo(
 
 abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     private val testInfoRegex =
-        "^.*?/s(?<sectionNumber>(?:\\d+)(?:\\.\\d+)*)_(?<sectionName>\\w+)/p(?<paragraph>\\d+)s(?<sentence>\\d+)_(?<testType>pos|neg)\\.kt$"
+        "^.*?/s(?<sectionNumber>(?:\\d+)(?:\\.\\d+)*)_(?<sectionName>[\\w-]+)/p(?<paragraph>\\d+)s(?<sentence>\\d+)_(?<testType>pos|neg)\\.kt$"
 
-    private val specUrl = "http://jetbrains.github.io/kotlin-spec"
+    private val specUrl = "file:///Users/victor/IdeaProjects/kotlin-spec/.pages/index.html"
 
     override fun getConfigurationKind(): ConfigurationKind {
         return ConfigurationKind.ALL
@@ -48,12 +48,8 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         )
     }
 
-    private fun getUnderscoreSectionName(sectionName: String): String {
-        return Pattern.compile("([A-Z])").matcher(sectionName).replaceAll("_$1").toLowerCase()
-    }
-
     private fun getHumanReadableSectionName(sectionName: String): String {
-        return Pattern.compile("([^^])([A-Z])").matcher(sectionName).replaceAll("$1 $2")
+        return sectionName.replace("-", " ")
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
@@ -70,7 +66,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
 
         println(
             "SPEC TEST IS RUNNING [${testInfo.testType}]: ${testInfo.sectionNumber} ${getHumanReadableSectionName(testInfo.sectionName)} " +
-                    "(paragraph: ${testInfo.paragraph}, sentence: ${testInfo.sentence}), $specUrl/#${getUnderscoreSectionName(testInfo.sectionName)}"
+                    "(paragraph: ${testInfo.paragraph}, sentence: ${testInfo.sentence}), $specUrl#${testInfo.sectionName}:${testInfo.paragraph}:${testInfo.sentence}"
         )
 
         super.analyzeAndCheck(testDataFile, files)
