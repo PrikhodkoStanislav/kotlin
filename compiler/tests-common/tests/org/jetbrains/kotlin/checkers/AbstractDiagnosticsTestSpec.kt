@@ -21,16 +21,33 @@ private enum class TestType(val type: String) {
 }
 
 private data class TestInfo(
+    val testType: TestType,
     val sectionNumber: String,
     val sectionName: String,
-    val paragraph: Int,
-    val sentence: Int,
-    val testType: TestType
-)
+    val paragraphNumber: Int,
+    val sentenceNumber: Int,
+    val sentence: String? = null
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is TestInfo) return false
+
+        return this.testType == other.testType && this.sectionNumber == other.sectionNumber && this.paragraphNumber == other.paragraphNumber && this.sentenceNumber == other.sentenceNumber
+    }
+
+    override fun hashCode(): Int {
+        return javaClass.hashCode()
+    }
+}
 
 abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
-    private val testInfoRegex =
-        "^.*?/s(?<sectionNumber>(?:\\d+)(?:\\.\\d+)*):(?<sectionName>[\\w-]+)/(?<paragraph>\\d+):(?<sentence>\\d+)-(?<testType>pos|neg)\\.kt$"
+    private val integerRegex = "[1-9]\\d*"
+
+    private val testPathRegex =
+        "^.*?/s(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):(?<sectionName>[\\w-]+)/(?<paragraphNumber>$integerRegex):(?<sentenceNumber>$integerRegex)-(?<testType>pos|neg)\\.kt$"
+
+    private val testContentMetaInfoRegex =
+        "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+\\*\\/\\s+"
 
     private val specUrl = "file:///Users/victor/IdeaProjects/kotlin-spec/.pages/index.html"
 
@@ -38,36 +55,50 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         return ConfigurationKind.ALL
     }
 
-    private fun getTestInfo(testInfoMatcher: Matcher): TestInfo {
+    private fun getTestInfo(testInfoMatcher: Matcher, directMappedTestTypeEnum: Boolean = false, withSentence: Boolean = false): TestInfo {
         return TestInfo(
+            if (directMappedTestTypeEnum)
+                TestType.valueOf(testInfoMatcher.group("testType")) else
+                TestType.fromValue(testInfoMatcher.group("testType"))!!,
             testInfoMatcher.group("sectionNumber"),
             testInfoMatcher.group("sectionName"),
-            testInfoMatcher.group("paragraph").toInt(),
-            testInfoMatcher.group("sentence").toInt(),
-            TestType.fromValue(testInfoMatcher.group("testType"))!!
+            testInfoMatcher.group("paragraphNumber").toInt(),
+            testInfoMatcher.group("sentenceNumber").toInt(),
+            if (withSentence) testInfoMatcher.group("sentence") else null
         )
     }
 
-    private fun getHumanReadableSectionName(sectionName: String): String {
-        return sectionName.replace("-", " ")
+    private fun getTestFileWithoutMetaInfo(testInfoByContentMatcher: Matcher): File {
+        val testFileContentWithoutMetaInfo = testInfoByContentMatcher.replaceAll("")
+        val tempFile = createTempFile()
+        tempFile.writeText(testFileContentWithoutMetaInfo)
+
+        return tempFile
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
-        val testInfoMatcher = Pattern.compile(testInfoRegex).matcher(testDataFile.path)
+        val testInfoByFilenameMatcher = Pattern.compile(testPathRegex).matcher(testDataFile.path)
+        val testInfoByContentMatcher = Pattern.compile(testContentMetaInfoRegex).matcher(testDataFile.readText())
 
         assertTrue(
             "Incorrect test filename or folder name.\n" +
                     "It must match the following path pattern: " +
                     "testsSpec/s<sectionNumber>_<sectionName>/p<paragraph>s<sentence>_<pos|neg>.kt " +
-                    "(example: testsSpec/s16.30_WhenExpression/p1s1_pos.kt)", testInfoMatcher.find()
+                    "(example: testsSpec/s16.30:when-expression/1:1-pos.kt)", testInfoByFilenameMatcher.find()
         )
 
-        val testInfo = getTestInfo(testInfoMatcher)
+        assertTrue("Incorrect meta info in test file.", testInfoByContentMatcher.find())
 
-        println(
-            "SPEC TEST IS RUNNING [${testInfo.testType}]: ${testInfo.sectionNumber} ${getHumanReadableSectionName(testInfo.sectionName)} " +
-                    "(paragraph: ${testInfo.paragraph}, sentence: ${testInfo.sentence}), $specUrl#${testInfo.sectionName}:${testInfo.paragraph}:${testInfo.sentence}"
-        )
+        val testInfoByFilename = getTestInfo(testInfoByFilenameMatcher)
+        val testInfoByContent = getTestInfo(testInfoByContentMatcher, withSentence = true, directMappedTestTypeEnum = true)
+
+        assertTrue("Test info from filename and file content is not consistency", testInfoByFilename == testInfoByContent)
+
+        println("-------------------------")
+        println("DIAGNOSTIC SPEC TEST IS RUNNING [${testInfoByFilename.testType}]")
+        println("SECTION: ${testInfoByFilename.sectionNumber} ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber}, sentence: ${testInfoByFilename.sentenceNumber})")
+        println("SENTENCE: ${testInfoByContent.sentence}")
+        println("URL: $specUrl#${testInfoByFilename.sectionName}:${testInfoByFilename.paragraphNumber}:${testInfoByFilename.sentenceNumber}")
 
         super.analyzeAndCheck(testDataFile, files)
     }
