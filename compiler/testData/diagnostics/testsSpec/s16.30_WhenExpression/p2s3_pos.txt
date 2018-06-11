@@ -1,0 +1,4 @@
+package
+
+public fun whenWithBoundValueTest(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun whenWithoutBoundValueTest(): kotlin.Int
