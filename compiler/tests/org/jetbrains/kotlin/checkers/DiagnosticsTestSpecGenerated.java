@@ -46,19 +46,14 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s1_pos.kt");
         }
 
+        @TestMetadata("p2s2_pos.kt")
+        public void testP2s2_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s2_pos.kt");
+        }
+
         @TestMetadata("p2s3_pos.kt")
         public void testP2s3_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s3_pos.kt");
-        }
-
-        @TestMetadata("p3s1_pos.kt")
-        public void testP3s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s1_pos.kt");
-        }
-
-        @TestMetadata("p3s2_pos.kt")
-        public void testP3s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s2_pos.kt");
         }
     }
 }
