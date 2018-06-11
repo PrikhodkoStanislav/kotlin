@@ -29,51 +29,56 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
     }
 
-    @TestMetadata("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression")
+    @TestMetadata("compiler/testData/diagnostics/testsSpec/s16.30_when-expression")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
-    public static class S16_30_WhenExpression extends AbstractDiagnosticsTestSpec {
+    public static class S16_30_when_expression extends AbstractDiagnosticsTestSpec {
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
         }
 
-        public void testAllFilesPresentInS16_30_WhenExpression() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+        public void testAllFilesPresentInS16_30_when_expression() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30_when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
         }
 
         @TestMetadata("p2s1_pos.kt")
         public void testP2s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s1_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s1_pos.kt");
         }
 
         @TestMetadata("p2s2_pos.kt")
         public void testP2s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s2_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s2_pos.kt");
         }
 
         @TestMetadata("p2s3_pos.kt")
         public void testP2s3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p2s3_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p2s3_pos.kt");
         }
 
         @TestMetadata("p3s1_pos.kt")
         public void testP3s1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s1_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s1_pos.kt");
         }
 
         @TestMetadata("p3s2_pos.kt")
         public void testP3s2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s2_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s2_pos.kt");
         }
 
         @TestMetadata("p3s3_pos.kt")
         public void testP3s3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s3_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s3_pos.kt");
         }
 
         @TestMetadata("p3s4_pos.kt")
         public void testP3s4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30_WhenExpression/p3s4_pos.kt");
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/p3s4_pos.kt");
+        }
+
+        @TestMetadata("pnsn_pos.kt")
+        public void testPnsn_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30_when-expression/pnsn_pos.kt");
         }
     }
 }
