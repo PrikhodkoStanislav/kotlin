@@ -6,7 +6,7 @@
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  */
 
-fun whenIntTest(value: Int?): Int {
+fun int(value: Int?): Int {
     when {
         value == null -> return 0
         value == 1 -> return 1
@@ -23,7 +23,7 @@ fun whenIntTest(value: Int?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenBoolTest(value: Boolean): Int {
+fun bool(value: Boolean): Int {
     when {
         value -> return 1
         !value -> return 2
@@ -32,7 +32,7 @@ fun whenBoolTest(value: Boolean): Int {
     return -1
 }
 
-fun whenNullableBoolTest(value: Boolean?): Int {
+fun nullableBool(value: Boolean?): Int {
     when {
         value == true -> return 1
         value == false -> return 2
@@ -42,20 +42,20 @@ fun whenNullableBoolTest(value: Boolean?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenNullableBoolSmartCastTest(value: Boolean?): Int {
+fun nullableBoolSmartCast(value: Boolean?): Int {
     when {
         value == null -> return 0
-            <!DEBUG_INFO_SMARTCAST!>value<!> -> return 1
+        <!DEBUG_INFO_SMARTCAST!>value<!> -> return 1
         !<!DEBUG_INFO_SMARTCAST!>value<!> -> return 2
     }
 
     return -1
 }
 
-fun whenStringTest(value: String?): Int {
+fun string(value: String?): Int {
     when {
         value == null -> return 0
-            <!DEBUG_INFO_SMARTCAST!>value<!>.isEmpty() -> return 1
+        <!DEBUG_INFO_SMARTCAST!>value<!>.isEmpty() -> return 1
         value == "a" || value == "b" -> return 2
         else -> return 4
     }
@@ -63,7 +63,7 @@ fun whenStringTest(value: String?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenFloatTest(value: Float?): Int {
+fun float(value: Float?): Int {
     when {
         value == null -> return 0
         <!DEBUG_INFO_SMARTCAST!>value<!> < 10.5F -> return 1
@@ -74,7 +74,7 @@ fun whenFloatTest(value: Float?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenDoubleTest(value: Double?): Int {
+fun double(value: Double?): Int {
     when {
         value == null -> return 0
         <!DEBUG_INFO_SMARTCAST!>value<!> < 10.51235 -> return 1
@@ -85,7 +85,7 @@ fun whenDoubleTest(value: Double?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenLongTest(value: Long?): Int {
+fun long(value: Long?): Int {
     when {
         value == null -> return 0
         <!DEBUG_INFO_SMARTCAST!>value<!> < 8128491894234244849L -> return 1
@@ -96,7 +96,7 @@ fun whenLongTest(value: Long?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenTypeCheckTest(value: Any?): Int {
+fun typeCheck(value: Any?): Int {
     when {
         value is String -> return 0
         value is Int -> return 1
@@ -107,7 +107,7 @@ fun whenTypeCheckTest(value: Any?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenRangeTest(value: Int?): Int {
+fun rangeTest(value: Int?): Int {
     when {
         value in 0..10 -> return 0
         value in 11..100 -> return 1
@@ -118,7 +118,7 @@ fun whenRangeTest(value: Int?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun whenBoolConstsTest(): Int {
+fun boolConsts(): Int {
     when {
         1 == 2 -> { return 0 }
         1 == 1 && 1 >= 5 -> { return 1 }

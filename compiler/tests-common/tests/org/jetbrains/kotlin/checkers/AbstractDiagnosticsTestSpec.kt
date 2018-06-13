@@ -49,7 +49,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     private val testContentMetaInfoRegex =
         "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+\\*\\/\\s+"
 
-    private val specUrl = "file:///Users/victor/IdeaProjects/kotlin-spec/.pages/index.html"
+    private val specUrl = "https://petukhovvictor.github.io/kotlin-spec"
 
     override fun getConfigurationKind(): ConfigurationKind {
         return ConfigurationKind.ALL

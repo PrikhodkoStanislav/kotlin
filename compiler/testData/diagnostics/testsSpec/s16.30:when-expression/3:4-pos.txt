@@ -1,9 +1,6 @@
 package
 
-public fun whenWithComplexFalseBeforeWhenTest(): kotlin.Int
-public fun whenWithComplexTrueBeforeWhenTest(): kotlin.Int
-public fun whenWithElseDuplicateTest(): kotlin.Int
-public fun whenWithElseNotLastPositionTest(): kotlin.Int
-public fun whenWithElseOnlyTest(): kotlin.Int
-public fun whenWithFalseBeforeWhenTest(): kotlin.Int
-public fun whenWithTrueBeforeWhenTest(): kotlin.Int
+public fun whenIntWithDuplicateTrueCaseTest(): kotlin.Int
+public fun whenIntWithTrueCaseTest(/*0*/ value: kotlin.Int): kotlin.Int
+public fun whenWithComplexTrueTest(): kotlin.Int
+public fun whenWithTrueAndElseTest(): kotlin.Int

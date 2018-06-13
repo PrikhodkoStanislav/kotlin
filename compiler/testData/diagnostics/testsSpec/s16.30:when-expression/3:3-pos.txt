@@ -1,6 +1,4 @@
 package
 
-public fun whenIntWithDuplicateTrueCaseTest(): kotlin.Int
-public fun whenIntWithTrueCaseTest(/*0*/ value: kotlin.Int): kotlin.Int
-public fun whenWithComplexTrueTest(): kotlin.Int
-public fun whenWithTrueAndElseTest(): kotlin.Int
+public fun whenExpressionCaseTest(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun whenExpressionWithTrueCaseTest(/*0*/ value: kotlin.Int?): kotlin.Int

@@ -19,7 +19,7 @@
     return 4
  }
  */
-fun whenBoolConditionsTest(value: Int): Int {
+fun conditionsWithInt(value: Int): Int {
     when {
         value == 0 -> return 1
         value > 0 && value <= 10 -> return 2
@@ -43,7 +43,7 @@ fun whenBoolConditionsTest(value: Int): Int {
     return 4
  }
  */
-fun whenBoolConditionsWithElseTest(value: Int): Int {
+fun conditionsWithIntAndElseBracnh(value: Int): Int {
     when {
         value == 0 -> return 1
         value > 0 && value <= 10 -> return 2
@@ -57,13 +57,28 @@ fun whenBoolConditionsWithElseTest(value: Int): Int {
 /*
  The same as the following conditional expression:
 
+ if (!value) {
+    return 1
+ }
+ */
+fun conditionWithBool(value: Boolean): Int {
+    when {
+        !value -> return 1
+    }
+
+    return -1
+}
+
+/*
+ The same as the following conditional expression:
+
  if (value) {
     return 1
  } else {
     return 2
  }
  */
-fun whenBoolConditionsOnBoolVarTest(value: Boolean): Int {
+fun conditionWithBoolAndElseBranch(value: Boolean): Int {
     when {
         value -> return 1
         else -> return 2
@@ -75,13 +90,20 @@ fun whenBoolConditionsOnBoolVarTest(value: Boolean): Int {
 /*
  The same as the following conditional expression:
 
- if (!value) {
+ if (value.isEmpty()) {
     return 1
+ } else if (value == "a") {
+    return 2
+ } else if (true) {
+    return 3
  }
  */
-fun whenSingleBoolConditionOnBoolVarTest(value: Boolean): Int {
+fun conditionsWithString(value: String?): Int {
     when {
-        !value -> return 1
+        value == null -> return 0
+        value.isEmpty() -> return 1
+        value == "a" -> return 2
+        true -> return 3
     }
 
     return -1
