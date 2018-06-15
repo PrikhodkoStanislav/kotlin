@@ -9,7 +9,7 @@
 /*
  Else branch will not be evaluated, because one of the higher branches is exactly evaluated.
  */
-fun withTrueAndElseCases(value: Int): Int {
+fun withTrueCaseAndElseNotEvaluated(value: Int): Int {
     when {
         value == 2 -> return 1
         value > 2 && value <= 10 -> return 2
@@ -18,7 +18,7 @@ fun withTrueAndElseCases(value: Int): Int {
         value > -4 || value < -100 && value > -1000 || value == 11 -> return 5
         value != -3 && value != -4 && value != -5 -> return 6
         value > -3 -> return 7
-        !!!(false) && "" == null || !!!(null == 0) -> return 2 -> return 8 // must be true
+        !!!(false) && <!SENSELESS_COMPARISON!>"" == null<!> || !!!(<!SENSELESS_COMPARISON!>null == 0<!>) -> return 8 // must be true
         else -> return 9
     }
 
@@ -28,10 +28,10 @@ fun withTrueAndElseCases(value: Int): Int {
 /*
  Else branch will be exactly evaluated, because the other branches will not be evaluated (false invariants).
  */
-fun withTrueAndElseCases(value: Int): Int {
+fun withTrueCaseAndElseEvaluated(): Int {
     when {
         true && 11 != 11 || 11 != 12 && false -> return 1 // must be false
-        !!!(false) && "" == null || !!!!(null == 0) -> return 2 // must be false
+        !!!(false) && <!SENSELESS_COMPARISON!>"" == null<!> || !!!!(<!SENSELESS_COMPARISON!>null == 0<!>) -> return 2 // must be false
         else -> return 2
     }
 

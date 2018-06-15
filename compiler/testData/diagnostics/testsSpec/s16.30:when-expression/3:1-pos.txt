@@ -1,13 +1,13 @@
 package
 
-public fun whenBoolConstsTest(): kotlin.Int
-public fun whenBoolTest(/*0*/ value: kotlin.Boolean): kotlin.Int
-public fun whenDoubleTest(/*0*/ value: kotlin.Double?): kotlin.Int
-public fun whenFloatTest(/*0*/ value: kotlin.Float?): kotlin.Int
-public fun whenIntTest(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun whenLongTest(/*0*/ value: kotlin.Long?): kotlin.Int
-public fun whenNullableBoolSmartCastTest(/*0*/ value: kotlin.Boolean?): kotlin.Int
-public fun whenNullableBoolTest(/*0*/ value: kotlin.Boolean?): kotlin.Int
-public fun whenRangeTest(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun whenStringTest(/*0*/ value: kotlin.String?): kotlin.Int
-public fun whenTypeCheckTest(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun bool(/*0*/ value: kotlin.Boolean): kotlin.Int
+public fun boolConsts(): kotlin.Int
+public fun double(/*0*/ value: kotlin.Double?): kotlin.Int
+public fun float(/*0*/ value: kotlin.Float?): kotlin.Int
+public fun int(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun long(/*0*/ value: kotlin.Long?): kotlin.Int
+public fun nullableBool(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun nullableBoolSmartCast(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun rangeTest(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun string(/*0*/ value: kotlin.String?): kotlin.Int
+public fun typeCheck(/*0*/ value: kotlin.Any?): kotlin.Int

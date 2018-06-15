@@ -35,24 +35,25 @@ fun withTrueInsteadElse(value: Int): Int {
         true -> return 10
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    return -1 // why dont have 'UNREACHABLE_CODE' diagnostic?
 }
 
 /*
  Whens with the 'true' branch at the end and the 'else' branch at the end must be equivalent.
  */
-fun compareWhensWithTrueAndElseCases(value: Int): Int {
+fun compareWhensWithTrueAndElseCases(): Boolean {
     return when {
         90 == 91 -> 1
         false == !!true -> 2
         11 > 11 -> 3
-        "" == null -> 4
+        <!SENSELESS_COMPARISON!>"" == null<!> -> 4
         else -> 5
     } == when {
         90 == 91 -> 1
         false == !!true -> 2
         11 > 11 -> 3
-        "" == null -> 4
+        <!SENSELESS_COMPARISON!>"" == null<!> -> 4
         true -> 5
+        else -> 6 // whether its necessary? TYPE_MISMATCH without it
     } // must be 5 == 5 => true
 }

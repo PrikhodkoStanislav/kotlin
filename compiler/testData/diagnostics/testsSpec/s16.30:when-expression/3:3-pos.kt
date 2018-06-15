@@ -41,26 +41,26 @@ fun withComplexBoolCases(): Int = <!NO_ELSE_IN_WHEN!>when<!> {
 }
 
 // The function must return 0 (as well as when expression)
-fun withBoolCases(value: Any?): Int = {
-    val whenValue = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-        false -> (1)
-    true -> (0) // will be evaluated
+fun withBoolCases(): Int {
+    val whenValue = <!NO_ELSE_IN_WHEN!>when<!> {
+        false -> 1
+    true -> 0 // will be evaluated
     }
 
     return whenValue
 }
 
 // The function must return 0 (as well as when expression)
-fun withBoolAndElseCases(value: Any?): Int = {
-    val whenValue = when(value) {
+fun withBoolAndElseCases(): Int {
+    val whenValue = when {
         false -> {
-            return 1
+            1
         }
         true -> { // will be evaluated
-            return 0
+            0
         }
         else -> {
-            return 2
+            2
         }
     }
 

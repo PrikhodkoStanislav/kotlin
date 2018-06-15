@@ -1,3 +1,4 @@
 package
 
-public fun whenAllConditionsTest(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun allConditions(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun calcSomeValue(/*0*/ value: kotlin.Int): kotlin.Int

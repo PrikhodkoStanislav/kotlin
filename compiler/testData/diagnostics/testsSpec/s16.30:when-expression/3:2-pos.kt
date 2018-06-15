@@ -24,14 +24,14 @@ fun manyCassesWithTrueBranchBetweenThem(value: Int): Int {
         else -> return 10
     }
 
-    return -1
+    <!UNREACHABLE_CODE!>return -1<!>
 }
 
 /*
  The function must return 1.
  'else' branch (appearing after) will not be checked and evaluated, because we have 'true' invariant in the first case.
 */
-fun caseWithTrueBranchBeforeElse(value: Int): Int {
+fun caseWithTrueBranchBeforeElse(): Int {
     when {
         false || false && true || (true) -> return 1
         else -> return 2

@@ -7,7 +7,9 @@
  */
 
 /*
- The same as the following conditional expression:
+ Not exhaustive when expression (of the type kotlin.Unit).
+
+ The same as the following conditional expression without else branch:
 
  if (value == 0) {
     return 1
@@ -31,6 +33,8 @@ fun conditionsWithInt(value: Int): Int {
 }
 
 /*
+ Exhaustive when expression.
+
  The same as the following conditional expression:
 
  if (value == 0) {
@@ -101,7 +105,7 @@ fun conditionWithBoolAndElseBranch(value: Boolean): Int {
 fun conditionsWithString(value: String?): Int {
     when {
         value == null -> return 0
-        value.isEmpty() -> return 1
+        <!DEBUG_INFO_SMARTCAST!>value<!>.isEmpty() -> return 1
         value == "a" -> return 2
         true -> return 3
     }
