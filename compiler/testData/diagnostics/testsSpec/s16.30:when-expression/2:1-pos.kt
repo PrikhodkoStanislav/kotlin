@@ -1,3 +1,5 @@
+// !CHECK_TYPE
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -47,7 +49,7 @@ fun conditionsWithInt(value: Int): Int {
     return 4
  }
  */
-fun conditionsWithIntAndElseBracnh(value: Int): Int {
+fun conditionsWithIntAndElseBranch(value: Int): Int {
     when {
         value == 0 -> return 1
         value > 0 && value <= 10 -> return 2
@@ -56,6 +58,28 @@ fun conditionsWithIntAndElseBracnh(value: Int): Int {
     }
 
     <!UNREACHABLE_CODE!>return -1<!>
+}
+
+/*
+ Exhaustive when expression with storing in variable and comparison with if
+ */
+fun conditionsWithIntAndElseBranchAndIfComparison(value: Int): Boolean {
+    val whenValue = when {
+        value == 0 -> 1
+        value > 0 && value <= 10 -> 2
+        value > 10 && value <= 100 -> 3
+        else -> 4
+    }
+
+    val ifValue = if (value == 0) 1
+        else if (value > 0 && value <= 10) 2
+        else if (value > 10 && value <= 100) 3
+        else 4
+
+    whenValue checkType { _<Int>() }
+    ifValue checkType { _<Int>() }
+
+    return whenValue == ifValue // must be true
 }
 
 /*
@@ -92,9 +116,28 @@ fun conditionWithBoolAndElseBranch(value: Boolean): Int {
 }
 
 /*
+ Exhaustive when expression with storing in variable and comparison with if
+ */
+fun conditionWithBoolAndElseBranchAndIfComparison(value: Boolean): Boolean {
+    val whenValue = when {
+        value -> 1
+        else -> 2
+    }
+
+    val ifValue = if (value) 1 else 2
+
+    whenValue checkType { _<Int>() }
+    ifValue checkType { _<Int>() }
+
+    return whenValue == ifValue // must be true
+}
+
+/*
  The same as the following conditional expression:
 
- if (value.isEmpty()) {
+ if (value == 0) {
+    return 0
+ else if (value.isEmpty()) {
     return 1
  } else if (value == "a") {
     return 2

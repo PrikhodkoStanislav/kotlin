@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -SENSELESS_COMPARISON
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -39,21 +41,21 @@ fun withTrueInsteadElse(value: Int): Int {
 }
 
 /*
- Whens with the 'true' branch at the end and the 'else' branch at the end must be equivalent.
+ Whens with the 'true' branch at the end and the 'else' branch at the end must be equivalent (similar semantics).
  */
 fun compareWhensWithTrueAndElseCases(): Boolean {
     return when {
         90 == 91 -> 1
         false == !!true -> 2
         11 > 11 -> 3
-        <!SENSELESS_COMPARISON!>"" == null<!> -> 4
+        "" == null -> 4
         else -> 5
     } == when {
         90 == 91 -> 1
         false == !!true -> 2
         11 > 11 -> 3
-        <!SENSELESS_COMPARISON!>"" == null<!> -> 4
+        "" == null -> 4
         true -> 5
-        else -> 6 // whether its necessary? TYPE_MISMATCH without it
+        else -> 6 // whether its necessary? TYPE_MISMATCH without it (not exhaustive when)
     } // must be 5 == 5 => true
 }

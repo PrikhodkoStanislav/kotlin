@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -SENSELESS_COMPARISON
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -18,7 +20,7 @@ fun withTrueCaseAndElseNotEvaluated(value: Int): Int {
         value > -4 || value < -100 && value > -1000 || value == 11 -> return 5
         value != -3 && value != -4 && value != -5 -> return 6
         value > -3 -> return 7
-        !!!(false) && <!SENSELESS_COMPARISON!>"" == null<!> || !!!(<!SENSELESS_COMPARISON!>null == 0<!>) -> return 8 // must be true
+        !!!(false) && "" == null || !!!(null == 0) -> return 8 // must be true
         else -> return 9
     }
 
@@ -31,7 +33,7 @@ fun withTrueCaseAndElseNotEvaluated(value: Int): Int {
 fun withTrueCaseAndElseEvaluated(): Int {
     when {
         true && 11 != 11 || 11 != 12 && false -> return 1 // must be false
-        !!!(false) && <!SENSELESS_COMPARISON!>"" == null<!> || !!!!(<!SENSELESS_COMPARISON!>null == 0<!>) -> return 2 // must be false
+        !!!(false) && "" == null || !!!!(null == 0) -> return 2 // must be false
         else -> return 2
     }
 

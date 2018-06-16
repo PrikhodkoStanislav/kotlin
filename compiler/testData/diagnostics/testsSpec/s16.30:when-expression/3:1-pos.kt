@@ -11,12 +11,12 @@ fun int(value: Int?): Int {
         value == null -> return 0
         value == 1 -> return 1
         value == 2 -> return 2
-            <!DEBUG_INFO_SMARTCAST!>value<!> > 2 && <!DEBUG_INFO_SMARTCAST!>value<!> <= 10 -> return 3
+        <!DEBUG_INFO_SMARTCAST!>value<!> > 2 && <!DEBUG_INFO_SMARTCAST!>value<!> <= 10 -> return 3
         value == 11 -> return 4
-            <!DEBUG_INFO_SMARTCAST!>value<!> > 11 -> return 5
-            <!DEBUG_INFO_SMARTCAST!>value<!> > -4 || <!DEBUG_INFO_SMARTCAST!>value<!> < -100 && <!DEBUG_INFO_SMARTCAST!>value<!> > -1000 || value == 11 -> return 7
+        <!DEBUG_INFO_SMARTCAST!>value<!> > 11 -> return 5
+        <!DEBUG_INFO_SMARTCAST!>value<!> > -4 || <!DEBUG_INFO_SMARTCAST!>value<!> < -100 && <!DEBUG_INFO_SMARTCAST!>value<!> > -1000 || value == 11 -> return 7
         value != -3 && value != -4 && value != -5 -> return 8
-            <!DEBUG_INFO_SMARTCAST!>value<!> > -3 -> return 9
+        <!DEBUG_INFO_SMARTCAST!>value<!> > -3 -> return 9
         else -> return 10
     }
 
@@ -111,7 +111,7 @@ fun rangeTest(value: Int?): Int {
     when {
         value in 0..10 -> return 0
         value in 11..100 -> return 1
-        value <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>in<!> 101.1000 -> return 2
+        value in 101..1000 -> return 2
         else -> return 4
     }
 
