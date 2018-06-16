@@ -82,6 +82,31 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:6-pos.kt");
         }
 
+        @TestMetadata("3:7-pos.kt")
+        public void test3_7_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:7-pos.kt");
+        }
+
+        @TestMetadata("4:1-pos.kt")
+        public void test4_1_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:1-pos.kt");
+        }
+
+        @TestMetadata("4:2-pos.kt")
+        public void test4_2_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:2-pos.kt");
+        }
+
+        @TestMetadata("4:3-pos.kt")
+        public void test4_3_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:3-pos.kt");
+        }
+
+        @TestMetadata("4:4-pos.kt")
+        public void test4_4_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:4-pos.kt");
+        }
+
         public void testAllFilesPresentInS16_30_when_expression() throws Exception {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30:when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
         }

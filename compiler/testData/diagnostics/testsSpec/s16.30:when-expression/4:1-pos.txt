@@ -1,0 +1,8 @@
+package
+
+public fun withBoolBoundValue(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun withCharBoundValue(/*0*/ value: kotlin.Char?): kotlin.Int
+public fun withDoubleBoundValue(/*0*/ value: kotlin.Double?): kotlin.Int
+public fun withFloatBoundValue(/*0*/ value: kotlin.Float?): kotlin.Int
+public fun withIntBoundValue(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun withStringBoundValue(/*0*/ value: kotlin.String?): kotlin.Int

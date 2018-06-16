@@ -6,7 +6,7 @@
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  */
 
-/*
+/*w
  The function can return a maximum of 5.
  Next casses (appearing after) will not be checked and evaluated, because we have 'true' invariant in the fifth case.
  */

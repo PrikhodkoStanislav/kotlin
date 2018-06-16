@@ -1,0 +1,3 @@
+package
+
+public fun simpleWithElse(/*0*/ value: kotlin.Int): kotlin.Int
