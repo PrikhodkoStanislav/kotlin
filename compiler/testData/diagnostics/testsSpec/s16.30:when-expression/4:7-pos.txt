@@ -1,0 +1,46 @@
+package
+
+public fun withBreakExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withCallExpression(/*0*/ value: kotlin.Int?, /*1*/ additionalValue1: kotlin.collections.List<kotlin.Int>, /*2*/ additionalValue2: A, /*3*/ additionalValue3: A?): kotlin.Int
+public fun withCastExpression(/*0*/ value: kotlin.collections.Collection<kotlin.Int>?, /*1*/ additionalValue1: kotlin.collections.Collection<kotlin.Int>, /*2*/ additionalValue2: kotlin.collections.Collection<kotlin.Int>?): kotlin.Int
+public fun withComparisonExpression(/*0*/ value: kotlin.Boolean, /*1*/ additionalValue1: kotlin.Int, /*2*/ additionalValue2: kotlin.Int): kotlin.Int
+public fun withConcatExpression(/*0*/ value: kotlin.String): kotlin.Int
+public fun withConjunctionAndDisjunctionExpression(/*0*/ value: kotlin.Boolean): kotlin.Int
+public fun withContinueExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withElvisOperatorExpression(/*0*/ value: kotlin.Boolean, /*1*/ additionalValue: kotlin.Int?): kotlin.Int
+public fun withEqualityExpression(/*0*/ value: kotlin.Boolean, /*1*/ flag1: kotlin.Boolean, /*2*/ flag2: kotlin.Boolean, /*3*/ obj1: kotlin.collections.List<kotlin.String>, /*4*/ obj2: kotlin.collections.List<kotlin.String>): kotlin.Int
+public fun withFloatArithmeticExpression(/*0*/ value: kotlin.Float?): kotlin.Int
+public fun withFunLiteral(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withIfExpression(/*0*/ value: kotlin.Int?, /*1*/ additionalValue: kotlin.Int, /*2*/ flag: kotlin.Boolean): kotlin.Int
+public fun withIndexingExpression(/*0*/ value: kotlin.Int?, /*1*/ additionalValue: kotlin.collections.List<kotlin.Int>): kotlin.Int
+public fun withIntArithmeticExpression(/*0*/ value: kotlin.Int): kotlin.Int
+public fun withLambdaLiteral(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withObjectLiteral(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withPostfixOperatorsExpression(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Boolean, /*2*/ additionalValue1: kotlin.Int, /*3*/ additionalValue2: kotlin.Int, /*4*/ flag: kotlin.Boolean?): kotlin.Int
+public fun withPrefixOperatorsExpression(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Boolean, /*2*/ additionalValue1: kotlin.Int, /*3*/ additionalValue2: kotlin.Int, /*4*/ flag: kotlin.Boolean): kotlin.Int
+public fun withPropertyAccessExpression(/*0*/ value: kotlin.Int?, /*1*/ additionalValue2: A, /*2*/ additionalValue3: A?): kotlin.Int
+public fun withRangeExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withReturnExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withThrowExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun withTryExpression(/*0*/ value: kotlin.Int?): kotlin.Int
+public fun withWhenExpression(/*0*/ value: kotlin.String?, /*1*/ additionalValue: kotlin.Int, /*2*/ flag: kotlin.Boolean): kotlin.Int
+
+public final class A {
+    public constructor A()
+    public final val prop1: kotlin.Int = 1
+    public final val prop2: kotlin.Int = 2
+    public final val prop3: kotlin.Int = 3
+    public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public final fun mul(/*0*/ value: kotlin.Int): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+}
+
+public open class B {
+    public constructor B()
+    public final val prop1: kotlin.Int = 1
+    public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+    public final fun withThisExpression(/*0*/ value: kotlin.Any?): kotlin.Int
+}

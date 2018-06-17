@@ -87,6 +87,11 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:7-pos.kt");
         }
 
+        @TestMetadata("4:11-pos.kt")
+        public void test4_11_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:11-pos.kt");
+        }
+
         @TestMetadata("4:1-pos.kt")
         public void test4_1_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:1-pos.kt");
@@ -102,28 +107,23 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:3-pos.kt");
         }
 
-        @TestMetadata("4:4-pos.kt")
-        public void test4_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:4-pos.kt");
-        }
-
         @TestMetadata("4:5-pos.kt")
         public void test4_5_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:5-pos.kt");
         }
 
-        @TestMetadata("4:6-pos.kt")
-        public void test4_6_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:6-pos.kt");
+        @TestMetadata("4:7-pos.kt")
+        public void test4_7_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:7-pos.kt");
+        }
+
+        @TestMetadata("4:9-pos.kt")
+        public void test4_9_pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4:9-pos.kt");
         }
 
         public void testAllFilesPresentInS16_30_when_expression() throws Exception {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30:when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
-        }
-
-        @TestMetadata("pnsn_pos.kt")
-        public void testPnsn_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/pnsn_pos.kt");
         }
     }
 }

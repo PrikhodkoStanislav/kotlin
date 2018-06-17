@@ -1,3 +1,0 @@
-package
-
-public fun withSimpleTypeCheckOperator(/*0*/ value: kotlin.Any): kotlin.Boolean
