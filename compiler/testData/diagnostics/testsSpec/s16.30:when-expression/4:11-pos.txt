@@ -1,7 +1,6 @@
 package
 
 public fun whenAnyTypeInference(/*0*/ value: kotlin.Int): kotlin.Int
-public fun whenAnyTypeInference2(/*0*/ value: kotlin.Int): kotlin.Int
 public fun whenLeastUpperBoundTypeInference(/*0*/ value: kotlin.Int): kotlin.Int
 
 public open class A {

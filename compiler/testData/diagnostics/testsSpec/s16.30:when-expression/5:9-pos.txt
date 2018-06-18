@@ -1,12 +1,44 @@
 package
 
-public fun withItselfSealed(/*0*/ expr: Expr1): kotlin.Int
-public fun withSealed(/*0*/ expr: Expr2): kotlin.Int
-public fun withSealedAndElse(/*0*/ expr: Expr2): kotlin.Int
-public fun withSimpleSealedExectlyCheck(/*0*/ expr: Expr3): kotlin.Int
-public fun withSimpleSealedExectlyCheckAndElse(/*0*/ expr: Expr3): kotlin.Int
-public fun withSimpleSealedOnDataClasses(/*0*/ expr: Expr1): kotlin.Int
-public fun withSimpleSealedOnDataClassesAndElse(/*0*/ expr: Expr1): kotlin.Int
+public fun withComplexTrueAndFalse(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun withEnum(/*0*/ dir: Direction?): kotlin.Int
+public fun withEnumAndElse(/*0*/ dir: Direction?): kotlin.Int
+public fun withEnumAndElseWithoutNull(/*0*/ dir: Direction?): kotlin.Int
+public fun withItselfSealed(/*0*/ expr: Expr1?): kotlin.Int
+public fun withSealed(/*0*/ expr: Expr2?): kotlin.Int
+public fun withSealedAndElse(/*0*/ expr: Expr2?): kotlin.Int
+public fun withSealedAndElseAndWithoutNull(/*0*/ expr: Expr2?): kotlin.Int
+public fun withSimpleSealedExectlyCheck(/*0*/ expr: Expr3?): kotlin.Int
+public fun withSimpleSealedExectlyCheckAndElse(/*0*/ expr: Expr3?): kotlin.Int
+public fun withSimpleSealedExectlyCheckAndElseAndWithoutNull(/*0*/ expr: Expr3?): kotlin.Int
+public fun withSimpleSealedOnDataClasses(/*0*/ expr: Expr1?): kotlin.Int
+public fun withSimpleSealedOnDataClassesAndElse(/*0*/ expr: Expr1?): kotlin.Int
+public fun withSimpleSealedOnDataClassesAndElseAndWithoutNull(/*0*/ expr: Expr1?): kotlin.Int
+public fun withSingleEnum(/*0*/ value: Anything?): kotlin.Int
+public fun withSingleEnumWithElse(/*0*/ value: Anything?): kotlin.Int
+public fun withSingleEnumWithElseWithoutNull(/*0*/ value: Anything?): kotlin.Int
+public fun withTrueAndFalse(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun withTrueAndFalseAndElse(/*0*/ value: kotlin.Boolean?): kotlin.Int
+public fun withTrueAndFalseAndElseAndWithoutNull(/*0*/ value: kotlin.Boolean?): kotlin.Int
+
+public final enum class Anything : kotlin.Enum<Anything> {
+    enum entry EVERYTHING
+
+    private constructor Anything()
+    public final override /*1*/ /*fake_override*/ val name: kotlin.String
+    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
+    public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: Anything): kotlin.Int
+    public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    protected/*protected and package*/ final override /*1*/ /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun finalize(): kotlin.Unit
+    public final override /*1*/ /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun getDeclaringClass(): java.lang.Class<Anything!>!
+    public final override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+
+    // Static members
+    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): Anything
+    public final /*synthesized*/ fun values(): kotlin.Array<Anything>
+}
 
 public final data class Const1 : Expr1 {
     public constructor Const1(/*0*/ number: kotlin.Int)
@@ -31,6 +63,31 @@ public final class Const2 : Expr2 {
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun m1(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+}
+
+public final enum class Direction : kotlin.Enum<Direction> {
+    enum entry NORTH
+
+    enum entry SOUTH
+
+    enum entry WEST
+
+    enum entry EAST
+
+    private constructor Direction()
+    public final override /*1*/ /*fake_override*/ val name: kotlin.String
+    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
+    public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: Direction): kotlin.Int
+    public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    protected/*protected and package*/ final override /*1*/ /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun finalize(): kotlin.Unit
+    public final override /*1*/ /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun getDeclaringClass(): java.lang.Class<Direction!>!
+    public final override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+
+    // Static members
+    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): Direction
+    public final /*synthesized*/ fun values(): kotlin.Array<Direction>
 }
 
 public sealed class Expr1 {

@@ -43,7 +43,7 @@ fun withItselfSealed(expr: Expr1): Int = when (expr) {
     <!USELESS_IS_CHECK!>is Expr1<!> -> 10
 }
 
-fun withSimpleSealedOnDataClassesEndElse(expr: Expr1): Int = when (expr) {
+fun withSimpleSealedOnDataClassesAndElse(expr: Expr1): Int = when (expr) {
     is Const1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.number
     is Sum1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.e1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.e2
     is Mul1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.m2
