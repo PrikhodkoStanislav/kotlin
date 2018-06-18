@@ -1,0 +1,5 @@
+package
+
+public fun withComplexTrueAndFalse(/*0*/ value: kotlin.Boolean): kotlin.Int
+public fun withTrueAndFalse(/*0*/ value: kotlin.Boolean): kotlin.Int
+public fun withTrueAndFalseAndElse(/*0*/ value: kotlin.Boolean): kotlin.Int
