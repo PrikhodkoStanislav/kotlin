@@ -43,6 +43,7 @@ import org.jetbrains.kotlin.kdoc.AbstractKDocLexerTest
 import org.jetbrains.kotlin.modules.xml.AbstractModuleXmlParserTest
 import org.jetbrains.kotlin.multiplatform.AbstractMultiPlatformIntegrationTest
 import org.jetbrains.kotlin.parsing.AbstractParsingTest
+import org.jetbrains.kotlin.parsing.AbstractParsingTestSpec
 import org.jetbrains.kotlin.renderer.AbstractDescriptorRendererTest
 import org.jetbrains.kotlin.renderer.AbstractFunctionDescriptorInExpressionRendererTest
 import org.jetbrains.kotlin.repl.AbstractReplInterpreterTest
@@ -154,6 +155,10 @@ fun main(args: Array<String>) {
             model("psi", testMethod = "doParsingTest", pattern = "^(.*)\\.kts?$")
             model("parseCodeFragment/expression", testMethod = "doExpressionCodeFragmentParsingTest", extension = "kt")
             model("parseCodeFragment/block", testMethod = "doBlockCodeFragmentParsingTest", extension = "kt")
+        }
+
+        testClass<AbstractParsingTestSpec> {
+            model("psi/testsSpec", testMethod = "doParsingTest", pattern = "^(.*)\\.kts?$")
         }
 
         GenerateRangesCodegenTestData.main(emptyArray<String>())

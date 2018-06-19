@@ -2557,6 +2557,37 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                 runTest("compiler/testData/psi/stringTemplates/RawStringsWithManyQuotes.kt");
             }
         }
+
+        @TestMetadata("compiler/testData/psi/testsSpec")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class TestsSpec extends AbstractParsingTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInTestsSpec() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/psi/testsSpec"), Pattern.compile("^(.*)\\.kts?$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/psi/testsSpec/s16.30:when-expression")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class S16_30_when_expression extends AbstractParsingTest {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("2:3-pos.kt")
+                public void test2_3_pos() throws Exception {
+                    runTest("compiler/testData/psi/testsSpec/s16.30:when-expression/2:3-pos.kt");
+                }
+
+                public void testAllFilesPresentInS16_30_when_expression() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/psi/testsSpec/s16.30:when-expression"), Pattern.compile("^(.*)\\.kts?$"), TargetBackend.ANY, true);
+                }
+            }
+        }
     }
 
     @TestMetadata("compiler/testData/parseCodeFragment/expression")
