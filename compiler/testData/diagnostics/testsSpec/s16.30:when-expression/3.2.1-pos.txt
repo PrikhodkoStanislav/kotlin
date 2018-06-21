@@ -1,0 +1,4 @@
+package
+
+public fun bar(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long): kotlin.Int
+public fun foo(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long): kotlin.Unit
