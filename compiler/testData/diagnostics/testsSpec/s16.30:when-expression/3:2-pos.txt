@@ -1,4 +1,0 @@
-package
-
-public fun caseWithTrueBranchBeforeElse(): kotlin.Int
-public fun manyCassesWithTrueBranchBetweenThem(/*0*/ value: kotlin.Int): kotlin.Int

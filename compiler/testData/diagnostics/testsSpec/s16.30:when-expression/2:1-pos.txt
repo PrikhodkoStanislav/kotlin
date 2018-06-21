@@ -1,9 +1,0 @@
-package
-
-public fun conditionWithBool(/*0*/ value: kotlin.Boolean): kotlin.Int
-public fun conditionWithBoolAndElseBranch(/*0*/ value: kotlin.Boolean): kotlin.Int
-public fun conditionWithBoolAndElseBranchAndIfComparison(/*0*/ value: kotlin.Boolean): kotlin.Boolean
-public fun conditionsWithInt(/*0*/ value: kotlin.Int): kotlin.Int
-public fun conditionsWithIntAndElseBranch(/*0*/ value: kotlin.Int): kotlin.Int
-public fun conditionsWithIntAndElseBranchAndIfComparison(/*0*/ value: kotlin.Int): kotlin.Boolean
-public fun conditionsWithString(/*0*/ value: kotlin.String?): kotlin.Int

@@ -1,0 +1,8 @@
+package
+
+public fun byte(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Byte): kotlin.Unit
+public fun double(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Double): kotlin.Unit
+public fun float(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Float): kotlin.Unit
+public fun int(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int): kotlin.Unit
+public fun long(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Long): kotlin.Unit
+public fun short(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Short): kotlin.Unit

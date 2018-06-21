@@ -1,4 +1,0 @@
-package
-
-public fun withBoundValue(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun withoutBoundValue(): kotlin.Int

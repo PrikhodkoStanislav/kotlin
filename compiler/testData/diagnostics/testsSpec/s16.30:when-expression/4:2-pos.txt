@@ -1,3 +1,0 @@
-package
-
-public fun differentConditions(/*0*/ value: kotlin.Any?): kotlin.Int

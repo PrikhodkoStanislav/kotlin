@@ -18,7 +18,15 @@ fun withIntArithmeticExpression(value: Int): Int = when (value) {
     else -> 8
 }
 
-fun withConjunctionAndDisjunctionExpression(value: Boolean): Int = when (value) {
+fun withFloatArithmeticExpression(value: Float?): Int = when (value) {
+    1.0F / 5F * 102.12F / Int.MIN_VALUE -> 1
+    2.4F - 1.0F -> 2
+    1.1231244512F / 24.1F -> 3
+    null -> 4
+    else -> 5
+}
+
+fun withLogicalExpression(value: Boolean): Int = when (value) {
     true && false || !!!true -> 1
     true -> 2
 }
@@ -40,14 +48,6 @@ fun withConcatExpression(value: String): Int = when (value) {
     " " + "1" -> 2
     " $value " + "2" -> 3
     else -> 4
-}
-
-fun withFloatArithmeticExpression(value: Float?): Int = when (value) {
-    1.0F / 5F * 102.12F / Int.MIN_VALUE -> 1
-    2.4F - 1.0F -> 2
-    1.1231244512F / 24.1F -> 3
-    null -> 4
-    else -> 5
 }
 
 fun withWhenExpression(value: String?, additionalValue: Int, flag: Boolean): Int = when (value) {

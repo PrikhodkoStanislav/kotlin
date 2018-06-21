@@ -1,4 +1,0 @@
-package
-
-public fun withTrueCaseAndElseEvaluated(): kotlin.Int
-public fun withTrueCaseAndElseNotEvaluated(/*0*/ value: kotlin.Int): kotlin.Int

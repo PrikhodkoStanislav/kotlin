@@ -1,5 +1,0 @@
-package
-
-public fun compareWhensWithTrueAndElseCases(): kotlin.Boolean
-public fun withElse(/*0*/ value: kotlin.Int): kotlin.Int
-public fun withTrueInsteadElse(/*0*/ value: kotlin.Int): kotlin.Int

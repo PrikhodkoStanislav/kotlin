@@ -1,6 +1,0 @@
-package
-
-public fun withComplexTrueCase(): kotlin.Int
-public fun withDoubleTrueCase(): kotlin.Int
-public fun withTrueAndElseCases(): kotlin.Int
-public fun withTrueCase(/*0*/ value: kotlin.Int): kotlin.Int

@@ -1,8 +1,0 @@
-package
-
-public fun withNotTypeCheckOperator(/*0*/ value: kotlin.Any?): kotlin.Int
-public fun withOppositeTypeCheckOperators(/*0*/ value: kotlin.Any?): kotlin.Int
-public fun withSimpleTypeCheckOperator(/*0*/ value: kotlin.Any): kotlin.Int
-public fun withSingleBranch(/*0*/ value: kotlin.Int): kotlin.Int
-public fun withSingleBranchTypeCheckAndElse(/*0*/ value: kotlin.Int): kotlin.Int
-public fun withUselessOppositeTypeCheckOperators(/*0*/ value: kotlin.Int): kotlin.Int

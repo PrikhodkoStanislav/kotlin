@@ -1,7 +1,0 @@
-package
-
-public fun withBoolAndElseCases(): kotlin.Int
-public fun withBoolCases(): kotlin.Int
-public fun withComplexBoolCases(): kotlin.Int
-public fun withTrueCase(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun withTrueCaseAndElse(/*0*/ value: kotlin.Any?): kotlin.String

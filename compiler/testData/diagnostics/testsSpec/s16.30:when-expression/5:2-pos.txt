@@ -1,8 +1,0 @@
-package
-
-public fun simpleWithElse(/*0*/ value: kotlin.Int): kotlin.Int
-public fun simpleWithElseAndBoundValue(/*0*/ value: kotlin.Int): kotlin.Int
-public fun withElseAndTrue(): kotlin.Int
-public fun withElseAndTrueAndBoundValue(): kotlin.Int
-public fun withOnlyElse(): kotlin.Int
-public fun withOnlyElseAndBoundValue(/*0*/ value: kotlin.Int): kotlin.Int

@@ -2,12 +2,10 @@ package
 
 public fun bool(/*0*/ value: kotlin.Boolean): kotlin.Int
 public fun boolConsts(): kotlin.Int
-public fun double(/*0*/ value: kotlin.Double?): kotlin.Int
-public fun float(/*0*/ value: kotlin.Float?): kotlin.Int
-public fun int(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun long(/*0*/ value: kotlin.Long?): kotlin.Int
-public fun nullableBool(/*0*/ value: kotlin.Boolean?): kotlin.Int
-public fun nullableBoolSmartCast(/*0*/ value: kotlin.Boolean?): kotlin.Int
-public fun rangeTest(/*0*/ value: kotlin.Int?): kotlin.Int
-public fun string(/*0*/ value: kotlin.String?): kotlin.Int
-public fun typeCheck(/*0*/ value: kotlin.Any?): kotlin.Int
+public fun double(/*0*/ value: kotlin.Double): kotlin.Int
+public fun float(/*0*/ value: kotlin.Float): kotlin.Int
+public fun int(/*0*/ value: kotlin.Int): kotlin.Int
+public fun long(/*0*/ value: kotlin.Long): kotlin.Int
+public fun rangeTest(/*0*/ value: kotlin.Int): kotlin.Int
+public fun string(/*0*/ value: kotlin.String): kotlin.Int
+public fun typeCheck(/*0*/ value: kotlin.Any): kotlin.Int
