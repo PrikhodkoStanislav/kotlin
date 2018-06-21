@@ -5,9 +5,7 @@
 
 package org.jetbrains.kotlin.checkers
 
-import org.jetbrains.kotlin.test.ConfigurationKind
-import org.jetbrains.kotlin.utils.SpecTestUtil.printSpecTestInfo
-import org.jetbrains.kotlin.utils.SpecTestValidationException
+import org.jetbrains.kotlin.test.*
 import org.junit.Assert
 import java.io.File
 
@@ -18,7 +16,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
         try {
-            printSpecTestInfo(testDataFile)
+            SpecTestUtil.printTestInfo(testDataFile, TestArea.DIAGNOSTIC)
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.reason.description)
         }

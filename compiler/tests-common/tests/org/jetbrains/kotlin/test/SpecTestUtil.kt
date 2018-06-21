@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.utils
+package org.jetbrains.kotlin.test
 
 import java.io.File
 import java.util.regex.Matcher
@@ -19,19 +19,27 @@ private enum class TestType(val type: String) {
     }
 }
 
+enum class TestArea(val title: String) {
+    PARSING("PARSING"),
+    DIAGNOSTIC("DIAGNOSTIC"),
+    BLACKBOX("BLACK BOX")
+}
+
 private data class TestInfo(
     val testType: TestType,
     val sectionNumber: String,
     val sectionName: String,
     val paragraphNumber: Int,
     val sentenceNumber: Int,
-    val sentence: String? = null
+    val sentence: String? = null,
+    val testNumber: Int,
+    val description: String? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is TestInfo) return false
 
-        return this.testType == other.testType && this.sectionNumber == other.sectionNumber && this.paragraphNumber == other.paragraphNumber && this.sentenceNumber == other.sentenceNumber
+        return this.testType == other.testType && this.sectionNumber == other.sectionNumber && this.testNumber == other.testNumber && this.paragraphNumber == other.paragraphNumber && this.sentenceNumber == other.sentenceNumber
     }
 
     override fun hashCode(): Int {
@@ -57,11 +65,11 @@ object SpecTestUtil {
 
     private const val integerRegex = "[1-9]\\d*"
     private const val testPathRegex =
-        "^.*?/s(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):(?<sectionName>[\\w-]+)/(?<paragraphNumber>$integerRegex):(?<sentenceNumber>$integerRegex)-(?<testType>pos|neg)\\.kt$"
+        "^.*?/s(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):(?<sectionName>[\\w-]+)/(?<paragraphNumber>$integerRegex).(?<sentenceNumber>$integerRegex).(?<testNumber>$integerRegex)-(?<testType>pos|neg)\\.kt$"
     private const val testContentMetaInfoRegex =
-        "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+\\*\\/\\s+"
+        "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$integerRegex)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)\\s+\\*\\/\\s+"
 
-    private fun getTestInfo(testInfoMatcher: Matcher, directMappedTestTypeEnum: Boolean = false, withSentence: Boolean = false): TestInfo {
+    private fun getTestInfo(testInfoMatcher: Matcher, directMappedTestTypeEnum: Boolean = false, withDetails: Boolean = false): TestInfo {
         return TestInfo(
             if (directMappedTestTypeEnum)
                 TestType.valueOf(testInfoMatcher.group("testType")) else
@@ -70,7 +78,9 @@ object SpecTestUtil {
             testInfoMatcher.group("sectionName"),
             testInfoMatcher.group("paragraphNumber").toInt(),
             testInfoMatcher.group("sentenceNumber").toInt(),
-            if (withSentence) testInfoMatcher.group("sentence") else null
+            if (withDetails) testInfoMatcher.group("sentence") else null,
+            testInfoMatcher.group("testNumber").toInt(),
+            if (withDetails) testInfoMatcher.group("testDescription") else null
         )
     }
 
@@ -96,7 +106,11 @@ object SpecTestUtil {
         }
 
         val testInfoByFilename = getTestInfo(testInfoByFilenameMatcher)
-        val testInfoByContent = getTestInfo(testInfoByContentMatcher, withSentence = true, directMappedTestTypeEnum = true)
+        val testInfoByContent = getTestInfo(
+            testInfoByContentMatcher,
+            withDetails = true,
+            directMappedTestTypeEnum = true
+        )
 
         if (testInfoByFilename != testInfoByContent) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_AND_METAINFO_NOT_CONSISTENCY)
@@ -105,13 +119,16 @@ object SpecTestUtil {
         return Pair(testInfoByFilename, testInfoByContent)
     }
 
-    fun printSpecTestInfo(testDataFile: File) {
+    fun printTestInfo(testDataFile: File, testArea: TestArea) {
         val (testInfoByFilename, testInfoByContent) = parseTestInfo(testDataFile)
+        val specSentenceUrl =
+            "$specUrl#${testInfoByFilename.sectionName}:${testInfoByFilename.paragraphNumber}:${testInfoByFilename.sentenceNumber}"
 
         println("-------------------------")
-        println("DIAGNOSTIC SPEC TEST IS RUNNING [${testInfoByFilename.testType}]")
-        println("SECTION: ${testInfoByFilename.sectionNumber} ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber}, sentence: ${testInfoByFilename.sentenceNumber})")
-        println("SENTENCE: ${testInfoByContent.sentence}")
-        println("URL: $specUrl#${testInfoByFilename.sectionName}:${testInfoByFilename.paragraphNumber}:${testInfoByFilename.sentenceNumber}")
+        println("${testArea.title} SPEC TEST IS RUNNING [${testInfoByFilename.testType}]")
+        println("SECTION: ${testInfoByFilename.sectionNumber} ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber})")
+        println("SENTENCE ${testInfoByContent.sentenceNumber} [$specSentenceUrl]: ${testInfoByContent.sentence}")
+        println("TEST NUMBER: ${testInfoByContent.testNumber}")
+        println("DESCRIPTION: ${testInfoByContent.description}")
     }
 }
