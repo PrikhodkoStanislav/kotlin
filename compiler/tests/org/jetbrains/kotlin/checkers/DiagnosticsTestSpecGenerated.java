@@ -177,6 +177,26 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.3-pos.kt");
         }
 
+        @TestMetadata("3.2.4-pos.kt")
+        public void test3_2_4pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.4-pos.kt");
+        }
+
+        @TestMetadata("3.5.1-pos.kt")
+        public void test3_5_1pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.5.1-pos.kt");
+        }
+
+        @TestMetadata("3.5.2-pos.kt")
+        public void test3_5_2pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.5.2-pos.kt");
+        }
+
+        @TestMetadata("3.5.3-pos.kt")
+        public void test3_5_3pos() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.5.3-pos.kt");
+        }
+
         @TestMetadata("3:1-pos.kt")
         public void test3_1_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3:1-pos.kt");
