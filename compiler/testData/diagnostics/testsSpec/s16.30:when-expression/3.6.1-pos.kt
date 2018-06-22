@@ -1,14 +1,14 @@
-// !DIAGNOSTICS: -SENSELESS_COMPARISON
-
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
  SECTION 16.30: When expression
- PARAGRAPH 3
+ PARAGRAPH: 3
  SENTENCE 6: Informally speaking, you can always replace the else branch with literal true and the semantics of the entry would not change.
+ NUMBER: 1
+ DESCRIPTION: Simple when without bound value and with else branch and true literal branch instead of it.
  */
 
-fun withElse(value: Int): Int {
+fun foo(value: Int): Int {
     when {
         value == 1 -> return 1
         value == 2 -> return 2
@@ -24,7 +24,7 @@ fun withElse(value: Int): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun withTrueInsteadElse(value: Int): Int {
+fun bar(value: Int): Int {
     when {
         value == 1 -> return 1
         value == 2 -> return 2
@@ -38,24 +38,4 @@ fun withTrueInsteadElse(value: Int): Int {
     }
 
     return -1 // why dont have 'UNREACHABLE_CODE' diagnostic?
-}
-
-/*
- Whens with the 'true' branch at the end and the 'else' branch at the end must be equivalent (similar semantics).
- */
-fun compareWhensWithTrueAndElseCases(): Boolean {
-    return when {
-        90 == 91 -> 1
-        false == !!true -> 2
-        11 > 11 -> 3
-        "" == null -> 4
-        else -> 5
-    } == when {
-        90 == 91 -> 1
-        false == !!true -> 2
-        11 > 11 -> 3
-        "" == null -> 4
-        true -> 5
-        else -> 6 // whether its necessary? TYPE_MISMATCH without it (not exhaustive when)
-    } // must be 5 == 5 => true
 }

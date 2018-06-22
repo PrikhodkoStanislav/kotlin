@@ -37,7 +37,7 @@ fun foo(value1: Int, value2: Float, value3: Double, value4: Short, value5: Byte,
         value7.method1(-.00000001f) <= 100 || value7.method1(4412.11F) >= 10 -> return 9
         isInt(0) || isInt(0L) -> return 10
         value7.method2(0) && value7.method2(0L) -> return 11
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || -10.toByte() == 90.toByte() || 91.toChar() == 127.toChar() -> return 12
+        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return 12
     }
 
     return -1
@@ -55,7 +55,7 @@ fun bar(value1: Int, value2: Float, value3: Double, value4: Short, value5: Byte,
         value7.method1(-.00000001f) <= 100 || value7.method1(4412.11F) >= 10 -> return 9
         isInt(0) || isInt(0L) -> return 10
         value7.method2(0) && value7.method2(0L) -> return 11
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || -10.toByte() == 90.toByte() || 91.toChar() == 127.toChar() -> return 12
+        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return 12
         else -> 13
     }
 }

@@ -1,0 +1,29 @@
+/*
+ KOTLIN SPEC TEST (POSITIVE)
+
+ SECTION 16.30: When expression
+ PARAGRAPH: 4
+ SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
+ NUMBER: 2
+ DESCRIPTION: When with different variants of the logical expressions in the control structure bodies.
+ */
+
+fun foo(value: Int, value1: Boolean, value2: Boolean) {
+    val value3 = true
+    val value4 = false
+
+    when(value) {
+        1 -> !value1
+        2 -> <!UNUSED_EXPRESSION!>value3 && value4 || value1<!>
+        3 -> <!UNUSED_EXPRESSION!>value1 || value2<!>
+        4 -> <!UNUSED_EXPRESSION!>value1 && value2<!>
+        5 -> !!value2
+        6 -> value1 || !!!value3
+        7 -> <!UNUSED_EXPRESSION!>value1 && value2 && value3 && value4<!>
+        8 -> !!!!!!!!!value2
+        9 -> !!!!value4
+        10 -> {
+            <!UNUSED_EXPRESSION!>value4 && value1 || value3 || value4 && value1<!>
+        }
+    }
+}
