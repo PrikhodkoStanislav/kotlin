@@ -36,7 +36,7 @@ fun bar2(value: Any): Int = when (value) {
     else -> 7
 }
 
-fun bar2(value: Any): Int {
+fun bar3(value: Any): Int {
     when (value) {
         is Int -> return 1
     }

@@ -5,16 +5,16 @@
  PARAGRAPH: 4
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 23
- DESCRIPTION: When with break expression in the control structure bodies.
+ DESCRIPTION: When with continue expression in the control structure bodies.
  */
 
 fun foo(value: Int) {
     loop1@ while (true) {
         loop2@ while (true) {
             when(value) {
-                1 -> break@loop1
+                1 -> continue@loop1
                 2 -> {
-                    break@loop2
+                    continue@loop2
                 }
             }
         }

@@ -1,4 +1,6 @@
 package
 
-public fun bar(/*0*/ value: kotlin.Any): kotlin.Int
+public fun bar1(/*0*/ value: kotlin.Any): kotlin.Int
+public fun bar2(/*0*/ value: kotlin.Any): kotlin.Int
+public fun bar3(/*0*/ value: kotlin.Any): kotlin.Int
 public fun foo(/*0*/ value: kotlin.Any): kotlin.Int

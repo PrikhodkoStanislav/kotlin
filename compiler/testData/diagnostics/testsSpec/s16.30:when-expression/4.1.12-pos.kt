@@ -17,9 +17,9 @@ fun foo(value: Int, value1: Int, value2: Int, value3: Boolean) {
         2 -> --mutableValue2
         3 -> --mutableValue1 - ++mutableValue2
         5 -> ++mutableValue1 + --mutableValue1
-        5 -> !value3
-        6 -> !!!!!!value3
-        7 -> {
+        6 -> !value3
+        7 -> !!!!!!value3
+        8 -> {
             ++mutableValue1 + --mutableValue1
         }
     }

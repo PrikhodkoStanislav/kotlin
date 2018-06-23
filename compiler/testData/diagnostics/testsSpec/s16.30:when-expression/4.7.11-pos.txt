@@ -1,0 +1,4 @@
+package
+
+public fun test1(/*0*/ value: kotlin.collections.Collection<kotlin.Int>?, /*1*/ value1: kotlin.collections.Collection<kotlin.Int>, /*2*/ value2: kotlin.collections.Collection<kotlin.Int>?): kotlin.Int
+public fun test2(/*0*/ value: kotlin.collections.Collection<kotlin.Int>?, /*1*/ value1: kotlin.collections.Collection<kotlin.Int>, /*2*/ value2: kotlin.collections.Collection<kotlin.Int>?): kotlin.Int

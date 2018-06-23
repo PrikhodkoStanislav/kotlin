@@ -16,9 +16,9 @@ fun foo(value: Int, value1: Int, value2: Int, value3: Boolean?, value4: Int?) {
         1 -> <!UNUSED_CHANGED_VALUE!>mutableValue1++<!>
         2 -> <!UNUSED_CHANGED_VALUE!>mutableValue2--<!>
         3 -> <!UNUSED_CHANGED_VALUE!>mutableValue1--<!> - <!UNUSED_CHANGED_VALUE!>mutableValue2++<!>
-        5 -> mutableValue1++ + <!UNUSED_CHANGED_VALUE!>mutableValue1--<!>
+        4 -> mutableValue1++ + <!UNUSED_CHANGED_VALUE!>mutableValue1--<!>
         5 -> !value3!!
-        7 -> {
+        6 -> {
             value4!! - <!UNUSED_CHANGED_VALUE!>mutableValue1--<!> - <!UNUSED_CHANGED_VALUE!>mutableValue2++<!>
         }
     }

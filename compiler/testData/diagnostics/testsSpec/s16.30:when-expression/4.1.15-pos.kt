@@ -33,7 +33,7 @@ fun foo(value: Int, value1: A, value2: A?, value3: List<Int>, value4: List<Int>?
         }
     }
 
-    when {
+    when(value) {
         1 -> fun1(value3, value4!!)
         2 -> fun2()()
         3 -> value1.mul(value3[0])
