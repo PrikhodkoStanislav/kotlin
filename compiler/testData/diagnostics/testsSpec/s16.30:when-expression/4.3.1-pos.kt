@@ -21,7 +21,7 @@ fun foo(value: Any): Int {
     return -1
 }
 
-fun bar(value: Any): Int = when (value) {
+fun bar1(value: Any): Int = when (value) {
     is Int -> 1
     is Float -> 2
     is Double -> 3
@@ -29,4 +29,17 @@ fun bar(value: Any): Int = when (value) {
     is Char -> 5
     is Boolean -> 6
     else -> 7
+}
+
+fun bar2(value: Any): Int = when (value) {
+    is Int -> 1
+    else -> 7
+}
+
+fun bar2(value: Any): Int {
+    when (value) {
+        is Int -> return 1
+    }
+
+    return -1
 }
