@@ -43,7 +43,7 @@ public final data class Const : Expr {
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
 }
 
-public final data class Const2 : Expr {
+public final data class Const2 : Expr2 {
     public constructor Const2(/*0*/ number: kotlin.Int)
     public final val number: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
