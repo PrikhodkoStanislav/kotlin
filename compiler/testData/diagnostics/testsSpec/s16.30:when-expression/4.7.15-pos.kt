@@ -28,7 +28,7 @@ fun test1(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
         fun1() -> 1
         value2.mul(value!!) -> 2
         value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 3
-        <!UNSAFE_IMPLICIT_INVOKE_CALL!>value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)<!>(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 4
+        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 4
         value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 5
         else -> 6
     }
@@ -43,7 +43,7 @@ fun test2(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
         fun1() -> return 1
         value2.mul(value!!) -> return 2
         value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> <!UNUSED_EXPRESSION!>3<!>
-        <!UNSAFE_IMPLICIT_INVOKE_CALL!>value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)<!>(<!DEBUG_INFO_SMARTCAST!>value<!>) -> <!UNUSED_EXPRESSION!>4<!>
+        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> <!UNUSED_EXPRESSION!>4<!>
         value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return 5
     }
 

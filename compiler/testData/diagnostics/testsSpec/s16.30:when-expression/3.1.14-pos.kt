@@ -12,9 +12,9 @@ fun foo(value: Int, value1: List<Int>, value2: List<List<List<List<Int>>>>?) {
     when {
         value == 1 -> value1[0]
         value == 2 -> value2!![0][1]
-        value == 3 -> <!UNSAFE_CALL!>value2[0]<!>[1][-1]
+        value == 3 -> value2!![0][1][-1]
         value == 4 -> {
-            <!UNSAFE_CALL!>value2[0]<!>[0][0][0]
+            value2[0]!![0][0][0]
         }
     }
 }
