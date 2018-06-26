@@ -15,12 +15,18 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
+        val testValidator = DiagnosticSpecTestValidator(testDataFile)
+
         try {
-            SpecTestUtil.printTestInfo(testDataFile, TestArea.DIAGNOSTIC)
+            testValidator.parseTestInfo()
+            testValidator.printTestInfo()
+            super.analyzeAndCheck(testDataFile, files) {
+                testValidator.collectDiagnostics(files)
+                testValidator.validateTestType()
+                testValidator.printSeverityStatistic()
+            }
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.reason.description)
         }
-
-        super.analyzeAndCheck(testDataFile, files)
     }
 }
