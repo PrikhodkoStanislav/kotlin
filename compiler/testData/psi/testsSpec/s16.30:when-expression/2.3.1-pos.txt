@@ -1,9 +1,9 @@
-KtFile: 2:3-pos.kt
+KtFile: 2.3.1-pos.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
     <empty list>
-  PsiComment(BLOCK_COMMENT)('/*\n KOTLIN SPEC TEST (POSITIVE)\n\n SECTION 16.30: When expression\n PARAGRAPH 2\n SENTENCE 3: When expression has two different forms: with bound value and without it.\n */')
+  PsiComment(BLOCK_COMMENT)('/*\n KOTLIN SPEC TEST (POSITIVE)\n\n SECTION 16.30: When expression\n PARAGRAPH: 2\n SENTENCE 3: When expression has two different forms: with bound value and without it.\n NUMBER: 1\n DESCRIPTION: sdfd\n */')
   PsiWhiteSpace('\n\n')
   FUN
     PsiElement(fun)('fun')
