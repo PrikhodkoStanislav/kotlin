@@ -37,6 +37,16 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
         }
 
+        @TestMetadata("2.3.1-neg.kt")
+        public void test2_3_1_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.1-neg.kt");
+        }
+
+        @TestMetadata("2.3.2-neg.kt")
+        public void test2_3_2_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.2-neg.kt");
+        }
+
         @TestMetadata("2.3.1-pos.kt")
         public void test2_3_1_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.1-pos.kt");

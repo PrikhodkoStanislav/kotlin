@@ -1,6 +1,7 @@
 package
 
 public fun byte(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.Unit
+public fun char(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Char, /*2*/ value2: A): kotlin.Unit
 public fun double(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.Unit
 public fun float(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.Unit
 public fun getByte(/*0*/ number: kotlin.Int): kotlin.Byte
