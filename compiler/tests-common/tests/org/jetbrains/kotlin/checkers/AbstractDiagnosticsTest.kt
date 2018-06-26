@@ -62,10 +62,6 @@ import java.util.regex.Pattern
 
 abstract class AbstractDiagnosticsTest : BaseDiagnosticsTest() {
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
-        analyzeAndCheck(testDataFile, files, null)
-    }
-
-    fun analyzeAndCheck(testDataFile: File, files: List<TestFile>, beforeAssertCallback: (() -> Unit)?) {
         val groupedByModule = files.groupBy(TestFile::module)
 
         var lazyOperationsLog: LazyOperationsLog? = null
@@ -165,10 +161,6 @@ abstract class AbstractDiagnosticsTest : BaseDiagnosticsTest() {
                 moduleBindings[module]!!, implementingModulesBindings, actualText,
                 shouldSkipJvmSignatureDiagnostics(groupedByModule) || isCommonModule
             )
-        }
-
-        if (beforeAssertCallback !== null) {
-            beforeAssertCallback()
         }
 
         var exceptionFromDynamicCallDescriptorsValidation: Throwable? = null

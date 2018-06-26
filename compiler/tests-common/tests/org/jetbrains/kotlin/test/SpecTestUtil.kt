@@ -106,7 +106,7 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         }
     }
 
-    fun parseTestInfo() {
+    private fun parseTestInfo() {
         val testInfoByFilenameMatcher = Pattern.compile(testPathRegex).matcher(testDataFile.path)
 
         if (!testInfoByFilenameMatcher.find()) {
@@ -125,6 +125,10 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         if (testInfoByFilename != testInfoByContent) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_AND_METAINFO_NOT_CONSISTENCY)
         }
+    }
+
+    fun validateByTestInfo() {
+        this.parseTestInfo()
     }
 
     fun printTestInfo() {
@@ -146,16 +150,19 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
 
 class DiagnosticSpecTestValidator(private val testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTIC) {
     private lateinit var diagnostics: MutableList<Diagnostic>
+    private lateinit var diagnosticStats: MutableMap<String, Int>
     private lateinit var diagnosticSeverityStats: MutableMap<Severity, Int>
 
     private fun collectDiagnosticStatistic() {
         diagnosticSeverityStats = mutableMapOf()
 
         diagnostics.forEach {
-            if (diagnosticSeverityStats.contains(it.severity)) {
-                diagnosticSeverityStats[it.severity] = diagnosticSeverityStats[it.severity]!! + 1
+            val severity = it.factory.severity
+
+            if (diagnosticSeverityStats.contains(severity)) {
+                diagnosticSeverityStats[severity] = diagnosticSeverityStats[severity]!! + 1
             } else {
-                diagnosticSeverityStats[it.severity] = 1
+                diagnosticSeverityStats[severity] = 1
             }
         }
     }
@@ -164,15 +171,20 @@ class DiagnosticSpecTestValidator(private val testDataFile: File) : SpecTestVali
         return if (Severity.ERROR in diagnosticSeverityStats) TestType.NEGATIVE else TestType.POSITIVE
     }
 
-    fun printSeverityStatistic() {
-        println("DIAGNOSTICS: $diagnosticSeverityStats")
-    }
-
-    fun collectDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
+    private fun collectDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
         diagnostics = mutableListOf()
+        diagnosticStats = mutableMapOf()
 
         files.forEach {
             it.actualDiagnostics.forEach {
+                val diagnosticName = it.diagnostic.factory.name
+
+                if (diagnosticStats.contains(diagnosticName)) {
+                    diagnosticStats[diagnosticName] = diagnosticStats[diagnosticName]!! + 1
+                } else {
+                    diagnosticStats[diagnosticName] = 1
+                }
+
                 diagnostics.add(it.diagnostic)
             }
         }
@@ -180,9 +192,9 @@ class DiagnosticSpecTestValidator(private val testDataFile: File) : SpecTestVali
         collectDiagnosticStatistic()
     }
 
-    fun validateTestType() {
+    private fun validateTestType(files: List<BaseDiagnosticsTest.TestFile>) {
         if (!this::diagnostics.isInitialized) {
-            throw SpecTestValidationException(SpecTestValidationFailedReason.DIAGNOSTIC_NOT_COLLECTED)
+            this.collectDiagnostics(files)
         }
 
         val computedTestType = computeTestType()
@@ -190,17 +202,21 @@ class DiagnosticSpecTestValidator(private val testDataFile: File) : SpecTestVali
         if (computedTestType != testInfo.testType) {
             val isNotNegative = computedTestType == TestType.POSITIVE && testInfo.testType == TestType.NEGATIVE
             val isNotPositive = computedTestType == TestType.NEGATIVE && testInfo.testType == TestType.POSITIVE
-            val reason: SpecTestValidationFailedReason
-
-            when {
-                isNotNegative -> reason = SpecTestValidationFailedReason.TEST_IS_NOT_NEGATIVE
-                isNotPositive -> reason = SpecTestValidationFailedReason.TEST_IS_NOT_POSITIVE
-                else -> reason = SpecTestValidationFailedReason.UNKNOWN
+            val reason = when {
+                isNotNegative -> SpecTestValidationFailedReason.TEST_IS_NOT_NEGATIVE
+                isNotPositive -> SpecTestValidationFailedReason.TEST_IS_NOT_POSITIVE
+                else -> SpecTestValidationFailedReason.UNKNOWN
             }
-
-            printSeverityStatistic()
 
             throw SpecTestValidationException(reason)
         }
+    }
+
+    fun printDiagnosticStatistic() {
+        println("DIAGNOSTICS: $diagnosticSeverityStats | $diagnosticStats")
+    }
+
+    fun validateByDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
+        validateTestType(files)
     }
 }

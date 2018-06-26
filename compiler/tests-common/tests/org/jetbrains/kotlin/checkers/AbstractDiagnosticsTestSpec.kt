@@ -5,28 +5,46 @@
 
 package org.jetbrains.kotlin.checkers
 
+import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
+import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.test.*
 import org.junit.Assert
 import java.io.File
 
 abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
+    private lateinit var testValidator: DiagnosticSpecTestValidator
+
     override fun getConfigurationKind(): ConfigurationKind {
         return ConfigurationKind.ALL
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
-        val testValidator = DiagnosticSpecTestValidator(testDataFile)
+        testValidator = DiagnosticSpecTestValidator(testDataFile)
 
         try {
-            testValidator.parseTestInfo()
-            testValidator.printTestInfo()
-            super.analyzeAndCheck(testDataFile, files) {
-                testValidator.collectDiagnostics(files)
-                testValidator.validateTestType()
-                testValidator.printSeverityStatistic()
-            }
+            testValidator.validateByTestInfo()
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.reason.description)
+        }
+
+        testValidator.printTestInfo()
+
+        super.analyzeAndCheck(testDataFile, files)
+    }
+
+    override fun performAdditionalChecksAfterDiagnostics(
+        testDataFile: File,
+        testFiles: List<TestFile>,
+        moduleFiles: Map<TestModule?, List<TestFile>>,
+        moduleDescriptors: Map<TestModule?, ModuleDescriptorImpl>,
+        moduleBindings: Map<TestModule?, BindingContext>
+    ) {
+        try {
+            testValidator.validateByDiagnostics(testFiles)
+        } catch (e: SpecTestValidationException) {
+            Assert.fail(e.reason.description)
+        } finally {
+            testValidator.printDiagnosticStatistic()
         }
     }
 }
