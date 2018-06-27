@@ -147,6 +147,11 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.1-neg.kt");
         }
 
+        @TestMetadata("3.1.2-neg.kt")
+        public void test3_1_2_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.2-neg.kt");
+        }
+
         @TestMetadata("3.1.3-pos.kt")
         public void test3_1_3_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.3-pos.kt");
