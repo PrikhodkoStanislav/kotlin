@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 1
- DESCRIPTION: When with different variants of the arithmetic expressions in the control structure bodies.
+ DESCRIPTION: When with different variants of the invalid arithmetic expressions in the control structure bodies.
  */
 
 fun getInt(number: Int): Int {
@@ -36,6 +36,22 @@ fun getChar(number: Int): Char {
     return (number + 11).toChar()
 }
 
+fun getString(number: Int): String {
+    return "${(number + 11).toChar()}..."
+}
+
+fun getNothing(): Nothing = throw Exception()
+
+fun getUnit(): Unit {}
+
+fun getAny(): Any {
+    return Any()
+}
+
+fun getList(): List<Int> {
+    return mutableListOf()
+}
+
 class A {
     fun getInt(number: Int): Int {
         return number + 11
@@ -64,25 +80,71 @@ class A {
     fun getChar(number: Int): Char {
         return (number + 11).toChar()
     }
+
+    fun getString(number: Int): String {
+        return "${(number + 11).toChar()}..."
+    }
+
+    fun getNothing(): Nothing = throw Exception()
+
+    fun getUnit(): Unit {
+
+    }
+
+    fun getAny(): Any {
+        return Any()
+    }
+
+    fun getList(): List<Int> {
+        return mutableListOf()
+    }
 }
 
-fun short(value: Int, value1: Short, value2: A) {
-    val value3: Short = 32767
-    val value4: Short = -32768
+// arithmetic expressions with invalid syntax on integers
+fun test1(value: Int, value1: A) {
+    when { value == 1 -> -100 <!OVERLOAD_RESOLUTION_AMBIGUITY!>+<!><!SYNTAX!><!> }
+    when { value == 1 -> + value1.getInt(10) }
+    when { value == 1 -> 10 <!OVERLOAD_RESOLUTION_AMBIGUITY!>-<!><!SYNTAX!><!> }
+    when { value == 1 -> - 9900 }
+    when { value == 1 -> getInt(10) <!OVERLOAD_RESOLUTION_AMBIGUITY!>*<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>*<!> -<!UNSUPPORTED!>0<!><!CONSTANT_EXPECTED_TYPE_MISMATCH, UNSUPPORTED!>0<!><!UNSUPPORTED, SYNTAX!>13<!><!SYNTAX!><!> }
+    when { value == 1 -> -100 <!OVERLOAD_RESOLUTION_AMBIGUITY!>/<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>/<!> getInt(<!NO_VALUE_FOR_PARAMETER!>)<!> }
+    when { value == 1 -> <!UNSUPPORTED, UNUSED_EXPRESSION!>0<!><!CONSTANT_EXPECTED_TYPE_MISMATCH, UNSUPPORTED!>0<!><!UNSUPPORTED, SYNTAX!>9900<!><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>%<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>%<!> -34 }
+    when { value == 1 -> -0 shr<!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>shr<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>0<!><!SYNTAX!><!> }
+    when { value == 1 -> 0 ushr<!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>ushr<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>234<!><!SYNTAX!><!> }
+    when { value == 1 -> 100000000 or<!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>or<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>34<!><!SYNTAX!><!> }
+    when { value == 1 -> value1.getInt(10) and<!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>and<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>99999999<!><!SYNTAX!><!> }
+}
 
-    when {
-        value == 1 -> 900.toShort()
-        value == 2 -> value2.getShort(value1.toInt()) - 9234.toShort()
-        value == 3 -> 9234.toShort() * 0.toShort()
-        value == 4 -> -6.toShort() / getShort(-9000)
-        value == 5 -> 6.toShort() % 112.toShort()
-        value == 5 -> -9313.toShort() % 10.toShort()
-        value == 6 -> 6.toShort() - value4
-        value == 7 -> 50.toShort() + value1 * -90.toShort() / value3 % 112.toShort() - value1
-        value == 8 -> {
-            value1 * -112.toShort() / 9234.toShort() - -1.toShort() + value2.getShort(111) / 0.toShort() % -99.toShort() % 9234.toShort() + value4
-        }
-    }
+// arithmetic expressions with invalid syntax on chars
+fun test2(value: Int, value1: A) {
+    when { value == 1 -> 100.toChar() +<!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>+<!> value1.getChar(10) }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!>10.toChar() <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>-<!><!SYNTAX!><!> }
+    when { value == 1 -> (-10).toChar() <!OVERLOAD_RESOLUTION_AMBIGUITY!>-<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!> 99.toChar() }
+    when { value == 1 -> getChar(10) <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>*<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>*<!> 13.toChar() }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!>1.toChar() <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>/<!><!SYNTAX!><!> }
+    when { value == 1 -> (-1).toChar() <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>/<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>/<!> getChar(10) }
+    when { value == 1 -> 0.toChar() <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>%<!><!SYNTAX!><!> }
+    when { value == 1 -><!SYNTAX!><!> <!SYNTAX!><!SYNTAX!><!>%<!> -34 }
+    when { value == 1 -> 94.toChar() <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>shr<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>shr<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>0<!><!SYNTAX!><!> }
+    when { value == 1 -> 255.toChar() <!UNRESOLVED_REFERENCE!>ushr<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>ushr<!> <!TYPE_MISMATCH!>234.toChar()<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!>128.toChar() <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>or<!><!SYNTAX!><!> }
+    when { value == 1 -> (-128).toChar() <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>or<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>or<!> <!TYPE_MISMATCH!>34.toChar()<!><!SYNTAX!><!> }
+    when { value == 1 -> value1.getChar(10) <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>and<!><!SYNTAX!><!> }
+    when { value == 1 -> <!UNRESOLVED_REFERENCE!>and<!> <!TYPE_MISMATCH!>9.toChar()<!><!SYNTAX!><!> }
 }
 
 fun int(value: Int, value1: Int, value2: A) {
