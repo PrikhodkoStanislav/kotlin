@@ -1,0 +1,14 @@
+package
+
+public fun test1(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test2(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test3(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test4(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test5(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test6(/*0*/ value: kotlin.Any): kotlin.Int
+public fun test7(/*0*/ value: kotlin.Any): kotlin.Int
+public typealias AnyCustom = kotlin.Any
+public typealias IntCustom = kotlin.Int
+public typealias ListBook = kotlin.collections.List<kotlin.collections.Map<kotlin.String, kotlin.String>>
+public typealias NothingCustom = kotlin.Nothing
+public typealias UnitCustom = kotlin.Unit

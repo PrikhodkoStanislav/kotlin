@@ -1,4 +1,0 @@
-package
-
-public fun test1(/*0*/ value: kotlin.String?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Boolean): kotlin.Int
-public fun test2(/*0*/ value: kotlin.String?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Boolean): kotlin.Int
