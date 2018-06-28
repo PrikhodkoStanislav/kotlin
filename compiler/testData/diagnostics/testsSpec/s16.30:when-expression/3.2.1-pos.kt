@@ -59,3 +59,7 @@ fun bar(value1: Int, value2: Float, value3: Double, value4: Short, value5: Byte,
         else -> 13
     }
 }
+
+fun foo(): Int = when {
+    else -> 1
+}

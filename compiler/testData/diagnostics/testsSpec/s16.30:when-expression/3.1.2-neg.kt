@@ -8,7 +8,7 @@
  DESCRIPTION: When with empty when entry.
  */
 
-fun test1(value: Int) {
+fun test1() {
     when {
         <!SYNTAX!><!>-> { println(1) }
     }
