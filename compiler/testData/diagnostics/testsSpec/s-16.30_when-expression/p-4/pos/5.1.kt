@@ -18,7 +18,7 @@ class A {
     }
 }
 
-fun foo1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
+fun test1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
     when (value) {
         in Int.MIN_VALUE..-1000000000000L -> return 1
         in -1000000000000L..0L -> return 2
@@ -34,7 +34,7 @@ fun foo1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
     return -1
 }
 
-fun bar1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = when (value) {
+fun test2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = when (value) {
     in Int.MIN_VALUE..-1000000000000L -> 1
     in -1000000000000L..0L -> 2
     in 1..10.toShort() -> 3
@@ -47,7 +47,7 @@ fun bar1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = w
     else -> 10
 }
 
-fun foo2(value: Int): Int {
+fun test3(value: Int): Int {
     when (value) {
         in Int.MIN_VALUE..Int.MAX_VALUE -> return 1
     }
@@ -55,7 +55,12 @@ fun foo2(value: Int): Int {
     return -1
 }
 
-fun bar2(value: Int): Int = when (value) {
+fun test4(value: Int): Int = when (value) {
+    in Int.MIN_VALUE..Int.MAX_VALUE -> 1
+    else -> 2
+}
+
+fun test5(value: Any?): Int = when (value) {
     in Int.MIN_VALUE..Int.MAX_VALUE -> 1
     else -> 2
 }

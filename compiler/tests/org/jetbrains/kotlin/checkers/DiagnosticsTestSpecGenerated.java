@@ -359,6 +359,21 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                     runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/3.3.kt");
                 }
 
+                @TestMetadata("5.1.kt")
+                public void test5_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/5.1.kt");
+                }
+
+                @TestMetadata("5.2.kt")
+                public void test5_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/5.2.kt");
+                }
+
+                @TestMetadata("5.3.kt")
+                public void test5_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/5.3.kt");
+                }
+
                 public void testAllFilesPresentInNeg() throws Exception {
                     KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
                 }
