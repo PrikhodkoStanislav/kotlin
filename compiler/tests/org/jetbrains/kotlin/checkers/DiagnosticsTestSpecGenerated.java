@@ -292,6 +292,16 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.1-pos.kt");
         }
 
+        @TestMetadata("4.1.1-neg.kt")
+        public void test4_1_1_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.1-neg.kt");
+        }
+
+        @TestMetadata("4.1.2-neg.kt")
+        public void test4_1_2_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.2-neg.kt");
+        }
+
         @TestMetadata("4.1.20-pos.kt")
         public void test4_1_20_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.20-pos.kt");
@@ -360,6 +370,21 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
         @TestMetadata("4.3.1-pos.kt")
         public void test4_3_1_pos() throws Exception {
             runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.1-pos.kt");
+        }
+
+        @TestMetadata("4.3.1-neg.kt")
+        public void test4_3_1_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.1-neg.kt");
+        }
+
+        @TestMetadata("4.3.2-neg.kt")
+        public void test4_3_2_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.2-neg.kt");
+        }
+
+        @TestMetadata("4.3.3-neg.kt")
+        public void test4_3_3_neg() throws Exception {
+            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.3-neg.kt");
         }
 
         @TestMetadata("4.3.2-pos.kt")
