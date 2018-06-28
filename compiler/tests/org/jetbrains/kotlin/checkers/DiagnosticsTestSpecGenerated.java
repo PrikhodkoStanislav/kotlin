@@ -29,576 +29,750 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
     }
 
-    @TestMetadata("compiler/testData/diagnostics/testsSpec/s16.30:when-expression")
+    @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
-    public static class S16_30_when_expression extends AbstractDiagnosticsTestSpec {
+    public static class S_16_30_when_expression extends AbstractDiagnosticsTestSpec {
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
         }
 
-        @TestMetadata("2.3.1-neg.kt")
-        public void test2_3_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.1-neg.kt");
-        }
-
-        @TestMetadata("2.3.1-pos.kt")
-        public void test2_3_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.1-pos.kt");
-        }
-
-        @TestMetadata("2.3.2-neg.kt")
-        public void test2_3_2_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.2-neg.kt");
-        }
-
-        @TestMetadata("2.3.2-pos.kt")
-        public void test2_3_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/2.3.2-pos.kt");
-        }
-
-        @TestMetadata("3.1.10-pos.kt")
-        public void test3_1_10_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.10-pos.kt");
-        }
-
-        @TestMetadata("3.1.11-pos.kt")
-        public void test3_1_11_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.11-pos.kt");
-        }
-
-        @TestMetadata("3.1.12-pos.kt")
-        public void test3_1_12_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.12-pos.kt");
-        }
-
-        @TestMetadata("3.1.13-pos.kt")
-        public void test3_1_13_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.13-pos.kt");
-        }
-
-        @TestMetadata("3.1.14-pos.kt")
-        public void test3_1_14_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.14-pos.kt");
-        }
-
-        @TestMetadata("3.1.15-pos.kt")
-        public void test3_1_15_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.15-pos.kt");
-        }
-
-        @TestMetadata("3.1.16-pos.kt")
-        public void test3_1_16_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.16-pos.kt");
-        }
-
-        @TestMetadata("3.1.17-pos.kt")
-        public void test3_1_17_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.17-pos.kt");
-        }
-
-        @TestMetadata("3.1.18-pos.kt")
-        public void test3_1_18_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.18-pos.kt");
-        }
-
-        @TestMetadata("3.1.19-pos.kt")
-        public void test3_1_19_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.19-pos.kt");
-        }
-
-        @TestMetadata("3.1.1-neg.kt")
-        public void test3_1_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.1-neg.kt");
-        }
-
-        @TestMetadata("3.1.1-pos.kt")
-        public void test3_1_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.1-pos.kt");
-        }
-
-        @TestMetadata("3.1.20-pos.kt")
-        public void test3_1_20_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.20-pos.kt");
-        }
-
-        @TestMetadata("3.1.21-pos.kt")
-        public void test3_1_21_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.21-pos.kt");
-        }
-
-        @TestMetadata("3.1.22-pos.kt")
-        public void test3_1_22_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.22-pos.kt");
-        }
-
-        @TestMetadata("3.1.23-pos.kt")
-        public void test3_1_23_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.23-pos.kt");
-        }
-
-        @TestMetadata("3.1.24-pos.kt")
-        public void test3_1_24_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.24-pos.kt");
-        }
-
-        @TestMetadata("3.1.2-neg.kt")
-        public void test3_1_2_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.2-neg.kt");
-        }
-
-        @TestMetadata("3.1.2-pos.kt")
-        public void test3_1_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.2-pos.kt");
-        }
-
-        @TestMetadata("3.1.3-pos.kt")
-        public void test3_1_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.3-pos.kt");
-        }
-
-        @TestMetadata("3.1.4-pos.kt")
-        public void test3_1_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.4-pos.kt");
-        }
-
-        @TestMetadata("3.1.5-pos.kt")
-        public void test3_1_5_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.5-pos.kt");
-        }
-
-        @TestMetadata("3.1.6-pos.kt")
-        public void test3_1_6_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.6-pos.kt");
-        }
-
-        @TestMetadata("3.1.7-pos.kt")
-        public void test3_1_7_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.7-pos.kt");
-        }
-
-        @TestMetadata("3.1.8-pos.kt")
-        public void test3_1_8_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.8-pos.kt");
-        }
-
-        @TestMetadata("3.1.9-pos.kt")
-        public void test3_1_9_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.1.9-pos.kt");
-        }
-
-        @TestMetadata("3.2.1-neg.kt")
-        public void test3_2_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.1-neg.kt");
-        }
-
-        @TestMetadata("3.2.1-pos.kt")
-        public void test3_2_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.1-pos.kt");
-        }
-
-        @TestMetadata("3.2.2-neg.kt")
-        public void test3_2_2_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.2-neg.kt");
-        }
-
-        @TestMetadata("3.2.2-pos.kt")
-        public void test3_2_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.2-pos.kt");
-        }
-
-        @TestMetadata("3.2.3-pos.kt")
-        public void test3_2_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.3-pos.kt");
-        }
-
-        @TestMetadata("3.2.4-pos.kt")
-        public void test3_2_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.4-pos.kt");
-        }
-
-        @TestMetadata("3.2.5-pos.kt")
-        public void test3_2_5_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.2.5-pos.kt");
-        }
-
-        @TestMetadata("3.7.1-neg.kt")
-        public void test3_7_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.7.1-neg.kt");
-        }
-
-        @TestMetadata("3.7.1-pos.kt")
-        public void test3_7_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/3.7.1-pos.kt");
-        }
-
-        @TestMetadata("4.10.1-pos.kt")
-        public void test4_10_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.10.1-pos.kt");
-        }
-
-        @TestMetadata("4.1.10-pos.kt")
-        public void test4_1_10_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.10-pos.kt");
-        }
-
-        @TestMetadata("4.1.11-pos.kt")
-        public void test4_1_11_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.11-pos.kt");
-        }
-
-        @TestMetadata("4.1.12-pos.kt")
-        public void test4_1_12_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.12-pos.kt");
-        }
-
-        @TestMetadata("4.1.13-pos.kt")
-        public void test4_1_13_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.13-pos.kt");
-        }
-
-        @TestMetadata("4.1.14-pos.kt")
-        public void test4_1_14_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.14-pos.kt");
-        }
-
-        @TestMetadata("4.1.15-pos.kt")
-        public void test4_1_15_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.15-pos.kt");
-        }
-
-        @TestMetadata("4.1.16-pos.kt")
-        public void test4_1_16_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.16-pos.kt");
-        }
-
-        @TestMetadata("4.1.17-pos.kt")
-        public void test4_1_17_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.17-pos.kt");
-        }
-
-        @TestMetadata("4.1.18-pos.kt")
-        public void test4_1_18_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.18-pos.kt");
-        }
-
-        @TestMetadata("4.1.19-pos.kt")
-        public void test4_1_19_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.19-pos.kt");
-        }
-
-        @TestMetadata("4.1.1-pos.kt")
-        public void test4_1_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.1-pos.kt");
-        }
-
-        @TestMetadata("4.1.1-neg.kt")
-        public void test4_1_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.1-neg.kt");
-        }
-
-        @TestMetadata("4.1.2-neg.kt")
-        public void test4_1_2_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.2-neg.kt");
-        }
-
-        @TestMetadata("4.1.20-pos.kt")
-        public void test4_1_20_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.20-pos.kt");
-        }
-
-        @TestMetadata("4.1.21-pos.kt")
-        public void test4_1_21_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.21-pos.kt");
-        }
-
-        @TestMetadata("4.1.22-pos.kt")
-        public void test4_1_22_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.22-pos.kt");
-        }
-
-        @TestMetadata("4.1.23-pos.kt")
-        public void test4_1_23_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.23-pos.kt");
-        }
-
-        @TestMetadata("4.1.24-pos.kt")
-        public void test4_1_24_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.24-pos.kt");
-        }
-
-        @TestMetadata("4.1.2-pos.kt")
-        public void test4_1_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.2-pos.kt");
-        }
-
-        @TestMetadata("4.1.3-pos.kt")
-        public void test4_1_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.3-pos.kt");
-        }
-
-        @TestMetadata("4.1.4-pos.kt")
-        public void test4_1_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.4-pos.kt");
-        }
-
-        @TestMetadata("4.1.5-pos.kt")
-        public void test4_1_5_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.5-pos.kt");
-        }
-
-        @TestMetadata("4.1.6-pos.kt")
-        public void test4_1_6_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.6-pos.kt");
-        }
-
-        @TestMetadata("4.1.7-pos.kt")
-        public void test4_1_7_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.7-pos.kt");
-        }
-
-        @TestMetadata("4.1.8-pos.kt")
-        public void test4_1_8_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.8-pos.kt");
-        }
-
-        @TestMetadata("4.1.9-pos.kt")
-        public void test4_1_9_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.1.9-pos.kt");
-        }
-
-        @TestMetadata("4.3.1-pos.kt")
-        public void test4_3_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.1-pos.kt");
-        }
-
-        @TestMetadata("4.3.1-neg.kt")
-        public void test4_3_1_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.1-neg.kt");
-        }
-
-        @TestMetadata("4.3.2-neg.kt")
-        public void test4_3_2_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.2-neg.kt");
-        }
-
-        @TestMetadata("4.3.3-neg.kt")
-        public void test4_3_3_neg() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.3-neg.kt");
-        }
-
-        @TestMetadata("4.3.2-pos.kt")
-        public void test4_3_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.2-pos.kt");
-        }
-
-        @TestMetadata("4.3.3-pos.kt")
-        public void test4_3_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.3.3-pos.kt");
-        }
-
-        @TestMetadata("4.5.1-pos.kt")
-        public void test4_5_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.5.1-pos.kt");
-        }
-
-        @TestMetadata("4.5.2-pos.kt")
-        public void test4_5_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.5.2-pos.kt");
-        }
-
-        @TestMetadata("4.7.10-pos.kt")
-        public void test4_7_10_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.10-pos.kt");
-        }
-
-        @TestMetadata("4.7.11-pos.kt")
-        public void test4_7_11_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.11-pos.kt");
-        }
-
-        @TestMetadata("4.7.12-pos.kt")
-        public void test4_7_12_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.12-pos.kt");
-        }
-
-        @TestMetadata("4.7.13-pos.kt")
-        public void test4_7_13_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.13-pos.kt");
-        }
-
-        @TestMetadata("4.7.14-pos.kt")
-        public void test4_7_14_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.14-pos.kt");
-        }
-
-        @TestMetadata("4.7.15-pos.kt")
-        public void test4_7_15_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.15-pos.kt");
-        }
-
-        @TestMetadata("4.7.16-pos.kt")
-        public void test4_7_16_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.16-pos.kt");
-        }
-
-        @TestMetadata("4.7.17-pos.kt")
-        public void test4_7_17_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.17-pos.kt");
-        }
-
-        @TestMetadata("4.7.18-pos.kt")
-        public void test4_7_18_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.18-pos.kt");
-        }
-
-        @TestMetadata("4.7.19-pos.kt")
-        public void test4_7_19_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.19-pos.kt");
-        }
-
-        @TestMetadata("4.7.1-pos.kt")
-        public void test4_7_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.1-pos.kt");
-        }
-
-        @TestMetadata("4.7.20-pos.kt")
-        public void test4_7_20_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.20-pos.kt");
-        }
-
-        @TestMetadata("4.7.21-pos.kt")
-        public void test4_7_21_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.21-pos.kt");
-        }
-
-        @TestMetadata("4.7.22-pos.kt")
-        public void test4_7_22_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.22-pos.kt");
-        }
-
-        @TestMetadata("4.7.23-pos.kt")
-        public void test4_7_23_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.23-pos.kt");
-        }
-
-        @TestMetadata("4.7.24-pos.kt")
-        public void test4_7_24_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.24-pos.kt");
-        }
-
-        @TestMetadata("4.7.2-pos.kt")
-        public void test4_7_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.2-pos.kt");
-        }
-
-        @TestMetadata("4.7.3-pos.kt")
-        public void test4_7_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.3-pos.kt");
-        }
-
-        @TestMetadata("4.7.4-pos.kt")
-        public void test4_7_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.4-pos.kt");
-        }
-
-        @TestMetadata("4.7.5-pos.kt")
-        public void test4_7_5_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.5-pos.kt");
-        }
-
-        @TestMetadata("4.7.6-pos.kt")
-        public void test4_7_6_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.6-pos.kt");
-        }
-
-        @TestMetadata("4.7.7-pos.kt")
-        public void test4_7_7_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.7-pos.kt");
-        }
-
-        @TestMetadata("4.7.8-pos.kt")
-        public void test4_7_8_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.8-pos.kt");
-        }
-
-        @TestMetadata("4.7.9-pos.kt")
-        public void test4_7_9_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.7.9-pos.kt");
-        }
-
-        @TestMetadata("4.9.1-pos.kt")
-        public void test4_9_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/4.9.1-pos.kt");
-        }
-
-        @TestMetadata("5.1.1-pos.kt")
-        public void test5_1_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/5.1.1-pos.kt");
-        }
-
-        @TestMetadata("5.1.2-pos.kt")
-        public void test5_1_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/5.1.2-pos.kt");
-        }
-
-        @TestMetadata("5.1.3-pos.kt")
-        public void test5_1_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/5.1.3-pos.kt");
-        }
-
-        @TestMetadata("5.1.4-pos.kt")
-        public void test5_1_4_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/5.1.4-pos.kt");
-        }
-
-        @TestMetadata("6.2.1-pos.kt")
-        public void test6_2_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.2.1-pos.kt");
-        }
-
-        @TestMetadata("6.2.2-pos.kt")
-        public void test6_2_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.2.2-pos.kt");
-        }
-
-        @TestMetadata("6.2.3-pos.kt")
-        public void test6_2_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.2.3-pos.kt");
-        }
-
-        @TestMetadata("6.4.1-pos.kt")
-        public void test6_4_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.4.1-pos.kt");
-        }
-
-        @TestMetadata("6.7.1-pos.kt")
-        public void test6_7_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.7.1-pos.kt");
-        }
-
-        @TestMetadata("6.8.1-pos.kt")
-        public void test6_8_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.8.1-pos.kt");
-        }
-
-        @TestMetadata("6.9.1-pos.kt")
-        public void test6_9_1_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.9.1-pos.kt");
-        }
-
-        @TestMetadata("6.9.2-pos.kt")
-        public void test6_9_2_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.9.2-pos.kt");
-        }
-
-        @TestMetadata("6.9.3-pos.kt")
-        public void test6_9_3_pos() throws Exception {
-            runTest("compiler/testData/diagnostics/testsSpec/s16.30:when-expression/6.9.3-pos.kt");
-        }
-
-        public void testAllFilesPresentInS16_30_when_expression() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s16.30:when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+        public void testAllFilesPresentInS_16_30_when_expression() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+        }
+
+        @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class P_2 extends AbstractDiagnosticsTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInP_2() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/neg")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Neg extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("3.1.kt")
+                public void test3_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/neg/3.1.kt");
+                }
+
+                @TestMetadata("3.2.kt")
+                public void test3_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/neg/3.2.kt");
+                }
+
+                public void testAllFilesPresentInNeg() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/pos")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Pos extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("3.1.kt")
+                public void test3_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/pos/3.1.kt");
+                }
+
+                @TestMetadata("3.2.kt")
+                public void test3_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/pos/3.2.kt");
+                }
+
+                public void testAllFilesPresentInPos() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-2/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+        }
+
+        @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class P_3 extends AbstractDiagnosticsTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInP_3() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Neg extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg/1.1.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg/1.2.kt");
+                }
+
+                @TestMetadata("2.1.kt")
+                public void test2_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg/2.1.kt");
+                }
+
+                @TestMetadata("2.2.kt")
+                public void test2_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg/2.2.kt");
+                }
+
+                @TestMetadata("7.1.kt")
+                public void test7_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg/7.1.kt");
+                }
+
+                public void testAllFilesPresentInNeg() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Pos extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.1.kt");
+                }
+
+                @TestMetadata("1.10.kt")
+                public void test1_10() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.10.kt");
+                }
+
+                @TestMetadata("1.11.kt")
+                public void test1_11() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.11.kt");
+                }
+
+                @TestMetadata("1.12.kt")
+                public void test1_12() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.12.kt");
+                }
+
+                @TestMetadata("1.13.kt")
+                public void test1_13() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.13.kt");
+                }
+
+                @TestMetadata("1.14.kt")
+                public void test1_14() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.14.kt");
+                }
+
+                @TestMetadata("1.15.kt")
+                public void test1_15() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.15.kt");
+                }
+
+                @TestMetadata("1.16.kt")
+                public void test1_16() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.16.kt");
+                }
+
+                @TestMetadata("1.17.kt")
+                public void test1_17() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.17.kt");
+                }
+
+                @TestMetadata("1.18.kt")
+                public void test1_18() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.18.kt");
+                }
+
+                @TestMetadata("1.19.kt")
+                public void test1_19() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.19.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.2.kt");
+                }
+
+                @TestMetadata("1.20.kt")
+                public void test1_20() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.20.kt");
+                }
+
+                @TestMetadata("1.21.kt")
+                public void test1_21() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.21.kt");
+                }
+
+                @TestMetadata("1.22.kt")
+                public void test1_22() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.22.kt");
+                }
+
+                @TestMetadata("1.23.kt")
+                public void test1_23() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.23.kt");
+                }
+
+                @TestMetadata("1.24.kt")
+                public void test1_24() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.24.kt");
+                }
+
+                @TestMetadata("1.3.kt")
+                public void test1_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.3.kt");
+                }
+
+                @TestMetadata("1.4.kt")
+                public void test1_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.4.kt");
+                }
+
+                @TestMetadata("1.5.kt")
+                public void test1_5() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.5.kt");
+                }
+
+                @TestMetadata("1.6.kt")
+                public void test1_6() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.6.kt");
+                }
+
+                @TestMetadata("1.7.kt")
+                public void test1_7() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.7.kt");
+                }
+
+                @TestMetadata("1.8.kt")
+                public void test1_8() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.8.kt");
+                }
+
+                @TestMetadata("1.9.kt")
+                public void test1_9() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/1.9.kt");
+                }
+
+                @TestMetadata("2.1.kt")
+                public void test2_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/2.1.kt");
+                }
+
+                @TestMetadata("2.2.kt")
+                public void test2_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/2.2.kt");
+                }
+
+                @TestMetadata("2.3.kt")
+                public void test2_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/2.3.kt");
+                }
+
+                @TestMetadata("2.4.kt")
+                public void test2_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/2.4.kt");
+                }
+
+                @TestMetadata("2.5.kt")
+                public void test2_5() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/2.5.kt");
+                }
+
+                @TestMetadata("7.1.kt")
+                public void test7_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos/7.1.kt");
+                }
+
+                public void testAllFilesPresentInPos() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-3/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+        }
+
+        @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class P_4 extends AbstractDiagnosticsTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInP_4() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Neg extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/1.1.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/1.2.kt");
+                }
+
+                @TestMetadata("3.1.kt")
+                public void test3_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/3.1.kt");
+                }
+
+                @TestMetadata("3.2.kt")
+                public void test3_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/3.2.kt");
+                }
+
+                @TestMetadata("3.3.kt")
+                public void test3_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg/3.3.kt");
+                }
+
+                public void testAllFilesPresentInNeg() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Pos extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("10.1.kt")
+                public void test10_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/10.1.kt");
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.1.kt");
+                }
+
+                @TestMetadata("1.10.kt")
+                public void test1_10() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.10.kt");
+                }
+
+                @TestMetadata("1.11.kt")
+                public void test1_11() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.11.kt");
+                }
+
+                @TestMetadata("1.12.kt")
+                public void test1_12() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.12.kt");
+                }
+
+                @TestMetadata("1.13.kt")
+                public void test1_13() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.13.kt");
+                }
+
+                @TestMetadata("1.14.kt")
+                public void test1_14() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.14.kt");
+                }
+
+                @TestMetadata("1.15.kt")
+                public void test1_15() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.15.kt");
+                }
+
+                @TestMetadata("1.16.kt")
+                public void test1_16() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.16.kt");
+                }
+
+                @TestMetadata("1.17.kt")
+                public void test1_17() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.17.kt");
+                }
+
+                @TestMetadata("1.18.kt")
+                public void test1_18() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.18.kt");
+                }
+
+                @TestMetadata("1.19.kt")
+                public void test1_19() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.19.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.2.kt");
+                }
+
+                @TestMetadata("1.20.kt")
+                public void test1_20() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.20.kt");
+                }
+
+                @TestMetadata("1.21.kt")
+                public void test1_21() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.21.kt");
+                }
+
+                @TestMetadata("1.22.kt")
+                public void test1_22() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.22.kt");
+                }
+
+                @TestMetadata("1.23.kt")
+                public void test1_23() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.23.kt");
+                }
+
+                @TestMetadata("1.24.kt")
+                public void test1_24() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.24.kt");
+                }
+
+                @TestMetadata("1.3.kt")
+                public void test1_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.3.kt");
+                }
+
+                @TestMetadata("1.4.kt")
+                public void test1_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.4.kt");
+                }
+
+                @TestMetadata("1.5.kt")
+                public void test1_5() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.5.kt");
+                }
+
+                @TestMetadata("1.6.kt")
+                public void test1_6() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.6.kt");
+                }
+
+                @TestMetadata("1.7.kt")
+                public void test1_7() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.7.kt");
+                }
+
+                @TestMetadata("1.8.kt")
+                public void test1_8() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.8.kt");
+                }
+
+                @TestMetadata("1.9.kt")
+                public void test1_9() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/1.9.kt");
+                }
+
+                @TestMetadata("3.1.kt")
+                public void test3_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/3.1.kt");
+                }
+
+                @TestMetadata("3.2.kt")
+                public void test3_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/3.2.kt");
+                }
+
+                @TestMetadata("3.3.kt")
+                public void test3_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/3.3.kt");
+                }
+
+                @TestMetadata("3.4.kt")
+                public void test3_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/3.4.kt");
+                }
+
+                @TestMetadata("5.1.kt")
+                public void test5_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/5.1.kt");
+                }
+
+                @TestMetadata("5.2.kt")
+                public void test5_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/5.2.kt");
+                }
+
+                @TestMetadata("7.1.kt")
+                public void test7_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.1.kt");
+                }
+
+                @TestMetadata("7.10.kt")
+                public void test7_10() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.10.kt");
+                }
+
+                @TestMetadata("7.11.kt")
+                public void test7_11() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.11.kt");
+                }
+
+                @TestMetadata("7.12.kt")
+                public void test7_12() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.12.kt");
+                }
+
+                @TestMetadata("7.13.kt")
+                public void test7_13() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.13.kt");
+                }
+
+                @TestMetadata("7.14.kt")
+                public void test7_14() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.14.kt");
+                }
+
+                @TestMetadata("7.15.kt")
+                public void test7_15() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.15.kt");
+                }
+
+                @TestMetadata("7.16.kt")
+                public void test7_16() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.16.kt");
+                }
+
+                @TestMetadata("7.17.kt")
+                public void test7_17() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.17.kt");
+                }
+
+                @TestMetadata("7.18.kt")
+                public void test7_18() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.18.kt");
+                }
+
+                @TestMetadata("7.19.kt")
+                public void test7_19() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.19.kt");
+                }
+
+                @TestMetadata("7.2.kt")
+                public void test7_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.2.kt");
+                }
+
+                @TestMetadata("7.20.kt")
+                public void test7_20() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.20.kt");
+                }
+
+                @TestMetadata("7.21.kt")
+                public void test7_21() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.21.kt");
+                }
+
+                @TestMetadata("7.22.kt")
+                public void test7_22() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.22.kt");
+                }
+
+                @TestMetadata("7.23.kt")
+                public void test7_23() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.23.kt");
+                }
+
+                @TestMetadata("7.24.kt")
+                public void test7_24() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.24.kt");
+                }
+
+                @TestMetadata("7.3.kt")
+                public void test7_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.3.kt");
+                }
+
+                @TestMetadata("7.4.kt")
+                public void test7_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.4.kt");
+                }
+
+                @TestMetadata("7.5.kt")
+                public void test7_5() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.5.kt");
+                }
+
+                @TestMetadata("7.6.kt")
+                public void test7_6() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.6.kt");
+                }
+
+                @TestMetadata("7.7.kt")
+                public void test7_7() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.7.kt");
+                }
+
+                @TestMetadata("7.8.kt")
+                public void test7_8() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.8.kt");
+                }
+
+                @TestMetadata("7.9.kt")
+                public void test7_9() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/7.9.kt");
+                }
+
+                @TestMetadata("9.1.kt")
+                public void test9_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos/9.1.kt");
+                }
+
+                public void testAllFilesPresentInPos() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-4/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+        }
+
+        @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class P_5 extends AbstractDiagnosticsTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInP_5() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Pos extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos/1.1.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos/1.2.kt");
+                }
+
+                @TestMetadata("1.3.kt")
+                public void test1_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos/1.3.kt");
+                }
+
+                @TestMetadata("1.4.kt")
+                public void test1_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos/1.4.kt");
+                }
+
+                public void testAllFilesPresentInPos() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+        }
+
+        @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class P_6 extends AbstractDiagnosticsTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInP_6() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Pos extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("2.1.kt")
+                public void test2_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/2.1.kt");
+                }
+
+                @TestMetadata("2.2.kt")
+                public void test2_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/2.2.kt");
+                }
+
+                @TestMetadata("2.3.kt")
+                public void test2_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/2.3.kt");
+                }
+
+                @TestMetadata("4.1.kt")
+                public void test4_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/4.1.kt");
+                }
+
+                @TestMetadata("7.1.kt")
+                public void test7_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/7.1.kt");
+                }
+
+                @TestMetadata("8.1.kt")
+                public void test8_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/8.1.kt");
+                }
+
+                @TestMetadata("9.1.kt")
+                public void test9_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/9.1.kt");
+                }
+
+                @TestMetadata("9.2.kt")
+                public void test9_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/9.2.kt");
+                }
+
+                @TestMetadata("9.3.kt")
+                public void test9_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos/9.3.kt");
+                }
+
+                public void testAllFilesPresentInPos() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-6/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
         }
     }
 }

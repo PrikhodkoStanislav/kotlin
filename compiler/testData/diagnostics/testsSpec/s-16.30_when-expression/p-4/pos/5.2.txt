@@ -1,0 +1,15 @@
+package
+
+public fun bar1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A): kotlin.Int
+public fun bar2(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
+public fun foo1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A): kotlin.Int
+public fun foo2(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
+
+public final class A {
+    public constructor A()
+    public final operator fun contains(/*0*/ a: kotlin.Int): kotlin.Boolean
+    public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    public final fun getIntArray(/*0*/ value: kotlin.Int): kotlin.IntArray
+    public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+}

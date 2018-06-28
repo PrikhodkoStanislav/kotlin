@@ -1,0 +1,6 @@
+package
+
+public fun test1(/*0*/ value: kotlin.Boolean, /*1*/ value1: kotlin.Int?): kotlin.Int
+public fun test2(/*0*/ value: kotlin.Boolean, /*1*/ value1: kotlin.Int?): kotlin.Int
+public fun test3(/*0*/ value: kotlin.Boolean, /*1*/ value1: kotlin.Int?): kotlin.Int
+public fun test4(/*0*/ value: kotlin.Boolean, /*1*/ value1: kotlin.Int?): kotlin.Int

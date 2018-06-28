@@ -60,7 +60,6 @@ enum class SpecTestValidationFailedReason(val description: String) {
     METAINFO_NOT_VALID("Incorrect meta info in test file."),
     FILENAME_AND_METAINFO_NOT_CONSISTENCY("Test info from filename and file content is not consistency"),
     NOT_PARSED("Test info not parsed. You must call parseTestInfo before test info printing."),
-    DIAGNOSTIC_NOT_COLLECTED("Diagnostics not collected from the test file. You must call collectAllDiagnostics."),
     TEST_IS_NOT_POSITIVE("Test is not positive because it contains diagnostics with ERROR severity."),
     TEST_IS_NOT_NEGATIVE("Test is not negative because it not contains diagnostics with ERROR severity."),
     UNKNOWN("Unknown validation error.")
@@ -78,7 +77,7 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
 
         private const val integerRegex = "[1-9]\\d*"
         private const val testPathRegex =
-            "^.*?/s(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):(?<sectionName>[\\w-]+)/(?<paragraphNumber>$integerRegex).(?<sentenceNumber>$integerRegex).(?<testNumber>$integerRegex)-(?<testType>pos|neg)\\.kt$"
+            "^.*?/s-(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*)_(?<sectionName>[\\w-]+)/p-(?<paragraphNumber>$integerRegex)/(?<testType>pos|neg)/(?<sentenceNumber>$integerRegex)\\.(?<testNumber>$integerRegex)\\.kt$"
         private const val testContentMetaInfoRegex =
             "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$integerRegex)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)\\s+\\*\\/\\s+"
 
@@ -148,7 +147,7 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
     }
 }
 
-class DiagnosticSpecTestValidator(private val testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTIC) {
+class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTIC) {
     private lateinit var diagnostics: MutableList<Diagnostic>
     private lateinit var diagnosticStats: MutableMap<String, Int>
     private lateinit var diagnosticSeverityStats: MutableMap<Severity, Int>
