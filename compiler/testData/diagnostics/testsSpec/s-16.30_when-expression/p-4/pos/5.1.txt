@@ -1,10 +1,11 @@
 package
 
-public fun bar1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Int, /*3*/ value3: kotlin.Long, /*4*/ value4: A): kotlin.Int
-public fun bar2(/*0*/ value: kotlin.Int): kotlin.Int
-public fun foo1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Int, /*3*/ value3: kotlin.Long, /*4*/ value4: A): kotlin.Int
-public fun foo2(/*0*/ value: kotlin.Int): kotlin.Int
 public fun getInt(/*0*/ number: kotlin.Int): kotlin.Int
+public fun test1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Int, /*3*/ value3: kotlin.Long, /*4*/ value4: A): kotlin.Int
+public fun test2(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Int, /*3*/ value3: kotlin.Long, /*4*/ value4: A): kotlin.Int
+public fun test3(/*0*/ value: kotlin.Int): kotlin.Int
+public fun test4(/*0*/ value: kotlin.Int): kotlin.Int
+public fun test5(/*0*/ value: kotlin.Any?): kotlin.Int
 
 public final class A {
     public constructor A()

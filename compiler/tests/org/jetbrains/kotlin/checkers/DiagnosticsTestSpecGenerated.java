@@ -700,6 +700,59 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                 KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
             }
 
+            @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Neg extends AbstractDiagnosticsTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                @TestMetadata("1.1.kt")
+                public void test1_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/1.1.kt");
+                }
+
+                @TestMetadata("1.2.kt")
+                public void test1_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/1.2.kt");
+                }
+
+                @TestMetadata("1.3.kt")
+                public void test1_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/1.3.kt");
+                }
+
+                @TestMetadata("1.4.kt")
+                public void test1_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/1.4.kt");
+                }
+
+                @TestMetadata("2.1.kt")
+                public void test2_1() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/2.1.kt");
+                }
+
+                @TestMetadata("2.2.kt")
+                public void test2_2() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/2.2.kt");
+                }
+
+                @TestMetadata("2.3.kt")
+                public void test2_3() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/2.3.kt");
+                }
+
+                @TestMetadata("2.4.kt")
+                public void test2_4() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg/2.4.kt");
+                }
+
+                public void testAllFilesPresentInNeg() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+            }
+
             @TestMetadata("compiler/testData/diagnostics/testsSpec/s-16.30_when-expression/p-5/pos")
             @TestDataPath("$PROJECT_ROOT")
             @RunWith(JUnit3RunnerWithInners.class)

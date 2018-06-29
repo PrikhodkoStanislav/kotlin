@@ -9,20 +9,20 @@
  */
 
 fun test1(<!UNUSED_PARAMETER!>value<!>: Int): Int = when {
-    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return 1
-    <!UNREACHABLE_CODE!>value == 1 -> return 2<!>
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 1
+    <!UNREACHABLE_CODE!>value == 1 -> 2<!>
 }
 
 fun test2(<!UNUSED_PARAMETER!>value<!>: Int): Int = when {
-    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return 1
-    <!UNREACHABLE_CODE!>value == 1 -> return 2<!>
-    <!UNREACHABLE_CODE!>value == 2 -> return 3<!>
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 1
+    <!UNREACHABLE_CODE!>value == 1 -> 2<!>
+    <!UNREACHABLE_CODE!>value == 2 -> 3<!>
 }
 
 fun test3(value: Int): Int = when {
     value == 1 -> return 1
-        <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return 2
-        <!UNREACHABLE_CODE!>value == 2 -> return 3<!>
+        <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 2
+        <!UNREACHABLE_CODE!>value == 2 -> 3<!>
 }
 
 fun test4(): Int {
