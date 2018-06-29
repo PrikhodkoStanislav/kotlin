@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 8
- DESCRIPTION: When with bound value and try expressions in when entry.
+ DESCRIPTION: 'When' with bound value and try expressions in 'when condition'.
  */
 
-fun test1(value: Int?): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Int?): Int = when (value) {
     try {
         4
     } catch (e: Exception) {
@@ -24,7 +25,8 @@ fun test1(value: Int?): Int = when (value) {
     else -> 4
 }
 
-fun test2(value: Int?): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Int?): Int {
     when (value) {
         try {
             4

@@ -5,10 +5,10 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 11
- DESCRIPTION: When with cast expression in the control structure bodies.
+ DESCRIPTION: 'When' with cast expression in the control structure body.
  */
 
-fun foo(value: Int, value1: Collection<Int>, value2: Collection<Int>?) {
+fun case_1(value: Int, value1: Collection<Int>, value2: Collection<Int>?) {
     when {
         value == 1 -> value1 as MutableList<Int>
         value == 2 -> value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!>

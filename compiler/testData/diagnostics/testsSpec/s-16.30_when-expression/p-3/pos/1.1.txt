@@ -1,9 +1,12 @@
 package
 
-public fun byte(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.Unit
-public fun char(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Char, /*2*/ value2: A): kotlin.Unit
-public fun double(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.Unit
-public fun float(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.Unit
+public fun case_1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.Unit
+public fun case_2(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.Unit
+public fun case_3(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.Unit
+public fun case_4(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.Unit
+public fun case_5(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.Unit
+public fun case_6(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.Unit
+public fun case_7(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Char, /*2*/ value2: A): kotlin.Unit
 public fun getByte(/*0*/ number: kotlin.Int): kotlin.Byte
 public fun getChar(/*0*/ number: kotlin.Int): kotlin.Char
 public fun getDouble(/*0*/ number: kotlin.Int): kotlin.Double
@@ -11,9 +14,6 @@ public fun getFloat(/*0*/ number: kotlin.Int): kotlin.Float
 public fun getInt(/*0*/ number: kotlin.Int): kotlin.Int
 public fun getLong(/*0*/ number: kotlin.Int): kotlin.Long
 public fun getShort(/*0*/ number: kotlin.Int): kotlin.Short
-public fun int(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.Unit
-public fun long(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.Unit
-public fun short(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.Unit
 
 public final class A {
     public constructor A()

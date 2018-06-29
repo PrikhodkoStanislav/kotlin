@@ -5,12 +5,13 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 3
- DESCRIPTION: When entry with contains operator and object without contains operator.
+ DESCRIPTION: 'When' with bound value and 'when entry' with contains operator and object without defined contains operator.
  */
 
 class A {}
 
-fun test1(value: Int, value1: A): Int {
+// CASE DESCRIPTION: 'When' with object of custom class, without defined contains operator.
+fun case_1(value: Int, value1: A): Int {
     when (<!UNUSED_EXPRESSION!>value<!>) {
         <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value1  -> return 1
     }
@@ -18,7 +19,8 @@ fun test1(value: Int, value1: A): Int {
     return -1
 }
 
-fun test2(
+// CASE DESCRIPTION: 'When' with object of various basic types (Int, Any, Nothing, Unit, Map — Collection example), without defined contains operator.
+fun case_2(
     value: Int,
     value1: Int,
     value2: Any,

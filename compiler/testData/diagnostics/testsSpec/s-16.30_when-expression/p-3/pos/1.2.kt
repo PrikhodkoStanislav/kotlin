@@ -5,10 +5,10 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 2
- DESCRIPTION: When with different variants of the logical expressions in the control structure bodies.
+ DESCRIPTION: 'When' with different variants of the logical expressions in the control structure body.
  */
 
-fun foo(value: Int, value1: Boolean, value2: Boolean, value3: String, value4: Any?) {
+fun case_1(value: Int, value1: Boolean, value2: Boolean, value3: String, value4: Any?) {
     val value5 = true
     val value6 = false
 

@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 23
- DESCRIPTION: When with bound value and continue expression in when entry.
+ DESCRIPTION: 'When' with bound value and continue expression in 'when condition'.
  */
 
-fun test1(value: Any?): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one continue expression.
+fun case_1(value: Any?): Int {
     loop@ while (true) {
         when (value) {
             continue@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
@@ -18,7 +19,8 @@ fun test1(value: Any?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun test2(value: Any?): Int? {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one continue expression.
+fun case_2(value: Any?): Int? {
     var <!UNUSED_VARIABLE!>whenValue<!>: Int? = null
 
     loop@ while (true) {
@@ -31,7 +33,8 @@ fun test2(value: Any?): Int? {
     <!UNREACHABLE_CODE!>return whenValue<!>
 }
 
-fun test3(value: Any?): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several continue expressions.
+fun case_3(value: Any?): Int {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -50,7 +53,8 @@ fun test3(value: Any?): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-fun test4(value: Any?): Int? {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several continue expressions.
+fun case_4(value: Any?): Int? {
     var <!UNUSED_VARIABLE!>whenValue<!>: Int? = null
 
     loop1@ while (true) {

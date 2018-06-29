@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 1
- DESCRIPTION: When with different variants of the arithmetic expressions in the control structure bodies.
+ DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in the control structure body.
  */
 
 fun getInt(number: Int): Int {
@@ -66,11 +66,12 @@ class A {
     }
 }
 
-fun short(value: Int, value1: Short, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Short.
+fun case_1(value: Int, value1: Short, value2: A) {
     val value3: Short = 32767
     val value4: Short = -32768
 
-    when(value) {
+    when (value) {
         1 -> 900.toShort()
         2 -> value2.getShort(value1.toInt()) - 9234.toShort()
         3 -> 9234.toShort() * 0.toShort()
@@ -85,11 +86,12 @@ fun short(value: Int, value1: Short, value2: A) {
     }
 }
 
-fun int(value: Int, value1: Int, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Int.
+fun case_2(value: Int, value1: Int, value2: A) {
     val value3 = 912
     val value4 = 124901924904
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_EXPRESSION!>2<!>
         2 -> 2 + 2
         3 -> 2 * -2
@@ -111,11 +113,12 @@ fun int(value: Int, value1: Int, value2: A) {
     }
 }
 
-fun long(value: Int, value1: Long, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Long.
+fun case_3(value: Int, value1: Long, value2: A) {
     val value3 = 9L
     val value4 = 124909249042341234L
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_EXPRESSION!>2L<!>
         2 -> 1249011249042341234L + 412L
         3 -> -2L * getLong(1000)
@@ -130,11 +133,12 @@ fun long(value: Int, value1: Long, value2: A) {
     }
 }
 
-fun float(value: Int, value1: Float, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Float.
+fun case_4(value: Int, value1: Float, value2: A) {
     val value3 = 912.2134F
     val value4 = -124901924904.991242f
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_EXPRESSION!>2.1F<!>
         2 -> 2.1f + value2.getFloat(-1)
         3 -> getFloat(-10) * 2f
@@ -149,11 +153,12 @@ fun float(value: Int, value1: Float, value2: A) {
     }
 }
 
-fun double(value: Int, value1: Double, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Double.
+fun case_5(value: Int, value1: Double, value2: A) {
     val value3 = 912.2134
     val value4 = -124901924904.99124212
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_EXPRESSION!>2.1<!>
         2 -> 2.1 + 2.5
         3 -> getDouble(-20) * 2.0
@@ -168,14 +173,15 @@ fun double(value: Int, value1: Double, value2: A) {
     }
 }
 
-fun byte(value: Int, value1: Byte, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Byte.
+fun case_6(value: Int, value1: Byte, value2: A) {
     val value3: Byte = -11
     val value4: Byte = 3
     val value5: Byte = 127
     val value6: Byte = 5
     val value7: Byte = -128
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_EXPRESSION!>value1<!>
         2 -> -11.toByte() - value3
         3 -> 90.toByte() * -value5

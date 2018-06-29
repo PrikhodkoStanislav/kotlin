@@ -8,7 +8,8 @@
  DESCRIPTION: Check when exhaustive via else entry (when without bound value).
  */
 
-fun test1(value: Int): Int = when {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (several value check branches and 'else' branch).
+fun case_1(value: Int): Int = when {
     value == 0 -> 1
     value > 0 && value <= 10 -> 2
     value > 10 && value <= 100 -> 3
@@ -16,11 +17,13 @@ fun test1(value: Int): Int = when {
     else -> 5
 }
 
-fun test2(): Int = when {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
+fun case_2(): Int = when {
     true -> 1
     else -> 2
 }
 
-fun test3(): Int = when {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
+fun case_3(): Int = when {
     else -> 1
 }

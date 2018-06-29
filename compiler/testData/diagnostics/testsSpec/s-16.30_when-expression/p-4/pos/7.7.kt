@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 7
- DESCRIPTION: When with bound value and if expressions in when entry.
+ DESCRIPTION: 'When' with bound value and if expressions in 'when condition'.
  */
 
-fun test1(value: Int?, value1: Int, value2: Boolean): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Int?, value1: Int, value2: Boolean): Int = when (value) {
     if (value1 > 10) {
         1
     } else if (value1 < -10) {
@@ -21,7 +22,8 @@ fun test1(value: Int?, value1: Int, value2: Boolean): Int = when (value) {
     else -> 4
 }
 
-fun test2(value: Int?, value1: Int, value2: Boolean): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Int?, value1: Int, value2: Boolean): Int {
     when (value) {
         if (value1 > 10) {
             1

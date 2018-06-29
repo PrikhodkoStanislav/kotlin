@@ -5,17 +5,19 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 3
- DESCRIPTION: When with bound value and equality expressions in when entry.
+ DESCRIPTION: 'When' with bound value and equality expressions in 'when condition'.
  */
 
-fun test1(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int = when (value) {
+// CASE DESCRIPTION: 'When' with boolean equality expression in 'when condition' and 'else' branch.
+fun case_1(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int = when (value) {
     flag1 == flag2 -> 1
     <!DEPRECATED_IDENTITY_EQUALS!>flag1 === flag2<!> -> 2
     obj1 === obj2 -> 3
     else -> 4
 }
 
-fun test2(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int {
+// CASE DESCRIPTION: 'When' with boolean equality expression in 'when condition'.
+fun case_2(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int {
     when (value) {
         flag1 == flag2 -> return 1
         <!DEPRECATED_IDENTITY_EQUALS!>flag1 === flag2<!> -> return 2
@@ -25,14 +27,27 @@ fun test2(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, ob
     return -1
 }
 
-fun test3(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int = when (value) {
+// CASE DESCRIPTION: 'When' with boolean not equality expression in 'when condition'.
+fun case_3(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int {
+    when (value) {
+        flag1 != flag2 -> return 1
+            <!DEPRECATED_IDENTITY_EQUALS!>flag1 !== flag2<!> -> return 2
+        obj1 !== obj2 -> return 3
+    }
+
+    return -1
+}
+
+// CASE DESCRIPTION: 'When' with boolean not equality expression in 'when condition' and 'else' branch.
+fun case_4(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int = when (value) {
     flag1 != flag2 -> 1
     <!DEPRECATED_IDENTITY_EQUALS!>flag1 !== flag2<!> -> 2
     obj1 !== obj2 -> 3
     else -> 4
 }
 
-fun test4(value: Boolean, value1: Char, value2: String): Int = when (value) {
+// CASE DESCRIPTION: 'When' with Char and String equality expressions in 'when condition'.
+fun case_5(value: Boolean, value1: Char, value2: String): Int = when (value) {
     value1 == '.' -> 1
     <!DEPRECATED_IDENTITY_EQUALS!>value1 !== '-'<!> -> 2
     value2 == "..." -> 3
@@ -44,7 +59,8 @@ fun test4(value: Boolean, value1: Char, value2: String): Int = when (value) {
     else -> 9
 }
 
-fun test5(value: Boolean, value1: Int, value2: Float, value3: Double, value4: Byte, value5: Char, value6: Short, value7: Long): Int = when (value) {
+// CASE DESCRIPTION: 'When' with numbers (and Char as number) equality expressions in 'when condition'.
+fun case_6(value: Boolean, value1: Int, value2: Float, value3: Double, value4: Byte, value5: Char, value6: Short, value7: Long): Int = when (value) {
     value1 == 9921 -> 1
     value1 != 212 -> 1
     <!DEPRECATED_IDENTITY_EQUALS!>value1 !== -1111111<!> -> 1
@@ -88,45 +104,34 @@ fun test5(value: Boolean, value1: Int, value2: Float, value3: Double, value4: By
     <!DEPRECATED_IDENTITY_EQUALS!>902901293L !== 3902901293L<!> -> 1
 }
 
-fun test6(value: Boolean, flag1: Boolean, flag2: Boolean, obj1: List<String>, obj2: List<String>): Int {
-    when (value) {
-        flag1 != flag2 -> return 1
-        <!DEPRECATED_IDENTITY_EQUALS!>flag1 !== flag2<!> -> return 2
-        obj1 !== obj2 -> return 3
-    }
-
-    return -1
-}
-
-fun test7(value: Boolean): Int = when (value) {
+// CASE DESCRIPTION: 'When' as expression with Boolean (literals) equality expressions in 'when condition'.
+fun case_7(value: Boolean): Int = when (value) {
     true || false == false || !false && true -> 1
     false || false != false || !!!!false && true -> 2
 }
 
-fun test8(value: Boolean): Int = when (value) {
-    true || false == false || !false && true -> 1
-    false || false != false || !!!!false && true -> 2
-}
-
-fun test9(value: Boolean): Int = when (value) {
+// CASE DESCRIPTION: 'When' as expression with Boolean (literals) equality expressions in 'when condition' and 'else' branch.
+fun case_8(value: Boolean): Int = when (value) {
     true || false == false || !false && true -> 1
     false || false != false || !!!!false && true -> 2
     <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> 3
 }
 
-fun test10(value: Boolean, value1: Boolean, value2: Boolean): Int = when (value) {
-    value1 == false || !false && true -> 1
-    value2 != false || !!!!false && true -> 2
-    <!DEPRECATED_IDENTITY_EQUALS!>value2 !== !false<!> || !!!false && true -> 2
-    <!DEPRECATED_IDENTITY_EQUALS!>value1 === !!false<!> || !(false && true) -> 2
-    else -> 3
-}
-
-fun test11(value: Boolean): Int {
+// CASE DESCRIPTION: 'When' as statement with Boolean (literals) equality expressions in 'when condition'.
+fun case_9(value: Boolean): Int {
     <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when (value) {
         true || false == false || !false && true -> return 1
         false || false != false || !!!!false && true -> return 2
     }<!>
 
     <!UNREACHABLE_CODE!>return -1<!>
+}
+
+// CASE DESCRIPTION: 'When' as expression with Boolean (variables and literals) equality expressions in 'when condition' and 'else' branch.
+fun case_10(value: Boolean, value1: Boolean, value2: Boolean): Int = when (value) {
+    value1 == false || !false && true -> 1
+    value2 != false || !!!!false && true -> 2
+    <!DEPRECATED_IDENTITY_EQUALS!>value2 !== !false<!> || !!!false && true -> 2
+    <!DEPRECATED_IDENTITY_EQUALS!>value1 === !!false<!> || !(false && true) -> 2
+    else -> 3
 }

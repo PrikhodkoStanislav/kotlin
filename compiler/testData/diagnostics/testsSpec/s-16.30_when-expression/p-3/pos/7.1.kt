@@ -5,10 +5,10 @@
  PARAGRAPH: 3
  SENTENCE 7: The else entry is also special in the sense that it must be the last entry in the expression, otherwise a compiler error must be generated.
  NUMBER: 1
- DESCRIPTION: Simple when without bound value and with else branch in the last position.
+ DESCRIPTION: 'When' without bound value and with else branch in the last position.
  */
 
-fun foo(value: Int): Int {
+fun case_1(value: Int): Int {
     when {
         value == 1 -> return 1
         value == 2 -> return 2

@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 2
- DESCRIPTION: Simple when with bound value and containment operator on the classes with contains operator.
+ DESCRIPTION: 'When' with bound value and containment operator on the classes with contains operator defined.
  */
 
 class A {
@@ -18,19 +18,22 @@ class A {
     }
 }
 
-fun foo1(value: Int, value1: List<IntArray>, value2: A): Int {
+// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined.
+fun case_1(value: Int, value1: List<IntArray>, value2: A, value3: IntRange): Int {
     when (value) {
         in value1[0] -> return 1
         in value1[10] -> return 2
         in listOf(3, 5, 6, 7, 8) -> return 3
         in value2 -> return 4
-        in value2.getIntArray(90000) -> return 5
+        in value3 -> return 5
+        in value2.getIntArray(90000) -> return 6
     }
 
     return -1
 }
 
-fun bar1(value: Int, value1: List<IntArray>, value2: A): Int = when (value) {
+// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined, and 'else' branch.
+fun case_2(value: Int, value1: List<IntArray>, value2: A): Int = when (value) {
     in value1[0] -> 1
     in value1[10] -> 2
     in listOf(3, 5, 6, 7, 8) -> 3
@@ -39,7 +42,8 @@ fun bar1(value: Int, value1: List<IntArray>, value2: A): Int = when (value) {
     else -> 6
 }
 
-fun foo2(value: Int, value1: A): Int {
+// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined.
+fun case_3(value: Int, value1: A): Int {
     when (value) {
         in value1.getIntArray(90000) -> return 1
     }
@@ -47,7 +51,8 @@ fun foo2(value: Int, value1: A): Int {
     return -1
 }
 
-fun bar2(value: Int, value1: A): Int = when (value) {
+// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined, and 'else' branch.
+fun case_4(value: Int, value1: A): Int = when (value) {
     in value1.getIntArray(90000) -> 1
     else -> 2
 }

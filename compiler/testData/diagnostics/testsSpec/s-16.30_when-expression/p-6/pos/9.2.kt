@@ -16,13 +16,8 @@ enum class Anything {
     EVERYTHING
 }
 
-enum class Color(val rgb: Int) {
-    RED(0xFF0000),
-    GREEN(0x00FF00),
-    BLUE(0x0000FF)
-}
-
-fun test1(dir: Direction?): Int = when (dir) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (both enum values and null value covered).
+fun case_1(dir: Direction?): Int = when (dir) {
     Direction.EAST -> 1
     Direction.NORTH -> 2
     Direction.SOUTH -> 3
@@ -30,15 +25,8 @@ fun test1(dir: Direction?): Int = when (dir) {
     null -> 5
 }
 
-fun test2(value: Anything?): Int = when (value) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (single enum value and null value covered).
+fun case_2(value: Anything?): Int = when (value) {
     Anything.EVERYTHING -> 1
     null -> 2
-}
-
-fun test3(value: Color?): Int = when (value) {
-    Color.valueOf("0xFF0000") -> 1
-    Color.valueOf("0x00FF00") -> 2
-    Color.valueOf("0x0000FF") -> 3
-    null -> 4
-    else -> 5
 }

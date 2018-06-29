@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 1
- DESCRIPTION: When with bound value and arithmetic expressions in when entry.
+ DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in 'when condition'.
  */
 
 fun getShort(number: Int): Short {
@@ -66,7 +66,49 @@ class A {
     }
 }
 
-fun int1(value: Int, value1: Int, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Short.
+fun case_1(value: Short, value1: Short, value2: A): Int {
+    val value3 = 912.toShort()
+
+    when (value) {
+        2.toShort() -> return 1
+        (2.toShort() + 2.toShort()).toShort() -> return 2
+        (2.toShort() * 6.toShort()).toShort() -> return 3
+        (8.toShort() / 5.toShort()).toShort() -> return 4
+        (8.toShort() % 5.toShort()).toShort() -> return 5
+        (9.toShort() - 1.toShort()).toShort() -> return 6
+        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> return 7
+        Int.MIN_VALUE.inv().toShort() -> return 15
+        Int.MAX_VALUE.hashCode().inv().toShort() -> return 16
+        (value1 * value3).toShort() -> return 17
+        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> return 18
+    }
+
+    return -1
+}
+
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Short, and 'else' branch.
+fun case_2(value: Short, value1: Short, value2: A): Int {
+    val value3 = 912.toShort()
+
+    return when (value) {
+        2.toShort() -> 1
+        (2.toShort() + 2.toShort()).toShort() -> 2
+        (2.toShort() * 6.toShort()).toShort() -> 3
+        (8.toShort() / 5.toShort()).toShort() -> 4
+        (8.toShort() % 5.toShort()).toShort() -> 5
+        (9.toShort() - 1.toShort()).toShort() -> 6
+        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> 7
+        Int.MIN_VALUE.inv().toShort() -> 15
+        Int.MAX_VALUE.hashCode().inv().toShort() -> 16
+        (value1 * value3).toShort() -> 17
+        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> 18
+        else -> 19
+    }
+}
+
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Int.
+fun case_3(value: Int, value1: Int, value2: A): Int {
     val value3 = 912
 
     when (value) {
@@ -93,7 +135,8 @@ fun int1(value: Int, value1: Int, value2: A): Int {
     return -1
 }
 
-fun int2(value: Int, value1: Int, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Int, and 'else' branch.
+fun case_4(value: Int, value1: Int, value2: A): Int {
     val value3 = 912
 
     return when (value) {
@@ -119,7 +162,8 @@ fun int2(value: Int, value1: Int, value2: A): Int {
     }
 }
 
-fun float1(value: Float, value1: Float, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Float.
+fun case_5(value: Float, value1: Float, value2: A): Int {
     val value3 = 912.113f
 
     when (value) {
@@ -137,7 +181,8 @@ fun float1(value: Float, value1: Float, value2: A): Int {
     return -1
 }
 
-fun float2(value: Float, value1: Float, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Float, and 'else' branch.
+fun case_6(value: Float, value1: Float, value2: A): Int {
     val value3 = 912.113f
 
     return when (value) {
@@ -154,7 +199,8 @@ fun float2(value: Float, value1: Float, value2: A): Int {
     }
 }
 
-fun double1(value: Double, value1: Double, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Double.
+fun case_7(value: Double, value1: Double, value2: A): Int {
     val value3 = 912.113
 
     when (value) {
@@ -172,7 +218,8 @@ fun double1(value: Double, value1: Double, value2: A): Int {
     return -1
 }
 
-fun double2(value: Double, value1: Double, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Double, and 'else' branch.
+fun case_8(value: Double, value1: Double, value2: A): Int {
     val value3 = 912.113
 
     return when (value) {
@@ -189,46 +236,8 @@ fun double2(value: Double, value1: Double, value2: A): Int {
     }
 }
 
-fun short1(value: Short, value1: Short, value2: A): Int {
-    val value3 = 912.toShort()
-
-    when (value) {
-        2.toShort() -> return 1
-        (2.toShort() + 2.toShort()).toShort() -> return 2
-        (2.toShort() * 6.toShort()).toShort() -> return 3
-        (8.toShort() / 5.toShort()).toShort() -> return 4
-        (8.toShort() % 5.toShort()).toShort() -> return 5
-        (9.toShort() - 1.toShort()).toShort() -> return 6
-        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> return 7
-        Int.MIN_VALUE.inv().toShort() -> return 15
-        Int.MAX_VALUE.hashCode().inv().toShort() -> return 16
-        (value1 * value3).toShort() -> return 17
-        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> return 18
-    }
-
-    return -1
-}
-
-fun short2(value: Short, value1: Short, value2: A): Int {
-    val value3 = 912.toShort()
-
-    return when (value) {
-        2.toShort() -> 1
-        (2.toShort() + 2.toShort()).toShort() -> 2
-        (2.toShort() * 6.toShort()).toShort() -> 3
-        (8.toShort() / 5.toShort()).toShort() -> 4
-        (8.toShort() % 5.toShort()).toShort() -> 5
-        (9.toShort() - 1.toShort()).toShort() -> 6
-        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> 7
-        Int.MIN_VALUE.inv().toShort() -> 15
-        Int.MAX_VALUE.hashCode().inv().toShort() -> 16
-        (value1 * value3).toShort() -> 17
-        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> 18
-        else -> 19
-    }
-}
-
-fun byte1(value: Byte, value1: Byte, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Byte.
+fun case_9(value: Byte, value1: Byte, value2: A): Int {
     val value3 = 912.toByte()
 
     when (value) {
@@ -248,7 +257,8 @@ fun byte1(value: Byte, value1: Byte, value2: A): Int {
     return -1
 }
 
-fun byte2(value: Byte, value1: Byte, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Byte, and 'else' branch.
+fun case_10(value: Byte, value1: Byte, value2: A): Int {
     val value3 = 912.toByte()
 
     return when (value) {
@@ -267,7 +277,8 @@ fun byte2(value: Byte, value1: Byte, value2: A): Int {
     }
 }
 
-fun char1(value: Char): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Char.
+fun case_11(value: Char): Int {
     when (value) {
         2.toChar() -> return 1
         2.toChar() + 2 -> return 2
@@ -279,7 +290,8 @@ fun char1(value: Char): Int {
     return -1
 }
 
-fun char2(value: Char): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Char, and 'else' branch.
+fun case_12(value: Char): Int = when (value) {
     2.toChar() -> 1
     2.toChar() + 23 -> 2
     8.toChar() - 12 -> 6
@@ -288,7 +300,8 @@ fun char2(value: Char): Int = when (value) {
     else -> 19
 }
 
-fun long1(value: Long, value1: Long, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long.
+fun case_13(value: Long, value1: Long, value2: A): Int {
     val value3: Long = 34939942345L
 
     when (value) {
@@ -314,7 +327,8 @@ fun long1(value: Long, value1: Long, value2: A): Int {
     return -1
 }
 
-fun long2(value: Long, value1: Long, value2: A): Int {
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long, and 'else' branch.
+fun case_14(value: Long, value1: Long, value2: A): Int {
     val value3: Long = 34939942345L
 
     return when (value) {

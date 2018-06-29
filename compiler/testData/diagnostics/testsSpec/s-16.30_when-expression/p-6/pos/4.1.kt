@@ -8,12 +8,14 @@
  DESCRIPTION: Check when exhaustive via boolean bound value and evaluating to value true and false.
  */
 
-fun test1(value: Boolean): Int = when(value) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value covered).
+fun case_1(value: Boolean): Int = when(value) {
     true -> 1
     false -> 2
 }
 
-fun test2(value: Boolean): Int = when(value) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value as complex expression covered).
+fun case_2(value: Boolean): Int = when(value) {
     true && false && ((true || false)) || true && !!!false && !!!true -> 1
     true && false && ((true || false)) || true && !!!false -> 2
 }

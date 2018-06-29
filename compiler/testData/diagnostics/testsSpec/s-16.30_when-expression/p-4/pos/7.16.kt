@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 16
- DESCRIPTION: When with bound value and property access expressions in when entry.
+ DESCRIPTION: 'When' with bound value and property access expressions in 'when condition'.
  */
 
 class A {
@@ -17,7 +17,8 @@ class A {
     }
 }
 
-fun test1(value: Int?, value1: A, value2: A?): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Int?, value1: A, value2: A?): Int = when (value) {
     value1.prop1 -> 1
     value2?.prop2 -> 2
     value2!!::prop2.get() -> 3
@@ -27,7 +28,8 @@ fun test1(value: Int?, value1: A, value2: A?): Int = when (value) {
     else -> 9
 }
 
-fun test2(value: Int?, value1: A, value2: A?): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Int?, value1: A, value2: A?): Int {
     when (value) {
         value1.prop1 -> return 1
         value2?.prop2 -> return 2

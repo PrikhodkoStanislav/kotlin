@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 3: Type test condition: type checking operator followed by type.
  NUMBER: 1
- DESCRIPTION: Simple when with bound value and type test condition.
+ DESCRIPTION: 'When' with bound value and type test condition.
  */
 
-fun test1(value: Any): Int {
+// CASE DESCRIPTION: 'When' with type test condition on the various basic types.
+fun case_1(value: Any): Int {
     when (value) {
         is Int -> return 1
         is Float -> return 2
@@ -21,7 +22,8 @@ fun test1(value: Any): Int {
     return -1
 }
 
-fun test2(value: Any): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various basic types.
+fun case_2(value: Any): Int = when (value) {
     is Int -> 1
     is Float -> 2
     is Double -> 3
@@ -31,12 +33,14 @@ fun test2(value: Any): Int = when (value) {
     else -> 7
 }
 
-fun test3(value: Any): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the one basic types (Int).
+fun case_3(value: Any): Int = when (value) {
     is Int -> 1
     else -> 7
 }
 
-fun test4(value: Any): Int {
+// CASE DESCRIPTION: 'When' with type test condition on the one basic types (Int).
+fun case_4(value: Any): Int {
     when (value) {
         is Int -> return 1
     }
@@ -44,17 +48,20 @@ fun test4(value: Any): Int {
     return -1
 }
 
-fun test5(value: Any): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Any.
+fun case_5(value: Any): Int = when (value) {
     <!USELESS_IS_CHECK!>is Any<!> -> 1
     else -> 2
 }
 
-fun test6(value: Any): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Nothing.
+fun case_6(value: Any): Int = when (value) {
     is Nothing -> 1
     else -> 2
 }
 
-fun test7(value: Any): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Unit.
+fun case_7(value: Any): Int = when (value) {
     is Unit -> 1
     else -> 2
 }

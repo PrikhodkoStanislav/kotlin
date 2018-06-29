@@ -10,14 +10,17 @@
  DESCRIPTION: Checking for not exhaustive when when contains by all Boolean values, bot no null check (or with no null check, but not contains by all Boolean values).
  */
 
-fun test1(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Boolean without null-check branch.
+fun case_1(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     true -> 1
     false -> 2
 }
 
-fun test2(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Boolean with null-check branch, but all possible values not covered.
+fun case_2(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     true -> 1
     null -> 2
 }
 
-fun test3(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Boolean without branches.
+fun case_3(value: Boolean?): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }

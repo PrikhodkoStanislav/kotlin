@@ -5,10 +5,10 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 22
- DESCRIPTION: When with return expression in the control structure bodies.
+ DESCRIPTION: 'When' with return expression in the control structure body.
  */
 
-fun foo(value: Int): Int {
+fun case_1(value: Int): Int {
     when {
         value == 1 -> return 1
         value == 2 -> (return 2)

@@ -5,10 +5,10 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 8
- DESCRIPTION: When with try expression in the control structure bodies.
+ DESCRIPTION: 'When' with try expression in the control structure body.
  */
 
-fun foo(value: Int, value1: String, value2: String) {
+fun case_1(value: Int, value1: String, value2: String) {
     when {
         value == 1 -> try {
             <!UNUSED_EXPRESSION!>4<!>

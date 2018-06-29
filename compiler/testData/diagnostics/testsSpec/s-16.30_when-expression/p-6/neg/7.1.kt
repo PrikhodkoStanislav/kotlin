@@ -22,18 +22,22 @@ data class Const2(val number: Int) : Expr2()
 sealed class Expr3
 object A2: Expr3() {}
 
-fun test1(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking and equality with object).
+fun case_1(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Const -> 1
     is Sum -> 2
     A -> 3
 }
 
-fun test2(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking).
+fun case_2(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Const -> 1
     is Sum -> 2
     is Mul -> 2
 }
 
-fun test3(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class with several subtypes (no branches).
+fun case_3(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
 
-fun test4(value: Expr3): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class with one subtype (no branches).
+fun case_4(value: Expr3): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }

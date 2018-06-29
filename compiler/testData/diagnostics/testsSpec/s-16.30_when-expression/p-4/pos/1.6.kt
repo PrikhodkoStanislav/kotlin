@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 6
- DESCRIPTION: When with when expression (exhaustive) in the control structure bodies.
+ DESCRIPTION: 'When' with exhaustive when expression in the control structure body.
  */
 
 enum class Direction {
@@ -17,7 +17,7 @@ data class Const(val number: Int) : Expr()
 data class Sum(val e1: Int, val e2: Int) : Expr()
 data class Mul(val m1: Int, val m2: Int) : Expr()
 
-fun foo(value: Int, value1: Int, value2: Boolean?, value3: Direction?, value4: Expr?) {
+fun case_1(value: Int, value1: Int, value2: Boolean?, value3: Direction?, value4: Expr?) {
     when(value) {
         1 -> when {
             value1 > 1000 -> <!UNUSED_EXPRESSION!>"1"<!>

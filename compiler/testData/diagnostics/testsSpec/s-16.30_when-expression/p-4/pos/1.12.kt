@@ -5,10 +5,10 @@
  PARAGRAPH: 4
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 12
- DESCRIPTION: When with prefix operator expression in the control structure bodies.
+ DESCRIPTION: 'When' with prefix operator expression in the control structure body.
  */
 
-fun foo(value: Int, value1: Int, value2: Int, value3: Boolean) {
+fun case_1(value: Int, value1: Int, value2: Int, value3: Boolean) {
     var mutableValue1 = value1
     var mutableValue2 = value2
 

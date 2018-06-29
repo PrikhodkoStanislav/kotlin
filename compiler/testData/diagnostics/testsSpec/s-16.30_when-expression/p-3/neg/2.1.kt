@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 1
- DESCRIPTION: When with not boolean condition in when entry
+ DESCRIPTION: 'When' with not boolean condition in 'when entry'
  */
 
 fun getInt(number: Int): Int {
@@ -98,8 +98,8 @@ class A {
     }
 }
 
-// numbers in when entry
-fun test1(
+// CASE DESCRIPTION: 'When' with numbers (Int, Short, Byte, Long, Float, Double) and Char (used as a number) in 'when entry'.
+fun case_1(
     value1: Int,
     value2: Int,
     value3: Short,
@@ -141,8 +141,8 @@ fun test1(
     return -1
 }
 
-// strings and chars in when entry
-fun test2(value1: String, value2: Char, value3: A): Int {
+// CASE DESCRIPTION: 'When' with String and Char in 'when entry'.
+fun case_2(value1: String, value2: Char, value3: A): Int {
     when {
         <!TYPE_MISMATCH!>""<!> -> return 1
         <!CONSTANT_EXPECTED_TYPE_MISMATCH!>'-'<!> -> return 2
@@ -159,8 +159,8 @@ fun test2(value1: String, value2: Char, value3: A): Int {
     return -1
 }
 
-// Nothing in when entry
-fun test3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): Int {
+// CASE DESCRIPTION: 'When' with Nothing in 'when entry'.
+fun case_3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): Int {
     when {
         value1 -> <!UNREACHABLE_CODE!>return 1<!>
         <!UNREACHABLE_CODE!>value2.getNothing() -> return 2<!>
@@ -171,8 +171,8 @@ fun test3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): Int {
     <!UNREACHABLE_CODE!>return -1<!>
 }
 
-// Unit in when entry
-fun test4(value1: Unit, value2: A): Int {
+// CASE DESCRIPTION: 'When' with Unit in 'when entry'.
+fun case_4(value1: Unit, value2: A): Int {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return 1
         <!TYPE_MISMATCH!>value2.getUnit()<!> -> return 2
@@ -184,8 +184,8 @@ fun test4(value1: Unit, value2: A): Int {
     return -1
 }
 
-// Any in when entry
-fun test5(value1: Any, value2: A): Int {
+// CASE DESCRIPTION: 'When' with Any in 'when entry'.
+fun case_5(value1: Any, value2: A): Int {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return 1
         <!TYPE_MISMATCH!>value2.getAny()<!> -> return 2
@@ -195,8 +195,8 @@ fun test5(value1: Any, value2: A): Int {
     return -1
 }
 
-// Collection in when entry
-fun test5(value1: List<Int>, value2: A): Int {
+// CASE DESCRIPTION: 'When' with List (Collection example) in 'when entry'.
+fun case_6(value1: List<Int>, value2: A): Int {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return 1
         <!TYPE_MISMATCH!>value2.getList()<!> -> return 2

@@ -5,17 +5,20 @@
  PARAGRAPH: 2
  SENTENCE 3: When expression has two different forms: with bound value and without it.
  NUMBER: 2
- DESCRIPTION: Simple (empty) when with missed when entries section.
+ DESCRIPTION: Empty 'when' with missed 'when entries' section.
  */
 
-fun test1(value: Int) {
+// CASE DESCRIPTION: 'when' with bound value.
+fun case_1(value: Int) {
     when (<!UNUSED_EXPRESSION!>value<!>)<!SYNTAX!><!>
 }
 
-fun test2() {
+// CASE DESCRIPTION: 'when' without bound value, but with parentheses.
+fun case_2() {
     when (<!SYNTAX!><!>)<!SYNTAX!><!>
 }
 
-fun test3() {
+// CASE DESCRIPTION: 'when' without bound and parentheses.
+fun case_3() {
     when<!SYNTAX!><!>
 }

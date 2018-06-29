@@ -5,11 +5,11 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 17
- DESCRIPTION: When with fun literal in the control structure bodies.
+ DESCRIPTION: 'When' with fun literal in the control structure body.
  */
 
-fun foo(value: Int) {
-    val fun1 = fun(): Int {
+fun case_1(value: Int) {
+    val fun_1 = fun(): Int {
         return 0
     }
 
@@ -20,7 +20,7 @@ fun foo(value: Int) {
                 else -> true
             }
         }<!>
-        value == 3 -> <!UNUSED_EXPRESSION!>fun1<!>
+        value == 3 -> <!UNUSED_EXPRESSION!>fun_1<!>
         value == 4 -> {
             <!UNUSED_EXPRESSION!>fun() {<!UNUSED_EXPRESSION!>fun() {<!UNUSED_EXPRESSION!>fun() {}<!>}<!>}<!>
         }

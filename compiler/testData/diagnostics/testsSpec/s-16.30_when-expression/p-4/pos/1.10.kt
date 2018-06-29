@@ -5,10 +5,10 @@
  PARAGRAPH: 4
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 10
- DESCRIPTION: When with range expression in the control structure bodies.
+ DESCRIPTION: 'When' with range expression in the control structure body.
  */
 
-fun foo(value: Int, value1: Int?, value2: Int) {
+fun case_1(value: Int, value1: Int?, value2: Int) {
     when(value) {
         1 -> 1..10
         2 -> 1..1

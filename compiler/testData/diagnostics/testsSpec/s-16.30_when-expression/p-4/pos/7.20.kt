@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 20
- DESCRIPTION: When with bound value and this expression in when entry.
+ DESCRIPTION: 'When' with bound value and this expression in 'when condition'.
  */
 
 open class A {
@@ -16,7 +16,8 @@ open class A {
         return 1
     }
 
-    fun test1(value: Any?): Int = when (value) {
+    // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+    fun case_1(value: Any?): Int = when (value) {
         this -> 1
         ((this)) -> 2
         this::prop1.get() -> 3
@@ -28,7 +29,8 @@ open class A {
         else -> 9
     }
 
-    fun test2(value: Any?): Int {
+    // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+    fun case_2(value: Any?): Int {
         when (value) {
             this -> return 1
             ((this)) -> return 2

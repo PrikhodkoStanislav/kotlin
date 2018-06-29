@@ -1,15 +1,14 @@
 package
 
-public fun test1(/*0*/ value: Expr): kotlin.Int
-public fun test10(/*0*/ value: Expr2?): kotlin.Int
-public fun test2(/*0*/ value: Expr?): kotlin.Int
-public fun test3(/*0*/ value: Expr): kotlin.Int
-public fun test4(/*0*/ value: Expr?): kotlin.Int
-public fun test5(/*0*/ value: Expr2): kotlin.Int
-public fun test6(/*0*/ value: Expr2?): kotlin.Int
-public fun test7(/*0*/ value: Expr2): kotlin.Int
-public fun test8(/*0*/ value: Expr2?): kotlin.Int
-public fun test9(/*0*/ value: Expr2): kotlin.Int
+public fun case_1(/*0*/ value: Expr): kotlin.Int
+public fun case_2(/*0*/ value: Expr?): kotlin.Int
+public fun case_3(/*0*/ value: Expr): kotlin.Int
+public fun case_4(/*0*/ value: Expr?): kotlin.Int
+public fun case_5(/*0*/ value: Expr2): kotlin.Int
+public fun case_6(/*0*/ value: Expr2?): kotlin.Int
+public fun case_7(/*0*/ value: Expr2): kotlin.Int
+public fun case_8(/*0*/ value: Expr2?): kotlin.Int
+public fun case_9(/*0*/ value: Expr2): kotlin.Int
 
 public open class A {
     public constructor A()

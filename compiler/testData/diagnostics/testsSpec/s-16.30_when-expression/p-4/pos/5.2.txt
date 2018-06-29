@@ -1,9 +1,9 @@
 package
 
-public fun bar1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A): kotlin.Int
-public fun bar2(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
-public fun foo1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A): kotlin.Int
-public fun foo2(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
+public fun case_1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A, /*3*/ value3: kotlin.ranges.IntRange): kotlin.Int
+public fun case_2(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.collections.List<kotlin.IntArray>, /*2*/ value2: A): kotlin.Int
+public fun case_3(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
+public fun case_4(/*0*/ value: kotlin.Int, /*1*/ value1: A): kotlin.Int
 
 public final class A {
     public constructor A()

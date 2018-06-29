@@ -5,14 +5,16 @@
  PARAGRAPH: 3
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 5
- DESCRIPTION: Simple when without bound value and only one else branch.
+ DESCRIPTION: 'When' without bound value and only one 'else' branch.
  */
 
-fun test1(): Int = when {
+// CASE DESCRIPTION: 'When' with only one 'else' branch ('when' used as expression).
+fun case_1(): Int = when {
     else -> 1
 }
 
-fun test2(): Int {
+// CASE DESCRIPTION: 'When' with only one 'else' branch ('when' used as statement).
+fun case_2(): Int {
     when {
         else -> {return 1}
     }

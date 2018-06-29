@@ -35,26 +35,30 @@ object Const1O : Expr3()
 object Sum1O : Expr3()
 object Mul1O : Expr3()
 
-fun test1(expr: Expr1?): Int = when (expr) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (all sealed class subtypes and null value covered).
+fun case_1(expr: Expr1?): Int = when (expr) {
     is Const1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.number
     is Sum1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.e1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.e2
     is Mul1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.m2
     null -> 1
 }
 
-fun test2(expr: Expr1?): Int = when (expr) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (sealed class itself and null value covered).
+fun case_2(expr: Expr1?): Int = when (expr) {
     is Expr1 -> 1
     null -> 2
 }
 
-fun test4(expr: Expr2?): Int = when (expr) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (all sealed class with methods subtypes and null value covered).
+fun case_3(expr: Expr2?): Int = when (expr) {
     is Const2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1()
     is Sum2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m2()
     is Mul2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m3()
     null -> 1
 }
 
-fun test5(expr: Expr3?): Int = when (expr) {
+// CASE DESCRIPTION: Checking for exhaustive in 'when' (all objects covered using implicit equality operator and null value covered).
+fun case_4(expr: Expr3?): Int = when (expr) {
     Const1O -> 1
     Sum1O -> 2
     Mul1O -> 3

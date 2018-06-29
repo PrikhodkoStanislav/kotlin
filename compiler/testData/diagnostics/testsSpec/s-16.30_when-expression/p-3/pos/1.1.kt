@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 1
- DESCRIPTION: When with different variants of the arithmetic expressions in the control structure bodies.
+ DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in the control structure body.
  */
 
 fun getInt(number: Int): Int {
@@ -66,7 +66,8 @@ class A {
     }
 }
 
-fun short(value: Int, value1: Short, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Short.
+fun case_1(value: Int, value1: Short, value2: A) {
     val value3: Short = 32767
     val value4: Short = -32768
 
@@ -85,7 +86,8 @@ fun short(value: Int, value1: Short, value2: A) {
     }
 }
 
-fun int(value: Int, value1: Int, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Int.
+fun case_2(value: Int, value1: Int, value2: A) {
     val value3 = 912
     val value4 = 124901924904
 
@@ -111,7 +113,8 @@ fun int(value: Int, value1: Int, value2: A) {
     }
 }
 
-fun long(value: Int, value1: Long, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Long.
+fun case_3(value: Int, value1: Long, value2: A) {
     val value3 = 9L
     val value4 = 124909249042341234L
 
@@ -130,7 +133,8 @@ fun long(value: Int, value1: Long, value2: A) {
     }
 }
 
-fun float(value: Int, value1: Float, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Float.
+fun case_4(value: Int, value1: Float, value2: A) {
     val value3 = 912.2134F
     val value4 = -124901924904.991242f
 
@@ -149,7 +153,8 @@ fun float(value: Int, value1: Float, value2: A) {
     }
 }
 
-fun double(value: Int, value1: Double, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Double.
+fun case_5(value: Int, value1: Double, value2: A) {
     val value3 = 912.2134
     val value4 = -124901924904.99124212
 
@@ -168,7 +173,8 @@ fun double(value: Int, value1: Double, value2: A) {
     }
 }
 
-fun byte(value: Int, value1: Byte, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Byte.
+fun case_6(value: Int, value1: Byte, value2: A) {
     val value3: Byte = -11
     val value4: Byte = 3
     val value5: Byte = 127
@@ -189,7 +195,8 @@ fun byte(value: Int, value1: Byte, value2: A) {
     }
 }
 
-fun char(value: Int, value1: Char, value2: A) {
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression (minus and plus of Integer) with Char.
+fun case_7(value: Int, value1: Char, value2: A) {
     val value3: Char = 11.toChar()
 
     when {

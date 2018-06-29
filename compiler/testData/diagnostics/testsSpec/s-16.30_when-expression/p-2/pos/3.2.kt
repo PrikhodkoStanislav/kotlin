@@ -5,9 +5,9 @@
  PARAGRAPH: 2
  SENTENCE 3: When expression has two different forms: with bound value and without it.
  NUMBER: 2
- DESCRIPTION: Simple (empty) when without bound value.
+ DESCRIPTION: Empty 'when' without bound value.
  */
 
-fun foo() {
+fun case_1() {
     when {}
 }

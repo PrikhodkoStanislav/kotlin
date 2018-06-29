@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 1
- DESCRIPTION: Simple when with bound value and containment operator with range operator.
+ DESCRIPTION: 'When' with bound value and containment operator with range operator.
  */
 
 fun getInt(number: Int): Int {
@@ -18,7 +18,8 @@ class A {
     }
 }
 
-fun test1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
+// CASE DESCRIPTION: 'When' with various integer ranges (not exhaustive).
+fun case_1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
     when (value) {
         in Int.MIN_VALUE..-1000000000000L -> return 1
         in -1000000000000L..0L -> return 2
@@ -34,7 +35,8 @@ fun test1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
     return -1
 }
 
-fun test2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = when (value) {
+// CASE DESCRIPTION: 'When' with various integer ranges and 'else' branch (exhaustive).
+fun case_2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = when (value) {
     in Int.MIN_VALUE..-1000000000000L -> 1
     in -1000000000000L..0L -> 2
     in 1..10.toShort() -> 3
@@ -47,7 +49,8 @@ fun test2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = 
     else -> 10
 }
 
-fun test3(value: Int): Int {
+// CASE DESCRIPTION: 'When' with one integer range (not exhaustive).
+fun case_3(value: Int): Int {
     when (value) {
         in Int.MIN_VALUE..Int.MAX_VALUE -> return 1
     }
@@ -55,12 +58,8 @@ fun test3(value: Int): Int {
     return -1
 }
 
-fun test4(value: Int): Int = when (value) {
-    in Int.MIN_VALUE..Int.MAX_VALUE -> 1
-    else -> 2
-}
-
-fun test5(value: Any?): Int = when (value) {
+// CASE DESCRIPTION: 'When' with one integer range and 'else' branch (exhaustive).
+fun case_4(value: Int): Int = when (value) {
     in Int.MIN_VALUE..Int.MAX_VALUE -> 1
     else -> 2
 }

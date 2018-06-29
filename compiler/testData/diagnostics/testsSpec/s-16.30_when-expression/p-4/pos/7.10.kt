@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 10
- DESCRIPTION: When with bound value and range expressions in when entry.
+ DESCRIPTION: 'When' with bound value and range expressions in 'when condition'.
  */
 
-fun test1(value: Any?, value1: Int, value2: Long): Int = when (value) {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Any?, value1: Int, value2: Long): Int = when (value) {
     -100..-1000 -> 1
     0..0-> 2
     -100..9 -> 3
@@ -20,7 +21,8 @@ fun test1(value: Any?, value1: Int, value2: Long): Int = when (value) {
     else -> 9
 }
 
-fun test2(value: Any?, value1: Int, value2: Long): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Any?, value1: Int, value2: Long): Int {
     when (value) {
         -100..-1000 -> return 1
         0..0-> return 2

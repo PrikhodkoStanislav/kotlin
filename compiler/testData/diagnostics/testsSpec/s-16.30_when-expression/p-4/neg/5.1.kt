@@ -5,10 +5,10 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 1
- DESCRIPTION: When entry with range, but wuthout contains operator.
+ DESCRIPTION: 'When' with bound value and 'when entry' with range exression, but wuthout contains operator.
  */
 
-fun test1(value: Int): Int {
+fun case_1(value: Int): Int {
     when (value) {
         <!INCOMPATIBLE_TYPES!>0..10<!> -> return 1
         <!INCOMPATIBLE_TYPES!>-10..10<!> -> return 2

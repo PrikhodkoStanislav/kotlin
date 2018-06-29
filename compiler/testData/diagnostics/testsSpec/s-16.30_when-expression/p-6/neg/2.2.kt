@@ -10,14 +10,17 @@
  DESCRIPTION: Checking for not exhaustive when with bound value when there is no else branch.
  */
 
-fun test1(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' (several branches).
+fun case_1(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     1 -> 1
     2 -> 2
     3 -> 3
 }
 
-fun test2(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' (one branch).
+fun case_2(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     1 -> 1
 }
 
-fun test3(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
+// CASE DESCRIPTION: Checking for not exhaustive in 'when' (no branches).
+fun case_3(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}

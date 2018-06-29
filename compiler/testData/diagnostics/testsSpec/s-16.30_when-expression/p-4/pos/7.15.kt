@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 15
- DESCRIPTION: When with bound value and call expressions in when entry.
+ DESCRIPTION: 'When' with bound value and call expressions in 'when condition'.
  */
 
 class A {
@@ -19,7 +19,8 @@ class A {
     }
 }
 
-fun test1(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
     fun fun1(): Int {
         return value1[0] + value1[1]
     }
@@ -34,7 +35,8 @@ fun test1(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
     }
 }
 
-fun test2(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
     fun fun1(): Int {
         return value1[0] + value1[1]
     }

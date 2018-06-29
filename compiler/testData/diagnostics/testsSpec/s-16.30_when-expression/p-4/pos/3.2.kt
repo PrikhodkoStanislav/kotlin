@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 3: Type test condition: type checking operator followed by type.
  NUMBER: 2
- DESCRIPTION: Simple when with bound value and type test condition (with sealed classes).
+ DESCRIPTION: 'When' with bound value and type test condition (with sealed class).
  */
 
 sealed class Expr
@@ -13,13 +13,15 @@ data class Const(val number: Int) : Expr()
 data class Sum(val e1: Int, val e2: Int) : Expr()
 data class Mul(val m1: Int, val m2: Int) : Expr()
 
-fun foo1(value: Expr): Int = when (value) {
+// CASE DESCRIPTION: 'When' with type test condition on the all possible subtypes of the sealed class.
+fun case_1(value: Expr): Int = when (value) {
     is Const -> 1
     is Sum -> 2
     is Mul -> 3
 }
 
-fun foo2(value: Expr): Int {
+// CASE DESCRIPTION: 'When' with type test condition on the not all possible subtypes of the sealed class.
+fun case_2(value: Expr): Int {
     <!NON_EXHAUSTIVE_WHEN_ON_SEALED_CLASS!>when<!> (value) {
         is Const -> return 1
         is Sum -> return 2
@@ -28,13 +30,15 @@ fun foo2(value: Expr): Int {
     return -1
 }
 
-fun bar1(value: Expr): Int = when (value) {
+// CASE DESCRIPTION: 'When' with type test condition on the not all possible subtypes of the sealed class and 'else' branch.
+fun case_3(value: Expr): Int = when (value) {
     is Const -> 1
     is Sum -> 2
     else -> 3
 }
 
-fun bar2(value: Expr): Int = when (value) {
+// CASE DESCRIPTION: 'When' with type test condition on the all possible subtypes of the sealed class and 'else' branch (redundant).
+fun case_4(value: Expr): Int = when (value) {
     is Const -> 1
     is Sum -> 2
     is Mul -> 3

@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 18
- DESCRIPTION: When with bound value and lambda literals in when entry.
+ DESCRIPTION: 'When' with bound value and lambda literals in 'when condition'.
  */
 
-fun test1(value: Any?): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Any?): Int {
     val lambda1 = { 0 }
 
     return when (value) {
@@ -24,7 +25,8 @@ fun test1(value: Any?): Int {
     }
 }
 
-fun test2(value: Any?): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Any?): Int {
     val lambda1 = { 0 }
 
     return when (value) {

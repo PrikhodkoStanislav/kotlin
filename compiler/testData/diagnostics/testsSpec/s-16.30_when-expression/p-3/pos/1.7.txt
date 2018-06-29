@@ -1,6 +1,6 @@
 package
 
-public fun foo(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Boolean?, /*3*/ value3: Direction?, /*4*/ value4: Expr?): kotlin.Unit
+public fun case_1(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Boolean?, /*3*/ value3: Direction?, /*4*/ value4: Expr?): kotlin.Unit
 
 public final data class Const : Expr {
     public constructor Const(/*0*/ number: kotlin.Int)

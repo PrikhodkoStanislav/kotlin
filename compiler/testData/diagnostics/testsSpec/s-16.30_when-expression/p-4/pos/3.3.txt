@@ -1,18 +1,17 @@
 package
 
-public fun bar1(/*0*/ value: Expr): kotlin.Int
-public fun bar10(/*0*/ value: kotlin.Any): kotlin.Int
-public fun bar2(/*0*/ value: Expr): kotlin.Int
-public fun bar3(/*0*/ value: Expr): kotlin.Int
-public fun bar4(/*0*/ value: Expr): kotlin.Int
-public fun bar5(/*0*/ value: Expr): kotlin.Int
-public fun bar6(/*0*/ value: Expr): kotlin.Int
-public fun bar7(/*0*/ value: Expr): kotlin.Int
-public fun bar8(/*0*/ value: Expr): kotlin.Int
-public fun bar9(/*0*/ value: kotlin.Any): kotlin.Int
-public fun foo0(/*0*/ value: Expr): kotlin.Int
-public fun foo1(/*0*/ value: Expr): kotlin.Int
-public fun foo2(/*0*/ value: Expr): kotlin.Int
+public fun case_1(/*0*/ value: Expr): kotlin.Int
+public fun case_10(/*0*/ value: Expr): kotlin.Int
+public fun case_11(/*0*/ value: kotlin.Any): kotlin.Int
+public fun case_12(/*0*/ value: kotlin.Any): kotlin.Int
+public fun case_2(/*0*/ value: Expr): kotlin.Int
+public fun case_3(/*0*/ value: Expr): kotlin.Int
+public fun case_4(/*0*/ value: Expr): kotlin.Int
+public fun case_5(/*0*/ value: Expr): kotlin.Int
+public fun case_6(/*0*/ value: Expr): kotlin.Int
+public fun case_7(/*0*/ value: Expr): kotlin.Int
+public fun case_8(/*0*/ value: Expr): kotlin.Int
+public fun case_9(/*0*/ value: Expr): kotlin.Int
 
 public final data class Const : Expr {
     public constructor Const(/*0*/ number: kotlin.Int)

@@ -1,6 +1,6 @@
 package
 
-public fun foo(/*0*/ value: kotlin.Int, /*1*/ value1: A, /*2*/ value2: A?): kotlin.Unit
+public fun case_1(/*0*/ value: kotlin.Int, /*1*/ value1: A, /*2*/ value2: A?): kotlin.Unit
 
 public final class A {
     public constructor A()

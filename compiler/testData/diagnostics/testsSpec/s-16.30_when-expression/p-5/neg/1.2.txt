@@ -1,9 +1,9 @@
 package
 
-public fun test1(/*0*/ value: Direction): kotlin.Int
-public fun test2(/*0*/ value: Direction?): kotlin.Int
-public fun test3(/*0*/ value: Direction): kotlin.Int
-public fun test4(/*0*/ value: Direction?): kotlin.Int
+public fun case_1(/*0*/ value: Direction): kotlin.Int
+public fun case_2(/*0*/ value: Direction?): kotlin.Int
+public fun case_3(/*0*/ value: Direction): kotlin.Int
+public fun case_4(/*0*/ value: Direction?): kotlin.Int
 
 public open class A {
     public constructor A()

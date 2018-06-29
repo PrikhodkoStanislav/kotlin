@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 3
- DESCRIPTION: Simple when without bound value and different variants of the boolean conditions (objects).
+ DESCRIPTION: 'When' without bound value and different variants of the boolean conditions (various objects).
  */
 
 open class A {}
@@ -13,7 +13,8 @@ open class B: A() {}
 open class C: B() {}
 object D {}
 
-fun foo(value1: Any, value2: Any, value3: A, value4: B, value5: C, value6: D, value7: Any, value8: Any, value9: Any): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch.
+fun case_1(value1: Any, value2: Any, value3: A, value4: B, value5: C, value6: D, value7: Any, value8: Any, value9: Any): Int {
     when {
         value1 === value2 -> return 1
         value3 == value2 -> return 2
@@ -28,7 +29,8 @@ fun foo(value1: Any, value2: Any, value3: A, value4: B, value5: C, value6: D, va
     return -1
 }
 
-fun bar(value1: Any, value2: Any, value3: A, value4: B, value5: C, value6: D, value7: Any, value8: Any, value9: Any): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch.
+fun case_2(value1: Any, value2: Any, value3: A, value4: B, value5: C, value6: D, value7: Any, value8: Any, value9: Any): Int {
     return when {
         value1 === value2 -> return 1
         value3 == value2 -> return 2

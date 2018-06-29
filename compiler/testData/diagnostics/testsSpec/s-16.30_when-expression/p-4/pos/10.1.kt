@@ -5,10 +5,10 @@
  PARAGRAPH: 4
  SENTENCE 10: This also means that if this form of when contains a boolean expression, it is not checked directly as if it would be in the other form, but rather checked for equality with the bound variable, which is not the same thing.
  NUMBER: 1
- DESCRIPTION: Simple when with boolean bound value and true/false checks.
+ DESCRIPTION: 'When' with boolean bound value and true/false checks.
  */
 
-fun test1(value: Boolean): Int = when (value) {
+fun case_1(value: Boolean): Int = when (value) {
     true -> 0
     false -> 1
 }

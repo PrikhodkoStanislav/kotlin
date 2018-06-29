@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 3: Type test condition: type checking operator followed by type.
  NUMBER: 3
- DESCRIPTION: When entry with type checking operator and non-type operator value.
+ DESCRIPTION: 'When' with bound value and 'when entry' with type checking operator and non-type value.
  */
 
 object A {}
@@ -16,18 +16,18 @@ class B {
     }
 }
 
-fun test1(value: Any): Int {
+// CASE DESCRIPTION: 'When' with custom object and companion object of class as type checking operator value.
+fun case_1(value: Any): Int {
     when (value) {
         is A -> return 1
         is B.Companion -> return 1
-        is B<!SYNTAX!>::<!><!SYNTAX!><!SYNTAX!><!>class<!><!SYNTAX!><!> <!SYNTAX!><!>-> return 1
-        is <!DUPLICATE_LABEL_IN_WHEN!>B<!><!SYNTAX!>::<!><!SYNTAX!><!SYNTAX!><!>class<!><!SYNTAX!><!SYNTAX!><!>.<!><!EXPRESSION_EXPECTED_PACKAGE_FOUND!>java<!> <!SYNTAX!><!>-> return 1
     }
 
     return -1
 }
 
-fun test2(value: Any, <!UNUSED_PARAMETER!>value1<!>: String, <!UNUSED_PARAMETER!>value2<!>: Any?): Int {
+// CASE DESCRIPTION: 'When' with variables and return value as type checking operator value.
+fun case_2(value: Any, <!UNUSED_PARAMETER!>value1<!>: String, <!UNUSED_PARAMETER!>value2<!>: Any?): Int {
     when (value) {
         is <!UNRESOLVED_REFERENCE!>value1<!> -> return 1
         is <!UNRESOLVED_REFERENCE!>value2<!> -> return 2
@@ -37,7 +37,8 @@ fun test2(value: Any, <!UNUSED_PARAMETER!>value1<!>: String, <!UNUSED_PARAMETER!
     return -1
 }
 
-fun test3(value: Any): Int {
+// CASE DESCRIPTION: 'When' with literals as type checking operator value.
+fun case_3(value: Any): Int {
     when (value) {
         is <!SYNTAX!><!>{} <!SYNTAX!><!>-> return 1
         is <!SYNTAX!><!SYNTAX!><!>fun<!>(<!SYNTAX!><!>) {} <!SYNTAX!><!>-> return 2

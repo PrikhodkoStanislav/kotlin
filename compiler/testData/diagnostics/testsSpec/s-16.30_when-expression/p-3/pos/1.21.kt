@@ -5,16 +5,16 @@
  PARAGRAPH: 3
  SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 21
- DESCRIPTION: When with throw expression in the control structure bodies.
+ DESCRIPTION: 'When' with throw expression in the control structure body.
  */
 
-fun foo(value: Int) {
-    val lambda1 = {
+fun case_1(value: Int) {
+    val lambda_1 = {
         throw Exception("Ex")
     }
 
     when {
-        value == 1 -> lambda1()
+        value == 1 -> lambda_1()
         value == 2 -> throw Exception("Ex")
         value == 3 -> {
             try {

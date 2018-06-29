@@ -7,7 +7,7 @@
  PARAGRAPH: 5
  SENTENCE 1: The type of the resulting expression is the least upper bound of the types of all the entries.
  NUMBER: 1
- DESCRIPTION: When least upper bound of the types check (when exhaustive via else branch).
+ DESCRIPTION: 'When' least upper bound of the types check (when exhaustive via else branch).
  */
 
 open class A {}
@@ -16,7 +16,8 @@ open class C: B() {}
 open class D: C() {}
 class E: D() {}
 
-fun test1(value: Int): Int {
+// CASE DESCRIPTION: Checking correctness type (custom types) in 'when' without bound value.
+fun case_1(value: Int): Int {
     val whenValue = when {
         value == 0 -> B()
         value > 0 && value <= 10 -> C()
@@ -30,7 +31,8 @@ fun test1(value: Int): Int {
     return -1
 }
 
-fun test2(value: Int): Int {
+// CASE DESCRIPTION: Checking correctness type (custom types) in 'when' with bound value.
+fun case_2(value: Int): Int {
     val whenValue = when(value) {
         0 -> B()
         1 -> C()
@@ -44,7 +46,8 @@ fun test2(value: Int): Int {
     return -1
 }
 
-fun test3(value: Int): Int {
+// CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' without bound value.
+fun case_3(value: Int): Int {
     val whenValue = when {
         value == 0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         value > 0 && value <= 10 -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -58,7 +61,8 @@ fun test3(value: Int): Int {
     return -1
 }
 
-fun test4(value: Int): Int {
+// CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with bound value.
+fun case_4(value: Int): Int {
     val whenValue = when(value) {
         0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         1 -> <!IMPLICIT_CAST_TO_ANY!>""<!>

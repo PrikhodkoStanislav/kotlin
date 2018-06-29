@@ -1,8 +1,8 @@
 package
 
-public fun test1(/*0*/ value: kotlin.Any): kotlin.Int
-public fun test2(/*0*/ value: kotlin.Any, /*1*/ value1: kotlin.String, /*2*/ value2: kotlin.Any?): kotlin.Int
-public fun test3(/*0*/ value: kotlin.Any): kotlin.Int
+public fun case_1(/*0*/ value: kotlin.Any): kotlin.Int
+public fun case_2(/*0*/ value: kotlin.Any, /*1*/ value1: kotlin.String, /*2*/ value2: kotlin.Any?): kotlin.Int
+public fun case_3(/*0*/ value: kotlin.Any): kotlin.Int
 
 public object A {
     private constructor A()

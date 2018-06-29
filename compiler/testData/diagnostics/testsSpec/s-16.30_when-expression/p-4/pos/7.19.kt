@@ -5,10 +5,11 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 19
- DESCRIPTION: When with bound value and object literals in when entry.
+ DESCRIPTION: 'When' with bound value and object literals in 'when condition'.
  */
 
-fun test1(value: Any?): Int {
+// CASE DESCRIPTION: 'When' with 'else' branch (as expression).
+fun case_1(value: Any?): Int {
     val object1 = object {
         val prop1 = 1
     }
@@ -33,7 +34,8 @@ fun test1(value: Any?): Int {
     }
 }
 
-fun test2(value: Any?): Int {
+// CASE DESCRIPTION: 'When' without 'else' branch (as statement).
+fun case_2(value: Any?): Int {
     val object1 = object {
         val prop1 = 1
     }
@@ -54,7 +56,6 @@ fun test2(value: Any?): Int {
             val prop1 = 1
         } -> <!UNUSED_EXPRESSION!>3<!>
         object1 -> return 4
-        else -> return 5
     }
 
     return -1

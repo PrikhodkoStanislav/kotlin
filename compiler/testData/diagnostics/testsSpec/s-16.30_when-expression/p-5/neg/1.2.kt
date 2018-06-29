@@ -7,7 +7,7 @@
  PARAGRAPH: 5
  SENTENCE 1: The type of the resulting expression is the least upper bound of the types of all the entries.
  NUMBER: 2
- DESCRIPTION: When least upper bound of the types check (when exhaustive via enum).
+ DESCRIPTION: 'When' least upper bound of the types check (when exhaustive via enum).
  */
 
 enum class Direction {
@@ -21,7 +21,8 @@ open class D: C() {}
 open class E: D() {}
 class F: E() {}
 
-fun test1(value: Direction): Int {
+// CASE DESCRIPTION: Checking all types except the correct one in 'when'.
+fun case_1(value: Direction): Int {
     val whenValue = when(value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
@@ -40,7 +41,8 @@ fun test1(value: Direction): Int {
     return -1
 }
 
-fun test2(value: Direction?): Int {
+// CASE DESCRIPTION: Checking all types except the correct one in 'when' with null-check branch.
+fun case_2(value: Direction?): Int {
     val whenValue = when(value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
@@ -62,7 +64,8 @@ fun test2(value: Direction?): Int {
     return -1
 }
 
-fun test3(value: Direction): Int {
+// CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when'.
+fun case_3(value: Direction): Int {
     val whenValue = when(value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -80,7 +83,8 @@ fun test3(value: Direction): Int {
     return -1
 }
 
-fun test4(value: Direction?): Int {
+// CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when' with null-check branch.
+fun case_4(value: Direction?): Int {
     val whenValue = when(value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>

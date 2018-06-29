@@ -1,11 +1,11 @@
 package
 
-public fun test1(/*0*/ value: Expr?): kotlin.Int
-public fun test2(/*0*/ value: Expr?): kotlin.Int
-public fun test3(/*0*/ value: Expr?): kotlin.Int
-public fun test4(/*0*/ value: Expr?): kotlin.Int
-public fun test5(/*0*/ value: Expr?): kotlin.Int
-public fun test6(/*0*/ value: Expr?): kotlin.Int
+public fun case_1(/*0*/ value: Expr?): kotlin.Int
+public fun case_2(/*0*/ value: Expr?): kotlin.Int
+public fun case_3(/*0*/ value: Expr?): kotlin.Int
+public fun case_4(/*0*/ value: Expr?): kotlin.Int
+public fun case_5(/*0*/ value: Expr?): kotlin.Int
+public fun case_6(/*0*/ value: Expr?): kotlin.Int
 
 public object A : Expr {
     private constructor A()
