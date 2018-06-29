@@ -34,7 +34,7 @@ fun test3(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Mul -> 3
 }
 
-fun test4(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {}
+fun test4(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
 
 fun test5(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Const -> 1

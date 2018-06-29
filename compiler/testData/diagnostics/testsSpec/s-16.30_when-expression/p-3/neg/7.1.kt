@@ -20,9 +20,9 @@ fun test2(<!UNUSED_PARAMETER!>value<!>: Int): Int = when {
 }
 
 fun test3(value: Int): Int = when {
-    value == 1 -> return 1
-        <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 2
-        <!UNREACHABLE_CODE!>value == 2 -> 3<!>
+    value == 1 -> 1
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 2
+    <!UNREACHABLE_CODE!>value == 2 -> 3<!>
 }
 
 fun test4(): Int {

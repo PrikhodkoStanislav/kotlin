@@ -28,6 +28,6 @@ fun test2(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     Direction.EAST -> 1
 }
 
-fun test3(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) { }
+fun test3(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
 
 fun test4(value: Anything): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }

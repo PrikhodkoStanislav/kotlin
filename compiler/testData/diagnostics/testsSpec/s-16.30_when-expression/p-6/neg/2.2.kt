@@ -20,4 +20,4 @@ fun test2(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     1 -> 1
 }
 
-fun test3(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {}
+fun test3(value: Int): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
