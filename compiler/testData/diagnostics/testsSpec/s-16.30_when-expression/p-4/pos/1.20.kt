@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -18,9 +20,9 @@ class A {
     }
 
     fun case_1(value: Int) {
-        when(value) {
-            1 -> <!UNUSED_EXPRESSION!>this<!>
-            2 -> ((<!UNUSED_EXPRESSION!>this<!>))
+        when (value) {
+            1 -> this
+            2 -> ((this))
             3 -> this::prop_1.get()
             4 -> this.prop_1
             5 -> this.lambda_1()

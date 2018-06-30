@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -9,7 +11,7 @@
  */
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (several branches).
-fun case_1(value: Int): String = when(value) {
+fun case_1(value: Int): String = when (value) {
     0 -> ""
     1 -> ""
     2 -> ""
@@ -18,7 +20,7 @@ fun case_1(value: Int): String = when(value) {
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
-fun case_2(value: Boolean): String = when(value) {
+fun case_2(value: Boolean): String = when (value) {
     true -> ""
     else -> ""
 }
@@ -30,6 +32,6 @@ fun case_3(): String = when (true) {
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
-fun case_4(value: Int): String = when(<!UNUSED_EXPRESSION!>value<!>) {
+fun case_4(value: Int): String = when(value) {
     else -> ""
 }

@@ -23,7 +23,7 @@ class F: E() {}
 
 // CASE DESCRIPTION: Checking correct type in 'when'.
 fun case_1(value: Direction): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
         Direction.SOUTH -> D()
@@ -38,7 +38,7 @@ fun case_1(value: Direction): String {
 
 // CASE DESCRIPTION: Checking correct type in 'when' with null-check branch.
 fun case_2(value: Direction?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
         Direction.SOUTH -> D()
@@ -54,7 +54,7 @@ fun case_2(value: Direction?): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when'.
 fun case_3(value: Direction): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         Direction.SOUTH -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}
@@ -69,7 +69,7 @@ fun case_3(value: Direction): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch.
 fun case_4(value: Direction?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         Direction.SOUTH -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}

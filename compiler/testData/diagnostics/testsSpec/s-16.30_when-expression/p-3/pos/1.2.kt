@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -15,8 +17,8 @@ fun case_1(value: Int, value1: Boolean, value2: Boolean, value3: String, value4:
     when {
         value == 1 -> !value1
         value == 2 -> value5 && value6 || value1 && !value3.isEmpty()
-        value == 3 -> <!UNUSED_EXPRESSION!>value1 || value2<!>
-        value == 4 -> <!UNUSED_EXPRESSION!>true && value2<!>
+        value == 3 -> value1 || value2
+        value == 4 -> true && value2
         value == 5 -> !!(!!(value4 == null))
         value == 6 -> value1 || !!!value5
         value == 7 -> value1 && !!true && value5 && value6

@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -12,7 +14,7 @@ class A {}
 
 // CASE DESCRIPTION: 'When' with object of custom class, without defined contains operator.
 fun case_1(value: Int, value1: A): String {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value1  -> return ""
     }
 

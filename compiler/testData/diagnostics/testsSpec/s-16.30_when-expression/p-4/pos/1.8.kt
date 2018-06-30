@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_LAMBDA_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -9,33 +11,33 @@
  */
 
 fun case_1(value: Int, value1: String, value2: String) {
-    when(value) {
+    when (value) {
         1 -> try {
-            <!UNUSED_EXPRESSION!>4<!>
+            4
         } catch (e: Exception) {
-            <!UNUSED_EXPRESSION!>5<!>
+            5
         }
         2 -> try {
             throw Exception()
         } catch (e: Exception) {
-            <!UNUSED_EXPRESSION!>value1<!>
+            value1
         } finally {
-            <!UNUSED_EXPRESSION!>7<!>
+            7
         }
         3 -> try {
             try {
                 throw Exception()
             } catch (e: Exception) {
-                <!UNUSED_LAMBDA_EXPRESSION!>{value2}<!>
+                {value2}
             }
         } catch (e: Exception) {
-            <!UNUSED_LAMBDA_EXPRESSION!>{2}<!>
+            {2}
         }
         4 -> {
             try {
-                <!UNUSED_EXPRESSION!>4<!>
+                4
             } catch (e: Exception) {
-                <!UNUSED_EXPRESSION!>5<!>
+                5
             }
         }
     }

@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -54,7 +56,7 @@ fun case_2(value: Any?): String {
                 }
             }
             val prop1 = 1
-        } -> <!UNUSED_EXPRESSION!>3<!>
+        } -> return ""
         object1 -> return ""
     }
 

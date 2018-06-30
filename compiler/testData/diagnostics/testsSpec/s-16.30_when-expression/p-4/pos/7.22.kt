@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 22
- DESCRIPTION: 'When' with bound value and this expression in 'when condition'.
+ DESCRIPTION: 'When' with bound value and return expression in 'when condition'.
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one return expression.

@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -DEBUG_INFO_SMARTCAST
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -28,9 +30,9 @@ fun case_1(value: Int?, value1: List<Int>, value2: A, value3: A?): String {
     return when (value) {
         fun_1() -> ""
         value2.mul(value!!) -> ""
-        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
-        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
-        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
+        value2.nestedMul(value)(value) -> ""
+        value3?.nestedMul(value)?.invoke(value) -> ""
+        value3?.mul(value) -> ""
         else -> ""
     }
 }
@@ -44,9 +46,9 @@ fun case_2(value: Int?, value1: List<Int>, value2: A, value3: A?): String {
     when (value) {
         fun_1() -> return ""
         value2.mul(value!!) -> return ""
-        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
-        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
-        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
+        value2.nestedMul(value)(value) -> return ""
+        value3?.nestedMul(value)?.invoke(value) -> return ""
+        value3?.mul(value) -> return ""
     }
 
     return ""

@@ -37,10 +37,10 @@ fun case_1(
         value == 10 -> {
             obj2 === obj1 && obj4 != obj2 || !(value6 == .000023412f) && value9 == '0' || value1 == false
         }
-        value == 11 -> obj1 === obj2
-        value == 12 -> obj1 == obj2
-        value == 13 -> obj3 <!UNREACHABLE_CODE!>=== obj4<!>
-        value == 14 -> obj4 <!UNREACHABLE_CODE!>!==<!> obj3
-        value == 15 -> obj3 <!UNREACHABLE_CODE!>!= obj3<!>
+        value == 11 -> obj3 <!UNREACHABLE_CODE!>=== obj4<!>
+        value == 12 -> obj4 <!UNREACHABLE_CODE!>!==<!> obj3
+        value == 13 -> obj3 <!UNREACHABLE_CODE!>!= obj3<!>
+        value == 14 -> obj1 === obj2
+        value == 15 -> obj1 == obj2
     }
 }

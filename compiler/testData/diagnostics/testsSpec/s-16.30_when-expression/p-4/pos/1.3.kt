@@ -24,7 +24,7 @@ fun case_1(
     obj3: Nothing,
     obj4: Any
 ) {
-    when(value) {
+    when (value) {
         1 -> value1 == true
         2 -> value2 == 127.toByte()
         3 -> value3 != 11.toShort()
@@ -37,10 +37,10 @@ fun case_1(
         10 -> {
             obj2 === obj1 && obj4 != obj2 || !(value6 == .000023412f) && value9 == '0' || value1 == false
         }
-        11 -> obj1 === obj2
-        12 -> obj1 == obj2
-        13 -> obj3 <!UNREACHABLE_CODE!>=== obj4<!>
-        14 -> obj4 <!UNREACHABLE_CODE!>!==<!> obj3
-        15 -> obj3 <!UNREACHABLE_CODE!>!= obj3<!>
+        11 -> obj3 <!UNREACHABLE_CODE!>=== obj4<!>
+        12 -> obj4 <!UNREACHABLE_CODE!>!==<!> obj3
+        13 -> obj3 <!UNREACHABLE_CODE!>!= obj3<!>
+        14 -> obj1 === obj2
+        15 -> obj1 == obj2
     }
 }

@@ -12,7 +12,7 @@ fun case_1(value: Int, value1: Int, value2: Int, value3: Boolean?, value4: Int?)
     var mutableValue1 = value1
     var mutableValue2 = value2
 
-    when(value) {
+    when (value) {
         1 -> <!UNUSED_CHANGED_VALUE!>mutableValue1++<!>
         2 -> <!UNUSED_CHANGED_VALUE!>mutableValue2--<!>
         3 -> <!UNUSED_CHANGED_VALUE!>mutableValue1--<!> - <!UNUSED_CHANGED_VALUE!>mutableValue2++<!>

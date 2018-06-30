@@ -9,7 +9,7 @@
  */
 
 fun case_1(value: Int, value1: List<Int>, value2: List<List<List<List<Int>>>>?) {
-    when(value) {
+    when (value) {
         1 -> value1[0]
         2 -> value2!![0][1]
         3 -> value2!![0][1][-1]

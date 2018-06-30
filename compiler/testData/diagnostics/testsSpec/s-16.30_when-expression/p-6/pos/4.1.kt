@@ -9,13 +9,13 @@
  */
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value covered).
-fun case_1(value: Boolean): String = when(value) {
+fun case_1(value: Boolean): String = when (value) {
     true -> ""
     false -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value as complex expression covered).
-fun case_2(value: Boolean): String = when(value) {
+fun case_2(value: Boolean): String = when (value) {
     true && false && ((true || false)) || true && !!!false && !!!true -> ""
     true && false && ((true || false)) || true && !!!false -> ""
 }

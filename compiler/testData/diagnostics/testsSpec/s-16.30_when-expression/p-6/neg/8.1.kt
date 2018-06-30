@@ -1,4 +1,5 @@
 // !CHECK_TYPE
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
 
 /*
  KOTLIN SPEC TEST (NEGATIVE)
@@ -31,7 +32,7 @@ fun case_2(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum with several values (no branches).
-fun case_3(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+fun case_3(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(value) { }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum with one value (no branches).
-fun case_4(value: Anything): String = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+fun case_4(value: Anything): String = <!NO_ELSE_IN_WHEN!>when<!>(value) { }

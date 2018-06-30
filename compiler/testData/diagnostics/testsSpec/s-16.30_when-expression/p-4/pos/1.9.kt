@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -9,13 +11,13 @@
  */
 
 fun case_1(value: Int, value1: String?, value2: String?, value3: String?) {
-    when(value) {
-        1 -> value1 ?: <!UNUSED_EXPRESSION!>true<!>
-        2 -> value1 ?: value2 ?: <!UNUSED_EXPRESSION!>true<!>
-        3 -> value1 ?: value2 ?: value3 ?: <!UNUSED_EXPRESSION!>true<!>
-        4 -> value1!! <!USELESS_ELVIS!>?: <!UNUSED_EXPRESSION!>true<!><!>
+    when (value) {
+        1 -> value1 ?: true
+        2 -> value1 ?: value2 ?: true
+        3 -> value1 ?: value2 ?: value3 ?: true
+        4 -> value1!! <!USELESS_ELVIS!>?: true<!>
         5 -> {
-            value2 ?: value3 ?: <!UNUSED_EXPRESSION!>true<!>
+            value2 ?: value3 ?: true
         }
     }
 }

@@ -28,7 +28,7 @@ class E: D() {}
 
 // CASE DESCRIPTION: Checking correct type in 'when'.
 fun case_1(value: Expr): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         is Const -> B()
         is Sum -> C()
         is Mul -> D()
@@ -42,7 +42,7 @@ fun case_1(value: Expr): String {
 
 // CASE DESCRIPTION: Checking correct type in 'when' with null-check branch.
 fun case_2(value: Expr?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         is Const -> B()
         is Sum -> C()
         is Mul -> D()
@@ -57,7 +57,7 @@ fun case_2(value: Expr?): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when'.
 fun case_3(value: Expr): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         is Mul -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}
@@ -71,7 +71,7 @@ fun case_3(value: Expr): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch.
 fun case_4(value: Expr?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         is Mul -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}
@@ -86,7 +86,7 @@ fun case_4(value: Expr?): String {
 
 // CASE DESCRIPTION: Checking correct type in 'when' (equality with objects).
 fun case_5(value: Expr2): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         ConstO -> B()
         SumO -> C()
         MulO -> D()
@@ -100,7 +100,7 @@ fun case_5(value: Expr2): String {
 
 // CASE DESCRIPTION: Checking correct type in 'when' (equality with objects) with null-check branch.
 fun case_6(value: Expr2?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         ConstO -> B()
         SumO -> C()
         MulO -> D()
@@ -115,7 +115,7 @@ fun case_6(value: Expr2?): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' (equality with objects).
 fun case_7(value: Expr2): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         MulO -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}
@@ -129,7 +129,7 @@ fun case_7(value: Expr2): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch (equality with objects).
 fun case_8(value: Expr2?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         MulO -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}
@@ -144,7 +144,7 @@ fun case_8(value: Expr2?): String {
 
 // CASE DESCRIPTION: Checking correct basic type (Int) in 'when' with.
 fun case_9(value: Expr2): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         <!USELESS_IS_CHECK!>is Expr2<!> -> 10
     }
 

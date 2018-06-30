@@ -9,7 +9,7 @@
  */
 
 fun case_1(value: Int, value1: Int?, value2: Int) {
-    when(value) {
+    when (value) {
         1 -> 1..10
         2 -> 1..1
         3 -> 1..-10

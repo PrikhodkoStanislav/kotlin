@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -23,7 +25,7 @@ fun case_1(value: Int) {
             }
             val prop1 = 1
         }
-        value == 3 -> <!UNUSED_EXPRESSION!>object1<!>
+        value == 3 -> object1
         value == 4 -> {
             object {
                 var lambda1 = {

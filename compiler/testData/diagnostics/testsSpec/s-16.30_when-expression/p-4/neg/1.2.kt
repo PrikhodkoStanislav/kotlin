@@ -9,7 +9,7 @@
  */
 
 fun case_1(value: Int) {
-    when(value) {
+    when (value) {
         <!SYNTAX!><!>-> { println(1) }
     }
 }

@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -13,7 +15,7 @@ fun case_1(value: Int): String = when (value) {
     <!UNREACHABLE_CODE!>1 -> ""<!>
 }
 
-fun case_2(value: Int): String = when(value) {
+fun case_2(value: Int): String = when (value) {
     <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
     <!UNREACHABLE_CODE!>1 -> ""<!>
     <!UNREACHABLE_CODE!>2 -> ""<!>
@@ -26,7 +28,7 @@ fun case_3(value: Int): String = when (value) {
 }
 
 fun case_4(value: Int): String {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return ""
         <!UNREACHABLE_CODE!>else -> return ""<!>
     }

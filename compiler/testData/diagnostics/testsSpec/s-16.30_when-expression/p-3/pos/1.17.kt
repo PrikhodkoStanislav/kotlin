@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -14,15 +16,15 @@ fun case_1(value: Int) {
     }
 
     when {
-        value == 1 -> <!UNUSED_EXPRESSION!>fun() {}<!>
+        value == 1 -> fun() {}
         value == 2 -> <!UNUSED_EXPRESSION!>fun(): Boolean {
             return when {
                 else -> true
             }
         }<!>
-        value == 3 -> <!UNUSED_EXPRESSION!>fun_1<!>
+        value == 3 -> fun_1
         value == 4 -> {
-            <!UNUSED_EXPRESSION!>fun() {<!UNUSED_EXPRESSION!>fun() {<!UNUSED_EXPRESSION!>fun() {}<!>}<!>}<!>
+            fun() {fun() {fun() {}}}
         }
     }
 }

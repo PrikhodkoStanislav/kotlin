@@ -33,7 +33,7 @@ fun case_1(value: Int): String {
 
 // CASE DESCRIPTION: Checking correctness type (custom types) in 'when' with bound value.
 fun case_2(value: Int): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         0 -> B()
         1 -> C()
         2 -> D()
@@ -63,7 +63,7 @@ fun case_3(value: Int): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with bound value.
 fun case_4(value: Int): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         1 -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         2 -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}

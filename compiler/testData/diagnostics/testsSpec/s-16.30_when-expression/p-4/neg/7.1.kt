@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_VALUE - ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -40,12 +42,12 @@ fun case_3(value: Int, value1: List<Int>): String {
 
 // CASE DESCRIPTION: 'When' with assignments.
 fun case_4(value: Int): String {
-    var <!ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE!>value1<!>: Int
+    var value1: Int
     var value2 = 10
 
     when (value) {
-        <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!><!UNUSED_VALUE!>value1 =<!> 10<!> -> return ""
-        (<!ASSIGNMENT_IN_EXPRESSION_CONTEXT!><!UNUSED_VALUE!>value1 =<!> 10<!>) -> return ""
+        <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>value1 = 10<!> -> return ""
+        (<!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>value1 = 10<!>) -> return ""
         <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>value2 += 10<!> -> return ""
         <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>value2 -= 10<!> -> return ""
         <!ASSIGNMENT_IN_EXPRESSION_CONTEXT!>value2 *= 10<!> -> return ""

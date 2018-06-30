@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -10,7 +12,7 @@
 
 // CASE DESCRIPTION: 'When' with one contains operator.
 fun case_1(value: Int): String {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         in<!SYNTAX!><!> -> return ""
     }
 
@@ -19,7 +21,7 @@ fun case_1(value: Int): String {
 
 // CASE DESCRIPTION: 'When' with two contains operators.
 fun case_2(value: Int): String {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         in<!SYNTAX!><!> -> return ""
         in<!SYNTAX!><!> -> return ""
     }

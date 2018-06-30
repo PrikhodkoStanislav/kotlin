@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_LAMBDA_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -12,14 +14,14 @@ fun case_1(value: Int) {
     val lambda1 = { 0 }
 
     when {
-        value == 1 -> <!UNUSED_EXPRESSION!>lambda1<!>
-        value == 2 -> {<!UNUSED_LAMBDA_EXPRESSION!>{{{}}}<!>}
-        value == 3 -> <!UNUSED_LAMBDA_EXPRESSION!>{ -> (Int)
+        value == 1 -> lambda1
+        value == 2 -> {{{{}}}}
+        value == 3 -> { -> (Int)
             {
                 arg: Int -> {
                     { println(arg) }
                 }
             }
-        }<!>
+        }
     }
 }

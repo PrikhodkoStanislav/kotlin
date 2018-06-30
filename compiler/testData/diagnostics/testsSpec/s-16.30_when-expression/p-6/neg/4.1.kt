@@ -1,4 +1,5 @@
 // !CHECK_TYPE
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
 
 /*
  KOTLIN SPEC TEST (NEGATIVE)
@@ -21,4 +22,4 @@ fun case_2(value: Boolean): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Boolean value (no branches).
-fun case_3(value: Boolean): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+fun case_3(value: Boolean): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) { }

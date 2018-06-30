@@ -11,7 +11,7 @@
 fun case_1(value: Int) {
     loop1@ while (true) {
         loop2@ while (true) {
-            when(value) {
+            when (value) {
                 1 -> break@loop1
                 2 -> {
                     break@loop2

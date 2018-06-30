@@ -15,7 +15,7 @@ class A {
 }
 
 fun case_1(value: Int, value1: A, value2: A?) {
-    when(value) {
+    when (value) {
         1 -> value1.prop_1
         2 -> value2?.prop_1
         3 -> value1::prop_1.get()

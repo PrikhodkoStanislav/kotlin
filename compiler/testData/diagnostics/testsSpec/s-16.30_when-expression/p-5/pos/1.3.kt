@@ -17,7 +17,7 @@ class D: C() {}
 
 // CASE DESCRIPTION: Checking correct type in 'when'.
 fun case_1(value: Boolean): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         true -> B()
         false -> C()
     }
@@ -30,7 +30,7 @@ fun case_1(value: Boolean): String {
 
 // CASE DESCRIPTION: Checking correct type in 'when' with null-check branch.
 fun case_2(value: Boolean?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         true -> B()
         false -> C()
         null -> D()
@@ -45,7 +45,7 @@ fun case_2(value: Boolean?): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when'.
 fun case_3(value: Boolean): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         true -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         false -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}
     }
@@ -59,7 +59,7 @@ fun case_3(value: Boolean): String {
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch.
 fun case_4(value: Boolean?): String {
-    val whenValue = when(value) {
+    val whenValue = when (value) {
         true -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         false -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}
         null -> <!IMPLICIT_CAST_TO_ANY!>object<!> {}

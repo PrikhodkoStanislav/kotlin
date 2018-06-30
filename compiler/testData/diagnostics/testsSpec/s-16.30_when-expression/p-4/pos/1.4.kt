@@ -18,7 +18,7 @@ fun case_1(
     value6: Double,
     value7: Char
 ) {
-    when(value) {
+    when (value) {
         1 -> value1 >= 100
         2 -> value2 < 32000
         3 -> value3 <= 11

@@ -9,7 +9,7 @@
  */
 
 fun case_1(value: Int, value1: String, value2: String) {
-    when(value) {
+    when (value) {
         1 -> value1 + value2
         2 -> value1 + ""
         3 -> "1" + "" + "..."

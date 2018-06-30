@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -92,7 +94,7 @@ fun case_2(value: Int, value1: Int, value2: A) {
     val value4 = 124901924904
 
     when (value) {
-        1 -> <!UNUSED_EXPRESSION!>2<!>
+        1 -> 2
         2 -> 2 + 2
         3 -> 2 * -2
         4 -> getInt(-9) / 3
@@ -119,7 +121,7 @@ fun case_3(value: Int, value1: Long, value2: A) {
     val value4 = 124909249042341234L
 
     when (value) {
-        1 -> <!UNUSED_EXPRESSION!>2L<!>
+        1 -> 2L
         2 -> 1249011249042341234L + 412L
         3 -> -2L * getLong(1000)
         4 -> 3241019249042341234L / -2L
@@ -139,7 +141,7 @@ fun case_4(value: Int, value1: Float, value2: A) {
     val value4 = -124901924904.991242f
 
     when (value) {
-        1 -> <!UNUSED_EXPRESSION!>2.1F<!>
+        1 -> 2.1F
         2 -> 2.1f + value2.getFloat(-1)
         3 -> getFloat(-10) * 2f
         4 -> 8.5f / -2.3f
@@ -159,7 +161,7 @@ fun case_5(value: Int, value1: Double, value2: A) {
     val value4 = -124901924904.99124212
 
     when (value) {
-        1 -> <!UNUSED_EXPRESSION!>2.1<!>
+        1 -> 2.1
         2 -> 2.1 + 2.5
         3 -> getDouble(-20) * 2.0
         4 -> -8.5 / 2.3
@@ -182,7 +184,7 @@ fun case_6(value: Int, value1: Byte, value2: A) {
     val value7: Byte = -128
 
     when (value) {
-        1 -> <!UNUSED_EXPRESSION!>value1<!>
+        1 -> value1
         2 -> -11.toByte() - value3
         3 -> 90.toByte() * -value5
         4 -> 2.toByte() / 100.toByte()

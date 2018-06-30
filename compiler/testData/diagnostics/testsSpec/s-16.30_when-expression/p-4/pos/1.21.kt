@@ -13,7 +13,7 @@ fun case_1(value: Int) {
         throw Exception("Ex")
     }
 
-    when(value) {
+    when (value) {
         1 -> lambda_1()
         2 -> throw Exception("Ex")
         3 -> {

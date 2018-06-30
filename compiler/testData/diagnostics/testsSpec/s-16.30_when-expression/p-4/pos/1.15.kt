@@ -33,7 +33,7 @@ fun case_1(value: Int, value1: A, value2: A?, value3: List<Int>, value4: List<In
         }
     }
 
-    when(value) {
+    when (value) {
         1 -> fun_1(value3, value4!!)
         2 -> fun_2()()
         3 -> value1.mul(value3[0])

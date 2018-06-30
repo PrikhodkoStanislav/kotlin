@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -38,7 +40,7 @@ fun case_3(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class without branches.
-fun case_4(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
+fun case_4(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {}
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class with null-check branch, but object not covered.
 fun case_5(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {

@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (NEGATIVE)
 
@@ -10,14 +12,14 @@
 
 // CASE DESCRIPTION: 'When' with only one invalid 'else' branch.
 fun case_1(value: Int) {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         else -><!SYNTAX!><!>
     }
 }
 
 // CASE DESCRIPTION: 'When' with only two invalid 'else' branches.
 fun case_2(value: Int) {
-    when (<!UNUSED_EXPRESSION!>value<!>) {
+    when (value) {
         else -><!SYNTAX!><!>
         else -><!SYNTAX!><!>
     }
