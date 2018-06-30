@@ -14,35 +14,35 @@ typealias NothingCustom = Nothing
 typealias IntCustom = Int
 
 // CASE DESCRIPTION: 'When' with type checking operator on the two typealiases (one of which is equal to the source type).
-fun case_1(value: Any): Int {
+fun case_1(value: Any): String {
     when (value) {
-        is IntCustom -> return 2
-        <!USELESS_IS_CHECK!>is AnyCustom<!> -> return 3
+        is IntCustom -> return ""
+        <!USELESS_IS_CHECK!>is AnyCustom<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with type checking operator on the one typealias and 'else' branch.
-fun case_2(value: Any): Int = when (value) {
-    is IntCustom -> 2
-    else -> 4
+fun case_2(value: Any): String = when (value) {
+    is IntCustom -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with type checking operator on the one typealias which is equal to the source type, and 'else' branch.
-fun case_3(value: Any): Int = when (value) {
-    <!USELESS_IS_CHECK!>is AnyCustom<!> -> 1
-    else -> 2
+fun case_3(value: Any): String = when (value) {
+    <!USELESS_IS_CHECK!>is AnyCustom<!> -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with type checking operator on the one typealias which is not equal to the source type, and 'else' branch.
-fun case_4(value: Any): Int = when (value) {
-    is UnitCustom -> 1
-    else -> 2
+fun case_4(value: Any): String = when (value) {
+    is UnitCustom -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with type checking operator on the Nothing typealias, and 'else' branch.
-fun case_5(value: Any): Int = when (value) {
-    is NothingCustom -> 1
-    else -> 2
+fun case_5(value: Any): String = when (value) {
+    is NothingCustom -> ""
+    else -> ""
 }

@@ -18,26 +18,26 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Int?, value1: A, value2: A?): Int = when (value) {
-    value1.prop1 -> 1
-    value2?.prop2 -> 2
-    value2!!::prop2.get() -> 3
-    value1::prop2.get() -> 4
-    (A::B)()::prop4.get() -> 5
-    (A::B)().prop4 -> 6
-    else -> 9
+fun case_1(value: Int?, value1: A, value2: A?): String = when (value) {
+    value1.prop1 -> ""
+    value2?.prop2 -> ""
+    value2!!::prop2.get() -> ""
+    value1::prop2.get() -> ""
+    (A::B)()::prop4.get() -> ""
+    (A::B)().prop4 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Int?, value1: A, value2: A?): Int {
+fun case_2(value: Int?, value1: A, value2: A?): String {
     when (value) {
-        value1.prop1 -> return 1
-        value2?.prop2 -> return 2
-        value2!!::prop2.get() -> return 3
-        value1::prop2.get() -> return 4
-        (A::B)()::prop4.get() -> return 5
-        (A::B)().prop4 -> return 6
+        value1.prop1 -> return ""
+        value2?.prop2 -> return ""
+        value2!!::prop2.get() -> return ""
+        value1::prop2.get() -> return ""
+        (A::B)()::prop4.get() -> return ""
+        (A::B)().prop4 -> return ""
     }
 
-    return -1
+    return ""
 }

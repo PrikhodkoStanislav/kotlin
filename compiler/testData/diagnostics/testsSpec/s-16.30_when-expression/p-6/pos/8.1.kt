@@ -17,14 +17,14 @@ enum class Anything {
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (all enum values covered).
-fun case_1(dir: Direction): Int = when (dir) {
-    Direction.EAST -> 1
-    Direction.NORTH -> 2
-    Direction.SOUTH -> 3
-    Direction.WEST -> 4
+fun case_1(dir: Direction): String = when (dir) {
+    Direction.EAST -> ""
+    Direction.NORTH -> ""
+    Direction.SOUTH -> ""
+    Direction.WEST -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (single enum value covered).
-fun case_2(value: Anything): Int = when (value) {
-    Anything.EVERYTHING -> 1
+fun case_2(value: Anything): String = when (value) {
+    Anything.EVERYTHING -> ""
 }

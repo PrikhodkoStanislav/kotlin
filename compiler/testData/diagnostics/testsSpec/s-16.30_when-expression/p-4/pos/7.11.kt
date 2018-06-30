@@ -9,22 +9,22 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Collection<Int>?, value1: Collection<Int>, value2: Collection<Int>?): Int = when (value) {
-    value1 as MutableList<Int> -> 1
-    value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!> -> 2
-    (value2 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int> -> 3
-    null -> 4
-    else -> 5
+fun case_1(value: Collection<Int>?, value1: Collection<Int>, value2: Collection<Int>?): String = when (value) {
+    value1 as MutableList<Int> -> ""
+    value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!> -> ""
+    (value2 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int> -> ""
+    null -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Collection<Int>?, value1: Collection<Int>, value2: Collection<Int>?): Int {
+fun case_2(value: Collection<Int>?, value1: Collection<Int>, value2: Collection<Int>?): String {
     when (value) {
-        value1 as MutableList<Int> -> return 1
-        value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!> -> return 2
-        (value2 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int> -> return 3
-        null -> return 4
+        value1 as MutableList<Int> -> return ""
+        value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!> -> return ""
+        (value2 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int> -> return ""
+        null -> return ""
     }
 
-    return -1
+    return ""
 }

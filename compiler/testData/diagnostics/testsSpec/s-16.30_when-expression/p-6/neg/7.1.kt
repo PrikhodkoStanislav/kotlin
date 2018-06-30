@@ -23,17 +23,17 @@ sealed class Expr3
 object A2: Expr3() {}
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking and equality with object).
-fun case_1(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    A -> 3
+fun case_1(value: Expr): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    A -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking).
-fun case_2(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    is Mul -> 2
+fun case_2(value: Expr): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    is Mul -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class with several subtypes (no branches).

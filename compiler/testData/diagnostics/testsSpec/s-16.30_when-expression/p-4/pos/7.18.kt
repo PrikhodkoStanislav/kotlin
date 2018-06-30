@@ -9,35 +9,35 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Any?): Int {
+fun case_1(value: Any?): String {
     val lambda1 = { 0 }
 
     return when (value) {
-        {} -> 1
-        {{{{{ 0 }}}}} -> 2
+        {} -> ""
+        {{{{{ 0 }}}}} -> ""
         {
             when {
                 else -> true
             }
-        } -> 3
-        lambda1 -> 4
-        else -> 5
+        } -> ""
+        lambda1 -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Any?): Int {
+fun case_2(value: Any?): String {
     val lambda1 = { 0 }
 
     return when (value) {
-        {} -> 1
-        {{{{{ 0 }}}}} -> 2
+        {} -> ""
+        {{{{{ 0 }}}}} -> ""
         {
             when {
                 else -> true
             }
-        } -> 3
-        lambda1 -> 4
-        else -> 5
+        } -> ""
+        lambda1 -> ""
+        else -> ""
     }
 }

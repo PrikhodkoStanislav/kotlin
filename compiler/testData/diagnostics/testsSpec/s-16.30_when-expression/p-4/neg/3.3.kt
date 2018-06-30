@@ -17,38 +17,38 @@ class B {
 }
 
 // CASE DESCRIPTION: 'When' with custom object and companion object of class as type checking operator value.
-fun case_1(value: Any): Int {
+fun case_1(value: Any): String {
     when (value) {
-        is A -> return 1
-        is B.Companion -> return 1
+        is A -> return ""
+        is B.Companion -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with variables and return value as type checking operator value.
-fun case_2(value: Any, <!UNUSED_PARAMETER!>value1<!>: String, <!UNUSED_PARAMETER!>value2<!>: Any?): Int {
+fun case_2(value: Any, <!UNUSED_PARAMETER!>value1<!>: String, <!UNUSED_PARAMETER!>value2<!>: Any?): String {
     when (value) {
-        is <!UNRESOLVED_REFERENCE!>value1<!> -> return 1
-        is <!UNRESOLVED_REFERENCE!>value2<!> -> return 2
-        is <!UNRESOLVED_REFERENCE!>value1<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>isEmpty<!><!SYNTAX!>(<!><!SYNTAX!><!SYNTAX!><!>)<!><!SYNTAX!><!> <!SYNTAX!><!>-> return 3
+        is <!UNRESOLVED_REFERENCE!>value1<!> -> return ""
+        is <!UNRESOLVED_REFERENCE!>value2<!> -> return ""
+        is <!UNRESOLVED_REFERENCE!>value1<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>isEmpty<!><!SYNTAX!>(<!><!SYNTAX!><!SYNTAX!><!>)<!><!SYNTAX!><!> <!SYNTAX!><!>-> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with literals as type checking operator value.
-fun case_3(value: Any): Int {
+fun case_3(value: Any): String {
     when (value) {
-        is <!SYNTAX!><!>{} <!SYNTAX!><!>-> return 1
-        is <!SYNTAX!><!SYNTAX!><!>fun<!>(<!SYNTAX!><!>) {} <!SYNTAX!><!>-> return 2
-        is <!SYNTAX!>90<!> -> return 2
-        is <!SYNTAX!>-<!><!SYNTAX!>.032<!><!SYNTAX!><!> <!SYNTAX!><!>-> return 3
-        is <!SYNTAX!>"<!><!SYNTAX!>...<!><!SYNTAX!><!SYNTAX!><!>"<!><!SYNTAX!><!> <!SYNTAX!><!>-> return 4
-        is <!SYNTAX!>'.'<!> -> return 5
-        is <!SYNTAX!>return<!> <!SYNTAX!>1<!><!SYNTAX!><!> <!SYNTAX!><!>-> return 6
-        is <!SYNTAX!>throw<!> <!SYNTAX!>Exception<!>(<!SYNTAX!><!>) <!SYNTAX!><!>-> return 7
+        is <!SYNTAX!><!>{} <!SYNTAX!><!>-> return ""
+        is <!SYNTAX!><!SYNTAX!><!>fun<!>(<!SYNTAX!><!>) {} <!SYNTAX!><!>-> return ""
+        is <!SYNTAX!>90<!> -> return ""
+        is <!SYNTAX!>-<!><!SYNTAX!>.032<!><!SYNTAX!><!> <!SYNTAX!><!>-> return ""
+        is <!SYNTAX!>"<!><!SYNTAX!>...<!><!SYNTAX!><!SYNTAX!><!>"<!><!SYNTAX!><!> <!SYNTAX!><!>-> return ""
+        is <!SYNTAX!>'.'<!> -> return ""
+        is <!SYNTAX!>return<!> <!SYNTAX!>1<!><!SYNTAX!><!> <!SYNTAX!><!>-> return ""
+        is <!SYNTAX!>throw<!> <!SYNTAX!>Exception<!>(<!SYNTAX!><!>) <!SYNTAX!><!>-> return ""
     }
 
-    return -1
+    return ""
 }

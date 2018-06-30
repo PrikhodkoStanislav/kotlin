@@ -9,31 +9,31 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch followed by one not 'else' branch.
-fun case_1(<!UNUSED_PARAMETER!>value<!>: Int): Int = when {
-    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 1
-    <!UNREACHABLE_CODE!>value == 1 -> 2<!>
+fun case_1(<!UNUSED_PARAMETER!>value<!>: Int): String = when {
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
+    <!UNREACHABLE_CODE!>value == 1 -> ""<!>
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch followed by two not 'else' branches.
-fun case_2(<!UNUSED_PARAMETER!>value<!>: Int): Int = when {
-    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 1
-    <!UNREACHABLE_CODE!>value == 1 -> 2<!>
-    <!UNREACHABLE_CODE!>value == 2 -> 3<!>
+fun case_2(<!UNUSED_PARAMETER!>value<!>: Int): String = when {
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
+    <!UNREACHABLE_CODE!>value == 1 -> ""<!>
+    <!UNREACHABLE_CODE!>value == 2 -> ""<!>
 }
 
 // CASE DESCRIPTION: 'When' with not 'else' branches followed by 'else' branch followed by not 'else' branch.
-fun case_3(value: Int): Int = when {
-    value == 1 -> 1
-    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> 2
-    <!UNREACHABLE_CODE!>value == 2 -> 3<!>
+fun case_3(value: Int): String = when {
+    value == 1 -> ""
+    <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
+    <!UNREACHABLE_CODE!>value == 2 -> ""<!>
 }
 
 // CASE DESCRIPTION: 'When' with two 'else' branches.
-fun case_4(): Int {
+fun case_4(): String {
     when {
-        <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return 1
-        <!UNREACHABLE_CODE!>else -> return 2<!>
+        <!ELSE_MISPLACED_IN_WHEN!>else<!> -> return ""
+        <!UNREACHABLE_CODE!>else -> return ""<!>
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }

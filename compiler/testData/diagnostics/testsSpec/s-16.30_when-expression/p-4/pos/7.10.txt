@@ -1,4 +1,4 @@
 package
 
-public fun case_1(/*0*/ value: kotlin.Any?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Long): kotlin.Int
-public fun case_2(/*0*/ value: kotlin.Any?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Long): kotlin.Int
+public fun case_1(/*0*/ value: kotlin.Any?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Long): kotlin.String
+public fun case_2(/*0*/ value: kotlin.Any?, /*1*/ value1: kotlin.Int, /*2*/ value2: kotlin.Long): kotlin.String

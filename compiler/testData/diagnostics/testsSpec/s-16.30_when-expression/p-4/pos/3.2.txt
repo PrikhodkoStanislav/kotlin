@@ -1,9 +1,9 @@
 package
 
-public fun case_1(/*0*/ value: Expr): kotlin.Int
-public fun case_2(/*0*/ value: Expr): kotlin.Int
-public fun case_3(/*0*/ value: Expr): kotlin.Int
-public fun case_4(/*0*/ value: Expr): kotlin.Int
+public fun case_1(/*0*/ value: Expr): kotlin.String
+public fun case_2(/*0*/ value: Expr): kotlin.String
+public fun case_3(/*0*/ value: Expr): kotlin.String
+public fun case_4(/*0*/ value: Expr): kotlin.String
 
 public final data class Const : Expr {
     public constructor Const(/*0*/ number: kotlin.Int)

@@ -27,7 +27,7 @@ open class D: C() {}
 class E: D() {}
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when'.
-fun case_1(value: Expr): Int {
+fun case_1(value: Expr): String {
     val whenValue = when(value) {
         is Const -> B()
         is Sum -> C()
@@ -40,11 +40,11 @@ fun case_1(value: Expr): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when' with null-check branch.
-fun case_2(value: Expr?): Int {
+fun case_2(value: Expr?): String {
     val whenValue = when(value) {
         is Const -> B()
         is Sum -> C()
@@ -60,11 +60,11 @@ fun case_2(value: Expr?): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when'.
-fun case_3(value: Expr): Int {
+fun case_3(value: Expr): String {
     val whenValue = when(value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -76,11 +76,11 @@ fun case_3(value: Expr): Int {
     checkSubtype<Int>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when' with null-check branch.
-fun case_4(value: Expr?): Int {
+fun case_4(value: Expr?): String {
     val whenValue = when(value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -95,11 +95,11 @@ fun case_4(value: Expr?): Int {
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<() -> Unit>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking objects except the correct one in 'when'.
-fun case_5(value: Expr2): Int {
+fun case_5(value: Expr2): String {
     val whenValue = when(value) {
         ConstO -> B()
         SumO -> C()
@@ -112,11 +112,11 @@ fun case_5(value: Expr2): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking objects except the correct one in 'when' with null-check branch.
-fun case_6(value: Expr2?): Int {
+fun case_6(value: Expr2?): String {
     val whenValue = when(value) {
         ConstO -> B()
         SumO -> C()
@@ -132,11 +132,11 @@ fun case_6(value: Expr2?): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking objects except the Any (implicit cast to any) in 'when'.
-fun case_7(value: Expr2): Int {
+fun case_7(value: Expr2): String {
     val whenValue = when(value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -148,11 +148,11 @@ fun case_7(value: Expr2): Int {
     checkSubtype<Int>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking objects except the Any (implicit cast to any) in 'when' with null-check branch.
-fun case_8(value: Expr2?): Int {
+fun case_8(value: Expr2?): String {
     val whenValue = when(value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -167,11 +167,11 @@ fun case_8(value: Expr2?): Int {
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<() -> Unit>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when' with 'else' branch.
-fun case_9(value: Expr2?): Int {
+fun case_9(value: Expr2?): String {
     val whenValue = when(value) {
         is Expr2 -> B()
         else -> C()
@@ -185,5 +185,5 @@ fun case_9(value: Expr2?): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }

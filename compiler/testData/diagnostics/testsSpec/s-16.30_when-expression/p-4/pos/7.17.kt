@@ -9,40 +9,40 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Any?): Int {
-    val fun1 = fun(): Int {
+fun case_1(value: Any?): String {
+    val fun_1 = fun(): Int {
         return 0
     }
 
     return when (value) {
-        fun() {} -> 1
-        fun(): () -> () -> Unit {return fun(): () -> Unit {return fun() {}}} -> 2
+        fun() {} -> ""
+        fun(): () -> () -> Unit {return fun(): () -> Unit {return fun() {}}} -> ""
         fun(): Boolean {
             return when {
                 else -> true
             }
-        } -> 3
-        fun1 -> 4
-        else -> 5
+        } -> ""
+        fun_1 -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Any?): Int {
-    val fun1 = fun(): Int {
+fun case_2(value: Any?): String {
+    val fun_1 = fun(): Int {
         return 0
     }
 
     when (value) {
-        fun() {} -> return 1
-        fun(): () -> () -> Unit {return fun(): () -> Unit {return fun() {}}} -> return 2
+        fun() {} -> return ""
+        fun(): () -> () -> Unit {return fun(): () -> Unit {return fun() {}}} -> return ""
         fun(): Boolean {
             return when {
                 else -> true
             }
-        } -> return 3
-        fun1 -> return 4
+        } -> return ""
+        fun_1 -> return ""
     }
 
-    return -1
+    return ""
 }

@@ -27,7 +27,7 @@ open class D: C() {}
 class E: D() {}
 
 // CASE DESCRIPTION: Checking correct type in 'when'.
-fun case_1(value: Expr): Int {
+fun case_1(value: Expr): String {
     val whenValue = when(value) {
         is Const -> B()
         is Sum -> C()
@@ -37,11 +37,11 @@ fun case_1(value: Expr): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking correct type in 'when' with null-check branch.
-fun case_2(value: Expr?): Int {
+fun case_2(value: Expr?): String {
     val whenValue = when(value) {
         is Const -> B()
         is Sum -> C()
@@ -52,11 +52,11 @@ fun case_2(value: Expr?): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when'.
-fun case_3(value: Expr): Int {
+fun case_3(value: Expr): String {
     val whenValue = when(value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -66,11 +66,11 @@ fun case_3(value: Expr): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch.
-fun case_4(value: Expr?): Int {
+fun case_4(value: Expr?): String {
     val whenValue = when(value) {
         is Const -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         is Sum -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -81,11 +81,11 @@ fun case_4(value: Expr?): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking correct type in 'when' (equality with objects).
-fun case_5(value: Expr2): Int {
+fun case_5(value: Expr2): String {
     val whenValue = when(value) {
         ConstO -> B()
         SumO -> C()
@@ -95,11 +95,11 @@ fun case_5(value: Expr2): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking correct type in 'when' (equality with objects) with null-check branch.
-fun case_6(value: Expr2?): Int {
+fun case_6(value: Expr2?): String {
     val whenValue = when(value) {
         ConstO -> B()
         SumO -> C()
@@ -110,11 +110,11 @@ fun case_6(value: Expr2?): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' (equality with objects).
-fun case_7(value: Expr2): Int {
+fun case_7(value: Expr2): String {
     val whenValue = when(value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -124,11 +124,11 @@ fun case_7(value: Expr2): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with null-check branch (equality with objects).
-fun case_8(value: Expr2?): Int {
+fun case_8(value: Expr2?): String {
     val whenValue = when(value) {
         ConstO -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         SumO -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -139,11 +139,11 @@ fun case_8(value: Expr2?): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking correct basic type (Int) in 'when' with.
-fun case_9(value: Expr2): Int {
+fun case_9(value: Expr2): String {
     val whenValue = when(value) {
         <!USELESS_IS_CHECK!>is Expr2<!> -> 10
     }
@@ -151,5 +151,5 @@ fun case_9(value: Expr2): Int {
     whenValue checkType { _<Int>() }
     checkSubtype<Int>(whenValue)
 
-    return -1
+    return ""
 }

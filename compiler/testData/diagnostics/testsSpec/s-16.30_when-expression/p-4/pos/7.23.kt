@@ -9,24 +9,24 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one continue expression.
-fun case_1(value: Any?): Int {
+fun case_1(value: Any?): String {
     loop@ while (true) {
         when (value) {
-            continue@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
+            continue@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
         }
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one continue expression.
-fun case_2(value: Any?): Int? {
-    var <!UNUSED_VARIABLE!>whenValue<!>: Int? = null
+fun case_2(value: Any?): String? {
+    var <!UNUSED_VARIABLE!>whenValue<!>: String? = null
 
     loop@ while (true) {
         <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
-            continue@loop <!UNREACHABLE_CODE!>-> 1
-            else -> 2
+            continue@loop <!UNREACHABLE_CODE!>-> ""
+            else -> ""
         }<!>
     }
 
@@ -34,38 +34,38 @@ fun case_2(value: Any?): Int? {
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several continue expressions.
-fun case_3(value: Any?): Int {
+fun case_3(value: Any?): String {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
                 loop4@ while (true) {
                     when (value) {
-                        continue@loop1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
-                        <!UNREACHABLE_CODE!>continue@loop2 -> return 2<!>
-                        <!UNREACHABLE_CODE!>continue@loop3 -> return 3<!>
-                        <!UNREACHABLE_CODE!>continue@loop4 -> return 4<!>
+                        continue@loop1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
+                        <!UNREACHABLE_CODE!>continue@loop2 -> return ""<!>
+                        <!UNREACHABLE_CODE!>continue@loop3 -> return ""<!>
+                        <!UNREACHABLE_CODE!>continue@loop4 -> return ""<!>
                     }
                 }
             }
         }
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several continue expressions.
-fun case_4(value: Any?): Int? {
-    var <!UNUSED_VARIABLE!>whenValue<!>: Int? = null
+fun case_4(value: Any?): String? {
+    var <!UNUSED_VARIABLE!>whenValue<!>: String? = null
 
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
                 loop4@ while (true) {
                     <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
-                        continue@loop1 <!UNREACHABLE_CODE!>-> 1
-                        continue@loop2 -> 2
-                        continue@loop3 -> 3
-                        continue@loop4 -> 4
+                        continue@loop1 <!UNREACHABLE_CODE!>-> ""
+                        continue@loop2 -> ""
+                        continue@loop3 -> ""
+                        continue@loop4 -> ""
                     }<!>
                 }
             }

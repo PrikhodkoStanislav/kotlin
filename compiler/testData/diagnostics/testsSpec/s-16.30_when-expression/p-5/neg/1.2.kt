@@ -22,7 +22,7 @@ open class E: D() {}
 class F: E() {}
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when'.
-fun case_1(value: Direction): Int {
+fun case_1(value: Direction): String {
     val whenValue = when(value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
@@ -38,11 +38,11 @@ fun case_1(value: Direction): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<E>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when' with null-check branch.
-fun case_2(value: Direction?): Int {
+fun case_2(value: Direction?): String {
     val whenValue = when(value) {
         Direction.EAST -> B()
         Direction.NORTH -> C()
@@ -61,11 +61,11 @@ fun case_2(value: Direction?): Int {
     checkSubtype<E>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<F>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when'.
-fun case_3(value: Direction): Int {
+fun case_3(value: Direction): String {
     val whenValue = when(value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -80,11 +80,11 @@ fun case_3(value: Direction): Int {
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<() -> Unit>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when' with null-check branch.
-fun case_4(value: Direction?): Int {
+fun case_4(value: Direction?): String {
     val whenValue = when(value) {
         Direction.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         Direction.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -100,5 +100,5 @@ fun case_4(value: Direction?): Int {
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<() -> Unit>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }

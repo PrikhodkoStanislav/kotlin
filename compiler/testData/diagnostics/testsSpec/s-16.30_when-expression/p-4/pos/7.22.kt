@@ -9,39 +9,39 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one return expression.
-fun case_1(value: Any?): Int {
+fun case_1(value: Any?): String {
     when (value) {
-        return 1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 2<!>
-        <!UNREACHABLE_CODE!>else -> 2<!>
+        return ""<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>else -> ""<!>
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one return expression.
-fun case_2(value: Any?): Int {
+fun case_2(value: Any?): String {
     when (value) {
-        return 1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 2<!>
+        return ""<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
     }
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several return expressions.
-fun case_3(value: Any?): Int {
+fun case_3(value: Any?): String {
     when (value) {
-        <!UNREACHABLE_CODE!>return return return return<!> return 1 -> <!UNREACHABLE_CODE!>return 2<!>
-        <!UNREACHABLE_CODE!>return (return (return (return (return 2)))) -> return 2<!>
-        <!UNREACHABLE_CODE!>return 3 -> return 2<!>
-        <!UNREACHABLE_CODE!>return 4 -> return 2<!>
-        <!UNREACHABLE_CODE!>else -> 2<!>
+        <!UNREACHABLE_CODE!>return return return return<!> return "" -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>return (return (return (return (return "")))) -> return ""<!>
+        <!UNREACHABLE_CODE!>return "" -> return ""<!>
+        <!UNREACHABLE_CODE!>return "" -> return ""<!>
+        <!UNREACHABLE_CODE!>else -> ""<!>
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several throw expressions.
-fun case_4(value: Any?): Int {
+fun case_4(value: Any?): String {
     when (value) {
-        <!UNREACHABLE_CODE!>return return return return<!> return 1 -> <!UNREACHABLE_CODE!>return 2<!>
-        <!UNREACHABLE_CODE!>return (return (return (return (return 2)))) -> return 2<!>
-        <!UNREACHABLE_CODE!>return 3 -> return 2<!>
-        <!UNREACHABLE_CODE!>return 4 -> return 2<!>
+        <!UNREACHABLE_CODE!>return return return return<!> return "" -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>return (return (return (return (return "")))) -> return ""<!>
+        <!UNREACHABLE_CODE!>return "" -> return ""<!>
+        <!UNREACHABLE_CODE!>return "" -> return ""<!>
     }
 }

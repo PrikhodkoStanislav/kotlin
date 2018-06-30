@@ -9,35 +9,35 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several entries.
-fun case_1(value: Boolean, value1: Int?): Int = when (value) {
-    value1 ?: true -> 1
-    value1!! > 100 -> 2
-    value1 <!USELESS_ELVIS!>?: false<!> -> 3
-    else -> 4
+fun case_1(value: Boolean, value1: Int?): String = when (value) {
+    value1 ?: true -> ""
+    value1!! > 100 -> ""
+    value1 <!USELESS_ELVIS!>?: false<!> -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several entries.
-fun case_2(value: Boolean, value1: Int?): Int {
+fun case_2(value: Boolean, value1: Int?): String {
     when (value) {
-        value1 ?: true -> return 1
-        value1!! > 100 -> return 2
-        value1 <!USELESS_ELVIS!>?: false<!> -> return 3
+        value1 ?: true -> return ""
+        value1!! > 100 -> return ""
+        value1 <!USELESS_ELVIS!>?: false<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one entry.
-fun case_3(value: Boolean, value1: Int?): Int = when (value) {
-    value1 ?: true -> 1
-    else -> 2
+fun case_3(value: Boolean, value1: Int?): String = when (value) {
+    value1 ?: true -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one entry.
-fun case_4(value: Boolean, value1: Int?): Int {
+fun case_4(value: Boolean, value1: Int?): String {
     when (value) {
-        value1 ?: true -> return 1
+        value1 ?: true -> return ""
     }
 
-    return -1
+    return ""
 }

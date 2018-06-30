@@ -15,40 +15,40 @@ data class Mul(val m1: Int, val m2: Int) : Expr()
 object A: Expr() {}
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class with null-check branch, but all possible subtypes not covered.
-fun case_1(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    A -> 3
-    null -> 4
+fun case_1(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    A -> ""
+    null -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class without null-check branch.
-fun case_2(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    is Mul -> 3
-    A -> 4
+fun case_2(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    is Mul -> ""
+    A -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class without null-check branch and all possible subtypes not covered.
-fun case_3(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    is Mul -> 3
+fun case_3(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    is Mul -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class without branches.
 fun case_4(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class with null-check branch, but object not covered.
-fun case_5(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    is Const -> 1
-    is Sum -> 2
-    is Mul -> 3
-    null -> 4
+fun case_5(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    is Const -> ""
+    is Sum -> ""
+    is Mul -> ""
+    null -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Sealed class without null-check branch and only object covered.
-fun case_6(value: Expr?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    A -> 1
+fun case_6(value: Expr?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    A -> ""
 }

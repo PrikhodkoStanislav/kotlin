@@ -9,20 +9,20 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: String): Int = when (value) {
-    "" -> 1
-    " " + "1" -> 2
-    " $value " + "2" -> 3
-    else -> 4
+fun case_1(value: String): String = when (value) {
+    "" -> ""
+    " " + "1" -> ""
+    " $value " + "2" -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: String): Int {
+fun case_2(value: String): String {
     when (value) {
-        "" -> return 1
-        " " + "1" -> return 2
-        " $value " + "2" -> return 3
+        "" -> return ""
+        " " + "1" -> return ""
+        " $value " + "2" -> return ""
     }
 
-    return -1
+    return ""
 }

@@ -19,47 +19,47 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' with various integer ranges (not exhaustive).
-fun case_1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int {
+fun case_1(value: Int, value1: Int, value2: Int, value3: Long, value4: A): String {
     when (value) {
-        in Int.MIN_VALUE..-1000000000000L -> return 1
-        in -1000000000000L..0L -> return 2
-        in 1..10.toShort() -> return 3
-        in 11.toByte()..value1 -> return 4
-        in value1..value2 -> return 5
-        in value2..1000 -> return 6
-        in value2..getInt(value2) -> return 7
-        in getInt(value2)..value4.method1(value2) -> return 8
-        in value4.method1(value2)..value3 -> return 9
+        in Int.MIN_VALUE..-1000000000000L -> return ""
+        in -1000000000000L..0L -> return ""
+        in 1..10.toShort() -> return ""
+        in 11.toByte()..value1 -> return ""
+        in value1..value2 -> return ""
+        in value2..1000 -> return ""
+        in value2..getInt(value2) -> return ""
+        in getInt(value2)..value4.method1(value2) -> return ""
+        in value4.method1(value2)..value3 -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with various integer ranges and 'else' branch (exhaustive).
-fun case_2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): Int = when (value) {
-    in Int.MIN_VALUE..-1000000000000L -> 1
-    in -1000000000000L..0L -> 2
-    in 1..10.toShort() -> 3
-    in 11.toByte()..value1 -> 4
-    in value1..value2 -> 5
-    in value2..1000 -> 6
-    in value2..getInt(value2) -> 7
-    in getInt(value2)..value4.method1(value2) -> 8
-    in value4.method1(value2)..value3 -> 9
-    else -> 10
+fun case_2(value: Int, value1: Int, value2: Int, value3: Long, value4: A): String = when (value) {
+    in Int.MIN_VALUE..-1000000000000L -> ""
+    in -1000000000000L..0L -> ""
+    in 1..10.toShort() -> ""
+    in 11.toByte()..value1 -> ""
+    in value1..value2 -> ""
+    in value2..1000 -> ""
+    in value2..getInt(value2) -> ""
+    in getInt(value2)..value4.method1(value2) -> ""
+    in value4.method1(value2)..value3 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with one integer range (not exhaustive).
-fun case_3(value: Int): Int {
+fun case_3(value: Int): String {
     when (value) {
-        in Int.MIN_VALUE..Int.MAX_VALUE -> return 1
+        in Int.MIN_VALUE..Int.MAX_VALUE -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with one integer range and 'else' branch (exhaustive).
-fun case_4(value: Int): Int = when (value) {
-    in Int.MIN_VALUE..Int.MAX_VALUE -> 1
-    else -> 2
+fun case_4(value: Int): String = when (value) {
+    in Int.MIN_VALUE..Int.MAX_VALUE -> ""
+    else -> ""
 }

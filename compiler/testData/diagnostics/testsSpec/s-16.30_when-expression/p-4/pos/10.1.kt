@@ -8,7 +8,7 @@
  DESCRIPTION: 'When' with boolean bound value and true/false checks.
  */
 
-fun case_1(value: Boolean): Int = when (value) {
-    true -> 0
-    false -> 1
+fun case_1(value: Boolean): String = when (value) {
+    true -> ""
+    false -> ""
 }

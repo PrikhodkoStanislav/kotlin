@@ -9,24 +9,24 @@
  */
 
 sealed class Expr1
-data class Const1(val number: Int) : Expr1()
-data class Sum1(val e1: Int, val e2: Int) : Expr1()
-data class Mul1(val m1: Int, val m2: Int) : Expr1()
+data class Const1(val n: String) : Expr1()
+data class Sum1(val e1: String, val e2: String) : Expr1()
+data class Mul1(val m1: String, val m2: String) : Expr1()
 
 sealed class Expr2
 class Const2() : Expr2() {
-    fun m1(): Int {
-        return 1
+    fun m1(): String {
+        return ""
     }
 }
 class Sum2() : Expr2() {
-    fun m2(): Int {
-        return 2
+    fun m2(): String {
+        return ""
     }
 }
 class Mul2() : Expr2() {
-    fun m3(): Int {
-        return 3
+    fun m3(): String {
+        return ""
     }
 }
 
@@ -36,27 +36,27 @@ object Sum1O : Expr3()
 object Mul1O : Expr3()
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (all sealed class subtypes covered).
-fun case_1(expr: Expr1): Int = when (expr) {
-    is Const1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.number
+fun case_1(expr: Expr1): String = when (expr) {
+    is Const1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.n
     is Sum1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.e1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.e2
     is Mul1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.m2
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (single sealed class subtypes covered).
-fun case_2(expr: Expr1): Int = when (expr) {
-    <!USELESS_IS_CHECK!>is Expr1<!> -> 1
+fun case_2(expr: Expr1): String = when (expr) {
+    <!USELESS_IS_CHECK!>is Expr1<!> -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (all sealed class subtypes with methods covered).
-fun case_3(expr: Expr2): Int = when (expr) {
+fun case_3(expr: Expr2): String = when (expr) {
     is Const2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1()
     is Sum2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m2()
     is Mul2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m3()
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (all objects covered using implicit equality operator).
-fun case_4(expr: Expr3): Int = when (expr) {
-    Const1O -> 1
-    Sum1O -> 2
-    Mul1O -> 3
+fun case_4(expr: Expr3): String = when (expr) {
+    Const1O -> ""
+    Sum1O -> ""
+    Mul1O -> ""
 }

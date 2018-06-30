@@ -26,36 +26,36 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch.
-fun case_1(value1: String, value2: Char, value3: A): Int {
+fun case_1(value1: String, value2: Char, value3: A): String {
     when {
-        value1.isEmpty() -> return 1
-        value1 == "..." || value1 == ":::" -> return 2
-        value1.equals("-") -> return 3
-        value2 == '_' -> return 4
-        value2 > 10.toChar() -> return 5
-        value2.equals('+') -> return 6
-        getString('a') == "A" || getString('+') == "+" -> return 7
-        value3.method_1('-') == "_" || value3.method_1('/') == "\\" -> return 8
-        isString("a") || isString('a') -> return 9
-        value3.method_2("a") || value3.method_2('a') -> return 10
+        value1.isEmpty() -> return ""
+        value1 == "..." || value1 == ":::" -> return ""
+        value1.equals("-") -> return ""
+        value2 == '_' -> return ""
+        value2 > 10.toChar() -> return ""
+        value2.equals('+') -> return ""
+        getString('a') == "A" || getString('+') == "+" -> return ""
+        value3.method_1('-') == "_" || value3.method_1('/') == "\\" -> return ""
+        isString("a") || isString('a') -> return ""
+        value3.method_2("a") || value3.method_2('a') -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch.
-fun case_2(value1: String, value2: Char, value3: A): Int {
+fun case_2(value1: String, value2: Char, value3: A): String {
     return when {
-        value1.isEmpty() -> 1
-        value1 == "..." || value1 == ":::" -> 2
-        value1.equals("-") -> 3
-        value2 == '_' -> 4
-        value2 > 10.toChar() -> 5
-        value2.equals('+') -> 6
-        getString('a') == "A" || getString('+') == "+" -> return 7
-        value3.method_1('-') == "_" || value3.method_1('/') == "\\" -> return 8
-        isString("a") || isString('a') -> return 9
-        value3.method_2("a") || value3.method_2('a') -> return 10
-        else -> 11
+        value1.isEmpty() -> ""
+        value1 == "..." || value1 == ":::" -> ""
+        value1.equals("-") -> ""
+        value2 == '_' -> ""
+        value2 > 10.toChar() -> ""
+        value2.equals('+') -> ""
+        getString('a') == "A" || getString('+') == "+" -> return ""
+        value3.method_1('-') == "_" || value3.method_1('/') == "\\" -> return ""
+        isString("a") || isString('a') -> return ""
+        value3.method_2("a") || value3.method_2('a') -> return ""
+        else -> ""
     }
 }

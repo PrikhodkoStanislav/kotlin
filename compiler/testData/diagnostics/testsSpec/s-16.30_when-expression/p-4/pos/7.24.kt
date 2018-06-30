@@ -9,24 +9,24 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one break expression.
-fun case_1(value: Any?): Int {
+fun case_1(value: Any?): String {
     loop@ while (true) {
         when (value) {
-            break@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
+            break@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
         }
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one break expression.
-fun case_2(value: Any?): Int? {
-    var whenValue: Int? = null
+fun case_2(value: Any?): String? {
+    var whenValue: String? = null
 
     loop@ while (true) {
         <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
-            break@loop <!UNREACHABLE_CODE!>-> 1
-            else -> 2
+            break@loop <!UNREACHABLE_CODE!>-> ""
+            else -> ""
         }<!>
     }
 
@@ -34,38 +34,38 @@ fun case_2(value: Any?): Int? {
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several break expressions.
-fun case_3(value: Any?): Int {
+fun case_3(value: Any?): String {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
                 loop4@ while (true) {
                     when (value) {
-                        break@loop1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
-                        <!UNREACHABLE_CODE!>break@loop2 -> return 2<!>
-                        <!UNREACHABLE_CODE!>break@loop3 -> return 3<!>
-                        <!UNREACHABLE_CODE!>break@loop4 -> return 4<!>
+                        break@loop1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
+                        <!UNREACHABLE_CODE!>break@loop2 -> return ""<!>
+                        <!UNREACHABLE_CODE!>break@loop3 -> return ""<!>
+                        <!UNREACHABLE_CODE!>break@loop4 -> return ""<!>
                     }
                 }
             }
         }
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several break expressions.
-fun case_4(value: Any?): Int? {
-    var whenValue: Int? = null
+fun case_4(value: Any?): String? {
+    var whenValue: String? = null
 
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
                 loop4@ while (true) {
                     <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
-                        break@loop1 <!UNREACHABLE_CODE!>-> 1
-                        break@loop2 -> 2
-                        break@loop3 -> 3
-                        break@loop4 -> 4
+                        break@loop1 <!UNREACHABLE_CODE!>-> ""
+                        break@loop2 -> ""
+                        break@loop3 -> ""
+                        break@loop4 -> ""
                     }<!>
                 }
             }

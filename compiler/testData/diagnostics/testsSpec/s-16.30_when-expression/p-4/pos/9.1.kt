@@ -9,25 +9,25 @@
  */
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and expression as when condition.
-fun case_1(value: Int?): Int = when (value) {
-    0 -> 0
-    1 -> 1
-    2 -> 2
-    else -> 3
+fun case_1(value: Int?): String = when (value) {
+    0 -> ""
+    1 -> ""
+    2 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and type test as when condition.
-fun case_2(value: Any): Int = when (value) {
-    is Int -> 0
-    is Boolean -> 1
-    is String -> 2
-    else -> 3
+fun case_2(value: Any): String = when (value) {
+    is Int -> ""
+    is Boolean -> ""
+    is String -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and range test as when condition.
-fun case_2(value: Int): Int = when (value) {
-    in -10..10 -> 0
-    in 11..1000 -> 1
-    in 1000..Int.MAX_VALUE -> 2
-    else -> 3
+fun case_2(value: Int): String = when (value) {
+    in -10..10 -> ""
+    in 11..1000 -> ""
+    in 1000..Int.MAX_VALUE -> ""
+    else -> ""
 }

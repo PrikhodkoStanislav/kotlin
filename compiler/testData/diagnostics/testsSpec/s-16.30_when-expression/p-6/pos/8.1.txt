@@ -1,7 +1,7 @@
 package
 
-public fun case_1(/*0*/ dir: Direction): kotlin.Int
-public fun case_2(/*0*/ value: Anything): kotlin.Int
+public fun case_1(/*0*/ dir: Direction): kotlin.String
+public fun case_2(/*0*/ value: Anything): kotlin.String
 
 public final enum class Anything : kotlin.Enum<Anything> {
     enum entry EVERYTHING

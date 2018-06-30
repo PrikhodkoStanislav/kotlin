@@ -9,20 +9,20 @@
  */
 
 // CASE DESCRIPTION: 'When' with one type checking operator.
-fun case_1(value: Any): Int {
+fun case_1(value: Any): String {
     when (value) {
-        is<!SYNTAX!><!> -> return 1
+        is<!SYNTAX!><!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with two type checking operators.
-fun case_2(value: Any): Int {
+fun case_2(value: Any): String {
     when (value) {
-        is<!SYNTAX!><!> -> return 1
-        is<!SYNTAX!><!> -> return 2
+        is<!SYNTAX!><!> -> return ""
+        is<!SYNTAX!><!> -> return ""
     }
 
-    return -1
+    return ""
 }

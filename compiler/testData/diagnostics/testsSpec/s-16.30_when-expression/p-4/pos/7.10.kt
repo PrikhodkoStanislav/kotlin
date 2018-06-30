@@ -9,30 +9,30 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Any?, value1: Int, value2: Long): Int = when (value) {
-    -100..-1000 -> 1
-    0..0-> 2
-    -100..9 -> 3
-    10..100 -> 4
-    101..value1 -> 5
-    value1..value2 -> 6
-    value2..102301239123L -> 7
-    null -> 8
-    else -> 9
+fun case_1(value: Any?, value1: Int, value2: Long): String = when (value) {
+    -100..-1000 -> ""
+    0..0 -> ""
+    -100..9 -> ""
+    10..100 -> ""
+    101..value1 -> ""
+    value1..value2 -> ""
+    value2..102301239123L -> ""
+    null -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Any?, value1: Int, value2: Long): Int {
+fun case_2(value: Any?, value1: Int, value2: Long): String {
     when (value) {
-        -100..-1000 -> return 1
-        0..0-> return 2
-        -100..9 -> return 3
-        10..100 -> return 4
-        101..value1 -> return 5
-        value1..value2 -> return 6
-        value2..102301239123L -> return 7
-        null -> return 8
+        -100..-1000 -> return ""
+        0..0 -> return ""
+        -100..9 -> return ""
+        10..100 -> return ""
+        101..value1 -> return ""
+        value1..value2 -> return ""
+        value2..102301239123L -> return ""
+        null -> return ""
     }
 
-    return -1
+    return ""
 }

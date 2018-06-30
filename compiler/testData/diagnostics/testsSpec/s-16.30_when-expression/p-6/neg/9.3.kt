@@ -17,30 +17,30 @@ enum class Anything {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum class without null-check branch.
-fun case_1(value: Direction?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    Direction.EAST -> 1
-    Direction.SOUTH -> 2
-    Direction.NORTH -> 3
-    Direction.WEST -> 3
+fun case_1(value: Direction?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    Direction.EAST -> ""
+    Direction.SOUTH -> ""
+    Direction.NORTH -> ""
+    Direction.WEST -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum class with null-check branch, but all possible values not covered.
-fun case_2(value: Direction?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    Direction.EAST -> 1
-    Direction.SOUTH -> 2
-    Direction.NORTH -> 3
-    null -> 3
+fun case_2(value: Direction?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    Direction.EAST -> ""
+    Direction.SOUTH -> ""
+    Direction.NORTH -> ""
+    null -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum class without branches.
 fun case_3(value: Anything): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) {}
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum class (with only one value) without null-check branch.
-fun case_4(value: Anything?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    Anything.EVERYTHING -> 1
+fun case_4(value: Anything?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    Anything.EVERYTHING -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum class (with only one value) with null-check branch, but value not covered.
-fun case_5(value: Anything?): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    null -> 1
+fun case_5(value: Anything?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    null -> ""
 }

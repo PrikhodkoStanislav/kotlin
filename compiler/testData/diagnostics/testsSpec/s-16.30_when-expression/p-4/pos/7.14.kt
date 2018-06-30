@@ -9,26 +9,26 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Int?, value1: List<Int>, value2: List<List<List<List<Int>>?>>, value3: List<List<() -> List<List<Int>>>>, value4: List<List<(() -> List<List<Int>>)?>>): Int = when (value) {
-    value1[0] -> 1
-    value1[1] -> 2
-    value2[0][11]!![-90][0L.toInt()] -> 2
-    value3[0][11]()[-90][0L.toInt()] -> 2
-    value4[0][11]!!()[-90][0L.toInt()] -> 2
-    null -> 3
-    else -> 4
+fun case_1(value: Int?, value1: List<Int>, value2: List<List<List<List<Int>>?>>, value3: List<List<() -> List<List<Int>>>>, value4: List<List<(() -> List<List<Int>>)?>>): String = when (value) {
+    value1[0] -> ""
+    value1[1] -> ""
+    value2[0][11]!![-90][0L.toInt()] -> ""
+    value3[0][11]()[-90][0L.toInt()] -> ""
+    value4[0][11]!!()[-90][0L.toInt()] -> ""
+    null -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Int?, value1: List<Int>, value2: List<List<List<List<Int>>?>>, value3: List<List<() -> List<List<Int>>>>, value4: List<List<(() -> List<List<Int>>)?>>): Int {
+fun case_2(value: Int?, value1: List<Int>, value2: List<List<List<List<Int>>?>>, value3: List<List<() -> List<List<Int>>>>, value4: List<List<(() -> List<List<Int>>)?>>): String {
     when (value) {
-        value1[0] -> return 1
-        value1[1] -> return 2
-        value2[0][11]!![-90][0L.toInt()] -> return 2
-        value3[0][11]()[-90][0L.toInt()] -> return 2
-        value4[0][11]!!()[-90][0L.toInt()] -> return 2
-        null -> return 3
+        value1[0] -> return ""
+        value1[1] -> return ""
+        value2[0][11]!![-90][0L.toInt()] -> return ""
+        value3[0][11]()[-90][0L.toInt()] -> return ""
+        value4[0][11]!!()[-90][0L.toInt()] -> return ""
+        null -> return ""
     }
 
-    return -1
+    return ""
 }

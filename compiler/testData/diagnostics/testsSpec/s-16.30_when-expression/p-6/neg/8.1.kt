@@ -19,19 +19,19 @@ enum class Anything {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum (several branches).
-fun case_1(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    Direction.EAST -> 1
-    Direction.SOUTH -> 2
-    Direction.NORTH -> 3
+fun case_1(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    Direction.EAST -> ""
+    Direction.SOUTH -> ""
+    Direction.NORTH -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum (one branch).
-fun case_2(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {
-    Direction.EAST -> 1
+fun case_2(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+    Direction.EAST -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum with several values (no branches).
-fun case_3(value: Direction): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+fun case_3(value: Direction): String = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
 
 // CASE DESCRIPTION: Checking for not exhaustive in 'when' on the Enum with one value (no branches).
-fun case_4(value: Anything): Int = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }
+fun case_4(value: Anything): String = <!NO_ELSE_IN_WHEN!>when<!>(<!UNUSED_EXPRESSION!>value<!>) { }

@@ -9,20 +9,20 @@
  */
 
 // CASE DESCRIPTION: 'When' with one contains operator.
-fun case_1(value: Int): Int {
+fun case_1(value: Int): String {
     when (<!UNUSED_EXPRESSION!>value<!>) {
-        in<!SYNTAX!><!> -> return 1
+        in<!SYNTAX!><!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with two contains operators.
-fun case_2(value: Int): Int {
+fun case_2(value: Int): String {
     when (<!UNUSED_EXPRESSION!>value<!>) {
-        in<!SYNTAX!><!> -> return 1
-        in<!SYNTAX!><!> -> return 2
+        in<!SYNTAX!><!> -> return ""
+        in<!SYNTAX!><!> -> return ""
     }
 
-    return -1
+    return ""
 }

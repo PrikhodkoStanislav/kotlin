@@ -20,34 +20,34 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
-    fun fun1(): Int {
+fun case_1(value: Int?, value1: List<Int>, value2: A, value3: A?): String {
+    fun fun_1(): Int {
         return value1[0] + value1[1]
     }
 
     return when (value) {
-        fun1() -> 1
-        value2.mul(value!!) -> 2
-        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 3
-        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 4
-        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> 5
-        else -> 6
+        fun_1() -> ""
+        value2.mul(value!!) -> ""
+        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
+        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
+        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Int?, value1: List<Int>, value2: A, value3: A?): Int {
-    fun fun1(): Int {
+fun case_2(value: Int?, value1: List<Int>, value2: A, value3: A?): String {
+    fun fun_1(): Int {
         return value1[0] + value1[1]
     }
 
     when (value) {
-        fun1() -> return 1
-        value2.mul(value!!) -> return 2
-        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> <!UNUSED_EXPRESSION!>3<!>
-        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> <!UNUSED_EXPRESSION!>4<!>
-        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return 5
+        fun_1() -> return ""
+        value2.mul(value!!) -> return ""
+        value2.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
+        value3?.nestedMul(<!DEBUG_INFO_SMARTCAST!>value<!>)?.invoke(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
+        value3?.mul(<!DEBUG_INFO_SMARTCAST!>value<!>) -> return ""
     }
 
-    return -1
+    return ""
 }

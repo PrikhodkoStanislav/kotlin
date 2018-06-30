@@ -1,8 +1,8 @@
 package
 
-public fun case_1(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long, /*6*/ value7: A, /*7*/ value8: kotlin.Char): kotlin.Int
-public fun case_2(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long, /*6*/ value7: A, /*7*/ value8: kotlin.Char): kotlin.Int
-public fun case_3(): kotlin.Int
+public fun case_1(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long, /*6*/ value7: A, /*7*/ value8: kotlin.Char): kotlin.String
+public fun case_2(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Float, /*2*/ value3: kotlin.Double, /*3*/ value4: kotlin.Short, /*4*/ value5: kotlin.Byte, /*5*/ value6: kotlin.Long, /*6*/ value7: A, /*7*/ value8: kotlin.Char): kotlin.String
+public fun case_3(): kotlin.String
 public fun getNumber(/*0*/ char: kotlin.Char): kotlin.Int
 public fun isInt(/*0*/ value: kotlin.Any): kotlin.Boolean
 

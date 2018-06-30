@@ -9,18 +9,18 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Any?): Int {
+fun case_1(value: Any?): String {
     val object1 = object {
         val prop1 = 1
     }
 
     return when (value) {
-        object {} -> 1
+        object {} -> ""
         object {
             val o1 = object {
                 val o2 = object {}
             }
-        } -> 2
+        } -> ""
         object {
             var lambda1 = {
                 when {
@@ -28,25 +28,25 @@ fun case_1(value: Any?): Int {
                 }
             }
             val prop1 = 1
-        } -> 3
-        object1 -> 4
-        else -> 5
+        } -> ""
+        object1 -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Any?): Int {
+fun case_2(value: Any?): String {
     val object1 = object {
         val prop1 = 1
     }
 
     when (value) {
-        object {} -> return 1
+        object {} -> return ""
         object {
             val o1 = object {
                 val o2 = object {}
             }
-        } -> return 2
+        } -> return ""
         object {
             var lambda1 = {
                 when {
@@ -55,8 +55,8 @@ fun case_2(value: Any?): Int {
             }
             val prop1 = 1
         } -> <!UNUSED_EXPRESSION!>3<!>
-        object1 -> return 4
+        object1 -> return ""
     }
 
-    return -1
+    return ""
 }

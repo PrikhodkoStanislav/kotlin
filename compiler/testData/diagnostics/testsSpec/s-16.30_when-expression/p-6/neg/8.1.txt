@@ -1,9 +1,9 @@
 package
 
-public fun case_1(/*0*/ value: Direction): kotlin.Int
-public fun case_2(/*0*/ value: Direction): kotlin.Int
-public fun case_3(/*0*/ value: Direction): kotlin.Int
-public fun case_4(/*0*/ value: Anything): kotlin.Int
+public fun case_1(/*0*/ value: Direction): kotlin.String
+public fun case_2(/*0*/ value: Direction): kotlin.String
+public fun case_3(/*0*/ value: Direction): kotlin.String
+public fun case_4(/*0*/ value: Anything): kotlin.String
 
 public final enum class Anything : kotlin.Enum<Anything> {
     enum entry EVERYTHING

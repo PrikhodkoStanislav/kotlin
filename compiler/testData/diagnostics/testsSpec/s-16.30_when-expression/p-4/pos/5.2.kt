@@ -19,40 +19,40 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined.
-fun case_1(value: Int, value1: List<IntArray>, value2: A, value3: IntRange): Int {
+fun case_1(value: Int, value1: List<IntArray>, value2: A, value3: IntRange): String {
     when (value) {
-        in value1[0] -> return 1
-        in value1[10] -> return 2
-        in listOf(3, 5, 6, 7, 8) -> return 3
-        in value2 -> return 4
-        in value3 -> return 5
-        in value2.getIntArray(90000) -> return 6
+        in value1[0] -> return ""
+        in value1[10] -> return ""
+        in listOf(3, 5, 6, 7, 8) -> return ""
+        in value2 -> return ""
+        in value3 -> return ""
+        in value2.getIntArray(90000) -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined, and 'else' branch.
-fun case_2(value: Int, value1: List<IntArray>, value2: A): Int = when (value) {
-    in value1[0] -> 1
-    in value1[10] -> 2
-    in listOf(3, 5, 6, 7, 8) -> 3
-    in value2 -> 4
-    in value2.getIntArray(90000) -> 5
-    else -> 6
+fun case_2(value: Int, value1: List<IntArray>, value2: A): String = when (value) {
+    in value1[0] -> ""
+    in value1[10] -> ""
+    in listOf(3, 5, 6, 7, 8) -> ""
+    in value2 -> ""
+    in value2.getIntArray(90000) -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined.
-fun case_3(value: Int, value1: A): Int {
+fun case_3(value: Int, value1: A): String {
     when (value) {
-        in value1.getIntArray(90000) -> return 1
+        in value1.getIntArray(90000) -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined, and 'else' branch.
-fun case_4(value: Int, value1: A): Int = when (value) {
-    in value1.getIntArray(90000) -> 1
-    else -> 2
+fun case_4(value: Int, value1: A): String = when (value) {
+    in value1.getIntArray(90000) -> ""
+    else -> ""
 }

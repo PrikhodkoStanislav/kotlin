@@ -13,7 +13,7 @@ class A {
     var prop_2 = 2
     val lambda_1 = {1}
 
-    fun fun1(): Int {
+    fun fun_1(): Int {
         return 1
     }
 
@@ -25,8 +25,8 @@ class A {
             4 -> this.prop_1
             5 -> this.lambda_1()
             6 -> this::lambda_1.get()()
-            7 -> this.fun1()
-            8 -> this::fun1.invoke()
+            7 -> this.fun_1()
+            8 -> this::fun_1.invoke()
         }
     }
 }

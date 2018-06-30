@@ -109,99 +109,99 @@ fun case_1(
     value7: Float,
     value8: Double,
     value9: A
-): Int {
+): String {
     when {
-        <!TYPE_MISMATCH!>-9 + 11<!> -> return 1
-        <!TYPE_MISMATCH!>9 / 11<!> -> return 2
-        <!TYPE_MISMATCH!>9 * value2<!> -> return 3
-        <!TYPE_MISMATCH!>-9 % 11<!> -> return 4
-        <!TYPE_MISMATCH!>9 or 11<!> -> return 5
-        <!TYPE_MISMATCH!>-9 and 11<!> -> return 6
-        <!TYPE_MISMATCH!>value1 xor 11<!> -> return 7
-        <!TYPE_MISMATCH!>-0 shr 50<!> -> return 8
-        <!TYPE_MISMATCH!>value1 ushr value2<!> -> return 9
-        <!TYPE_MISMATCH!>9.inv()<!> -> return 10
-        <!TYPE_MISMATCH!>9 % 11 + 123 - value1 or 11 and value2<!> -> return 11
-        <!TYPE_MISMATCH!>value3 * 143.toShort()<!> -> return 12
-        <!TYPE_MISMATCH!>getShort(13) - 143.toShort()<!> -> return 13
-        <!TYPE_MISMATCH!>value4 * (-143).toByte()<!> -> return 14
-        <!TYPE_MISMATCH!>value9.getByte(22) % 143.toByte()<!> -> return 15
-        <!TYPE_MISMATCH!>value5 +10<!> -> return 16
-        <!TYPE_MISMATCH!>143.toChar() - 11<!> -> return 17
-        <!TYPE_MISMATCH!>value6 * 432L<!> -> return 18
-        <!TYPE_MISMATCH!>-0L * 20L<!> -> return 19
-        <!TYPE_MISMATCH!>value9.getLong(123) % 1234123513543L<!> -> return 20
-        <!TYPE_MISMATCH!>-.012f / value7<!> -> return 21
-        <!TYPE_MISMATCH!>value9.getLong(321) - 10000f<!> -> return 22
-        <!TYPE_MISMATCH!>-.012 + value8<!> -> return 23
-        <!TYPE_MISMATCH!>value9.getDouble(321) - 10000.0<!> -> return 24
-        <!TYPE_MISMATCH!>9 % 11 + 123 - value1 or 11 and <!TYPE_MISMATCH!>value2 / value9.getDouble(321) - -.1223F<!><!> -> return 25
+        <!TYPE_MISMATCH!>-9 + 11<!> -> return ""
+        <!TYPE_MISMATCH!>9 / 11<!> -> return ""
+        <!TYPE_MISMATCH!>9 * value2<!> -> return ""
+        <!TYPE_MISMATCH!>-9 % 11<!> -> return ""
+        <!TYPE_MISMATCH!>9 or 11<!> -> return ""
+        <!TYPE_MISMATCH!>-9 and 11<!> -> return ""
+        <!TYPE_MISMATCH!>value1 xor 11<!> -> return ""
+        <!TYPE_MISMATCH!>-0 shr 50<!> -> return ""
+        <!TYPE_MISMATCH!>value1 ushr value2<!> -> return ""
+        <!TYPE_MISMATCH!>9.inv()<!> -> return ""
+        <!TYPE_MISMATCH!>9 % 11 + 123 - value1 or 11 and value2<!> -> return ""
+        <!TYPE_MISMATCH!>value3 * 143.toShort()<!> -> return ""
+        <!TYPE_MISMATCH!>getShort(13) - 143.toShort()<!> -> return ""
+        <!TYPE_MISMATCH!>value4 * (-143).toByte()<!> -> return ""
+        <!TYPE_MISMATCH!>value9.getByte(22) % 143.toByte()<!> -> return ""
+        <!TYPE_MISMATCH!>value5 +10<!> -> return ""
+        <!TYPE_MISMATCH!>143.toChar() - 11<!> -> return ""
+        <!TYPE_MISMATCH!>value6 * 432L<!> -> return ""
+        <!TYPE_MISMATCH!>-0L * 20L<!> -> return ""
+        <!TYPE_MISMATCH!>value9.getLong(123) % 1234123513543L<!> -> return ""
+        <!TYPE_MISMATCH!>-.012f / value7<!> -> return ""
+        <!TYPE_MISMATCH!>value9.getLong(321) - 10000f<!> -> return ""
+        <!TYPE_MISMATCH!>-.012 + value8<!> -> return ""
+        <!TYPE_MISMATCH!>value9.getDouble(321) - 10000.0<!> -> return ""
+        <!TYPE_MISMATCH!>9 % 11 + 123 - value1 or 11 and <!TYPE_MISMATCH!>value2 / value9.getDouble(321) - -.1223F<!><!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with String and Char in 'when entry'.
-fun case_2(value1: String, value2: Char, value3: A): Int {
+fun case_2(value1: String, value2: Char, value3: A): String {
     when {
-        <!TYPE_MISMATCH!>""<!> -> return 1
-        <!CONSTANT_EXPECTED_TYPE_MISMATCH!>'-'<!> -> return 2
-        <!TYPE_MISMATCH!>"$value1$value2"<!> -> return 3
-        <!TYPE_MISMATCH!>value1<!> -> return 4
-        <!TYPE_MISMATCH!>"$value1${getString(43)}"<!> -> return 5
-        <!TYPE_MISMATCH!>"${value3.getString(33)}"<!> -> return 6
-        <!TYPE_MISMATCH!>"${value3.getString(33)}"<!> -> return 7
-        <!TYPE_MISMATCH!>getChar(32)<!> -> return 8
-        <!TYPE_MISMATCH!>value3.getChar(32) - 20<!> -> return 9
-        <!TYPE_MISMATCH!>value1 + "..." + value3.getString(43)<!> -> return 10
+        <!TYPE_MISMATCH!>""<!> -> return ""
+        <!CONSTANT_EXPECTED_TYPE_MISMATCH!>'-'<!> -> return ""
+        <!TYPE_MISMATCH!>"$value1$value2"<!> -> return ""
+        <!TYPE_MISMATCH!>value1<!> -> return ""
+        <!TYPE_MISMATCH!>"$value1${getString(43)}"<!> -> return ""
+        <!TYPE_MISMATCH!>"${value3.getString(33)}"<!> -> return ""
+        <!TYPE_MISMATCH!>"${value3.getString(33)}"<!> -> return ""
+        <!TYPE_MISMATCH!>getChar(32)<!> -> return ""
+        <!TYPE_MISMATCH!>value3.getChar(32) - 20<!> -> return ""
+        <!TYPE_MISMATCH!>value1 + "..." + value3.getString(43)<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with Nothing in 'when entry'.
-fun case_3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): Int {
+fun case_3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): String {
     when {
-        value1 -> <!UNREACHABLE_CODE!>return 1<!>
-        <!UNREACHABLE_CODE!>value2.getNothing() -> return 2<!>
-        <!UNREACHABLE_CODE!>getNothing() -> return 3<!>
-        <!UNREACHABLE_CODE!>throw Exception() -> return 4<!>
+        value1 -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>value2.getNothing() -> return ""<!>
+        <!UNREACHABLE_CODE!>getNothing() -> return ""<!>
+        <!UNREACHABLE_CODE!>throw Exception() -> return ""<!>
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // CASE DESCRIPTION: 'When' with Unit in 'when entry'.
-fun case_4(value1: Unit, value2: A): Int {
+fun case_4(value1: Unit, value2: A): String {
     when {
-        <!TYPE_MISMATCH!>value1<!> -> return 1
-        <!TYPE_MISMATCH!>value2.getUnit()<!> -> return 2
-        <!TYPE_MISMATCH!>getUnit()<!> -> return 3
-        <!TYPE_MISMATCH!>{}<!> -> return 4
-        <!TYPE_MISMATCH!>fun() {}<!> -> return 5
+        <!TYPE_MISMATCH!>value1<!> -> return ""
+        <!TYPE_MISMATCH!>value2.getUnit()<!> -> return ""
+        <!TYPE_MISMATCH!>getUnit()<!> -> return ""
+        <!TYPE_MISMATCH!>{}<!> -> return ""
+        <!TYPE_MISMATCH!>fun() {}<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with Any in 'when entry'.
-fun case_5(value1: Any, value2: A): Int {
+fun case_5(value1: Any, value2: A): String {
     when {
-        <!TYPE_MISMATCH!>value1<!> -> return 1
-        <!TYPE_MISMATCH!>value2.getAny()<!> -> return 2
-        <!TYPE_MISMATCH!>getAny()<!> -> return 3
+        <!TYPE_MISMATCH!>value1<!> -> return ""
+        <!TYPE_MISMATCH!>value2.getAny()<!> -> return ""
+        <!TYPE_MISMATCH!>getAny()<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with List (Collection example) in 'when entry'.
-fun case_6(value1: List<Int>, value2: A): Int {
+fun case_6(value1: List<Int>, value2: A): String {
     when {
-        <!TYPE_MISMATCH!>value1<!> -> return 1
-        <!TYPE_MISMATCH!>value2.getList()<!> -> return 2
-        <!TYPE_MISMATCH!>getList()<!> -> return 3
+        <!TYPE_MISMATCH!>value1<!> -> return ""
+        <!TYPE_MISMATCH!>value2.getList()<!> -> return ""
+        <!TYPE_MISMATCH!>getList()<!> -> return ""
     }
 
-    return -1
+    return ""
 }

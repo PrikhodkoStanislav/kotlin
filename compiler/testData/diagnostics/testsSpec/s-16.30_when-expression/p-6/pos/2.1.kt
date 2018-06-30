@@ -9,21 +9,21 @@
  */
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (several value check branches and 'else' branch).
-fun case_1(value: Int): Int = when {
-    value == 0 -> 1
-    value > 0 && value <= 10 -> 2
-    value > 10 && value <= 100 -> 3
-    value > 100 -> 4
-    else -> 5
+fun case_1(value: Int): String = when {
+    value == 0 -> ""
+    value > 0 && value <= 10 -> ""
+    value > 10 && value <= 100 -> ""
+    value > 100 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
-fun case_2(): Int = when {
-    true -> 1
-    else -> 2
+fun case_2(): String = when {
+    true -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
-fun case_3(): Int = when {
-    else -> 1
+fun case_3(): String = when {
+    else -> ""
 }

@@ -9,27 +9,27 @@
  */
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (several branches).
-fun case_1(value: Int): Int = when(value) {
-    0 -> 1
-    1 -> 2
-    2 -> 3
-    3 -> 4
-    else -> 5
+fun case_1(value: Int): String = when(value) {
+    0 -> ""
+    1 -> ""
+    2 -> ""
+    3 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
-fun case_2(value: Boolean): Int = when(value) {
-    true -> 1
-    else -> 2
+fun case_2(value: Boolean): String = when(value) {
+    true -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' with constant bound value (value check branch and 'else' branch).
-fun case_3(): Int = when (true) {
-    true -> 1
-    else -> 2
+fun case_3(): String = when (true) {
+    true -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
-fun case_4(value: Int): Int = when(<!UNUSED_EXPRESSION!>value<!>) {
-    else -> 1
+fun case_4(value: Int): String = when(<!UNUSED_EXPRESSION!>value<!>) {
+    else -> ""
 }

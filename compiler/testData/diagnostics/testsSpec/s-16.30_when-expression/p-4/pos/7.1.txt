@@ -1,19 +1,19 @@
 package
 
-public fun case_1(/*0*/ value: kotlin.Short, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.Int
-public fun case_10(/*0*/ value: kotlin.Byte, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.Int
-public fun case_11(/*0*/ value: kotlin.Char): kotlin.Int
-public fun case_12(/*0*/ value: kotlin.Char): kotlin.Int
-public fun case_13(/*0*/ value: kotlin.Long, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.Int
-public fun case_14(/*0*/ value: kotlin.Long, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.Int
-public fun case_2(/*0*/ value: kotlin.Short, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.Int
-public fun case_3(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.Int
-public fun case_4(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.Int
-public fun case_5(/*0*/ value: kotlin.Float, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.Int
-public fun case_6(/*0*/ value: kotlin.Float, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.Int
-public fun case_7(/*0*/ value: kotlin.Double, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.Int
-public fun case_8(/*0*/ value: kotlin.Double, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.Int
-public fun case_9(/*0*/ value: kotlin.Byte, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.Int
+public fun case_1(/*0*/ value: kotlin.Short, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.String
+public fun case_10(/*0*/ value: kotlin.Byte, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.String
+public fun case_11(/*0*/ value: kotlin.Char): kotlin.String
+public fun case_12(/*0*/ value: kotlin.Char): kotlin.String
+public fun case_13(/*0*/ value: kotlin.Long, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.String
+public fun case_14(/*0*/ value: kotlin.Long, /*1*/ value1: kotlin.Long, /*2*/ value2: A): kotlin.String
+public fun case_2(/*0*/ value: kotlin.Short, /*1*/ value1: kotlin.Short, /*2*/ value2: A): kotlin.String
+public fun case_3(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.String
+public fun case_4(/*0*/ value: kotlin.Int, /*1*/ value1: kotlin.Int, /*2*/ value2: A): kotlin.String
+public fun case_5(/*0*/ value: kotlin.Float, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.String
+public fun case_6(/*0*/ value: kotlin.Float, /*1*/ value1: kotlin.Float, /*2*/ value2: A): kotlin.String
+public fun case_7(/*0*/ value: kotlin.Double, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.String
+public fun case_8(/*0*/ value: kotlin.Double, /*1*/ value1: kotlin.Double, /*2*/ value2: A): kotlin.String
+public fun case_9(/*0*/ value: kotlin.Byte, /*1*/ value1: kotlin.Byte, /*2*/ value2: A): kotlin.String
 public fun getByte(/*0*/ number: kotlin.Int): kotlin.Byte
 public fun getChar(/*0*/ number: kotlin.Int): kotlin.Char
 public fun getDouble(/*0*/ number: kotlin.Int): kotlin.Double

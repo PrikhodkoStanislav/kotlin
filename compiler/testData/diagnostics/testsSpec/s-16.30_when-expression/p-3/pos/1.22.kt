@@ -8,14 +8,14 @@
  DESCRIPTION: 'When' with return expression in the control structure body.
  */
 
-fun case_1(value: Int): Int {
+fun case_1(value: Int): String {
     when {
-        value == 1 -> return 1
-        value == 2 -> (return 2)
+        value == 1 -> return ""
+        value == 2 -> (return "")
         value == 3 -> {
-            return 3
+            return ""
         }
     }
 
-    return -1
+    return ""
 }

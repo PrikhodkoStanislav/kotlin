@@ -9,39 +9,39 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Int?): Int = when (value) {
+fun case_1(value: Int?): String = when (value) {
     try {
         4
     } catch (e: Exception) {
         5
-    } -> 1
+    } -> ""
     try {
         throw Exception()
     } catch (e: Exception) {
         6
     } finally {
         <!UNUSED_EXPRESSION!>7<!>
-    } -> 2
-    else -> 4
+    } -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Int?): Int {
+fun case_2(value: Int?): String {
     when (value) {
         try {
             4
         } catch (e: Exception) {
             5
-        } -> return 1
+        } -> return ""
         try {
             throw Exception()
         } catch (e: Exception) {
             6
         } finally {
             <!UNUSED_EXPRESSION!>7<!>
-        } -> return 2
-        else -> return 4
+        } -> return ""
+        else -> return ""
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }

@@ -26,30 +26,30 @@ class A {
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch.
-fun case_1(value1: A): Int {
+fun case_1(value1: A): String {
     when {
-        false || false && true || ((((true)))) -> return 1
-        ((value1.method_1("some string"))) || true -> return 2
-        value1.method_2("") && ((((false)))) -> return 3
-        value1.method_2("") || !!!!!!isShortString("++++") && isString("") -> return 4
-        value1.method_2("") -> return 5
-        true && true && true && !!!true && true -> return 6
-        false || false || false || !!!false || false -> return 7
+        false || false && true || ((((true)))) -> return ""
+        ((value1.method_1("some string"))) || true -> return ""
+        value1.method_2("") && ((((false)))) -> return ""
+        value1.method_2("") || !!!!!!isShortString("++++") && isString("") -> return ""
+        value1.method_2("") -> return ""
+        true && true && true && !!!true && true -> return ""
+        false || false || false || !!!false || false -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch.
-fun case_2(value1: A): Int {
+fun case_2(value1: A): String {
     return when {
-        false || false && true || ((((true)))) -> return 1
-        ((value1.method_1("some string"))) || true -> return 2
-        value1.method_2("") && ((((false)))) -> return 3
-        value1.method_2("") || !!!!!!isShortString("++++") && isString("") -> return 4
-        value1.method_2("") -> return 5
-        true && true && true && !!!true && true -> return 6
-        false || false || false || !!!false || false -> return 7
-        else -> 8
+        false || false && true || ((((true)))) -> return ""
+        ((value1.method_1("some string"))) || true -> return ""
+        value1.method_2("") && ((((false)))) -> return ""
+        value1.method_2("") || !!!!!!isShortString("++++") && isString("") -> return ""
+        value1.method_2("") -> return ""
+        true && true && true && !!!true && true -> return ""
+        false || false || false || !!!false || false -> return ""
+        else -> ""
     }
 }

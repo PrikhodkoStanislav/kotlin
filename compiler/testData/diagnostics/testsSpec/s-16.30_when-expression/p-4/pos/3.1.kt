@@ -9,59 +9,59 @@
  */
 
 // CASE DESCRIPTION: 'When' with type test condition on the various basic types.
-fun case_1(value: Any): Int {
+fun case_1(value: Any): String {
     when (value) {
-        is Int -> return 1
-        is Float -> return 2
-        is Double -> return 3
-        is String -> return 4
-        is Char -> return 5
-        is Boolean -> return 6
+        is Int -> return ""
+        is Float -> return ""
+        is Double -> return ""
+        is String -> return ""
+        is Char -> return ""
+        is Boolean -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various basic types.
-fun case_2(value: Any): Int = when (value) {
-    is Int -> 1
-    is Float -> 2
-    is Double -> 3
-    is String -> 4
-    is Char -> 5
-    is Boolean -> 6
-    else -> 7
+fun case_2(value: Any): String = when (value) {
+    is Int -> ""
+    is Float -> ""
+    is Double -> ""
+    is String -> ""
+    is Char -> ""
+    is Boolean -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the one basic types (Int).
-fun case_3(value: Any): Int = when (value) {
-    is Int -> 1
-    else -> 7
+fun case_3(value: Any): String = when (value) {
+    is Int -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with type test condition on the one basic types (Int).
-fun case_4(value: Any): Int {
+fun case_4(value: Any): String {
     when (value) {
-        is Int -> return 1
+        is Int -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Any.
-fun case_5(value: Any): Int = when (value) {
-    <!USELESS_IS_CHECK!>is Any<!> -> 1
-    else -> 2
+fun case_5(value: Any): String = when (value) {
+    <!USELESS_IS_CHECK!>is Any<!> -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Nothing.
-fun case_6(value: Any): Int = when (value) {
-    is Nothing -> 1
-    else -> 2
+fun case_6(value: Any): String = when (value) {
+    is Nothing -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on Unit.
-fun case_7(value: Any): Int = when (value) {
-    is Unit -> 1
-    else -> 2
+fun case_7(value: Any): String = when (value) {
+    is Unit -> ""
+    else -> ""
 }

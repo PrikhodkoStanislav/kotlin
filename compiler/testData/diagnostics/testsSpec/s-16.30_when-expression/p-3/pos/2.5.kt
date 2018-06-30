@@ -9,13 +9,13 @@
  */
 
 // CASE DESCRIPTION: 'When' with only one 'else' branch ('when' used as expression).
-fun case_1(): Int = when {
-    else -> 1
+fun case_1(): String = when {
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' with only one 'else' branch ('when' used as statement).
-fun case_2(): Int {
+fun case_2(): String {
     when {
-        else -> {return 1}
+        else -> {return ""}
     }
 }

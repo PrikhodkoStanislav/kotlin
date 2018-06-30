@@ -1,7 +1,7 @@
 package
 
-public fun case_1(/*0*/ value1: kotlin.Any, /*1*/ value2: kotlin.Any, /*2*/ value3: A, /*3*/ value4: B, /*4*/ value5: C, /*5*/ value6: D, /*6*/ value7: kotlin.Any, /*7*/ value8: kotlin.Any, /*8*/ value9: kotlin.Any): kotlin.Int
-public fun case_2(/*0*/ value1: kotlin.Any, /*1*/ value2: kotlin.Any, /*2*/ value3: A, /*3*/ value4: B, /*4*/ value5: C, /*5*/ value6: D, /*6*/ value7: kotlin.Any, /*7*/ value8: kotlin.Any, /*8*/ value9: kotlin.Any): kotlin.Int
+public fun case_1(/*0*/ value1: kotlin.Any, /*1*/ value2: kotlin.Any, /*2*/ value3: A, /*3*/ value4: B, /*4*/ value5: C, /*5*/ value6: D, /*6*/ value7: kotlin.Any, /*7*/ value8: kotlin.Any, /*8*/ value9: kotlin.Any): kotlin.String
+public fun case_2(/*0*/ value1: kotlin.Any, /*1*/ value2: kotlin.Any, /*2*/ value3: A, /*3*/ value4: B, /*4*/ value5: C, /*5*/ value6: D, /*6*/ value7: kotlin.Any, /*7*/ value8: kotlin.Any, /*8*/ value9: kotlin.Any): kotlin.String
 
 public open class A {
     public constructor A()

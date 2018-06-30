@@ -1,11 +1,11 @@
 package
 
-public fun case_1(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Int, /*2*/ value3: kotlin.Short, /*3*/ value4: kotlin.Byte, /*4*/ value5: kotlin.Char, /*5*/ value6: kotlin.Long, /*6*/ value7: kotlin.Float, /*7*/ value8: kotlin.Double, /*8*/ value9: A): kotlin.Int
-public fun case_2(/*0*/ value1: kotlin.String, /*1*/ value2: kotlin.Char, /*2*/ value3: A): kotlin.Int
-public fun case_3(/*0*/ value1: kotlin.Nothing, /*1*/ value2: A): kotlin.Int
-public fun case_4(/*0*/ value1: kotlin.Unit, /*1*/ value2: A): kotlin.Int
-public fun case_5(/*0*/ value1: kotlin.Any, /*1*/ value2: A): kotlin.Int
-public fun case_6(/*0*/ value1: kotlin.collections.List<kotlin.Int>, /*1*/ value2: A): kotlin.Int
+public fun case_1(/*0*/ value1: kotlin.Int, /*1*/ value2: kotlin.Int, /*2*/ value3: kotlin.Short, /*3*/ value4: kotlin.Byte, /*4*/ value5: kotlin.Char, /*5*/ value6: kotlin.Long, /*6*/ value7: kotlin.Float, /*7*/ value8: kotlin.Double, /*8*/ value9: A): kotlin.String
+public fun case_2(/*0*/ value1: kotlin.String, /*1*/ value2: kotlin.Char, /*2*/ value3: A): kotlin.String
+public fun case_3(/*0*/ value1: kotlin.Nothing, /*1*/ value2: A): kotlin.String
+public fun case_4(/*0*/ value1: kotlin.Unit, /*1*/ value2: A): kotlin.String
+public fun case_5(/*0*/ value1: kotlin.Any, /*1*/ value2: A): kotlin.String
+public fun case_6(/*0*/ value1: kotlin.collections.List<kotlin.Int>, /*1*/ value2: A): kotlin.String
 public fun getAny(): kotlin.Any
 public fun getByte(/*0*/ number: kotlin.Int): kotlin.Byte
 public fun getChar(/*0*/ number: kotlin.Int): kotlin.Char

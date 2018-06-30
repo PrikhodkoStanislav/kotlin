@@ -17,7 +17,7 @@ open class D: C() {}
 class E: D() {}
 
 // CASE DESCRIPTION: Checking correctness type (custom types) in 'when' without bound value.
-fun case_1(value: Int): Int {
+fun case_1(value: Int): String {
     val whenValue = when {
         value == 0 -> B()
         value > 0 && value <= 10 -> C()
@@ -28,11 +28,11 @@ fun case_1(value: Int): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking correctness type (custom types) in 'when' with bound value.
-fun case_2(value: Int): Int {
+fun case_2(value: Int): String {
     val whenValue = when(value) {
         0 -> B()
         1 -> C()
@@ -43,11 +43,11 @@ fun case_2(value: Int): Int {
     whenValue checkType { _<B>() }
     checkSubtype<A>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' without bound value.
-fun case_3(value: Int): Int {
+fun case_3(value: Int): String {
     val whenValue = when {
         value == 0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         value > 0 && value <= 10 -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -58,11 +58,11 @@ fun case_3(value: Int): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with bound value.
-fun case_4(value: Int): Int {
+fun case_4(value: Int): String {
     val whenValue = when(value) {
         0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         1 -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -73,5 +73,5 @@ fun case_4(value: Int): Int {
     whenValue checkType { _<Any>() }
     checkSubtype<Any>(whenValue)
 
-    return -1
+    return ""
 }

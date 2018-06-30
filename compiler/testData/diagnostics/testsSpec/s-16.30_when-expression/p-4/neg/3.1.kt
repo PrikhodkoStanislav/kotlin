@@ -11,28 +11,28 @@
 class A {}
 
 // CASE DESCRIPTION: 'When' with custom class type test condition.
-fun case_1(value: Any): Int {
+fun case_1(value: Any): String {
     when (value) {
-        <!NO_COMPANION_OBJECT!>A<!> -> return 1
+        <!NO_COMPANION_OBJECT!>A<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with Any type test condition.
-fun case_2(value: Any): Int {
+fun case_2(value: Any): String {
     when (value) {
-        <!NO_COMPANION_OBJECT!>Any<!> -> return 1
+        <!NO_COMPANION_OBJECT!>Any<!> -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with Nothing type test condition.
-fun case_3(value: Any): Int {
+fun case_3(value: Any): String {
     when (value) {
-        <!NO_COMPANION_OBJECT!>Nothing<!> -> return 1
+        <!NO_COMPANION_OBJECT!>Nothing<!> -> return ""
     }
 
-    return -1
+    return ""
 }

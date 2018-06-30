@@ -8,12 +8,12 @@
  DESCRIPTION: 'When' with bound value and 'when entry' with range exression, but wuthout contains operator.
  */
 
-fun case_1(value: Int): Int {
+fun case_1(value: Int): String {
     when (value) {
-        <!INCOMPATIBLE_TYPES!>0..10<!> -> return 1
-        <!INCOMPATIBLE_TYPES!>-10..10<!> -> return 2
-        <!INCOMPATIBLE_TYPES!>-0..0<!> -> return 3
+        <!INCOMPATIBLE_TYPES!>0..10<!> -> return ""
+        <!INCOMPATIBLE_TYPES!>-10..10<!> -> return ""
+        <!INCOMPATIBLE_TYPES!>-0..0<!> -> return ""
     }
 
-    return -1
+    return ""
 }

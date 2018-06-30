@@ -11,12 +11,12 @@
 class A {}
 
 // CASE DESCRIPTION: 'When' with object of custom class, without defined contains operator.
-fun case_1(value: Int, value1: A): Int {
+fun case_1(value: Int, value1: A): String {
     when (<!UNUSED_EXPRESSION!>value<!>) {
-        <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value1  -> return 1
+        <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value1  -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with object of various basic types (Int, Any, Nothing, Unit, Map — Collection example), without defined contains operator.
@@ -27,7 +27,7 @@ fun case_2(
     value3: Nothing,
     <!UNUSED_PARAMETER!>value4<!>: Unit,
     <!UNUSED_PARAMETER!>value5<!>: Map<Int, Int>
-): Int {
+): String {
     when (value) {
         <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value1 -> {}
         <!UNRESOLVED_REFERENCE_WRONG_RECEIVER, TYPE_MISMATCH_IN_RANGE!>in<!> value2 -> {}
@@ -36,5 +36,5 @@ fun case_2(
         <!UNREACHABLE_CODE!>in value5 -> {}<!>
     }
 
-    return -1
+    return ""
 }

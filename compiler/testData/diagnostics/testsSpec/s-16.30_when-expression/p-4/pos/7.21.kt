@@ -9,33 +9,33 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one throw expression.
-fun case_1(value: Any?): Int = when (value) {
-    throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>1<!>
-    <!UNREACHABLE_CODE!>else -> 2<!>
+fun case_1(value: Any?): String = when (value) {
+    throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>""<!>
+    <!UNREACHABLE_CODE!>else -> ""<!>
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one throw expression.
-fun case_2(value: Any?): Int {
+fun case_2(value: Any?): String {
     when (value) {
-        throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
+        throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several throw expressions.
-fun case_3(value: Any?): Int = when (value) {
-    throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>1<!>
-    <!UNREACHABLE_CODE!>throw Exception("Ex") -> 2<!>
-    <!UNREACHABLE_CODE!>else -> 4<!>
+fun case_3(value: Any?): String = when (value) {
+    throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>""<!>
+    <!UNREACHABLE_CODE!>throw Exception("Ex") -> ""<!>
+    <!UNREACHABLE_CODE!>else -> ""<!>
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several throw expressions.
-fun case_4(value: Any?): Int {
+fun case_4(value: Any?): String {
     when (value) {
-        throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return 1<!>
-        <!UNREACHABLE_CODE!>throw Exception("Ex") -> return 2<!>
+        throw Exception("Ex")<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>throw Exception("Ex") -> return ""<!>
     }
 
-    <!UNREACHABLE_CODE!>return -1<!>
+    <!UNREACHABLE_CODE!>return ""<!>
 }

@@ -35,23 +35,23 @@ fun case_1(
     value6: Long,
     value7: A,
     value8: Char
-): Int {
+): String {
     when {
-        value1 == 21 -> return 1
-        value2 > -.000000001 && value2 < 0.000000001 -> return 2
-        value3 > 2.0 && value3 <= 1000.90 -> return 3
-        value4 == 0.toShort() -> return 4
-        value5 > -128 || value5 < 127 -> return 6
-        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> return 7
-        getNumber('a') > 100 || getNumber('+') < 10 -> return 8
-        value7.method_1(-.00000001f) <= 100 || value7.method_1(4412.11F) >= 10 -> return 9
-        isInt(0) || isInt(0L) -> return 10
-        value7.method_2(0) && value7.method_2(0L) -> return 11
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return 12
-        value8 == 127.toChar() -> return 13
+        value1 == 21 -> return ""
+        value2 > -.000000001 && value2 < 0.000000001 -> return ""
+        value3 > 2.0 && value3 <= 1000.90 -> return ""
+        value4 == 0.toShort() -> return ""
+        value5 > -128 || value5 < 127 -> return ""
+        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> return ""
+        getNumber('a') > 100 || getNumber('+') < 10 -> return ""
+        value7.method_1(-.00000001f) <= 100 || value7.method_1(4412.11F) >= 10 -> return ""
+        isInt(0) || isInt(0L) -> return ""
+        value7.method_2(0) && value7.method_2(0L) -> return ""
+        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return ""
+        value8 == 127.toChar() -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch.
@@ -64,25 +64,25 @@ fun case_2(
     value6: Long,
     value7: A,
     value8: Char
-): Int {
+): String {
     return when {
-        value1 == 21 -> 1
-        value2 > -.000000001 && value2 < 0.000000001 -> 2
-        value3 > 2.0 && value3 <= 1000.90 -> 3
-        value4 == 0.toShort() -> 4
-        value5 > -128 || value5 < 127 -> 6
-        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> 7
-        getNumber('a') > 100 || getNumber('+') < 10 -> return 8
-        value7.method_1(-.00000001f) <= 100 || value7.method_1(4412.11F) >= 10 -> return 9
-        isInt(0) || isInt(0L) -> return 10
-        value7.method_2(0) && value7.method_2(0L) -> return 11
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return 12
-        value8 == 127.toChar() -> return 13
-        else -> 14
+        value1 == 21 -> ""
+        value2 > -.000000001 && value2 < 0.000000001 -> ""
+        value3 > 2.0 && value3 <= 1000.90 -> ""
+        value4 == 0.toShort() -> ""
+        value5 > -128 || value5 < 127 -> ""
+        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> ""
+        getNumber('a') > 100 || getNumber('+') < 10 -> return ""
+        value7.method_1(-.00000001f) <= 100 || value7.method_1(4412.11F) >= 10 -> return ""
+        isInt(0) || isInt(0L) -> return ""
+        value7.method_2(0) && value7.method_2(0L) -> return ""
+        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return ""
+        value8 == 127.toChar() -> return ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' with only one 'else' branch.
-fun case_3(): Int = when {
-    else -> 1
+fun case_3(): String = when {
+    else -> ""
 }

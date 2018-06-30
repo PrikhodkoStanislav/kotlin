@@ -9,21 +9,21 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression).
-fun case_1(value: Int?, value1: Int, value2: Boolean): Int = when (value) {
+fun case_1(value: Int?, value1: Int, value2: Boolean): String = when (value) {
     if (value1 > 10) {
         1
     } else if (value1 < -10) {
         2
     } else {
         3
-    } -> 1
-    null -> 2
-    if (value2) 10 else 100 -> 3
-    else -> 4
+    } -> ""
+    null -> ""
+    if (value2) 10 else 100 -> ""
+    else -> ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement).
-fun case_2(value: Int?, value1: Int, value2: Boolean): Int {
+fun case_2(value: Int?, value1: Int, value2: Boolean): String {
     when (value) {
         if (value1 > 10) {
             1
@@ -31,10 +31,10 @@ fun case_2(value: Int?, value1: Int, value2: Boolean): Int {
             2
         } else {
             3
-        } -> return 1
-        null -> return 2
-        if (value2) 10 else 100 -> return 3
+        } -> return ""
+        null -> return ""
+        if (value2) 10 else 100 -> return ""
     }
 
-    return -1
+    return ""
 }

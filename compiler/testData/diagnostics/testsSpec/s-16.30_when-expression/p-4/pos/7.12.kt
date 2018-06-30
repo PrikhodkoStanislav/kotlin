@@ -9,45 +9,45 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and increment/decrement operator.
-fun case_1(value: Int, value1: Int, value2: Int): Int {
+fun case_1(value: Int, value1: Int, value2: Int): String {
     var value1Mutable = value1
     var value2Mutable = value2
 
     return when (value) {
-        ++value1Mutable -> 1
-        --value2Mutable -> 2
-        else -> 5
+        ++value1Mutable -> ""
+        --value2Mutable -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and increment/decrement operator.
-fun case_2(value: Int, value1: Int, value2: Int): Int {
+fun case_2(value: Int, value1: Int, value2: Int): String {
     var value1Mutable = value1
     var value2Mutable = value2
 
     when (value) {
-        ++value1Mutable -> return 1
-        --value2Mutable -> return 2
+        ++value1Mutable -> return ""
+        --value2Mutable -> return ""
     }
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and not operator.
-fun case_3(value: Boolean, value1: Boolean): Int {
+fun case_3(value: Boolean, value1: Boolean): String {
     return when (value) {
-        !value1 -> 1
-        !!!value1 -> 2
-        else -> 3
+        !value1 -> ""
+        !!!value1 -> ""
+        else -> ""
     }
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and not operator.
-fun case_4(value: Boolean, value1: Boolean): Int {
+fun case_4(value: Boolean, value1: Boolean): String {
     when (value) {
-        !value1 -> return 1
-        !!!value1 -> return 2
+        !value1 -> return ""
+        !!!value1 -> return ""
     }
 
-    return -1
+    return ""
 }

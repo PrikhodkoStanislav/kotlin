@@ -16,7 +16,7 @@ open class C: B() {}
 class D: C() {}
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when'.
-fun case_1(value: Boolean): Int {
+fun case_1(value: Boolean): String {
     val whenValue = when(value) {
         true -> B()
         false -> C()
@@ -28,11 +28,11 @@ fun case_1(value: Boolean): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when' with null-check branch.
-fun case_2(value: Boolean?): Int {
+fun case_2(value: Boolean?): String {
     val whenValue = when(value) {
         true -> B()
         false -> C()
@@ -45,11 +45,11 @@ fun case_2(value: Boolean?): Int {
     checkSubtype<D>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<C>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when'.
-fun case_3(value: Boolean): Int {
+fun case_3(value: Boolean): String {
     val whenValue = when(value) {
         true -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         false -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -60,11 +60,11 @@ fun case_3(value: Boolean): Int {
     checkSubtype<Int>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when' with null-check branch.
-fun case_4(value: Boolean?): Int {
+fun case_4(value: Boolean?): String {
     val whenValue = when(value) {
         true -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         false -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}
@@ -79,7 +79,7 @@ fun case_4(value: Boolean?): Int {
     checkSubtype<String>(<!TYPE_MISMATCH!>whenValue<!>)
     checkSubtype<() -> Unit>(<!TYPE_MISMATCH!>whenValue<!>)
 
-    return -1
+    return ""
 }
 
 
