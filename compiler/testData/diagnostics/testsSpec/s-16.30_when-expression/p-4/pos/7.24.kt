@@ -9,77 +9,77 @@
  */
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and only one break expression.
-fun case_1(value: Any?, value1: Stack<Int>): String {
-    loop@ while (!value1.empty()) {
+fun case_1(value: Any?, value1: MutableList<Int>): String {
+    loop@ while (value1.isNotEmpty()) {
+        value1.removeAt(0)
         when (value) {
             break@loop<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
         }
-        value1.pop()
     }
 
     return ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and only one break expression.
-fun case_2(value: Any?, value1: Stack<Int>): String? {
+fun case_2(value: Any?, value1: MutableList<Int>): String? {
     var whenValue: String? = null
 
-    loop@ while (!value1.empty()) {
+    loop@ while (value1.isNotEmpty()) {
+        value1.removeAt(0)
         <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
             break@loop <!UNREACHABLE_CODE!>-> ""
             else -> ""
         }<!>
-        value1.pop()
     }
 
     return whenValue
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch (as expression) and several break expressions.
-fun case_3(value: Any?, value1: Stack<Int>, value2: Stack<Int>, value3: Stack<Int>, value4: Stack<Int>): String {
-    loop1@ while (!value1.empty()) {
-        loop2@ while (!value2.empty()) {
-            loop3@ while (!value3.empty()) {
-                loop4@ while (!value4.empty()) {
+fun case_3(value: Any?, value1: MutableList<Int>, value2: MutableList<Int>, value3: MutableList<Int>, value4: MutableList<Int>): String {
+    loop1@ while (value1.isNotEmpty()) {
+        loop2@ while (value2.isNotEmpty()) {
+            loop3@ while (value3.isNotEmpty()) {
+                loop4@ while (value4.isNotEmpty()) {
+                    value4.removeAt(0)
                     when (value) {
                         break@loop1<!UNREACHABLE_CODE!><!> -> <!UNREACHABLE_CODE!>return ""<!>
                         <!UNREACHABLE_CODE!>break@loop2 -> return ""<!>
                         <!UNREACHABLE_CODE!>break@loop3 -> return ""<!>
                         <!UNREACHABLE_CODE!>break@loop4 -> return ""<!>
                     }
-                    value4.pop()
                 }
-                value3.pop()
+                value3.removeAt(0)
             }
-            value2.pop()
+            value2.removeAt(0)
         }
-        value1.pop()
+        value1.removeAt(0)
     }
 
     return ""
 }
 
 // CASE DESCRIPTION: 'When' without 'else' branch (as statement) and several break expressions.
-fun case_4(value: Any?, value1: Stack<Int>, value2: Stack<Int>, value3: Stack<Int>, value4: Stack<Int>): String? {
+fun case_4(value: Any?, value1: MutableList<Int>, value2: MutableList<Int>, value3: MutableList<Int>, value4: MutableList<Int>): String? {
     var whenValue: String? = null
 
-    loop1@ while (!value1.empty()) {
-        loop2@ while (!value2.empty()) {
-            loop3@ while (!value3.empty()) {
-                loop4@ while (!value4.empty()) {
+    loop1@ while (value1.isNotEmpty()) {
+        loop2@ while (value2.isNotEmpty()) {
+            loop3@ while (value3.isNotEmpty()) {
+                loop4@ while (value4.isNotEmpty()) {
+                    value4.removeAt(0)
                     <!UNREACHABLE_CODE!>whenValue = when (<!>value<!UNREACHABLE_CODE!>) {<!>
                         break@loop1 <!UNREACHABLE_CODE!>-> ""
                         break@loop2 -> ""
                         break@loop3 -> ""
                         break@loop4 -> ""
                     }<!>
-                    value4.pop()
                 }
-                value3.pop()
+                value3.removeAt(0)
             }
-            value2.pop()
+            value2.removeAt(0)
         }
-        value1.pop()
+        value1.removeAt(0)
     }
 
     return whenValue

@@ -17,11 +17,11 @@ fun case_1(value: Int) {
 
     when {
         value == 1 -> fun() {}
-        value == 2 -> <!UNUSED_EXPRESSION!>fun(): Boolean {
+        value == 2 -> fun(): Boolean {
             return when {
                 else -> true
             }
-        }<!>
+        }
         value == 3 -> fun_1
         value == 4 -> {
             fun() {fun() {fun() {}}}

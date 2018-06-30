@@ -62,8 +62,8 @@ fun case_7(value: Boolean): String {
     when (value) {
         1100 > 900 -> return ""
         9 < 900 && 111 >= 900 -> return ""
-        <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> return ""
+        else -> return ""
     }
 
-    return ""
+    <!UNREACHABLE_CODE!>return ""<!>
 }
