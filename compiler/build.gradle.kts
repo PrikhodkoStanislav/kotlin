@@ -1,5 +1,6 @@
 
 import java.io.File
+import java.util.regex.Pattern
 import org.gradle.api.tasks.bundling.Jar
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
@@ -204,3 +205,109 @@ codegenTest(target = 10, jvm = 10) {
 val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateCompilerTestsKt")
 
 testsJar()
+
+task("printSpecTestStatistic") {
+    val testDataDir = "testData"
+    val specTestsDir = "testsSpec"
+    val specTestAreas = listOf("diagnostics", "psi", "codegen")
+    val integerRegex = "[1-9]\\d*"
+    val testPathRegex =
+        "s-(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*)_(?<sectionName>[\\w-]+)/p-(?<paragraphNumber>$integerRegex)/(?<testType>pos|neg)/(?<sentenceNumber>$integerRegex)\\.(?<testNumber>$integerRegex)\\.kt$"
+
+    abstract class StatElement {
+        var counter = 0
+        abstract val elements: MutableMap<out Any, out StatElement>?
+        abstract fun increment()
+    }
+
+    class TestTypeStat(private val paragraph: StatElement): StatElement() {
+        override val elements = null
+        override fun increment() {
+            counter++
+            paragraph.increment()
+        }
+    }
+
+    class ParagraphStat(private val section: StatElement): StatElement() {
+        override val elements: MutableMap<String, TestTypeStat>? = sortedMapOf()
+        override fun increment() {
+            counter++
+            section.increment()
+        }
+    }
+
+    class SectionStat(private val area: StatElement): StatElement() {
+        override val elements: MutableMap<Int, ParagraphStat>? = sortedMapOf()
+        override fun increment() {
+            counter++
+            area.increment()
+        }
+    }
+
+    class AreaStat: StatElement() {
+        override val elements: MutableMap<String, SectionStat>? = sortedMapOf()
+        override fun increment() {
+            counter++
+        }
+    }
+
+    fun printStat(statistic: MutableMap<out Any, out StatElement>, depth: Int = 0) {
+        statistic.forEach {
+            for (i in 1..depth) print("    ")
+
+            var statKey = it.key
+
+            statKey = if (statKey is String) statKey.toUpperCase() else statKey
+
+            println("$statKey: ${it.value.counter}")
+
+            if (it.value.elements != null) {
+                printStat(it.value.elements!!, depth + 1)
+            }
+        }
+    }
+
+    fun incrementStatCounters(testAreaStats: AreaStat, sectionName: String, paragraphNumber: Int, testType: String) {
+        val section = testAreaStats.elements!!.computeIfAbsent(sectionName) { SectionStat(testAreaStats) }
+        val paragraph = section.elements!!.computeIfAbsent(paragraphNumber) { ParagraphStat(section) }
+
+        paragraph.elements!!.computeIfAbsent(testType) { TestTypeStat(paragraph) }.increment()
+    }
+
+    println("--------------------------------------------------")
+    println("SPEC TESTS STATISTIC")
+    println("--------------------------------------------------")
+
+    val statistic: MutableMap<String, AreaStat> = mutableMapOf()
+
+    specTestAreas.forEach {
+        val specTestType = it
+        val specTestsPath = "$testDataDir/$specTestType/$specTestsDir"
+
+        statistic[specTestType] = AreaStat()
+
+        File(specTestsPath).walkTopDown().forEach areaTests@{
+            if (!it.isFile || it.extension != "kt") {
+                return@areaTests
+            }
+
+            val testInfoMatcher = Pattern.compile(testPathRegex).matcher(it.path)
+
+            if (!testInfoMatcher.find()) {
+                return@areaTests
+            }
+
+            val sectionNumber = testInfoMatcher.group("sectionNumber")
+            val sectionName = testInfoMatcher.group("sectionName")
+            val paragraphNumber = testInfoMatcher.group("paragraphNumber").toInt()
+            val testType = testInfoMatcher.group("testType")
+            val section = "$sectionNumber $sectionName"
+
+            incrementStatCounters(statistic[specTestType]!!, section, paragraphNumber, testType)
+        }
+    }
+
+    printStat(statistic)
+
+    println("--------------------------------------------------")
+}
