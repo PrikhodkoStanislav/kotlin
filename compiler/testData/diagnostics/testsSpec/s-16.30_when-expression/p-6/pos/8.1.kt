@@ -16,7 +16,7 @@ enum class Anything {
     EVERYTHING
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (all enum values covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all enum values covered).
 fun case_1(dir: Direction): String = when (dir) {
     Direction.EAST -> ""
     Direction.NORTH -> ""
@@ -24,7 +24,7 @@ fun case_1(dir: Direction): String = when (dir) {
     Direction.WEST -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (single enum value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (single enum value covered).
 fun case_2(value: Anything): String = when (value) {
     Anything.EVERYTHING -> ""
 }

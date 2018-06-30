@@ -10,7 +10,7 @@
  DESCRIPTION: Check when exhaustive via else entry (when with bound value).
  */
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (several branches).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (several branches).
 fun case_1(value: Int): String = when (value) {
     0 -> ""
     1 -> ""
@@ -19,19 +19,19 @@ fun case_1(value: Int): String = when (value) {
     else -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (value check branch and 'else' branch).
 fun case_2(value: Boolean): String = when (value) {
     true -> ""
     else -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' with constant bound value (value check branch and 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' with constant bound value (value check branch and 'else' branch).
 fun case_3(): String = when (true) {
     true -> ""
     else -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (only 'else' branch).
 fun case_4(value: Int): String = when(value) {
     else -> ""
 }

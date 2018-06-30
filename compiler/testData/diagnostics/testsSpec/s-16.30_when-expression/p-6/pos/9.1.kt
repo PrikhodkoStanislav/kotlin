@@ -8,14 +8,14 @@
  DESCRIPTION: Check when exhaustive when boolean values are checked and contains a null check.
  */
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean values and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (both boolean values and null value covered).
 fun case_1(value: Boolean?): String = when (value) {
     true -> ""
     false -> ""
     null -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean values as complex expressions and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (both boolean values as complex expressions and null value covered).
 fun case_2(value: Boolean?): String = when (value) {
     true && false && ((true || false)) || true && !!!false && !!!true -> ""
     true && false && ((true || false)) || true && !!!false -> ""

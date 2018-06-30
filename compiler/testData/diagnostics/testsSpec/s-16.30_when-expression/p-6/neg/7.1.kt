@@ -23,22 +23,27 @@ data class Const2(val number: Int) : Expr2()
 sealed class Expr3
 object A2: Expr3() {}
 
-// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking and equality with object).
+sealed class ExprEmpty
+
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the sealed class (type checking and equality with object).
 fun case_1(value: Expr): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Const -> ""
     is Sum -> ""
     A -> ""
 }
 
-// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class (type checking).
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the sealed class (type checking).
 fun case_2(value: Expr): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
     is Const -> ""
     is Sum -> ""
     is Mul -> ""
 }
 
-// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class with several subtypes (no branches).
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the sealed class with several subtypes (no branches).
 fun case_3(value: Expr): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) { }
 
-// CASE DESCRIPTION: Checking for not exhaustive in 'when' on the sealed class with one subtype (no branches).
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the sealed class with one subtype (no branches).
 fun case_4(value: Expr3): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) { }
+
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the empty sealed class (without subtypes).
+fun case_5(value: ExprEmpty): String = <!NO_ELSE_IN_WHEN!>when<!> (value) { }

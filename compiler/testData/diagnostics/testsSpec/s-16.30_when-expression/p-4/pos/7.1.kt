@@ -277,7 +277,7 @@ fun case_10(value: Byte, value1: Byte, value2: A): String {
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Char.
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression (minus and plus of Integer) with Char.
 fun case_11(value: Char): String {
     when (value) {
         2.toChar() -> return ""
@@ -290,7 +290,7 @@ fun case_11(value: Char): String {
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Char, and 'else' branch.
+// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression (minus and plus of Integer) with Char, and 'else' branch.
 fun case_12(value: Char): String = when (value) {
     2.toChar() -> ""
     2.toChar() + 23 -> ""

@@ -46,8 +46,40 @@ fun case_2(value: Int): String {
     return ""
 }
 
-// CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' without bound value.
+// CASE DESCRIPTION: Checking correctness type (numbers) in 'when' without bound value.
 fun case_3(value: Int): String {
+    val whenValue = when {
+        value == 0 -> <!IMPLICIT_CAST_TO_ANY!>1 + 1<!>
+        value == 1 -> <!IMPLICIT_CAST_TO_ANY!>1 + 1L<!>
+        value == 2 -> <!IMPLICIT_CAST_TO_ANY!>1 + -.122<!>
+        value == 3 -> <!IMPLICIT_CAST_TO_ANY!>1 + -.000f<!>
+        value == 4 -> <!IMPLICIT_CAST_TO_ANY!>1 + 10.toShort()<!>
+        else -> <!IMPLICIT_CAST_TO_ANY!>1 + 10.toShort()<!>
+    }
+
+    whenValue checkType { _<Any>() }
+
+    return ""
+}
+
+// CASE DESCRIPTION: Checking correctness type (numbers) in 'when' with bound value.
+fun case_4(value: Int): String {
+    val whenValue = when (value) {
+        0 -> <!IMPLICIT_CAST_TO_ANY!>1 + 1<!>
+        1 -> <!IMPLICIT_CAST_TO_ANY!>1 + 1L<!>
+        2 -> <!IMPLICIT_CAST_TO_ANY!>1 + -.122<!>
+        3 -> <!IMPLICIT_CAST_TO_ANY!>1 + -.000f<!>
+        4 -> <!IMPLICIT_CAST_TO_ANY!>1 + 10.toShort()<!>
+        else -> <!IMPLICIT_CAST_TO_ANY!>1 + 10.toByte()<!>
+    }
+
+    whenValue checkType { _<Any>() }
+
+    return ""
+}
+
+// CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' without bound value.
+fun case_5(value: Int): String {
     val whenValue = when {
         value == 0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         value > 0 && value <= 10 -> <!IMPLICIT_CAST_TO_ANY!>""<!>
@@ -62,7 +94,7 @@ fun case_3(value: Int): String {
 }
 
 // CASE DESCRIPTION: Checking Any type (implicit cast to any) in 'when' with bound value.
-fun case_4(value: Int): String {
+fun case_6(value: Int): String {
     val whenValue = when (value) {
         0 -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         1 -> <!IMPLICIT_CAST_TO_ANY!>""<!>

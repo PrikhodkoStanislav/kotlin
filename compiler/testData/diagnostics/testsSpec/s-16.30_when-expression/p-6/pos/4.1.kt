@@ -8,13 +8,13 @@
  DESCRIPTION: Check when exhaustive via boolean bound value and evaluating to value true and false.
  */
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (both boolean value covered).
 fun case_1(value: Boolean): String = when (value) {
     true -> ""
     false -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (both boolean value as complex expression covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (both boolean value as complex expression covered).
 fun case_2(value: Boolean): String = when (value) {
     true && false && ((true || false)) || true && !!!false && !!!true -> ""
     true && false && ((true || false)) || true && !!!false -> ""

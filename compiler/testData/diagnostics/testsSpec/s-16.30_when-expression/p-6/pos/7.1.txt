@@ -1,9 +1,10 @@
 package
 
-public fun case_1(/*0*/ expr: Expr1): kotlin.String
-public fun case_2(/*0*/ expr: Expr1): kotlin.String
-public fun case_3(/*0*/ expr: Expr2): kotlin.String
-public fun case_4(/*0*/ expr: Expr3): kotlin.String
+public fun case_1(/*0*/ value: Expr1): kotlin.String
+public fun case_2(/*0*/ value: Expr1): kotlin.String
+public fun case_3(/*0*/ value: Expr2): kotlin.String
+public fun case_4(/*0*/ value: Expr3): kotlin.String
+public fun case_5(/*0*/ value: ExprEmpty): kotlin.String
 
 public final data class Const1 : Expr1 {
     public constructor Const1(/*0*/ n: kotlin.String)
@@ -46,6 +47,13 @@ public sealed class Expr2 {
 
 public sealed class Expr3 {
     private constructor Expr3()
+    public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+    public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+    public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+}
+
+public sealed class ExprEmpty {
+    private constructor ExprEmpty()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

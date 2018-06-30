@@ -1,3 +1,5 @@
+// !DIAGNOSTICS: -UNUSED_EXPRESSION
+
 /*
  KOTLIN SPEC TEST (POSITIVE)
 
@@ -12,6 +14,8 @@ sealed class Expr
 data class Const(val number: Int) : Expr()
 data class Sum(val e1: Int, val e2: Int) : Expr()
 data class Mul(val m1: Int, val m2: Int) : Expr()
+
+sealed class ExprEmpty
 
 // CASE DESCRIPTION: 'When' with type test condition on the all possible subtypes of the sealed class.
 fun case_1(value: Expr): String = when (value) {
@@ -43,4 +47,9 @@ fun case_4(value: Expr): String = when (value) {
     is Sum -> ""
     is Mul -> ""
     <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> ""
+}
+
+// CASE DESCRIPTION: 'When' with type test condition on the empty sealed class.
+fun case_5(value: ExprEmpty): String = when (value) {
+    else -> ""
 }

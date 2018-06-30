@@ -205,3 +205,15 @@ fun case_6(value1: List<Int>, value2: A): String {
 
     return ""
 }
+
+// CASE DESCRIPTION: 'When' with range expression (IntRange) in 'when condition'.
+fun case_7(value1: Int, value2: Int): String {
+    when {
+        <!TYPE_MISMATCH!>-10..-1<!> -> return ""
+        <!TYPE_MISMATCH!>-0..0<!> -> return ""
+        <!TYPE_MISMATCH!>1..value1<!> -> return ""
+        <!TYPE_MISMATCH!>value1 + 1..value2<!> -> return ""
+    }
+
+    return ""
+}

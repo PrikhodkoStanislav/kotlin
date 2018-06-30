@@ -8,7 +8,7 @@
  DESCRIPTION: Check when exhaustive via else entry (when without bound value).
  */
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (several value check branches and 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (several value check branches and 'else' branch).
 fun case_1(value: Int): String = when {
     value == 0 -> ""
     value > 0 && value <= 10 -> ""
@@ -17,13 +17,13 @@ fun case_1(value: Int): String = when {
     else -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (value check branch and 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (value check branch and 'else' branch).
 fun case_2(): String = when {
     true -> ""
     else -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive in 'when' (only 'else' branch).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (only 'else' branch).
 fun case_3(): String = when {
     else -> ""
 }
