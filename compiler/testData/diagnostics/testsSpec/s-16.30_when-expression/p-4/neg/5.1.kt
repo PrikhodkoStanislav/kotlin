@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 1
- DESCRIPTION: 'When' with bound value and 'when entry' with range exression, but wuthout contains operator.
+ DESCRIPTION: 'When' with bound value and 'when condition' with range exression, but wuthout contains operator.
  */
 
 fun case_1(value: Int): String {

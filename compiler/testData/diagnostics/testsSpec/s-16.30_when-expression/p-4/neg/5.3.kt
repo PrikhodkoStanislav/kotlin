@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 3
- DESCRIPTION: 'When' with bound value and 'when entry' with contains operator and object without defined contains operator.
+ DESCRIPTION: 'When' with bound value and 'when condition' with contains operator and object without defined contains operator.
  */
 
 class A {}

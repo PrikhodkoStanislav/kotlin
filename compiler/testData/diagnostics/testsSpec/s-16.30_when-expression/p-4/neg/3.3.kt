@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 3: Type test condition: type checking operator followed by type.
  NUMBER: 3
- DESCRIPTION: 'When' with bound value and 'when entry' with type checking operator and non-type value.
+ DESCRIPTION: 'When' with bound value and 'when condition' with type checking operator and non-type value.
  */
 
 object A {}

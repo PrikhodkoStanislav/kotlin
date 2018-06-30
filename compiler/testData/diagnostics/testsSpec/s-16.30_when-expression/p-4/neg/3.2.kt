@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 3: Type test condition: type checking operator followed by type.
  NUMBER: 2
- DESCRIPTION: 'When' with bound value and type test condition, but missed type in 'when entry'.
+ DESCRIPTION: 'When' with bound value and type test condition, but missed type in 'when condition'.
  */
 
 // CASE DESCRIPTION: 'When' with one type checking operator.

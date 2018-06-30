@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 1
- DESCRIPTION: 'When' with not boolean condition in 'when entry'
+ DESCRIPTION: 'When' with not boolean condition in 'when condition'
  */
 
 fun getInt(number: Int): Int {
@@ -98,7 +98,7 @@ class A {
     }
 }
 
-// CASE DESCRIPTION: 'When' with numbers (Int, Short, Byte, Long, Float, Double) and Char (used as a number) in 'when entry'.
+// CASE DESCRIPTION: 'When' with numbers (Int, Short, Byte, Long, Float, Double) and Char (used as a number) in 'when condition'.
 fun case_1(
     value1: Int,
     value2: Int,
@@ -141,7 +141,7 @@ fun case_1(
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with String and Char in 'when entry'.
+// CASE DESCRIPTION: 'When' with String and Char in 'when condition'.
 fun case_2(value1: String, value2: Char, value3: A): String {
     when {
         <!TYPE_MISMATCH!>""<!> -> return ""
@@ -159,7 +159,7 @@ fun case_2(value1: String, value2: Char, value3: A): String {
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with Nothing in 'when entry'.
+// CASE DESCRIPTION: 'When' with Nothing in 'when condition'.
 fun case_3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): String {
     when {
         value1 -> <!UNREACHABLE_CODE!>return ""<!>
@@ -171,7 +171,7 @@ fun case_3(value1: Nothing, <!UNUSED_PARAMETER!>value2<!>: A): String {
     <!UNREACHABLE_CODE!>return ""<!>
 }
 
-// CASE DESCRIPTION: 'When' with Unit in 'when entry'.
+// CASE DESCRIPTION: 'When' with Unit in 'when condition'.
 fun case_4(value1: Unit, value2: A): String {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return ""
@@ -184,7 +184,7 @@ fun case_4(value1: Unit, value2: A): String {
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with Any in 'when entry'.
+// CASE DESCRIPTION: 'When' with Any in 'when condition'.
 fun case_5(value1: Any, value2: A): String {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return ""
@@ -195,7 +195,7 @@ fun case_5(value1: Any, value2: A): String {
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with List (Collection example) in 'when entry'.
+// CASE DESCRIPTION: 'When' with List (Collection example) in 'when condition'.
 fun case_6(value1: List<Int>, value2: A): String {
     when {
         <!TYPE_MISMATCH!>value1<!> -> return ""

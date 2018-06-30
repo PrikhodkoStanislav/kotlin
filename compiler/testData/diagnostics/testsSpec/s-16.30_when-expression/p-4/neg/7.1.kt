@@ -5,7 +5,7 @@
  PARAGRAPH: 4
  SENTENCE 7: Any other expression.
  NUMBER: 1
- DESCRIPTION: 'When' with bound value and non-expressions in 'when entry'.
+ DESCRIPTION: 'When' with bound value and non-expressions in 'when condition'.
  */
 
 // CASE DESCRIPTION: 'When' with while statement.
