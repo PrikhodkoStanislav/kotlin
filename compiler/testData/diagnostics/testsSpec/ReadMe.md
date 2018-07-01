@@ -19,10 +19,10 @@ Example test file path: `testsSpec/s-16.30_when-expression/p-2/neg/3.1.kt`
 
 ## Positive and negative tests
 
-Positive tests are considered to be tests in which there is no single diagnostics with a *ERROR* severity.
-Positive tests can only contain diagnostics with a *WARNING* or *INFO* severity (or not contain at all).
+Positive tests are considered to be tests in which there is no single diagnostics with a `ERROR` severity.
+Positive tests can only contain diagnostics with a `WARNING` or `INFO` severity (or not contain at all).
 
-In a negative test, there must be at least one diagnostic with *ERROR* severity.
+In a negative test, there must be at least one diagnostic with `ERROR` severity.
 
 ## Test format specification
 
