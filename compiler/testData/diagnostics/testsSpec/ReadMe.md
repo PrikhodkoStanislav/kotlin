@@ -24,7 +24,7 @@ Positive tests can only contain diagnostics with a `WARNING` or `INFO` severity 
 
 In a negative test, there must be at least one diagnostic with `ERROR` severity.
 
-## Test format specification
+## Test format
 
 ### Test description
 
