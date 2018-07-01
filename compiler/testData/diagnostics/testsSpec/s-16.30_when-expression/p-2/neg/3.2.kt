@@ -8,17 +8,17 @@
  DESCRIPTION: Empty 'when' with missed 'when entries' section.
  */
 
-// CASE DESCRIPTION: 'when' with bound value.
+// CASE DESCRIPTION: 'When' with bound value.
 fun case_1(value: Int) {
     when (<!UNUSED_EXPRESSION!>value<!>)<!SYNTAX!><!>
 }
 
-// CASE DESCRIPTION: 'when' without bound value, but with parentheses.
+// CASE DESCRIPTION: 'When' without bound value, but with parentheses.
 fun case_2() {
     when (<!SYNTAX!><!>)<!SYNTAX!><!>
 }
 
-// CASE DESCRIPTION: 'when' without bound and parentheses.
+// CASE DESCRIPTION: 'When' without bound value and parentheses.
 fun case_3() {
     when<!SYNTAX!><!>
 }

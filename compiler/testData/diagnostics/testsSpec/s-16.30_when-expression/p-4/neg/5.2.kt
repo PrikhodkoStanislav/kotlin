@@ -7,7 +7,7 @@
  PARAGRAPH: 4
  SENTENCE 5: Contains test condition: containment operator followed by an expression.
  NUMBER: 2
- DESCRIPTION: 'When' with bound value and 'when condition' with range expression, but wuthout contains operator.
+ DESCRIPTION: 'When' with bound value and 'when condition' with range expression, but without contains operator.
  */
 
 // CASE DESCRIPTION: 'When' with one contains operator.
