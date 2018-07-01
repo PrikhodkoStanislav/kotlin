@@ -12,7 +12,7 @@ import proguard.gradle.ProGuardTask
 buildscript {
     extra["defaultSnapshotVersion"] = "1.2-SNAPSHOT"
 
-    kotlinBootstrapFrom(BootstrapOption.TeamCity("1.2.60-dev-544", onlySuccessBootstrap = false))
+    kotlinBootstrapFrom(BootstrapOption.TeamCity("1.2.60-dev-980", onlySuccessBootstrap = false))
 
     val mirrorRepo: String? = findProperty("maven.repository.mirror")?.toString()
 
@@ -35,7 +35,14 @@ buildscript {
         }
     }
 
+    // a workaround for kotlin compiler classpath in kotlin project: sometimes gradle substitutes
+    // kotlin-stdlib external dependency with local project :kotlin-stdlib in kotlinCompilerClasspath configuration.
+    // see also configureCompilerClasspath@
+    val bootstrapCompilerClasspath by configurations.creating
+
     dependencies {
+        bootstrapCompilerClasspath(kotlinDep("compiler-embeddable", bootstrapKotlinVersion))
+
         classpath("com.gradle.publish:plugin-publish-plugin:0.9.7")
         classpath(kotlinDep("gradle-plugin", bootstrapKotlinVersion))
         classpath("net.sf.proguard:proguard-gradle:5.3.3")
@@ -163,12 +170,12 @@ extra["intellijSeparateSdks"] = intellijSeparateSdks
 extra["IntellijCoreDependencies"] =
         listOf("annotations",
                "asm-all",
-               "guava-21.0",
+               "guava",
                "jdom",
                "jna",
                "log4j",
                "picocontainer",
-               "snappy-in-java-0.5.1",
+               "snappy-in-java",
                "streamex",
                "trove4j")
 
@@ -286,7 +293,7 @@ allprojects {
     // therefore it is disabled by default
     // buildDir = File(commonBuildDir, project.name)
 
-    val repos: List<String> by rootProject.extra
+    val repos = rootProject.extra["repos"] as List<String>
     repositories {
         intellijSdkRepo(project)
         androidDxJarRepo(project)
@@ -347,11 +354,18 @@ allprojects {
         fun FileCollection.printClassPath(role: String) =
                 println("${project.path} $role classpath:\n  ${joinToString("\n  ") { it.toProjectRootRelativePathOrSelf() } }")
 
-        try { the<JavaPluginConvention>() } catch (_: UnknownDomainObjectException) { null }?.let { javaConvention ->
+        try { javaPluginConvention() } catch (_: UnknownDomainObjectException) { null }?.let { javaConvention ->
             task("printCompileClasspath") { doFirst { javaConvention.sourceSets["main"].compileClasspath.printClassPath("compile") } }
             task("printRuntimeClasspath") { doFirst { javaConvention.sourceSets["main"].runtimeClasspath.printClassPath("runtime") } }
             task("printTestCompileClasspath") { doFirst { javaConvention.sourceSets["test"].compileClasspath.printClassPath("test compile") } }
             task("printTestRuntimeClasspath") { doFirst { javaConvention.sourceSets["test"].runtimeClasspath.printClassPath("test runtime") } }
+        }
+
+        run configureCompilerClasspath@ {
+            val bootstrapCompilerClasspath by rootProject.buildscript.configurations
+            configurations.findByName("kotlinCompilerClasspath")?.let {
+                dependencies.add(it.name, files(bootstrapCompilerClasspath))
+            }
         }
     }
 }
@@ -584,8 +598,7 @@ val cidrPlugin by task<Copy> {
     from(ideaPluginDir) {
         exclude("lib/kotlin-plugin.jar")
 
-        exclude("lib/uast-kotlin.jar")
-        exclude("lib/uast-kotlin-ide.jar")
+        exclude("lib/android-lint.jar")
         exclude("lib/android-ide.jar")
         exclude("lib/android-output-parser-ide.jar")
         exclude("lib/android-extensions-ide.jar")
@@ -667,7 +680,7 @@ tasks.create("findShadowJarsInClasspath").doLast {
         for (task in project.tasks) {
             when (task) {
                 is ShadowJar -> {
-                    shadowJars.add(File(task.archivePath))
+                    shadowJars.add(fileFrom(task.archivePath))
                 }
                 is ProGuardTask -> {
                     shadowJars.addAll(task.outputs.files.toList())

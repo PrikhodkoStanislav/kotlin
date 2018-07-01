@@ -32,7 +32,7 @@ val shadowJar by task<ShadowJar> {
     classifier = "shadow"
     version = null
     configurations = listOf(shadows)
-    from(the<JavaPluginConvention>().sourceSets.getByName("main").output)
+    from(mainSourceSet.output)
     manifest {
         attributes["Main-Class"] = "org.jetbrains.kotlin.kotlinp.Main"
     }

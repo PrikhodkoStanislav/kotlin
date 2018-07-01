@@ -545,6 +545,7 @@ public class DefaultErrorMessages {
         MAP.put(REDUNDANT_ELSE_IN_WHEN, "'when' is exhaustive so 'else' is redundant here");
         MAP.put(COMMA_IN_WHEN_CONDITION_WITHOUT_ARGUMENT, "Deprecated syntax. Use '||' instead of commas in when-condition for 'when' without argument");
         MAP.put(DUPLICATE_LABEL_IN_WHEN, "Duplicate label in when");
+        MAP.put(ILLEGAL_DECLARATION_IN_WHEN_SUBJECT, "Illegal variable declaration in 'when' subject: {0}. Should be a simple val with an initializer", STRING);
 
         MAP.put(NO_ELSE_IN_WHEN, "''when'' expression must be exhaustive, add necessary {0}", RENDER_WHEN_MISSING_CASES);
         MAP.put(NON_EXHAUSTIVE_WHEN, "''when'' expression on enum is recommended to be exhaustive, add {0}", RENDER_WHEN_MISSING_CASES);
@@ -621,6 +622,8 @@ public class DefaultErrorMessages {
         }, DECLARATION_NAME);
         MAP.put(SMARTCAST_IMPOSSIBLE,
                 "Smart cast to ''{0}'' is impossible, because ''{1}'' is a {2}", RENDER_TYPE, STRING, STRING);
+        MAP.put(DEPRECATED_SMARTCAST,
+                "Smart cast to ''{0}'' is deprecated, because ''{1}'' is a {2}", RENDER_TYPE, STRING, STRING);
         MAP.put(ALWAYS_NULL, "The result of the expression is always null");
 
         MAP.put(MISSING_CONSTRUCTOR_KEYWORD, "Use 'constructor' keyword after modifiers of primary constructor");

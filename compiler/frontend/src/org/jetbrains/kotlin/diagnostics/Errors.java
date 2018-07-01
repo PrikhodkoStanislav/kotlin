@@ -903,6 +903,7 @@ public interface Errors {
     DiagnosticFactory2<KtExpression, KotlinType, KotlinType> IMPLICIT_CAST_TO_ANY = DiagnosticFactory2.create(WARNING);
 
     DiagnosticFactory3<KtExpression, KotlinType, String, String> SMARTCAST_IMPOSSIBLE = DiagnosticFactory3.create(ERROR);
+    DiagnosticFactory3<KtExpression, KotlinType, String, String> DEPRECATED_SMARTCAST = DiagnosticFactory3.create(WARNING);
     DiagnosticFactory0<KtExpression> ALWAYS_NULL = DiagnosticFactory0.create(WARNING);
 
     DiagnosticFactory0<KtNullableType> USELESS_NULLABLE_CHECK = DiagnosticFactory0.create(WARNING, NULLABLE_TYPE);
@@ -934,6 +935,8 @@ public interface Errors {
 
     DiagnosticFactory0<PsiElement> COMMA_IN_WHEN_CONDITION_WITHOUT_ARGUMENT = DiagnosticFactory0.create(ERROR);
     DiagnosticFactory0<PsiElement> DUPLICATE_LABEL_IN_WHEN = DiagnosticFactory0.create(WARNING);
+
+    DiagnosticFactory1<PsiElement, String> ILLEGAL_DECLARATION_IN_WHEN_SUBJECT = DiagnosticFactory1.create(ERROR);
 
     // Type mismatch
 

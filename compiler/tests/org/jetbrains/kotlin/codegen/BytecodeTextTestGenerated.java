@@ -274,6 +274,11 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         runTest("compiler/testData/codegen/bytecodeText/noSuperCheckInDefaultConstuctor.kt");
     }
 
+    @TestMetadata("noSyntheticAccessorForPrivateCompanionObjectWhenNotRequired.kt")
+    public void testNoSyntheticAccessorForPrivateCompanionObjectWhenNotRequired() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeText/noSyntheticAccessorForPrivateCompanionObjectWhenNotRequired.kt");
+    }
+
     @TestMetadata("noWrapperForMethodReturningPrimitive.kt")
     public void testNoWrapperForMethodReturningPrimitive() throws Exception {
         runTest("compiler/testData/codegen/bytecodeText/noWrapperForMethodReturningPrimitive.kt");
@@ -422,6 +427,11 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         @TestMetadata("fold.kt")
         public void testFold() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/boxingOptimization/fold.kt");
+        }
+
+        @TestMetadata("inlineClassesAndInlinedLambda.kt")
+        public void testInlineClassesAndInlinedLambda() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/boxingOptimization/inlineClassesAndInlinedLambda.kt");
         }
 
         @TestMetadata("intCompareTo.kt")
@@ -1235,24 +1245,6 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
                 String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/coroutines/intLikeVarSpilling/usedInVarStore.kt");
                 doTestWithCoroutinesPackageReplacement(fileName, "kotlin.coroutines");
             }
-        }
-    }
-
-    @TestMetadata("compiler/testData/codegen/bytecodeText/dataClasses")
-    @TestDataPath("$PROJECT_ROOT")
-    @RunWith(JUnit3RunnerWithInners.class)
-    public static class DataClasses extends AbstractBytecodeTextTest {
-        private void runTest(String testDataFilePath) throws Exception {
-            KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
-        }
-
-        public void testAllFilesPresentInDataClasses() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/bytecodeText/dataClasses"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
-        }
-
-        @TestMetadata("kt12330.kt")
-        public void testKt12330() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/dataClasses/kt12330.kt");
         }
     }
 
@@ -2088,6 +2080,11 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
             runTest("compiler/testData/codegen/bytecodeText/inlineClasses/noAssertionsForInlineClassesBasedOnNullableTypes.kt");
         }
 
+        @TestMetadata("noBoxingOperationsOnNonTrivialSpread.kt")
+        public void testNoBoxingOperationsOnNonTrivialSpread() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/inlineClasses/noBoxingOperationsOnNonTrivialSpread.kt");
+        }
+
         @TestMetadata("passInlineClassesWithSpreadOperatorToVarargs.kt")
         public void testPassInlineClassesWithSpreadOperatorToVarargs() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/inlineClasses/passInlineClassesWithSpreadOperatorToVarargs.kt");
@@ -2822,6 +2819,26 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         @TestMetadata("simpleConstValsInsideWhen.kt")
         public void testSimpleConstValsInsideWhen() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/when/simpleConstValsInsideWhen.kt");
+        }
+
+        @TestMetadata("subjectValHasLocalVariableSlot.kt")
+        public void testSubjectValHasLocalVariableSlot() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/when/subjectValHasLocalVariableSlot.kt");
+        }
+
+        @TestMetadata("subjectValInEnumWhenHasLocalVariableSlot.kt")
+        public void testSubjectValInEnumWhenHasLocalVariableSlot() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/when/subjectValInEnumWhenHasLocalVariableSlot.kt");
+        }
+
+        @TestMetadata("subjectValInIntWhenHasLocalVariableSlot.kt")
+        public void testSubjectValInIntWhenHasLocalVariableSlot() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/when/subjectValInIntWhenHasLocalVariableSlot.kt");
+        }
+
+        @TestMetadata("subjectValInStringWhenHasLocalVariableSlot.kt")
+        public void testSubjectValInStringWhenHasLocalVariableSlot() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/when/subjectValInStringWhenHasLocalVariableSlot.kt");
         }
 
         @TestMetadata("whenNull.kt")
