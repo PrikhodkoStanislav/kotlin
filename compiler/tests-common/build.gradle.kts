@@ -54,52 +54,55 @@ task("printSpecTestStatistic") {
 
     abstract class StatElement {
         var counter = 0
-        abstract val elements: MutableMap<out Any, out StatElement>?
-        abstract fun increment()
+        abstract val elements: MutableMap<*, out StatElement>?
+        open fun increment() {
+            counter++
+        }
     }
 
     class TestTypeStat(private val paragraph: StatElement): StatElement() {
         override val elements = null
         override fun increment() {
-            counter++
+            super.increment()
             paragraph.increment()
         }
     }
 
     class ParagraphStat(private val section: StatElement): StatElement() {
-        override val elements: MutableMap<String, TestTypeStat>? = sortedMapOf()
+        override val elements = sortedMapOf<String, TestTypeStat>()
         override fun increment() {
-            counter++
+            super.increment()
             section.increment()
         }
     }
 
     class SectionStat(private val area: StatElement): StatElement() {
-        override val elements: MutableMap<Int, ParagraphStat>? = sortedMapOf()
+        override val elements = sortedMapOf<Int, ParagraphStat>()
         override fun increment() {
-            counter++
+            super.increment()
             area.increment()
         }
     }
 
     class AreaStat: StatElement() {
-        override val elements: MutableMap<String, SectionStat>? = sortedMapOf()
-        override fun increment() {
-            counter++
-        }
+        override val elements = sortedMapOf<String, SectionStat>()
     }
 
-    fun printStat(statistic: MutableMap<String, AreaStat>, depth: Int = 0) {
+    fun printStat(statistic: MutableMap<String, AreaStat>) {
+        println("--------------------------------------------------")
+        println("SPEC TESTS STATISTIC")
+        println("--------------------------------------------------")
+
         statistic.forEach {
             println("${it.key.toUpperCase()}: ${it.value.counter} tests")
 
-            it.value.elements!!.forEach {
+            it.value.elements.forEach {
                 println("  ${it.key.toUpperCase()}: ${it.value.counter} tests")
 
-                it.value.elements!!.forEach {
+                it.value.elements.forEach {
                     val testTypes = mutableListOf<String>()
 
-                    it.value.elements!!.forEach {
+                    it.value.elements.forEach {
                         testTypes.add("${it.key}: ${it.value.counter}")
                     }
 
@@ -107,26 +110,24 @@ task("printSpecTestStatistic") {
                 }
             }
         }
+
+        println("--------------------------------------------------")
     }
 
     fun incrementStatCounters(testAreaStats: AreaStat, sectionName: String, paragraphNumber: Int, testType: String) {
-        val section = testAreaStats.elements!!.computeIfAbsent(sectionName) { SectionStat(testAreaStats) }
-        val paragraph = section.elements!!.computeIfAbsent(paragraphNumber) { ParagraphStat(section) }
+        val section = testAreaStats.elements.computeIfAbsent(sectionName) { SectionStat(testAreaStats) }
+        val paragraph = section.elements.computeIfAbsent(paragraphNumber) { ParagraphStat(section) }
 
-        paragraph.elements!!.computeIfAbsent(testType) { TestTypeStat(paragraph) }.increment()
+        paragraph.elements.computeIfAbsent(testType) { TestTypeStat(paragraph) }.increment()
     }
 
-    println("--------------------------------------------------")
-    println("SPEC TESTS STATISTIC")
-    println("--------------------------------------------------")
-
-    val statistic: MutableMap<String, AreaStat> = mutableMapOf()
+    val statistic = mutableMapOf<String, AreaStat>()
 
     specTestAreas.forEach {
-        val specTestType = it
-        val specTestsPath = "$testDataDir/$specTestType/$specTestsDir"
+        val specTestArea = it
+        val specTestsPath = "$testDataDir/$specTestArea/$specTestsDir"
 
-        statistic[specTestType] = AreaStat()
+        statistic[specTestArea] = AreaStat()
 
         File(specTestsPath).walkTopDown().forEach areaTests@{
             if (!it.isFile || it.extension != "kt") {
@@ -145,11 +146,9 @@ task("printSpecTestStatistic") {
             val testType = testInfoMatcher.group("testType")
             val section = "$sectionNumber $sectionName"
 
-            incrementStatCounters(statistic[specTestType]!!, section, paragraphNumber, testType)
+            incrementStatCounters(statistic[specTestArea]!!, section, paragraphNumber, testType)
         }
     }
 
     printStat(statistic)
-
-    println("--------------------------------------------------")
 }
