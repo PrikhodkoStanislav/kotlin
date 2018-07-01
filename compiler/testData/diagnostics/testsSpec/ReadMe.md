@@ -24,7 +24,7 @@ Positive tests can only contain diagnostics with a `WARNING` or `INFO` severity 
 
 In a negative test, there must be at least one diagnostic with `ERROR` severity.
 
-## Test format
+## Tests format
 
 ### Test description
 
@@ -80,9 +80,9 @@ fun case_1(expr: Expr?): String = when (expr) {
 ## Test validation
 
 Before running the test, the following validation is performed:
-- check for correspondence to the format of the folders and files names;
+- check for correspondence to the format of the folders and file names;
 - check for correspondence to the format of the meta-information in the test file;
-- check for consistency between the location and name of the test file and the meta-information inside in it;
+- check for consistency between the location and name of the test file and the meta-information in it;
 - checking whether the test is positive or negative using information about diagnostics severity.
 
 If the validation fails, you will receive exception about it.
@@ -94,7 +94,7 @@ During the test run, the following information is displayed for each test:
 ```
 <POSITIVE|NEGATIVE> DIAGNOSTIC SPEC TEST
 SECTION: <sectionNumber> <sectionName> (paragraph: <paragraphNumber>)
-SENTENCE <setenceNumber> [<specUrl>]: <sentence>
+SENTENCE <sentenceNumber> [<specUrl>]: <sentence>
 TEST NUMBER: <testNumber>
 NUMBER OF TEST CASES: <casesNumber>
 DESCRIPTION: <testDescription>
@@ -121,14 +121,15 @@ Example output:
 --------------------------------------------------
 SPEC TESTS STATISTIC
 --------------------------------------------------
-DIAGNOSTICS TESTS: 131
-  16.30 WHEN-EXPRESSION: 131
-    2 PARAGRAPH: 4 (neg: 2, pos: 2)
-    3 PARAGRAPH: 35 (neg: 5, pos: 30)
-    4 PARAGRAPH: 67 (neg: 11, pos: 56)
-    5 PARAGRAPH: 8 (neg: 4, pos: 4)
-    6 PARAGRAPH: 17 (neg: 8, pos: 9)
-PSI TESTS: 0
-CODEGEN TESTS: 0
+DIAGNOSTICS: 131 tests
+  16.30 WHEN-EXPRESSION: 131 tests
+    PARAGRAPH 2: 4 tests (neg: 2, pos: 2)
+    PARAGRAPH 3: 35 tests (neg: 5, pos: 30)
+    PARAGRAPH 4: 67 tests (neg: 11, pos: 56)
+    PARAGRAPH 5: 8 tests (neg: 4, pos: 4)
+    PARAGRAPH 6: 17 tests (neg: 8, pos: 9)
+PSI: 0 tests
+CODEGEN: 0 tests
+--------------------------------------------------
 
 ```

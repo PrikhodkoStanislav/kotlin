@@ -91,10 +91,10 @@ task("printSpecTestStatistic") {
 
     fun printStat(statistic: MutableMap<String, AreaStat>, depth: Int = 0) {
         statistic.forEach {
-            println("${it.key.toUpperCase()} TESTS: ${it.value.counter}")
+            println("${it.key.toUpperCase()}: ${it.value.counter} tests")
 
             it.value.elements!!.forEach {
-                println("  ${it.key.toUpperCase()}: ${it.value.counter}")
+                println("  ${it.key.toUpperCase()}: ${it.value.counter} tests")
 
                 it.value.elements!!.forEach {
                     val testTypes = mutableListOf<String>()
@@ -103,7 +103,7 @@ task("printSpecTestStatistic") {
                         testTypes.add("${it.key}: ${it.value.counter}")
                     }
 
-                    println("    ${it.key} PARAGRAPH: ${it.value.counter} (${testTypes.joinToString(", ")})")
+                    println("    PARAGRAPH ${it.key}: ${it.value.counter} tests (${testTypes.joinToString(", ")})")
                 }
             }
         }
