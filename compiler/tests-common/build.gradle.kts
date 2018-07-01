@@ -44,7 +44,7 @@ sourceSets {
 
 testsJar {}
 
-task("printSpecTestStatistic") {
+tasks.create("printSpecTestStatistic").doLast {
     val testDataDir = "../testData"
     val specTestsDir = "testsSpec"
     val specTestAreas = listOf("diagnostics", "psi", "codegen")
