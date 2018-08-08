@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 plugins {
     kotlin("jvm")
     id("jps-compatible")//4
-}
+}//5
 
 jvmTarget = "1.6"
 
