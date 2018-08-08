@@ -19,15 +19,10 @@ enum class TestType(val type: String) {
     }
 }
 
-enum class TestArea(val folderName: String) {
-    PSI("psi"),
-    DIAGNOSTIC("diagnostics"),
-    CODEGEN("codegen");
-
-    companion object {
-        private val map = TestArea.values().associateBy(TestArea::folderName)
-        fun fromValue(folderName: String) = map[folderName]
-    }
+enum class TestArea {
+    PSI,
+    DIAGNOSTICS,
+    CODEGEN
 }
 
 data class TestCase(
@@ -37,7 +32,7 @@ data class TestCase(
     val issues: List<String>?
 )
 
-data class TestInfo(
+class TestInfo(
     val testArea: TestArea,
     val testType: TestType,
     val sectionNumber: String,
@@ -62,10 +57,6 @@ data class TestInfo(
                 && this.paragraphNumber == other.paragraphNumber
                 && this.sentenceNumber == other.sentenceNumber
     }
-
-    override fun hashCode(): Int {
-        return javaClass.hashCode()
-    }
 }
 
 enum class SpecTestValidationFailedReason(val description: String) {
@@ -77,7 +68,6 @@ enum class SpecTestValidationFailedReason(val description: String) {
     ),
     METAINFO_NOT_VALID("Incorrect meta info in test file."),
     FILENAME_AND_METAINFO_NOT_CONSISTENCY("Test info from filename and file content is not consistency"),
-    NOT_PARSED("Test info not parsed. You must call parseTestInfo before test info printing."),
     TEST_IS_NOT_POSITIVE("Test is not positive because it contains error elements (PsiErrorElement or diagnostic with error severity)."),
     TEST_IS_NOT_NEGATIVE("Test is not negative because it not contains error type elements (PsiErrorElement or diagnostic with error severity)."),
     UNKNOWN("Unknown validation error.")
@@ -88,20 +78,19 @@ class SpecTestValidationException(val reason: SpecTestValidationFailedReason) : 
 abstract class SpecTestValidator(private val testDataFile: File, private val testArea: TestArea) {
     private lateinit var testInfoByFilename: TestInfo
     private lateinit var testInfoByContent: TestInfo
-    protected val testInfo by lazy { testInfoByContent }
+    private val testInfo by lazy { testInfoByContent }
 
     companion object {
-        const val specUrl = "https://jetbrains.github.io/kotlin-spec/"
+        private const val INTEGER_REGEX = "[1-9]\\d*"
+        private const val TEST_UNEXPECTED_BEHAVIOUR = "(?:\n\\s*(?<unexpectedBehaviour>UNEXPECTED BEHAVIOUR))"
+        private const val TEST_ISSUES = "(?:\n\\s*ISSUES:\\s*(?<issues>(KT-[1-9]\\d*)(,\\s*KT-[1-9]\\d*)*))"
 
-        private const val integerRegex = "[1-9]\\d*"
-        private const val testPathRegex =
-            "^.*?/(?<testArea>diagnostics|psi|codegen)/s-(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*)_(?<sectionName>[\\w-]+)/p-(?<paragraphNumber>$integerRegex)/(?<testType>pos|neg)/(?<sentenceNumber>$integerRegex)\\.(?<testNumber>$integerRegex)\\.kt$"
-        private const val testUnexpectedBehaviour = "(?:\n\\s*(?<unexpectedBehaviour>UNEXPECTED BEHAVIOUR))"
-        private const val testIssues = "(?:\n\\s*ISSUES:\\s*(?<issues>(KT-[1-9]\\d*)(,\\s*KT-[1-9]\\d*)*))"
-        private const val testContentMetaInfoRegex =
-            "\\/\\*\\s+KOTLIN (?<testArea>DIAGNOSTIC|PSI|CODEGEN) SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$integerRegex)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)$testUnexpectedBehaviour?$testIssues?\\s+\\*\\/\\s+"
-        private const val testCaseInfo =
-            "(?:(?:\\/\\*\n\\s*)|(?:\\/\\/\\s*))CASE DESCRIPTION:\\s*(?<testCaseDescription>.*?)$testUnexpectedBehaviour?$testIssues?\n(\\s\\*\\/)?"
+        val testPathRegex: Pattern =
+            Pattern.compile("^.*?/(?<testArea>diagnostics|psi|codegen)/s-(?<sectionNumber>(?:$INTEGER_REGEX)(?:\\.$INTEGER_REGEX)*)_(?<sectionName>[\\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX)/(?<testType>pos|neg)/(?<sentenceNumber>$INTEGER_REGEX)\\.(?<testNumber>$INTEGER_REGEX)\\.kt$")
+        val testContentMetaInfoRegex: Pattern =
+            Pattern.compile("\\/\\*\\s+KOTLIN (?<testArea>DIAGNOSTICS|PSI|CODEGEN) SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$INTEGER_REGEX)(?:\\.$INTEGER_REGEX)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$INTEGER_REGEX)\\s+SENTENCE\\s*(?<sentenceNumber>$INTEGER_REGEX):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$INTEGER_REGEX)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)$TEST_UNEXPECTED_BEHAVIOUR?$TEST_ISSUES?\\s+\\*\\/\\s+")
+        val testCaseInfo: Pattern =
+            Pattern.compile("(?:(?:\\/\\*\n\\s*)|(?:\\/\\/\\s*))CASE DESCRIPTION:\\s*(?<testCaseDescription>.*?)$TEST_UNEXPECTED_BEHAVIOUR?$TEST_ISSUES?\n(\\s\\*\\/)?")
 
         private fun getTestInfo(
             testInfoMatcher: Matcher,
@@ -114,9 +103,7 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
             val testDescription = if (withDetails) testInfoMatcher.group("testDescription") else null
 
             return TestInfo(
-                if (directMappedTestTypeEnum)
-                    TestArea.valueOf(testInfoMatcher.group("testArea")) else
-                    TestArea.fromValue(testInfoMatcher.group("testArea"))!!,
+                TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
                 if (directMappedTestTypeEnum)
                     TestType.valueOf(testInfoMatcher.group("testType")) else
                     TestType.fromValue(testInfoMatcher.group("testType"))!!,
@@ -172,22 +159,15 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         }
 
         fun testMetaInfoFilter(fileContent: String): String {
-            val fileContentWithoutTestInfo = Pattern.compile(testContentMetaInfoRegex).matcher(fileContent).replaceAll("")
-            val fileContentWithoutCasesInfo = Pattern.compile(testCaseInfo).matcher(fileContentWithoutTestInfo).replaceAll("")
+            val fileContentWithoutTestInfo = testContentMetaInfoRegex.matcher(fileContent).replaceAll("")
+            val fileContentWithoutCasesInfo = testCaseInfo.matcher(fileContentWithoutTestInfo).replaceAll("")
 
             return fileContentWithoutCasesInfo
         }
-
-        fun testMetaInfoFilter(testFilePath: File) = testMetaInfoFilter(testFilePath.readText())
     }
 
-    private fun hasUnexpectedBehavior(testCases: List<TestCase>, testInfoMatcher: Matcher): Boolean {
-        testCases.forEach {
-            if (it.unexpectedBehavior) return true
-        }
-
-        return testInfoMatcher.group("unexpectedBehaviour") != null
-    }
+    private fun hasUnexpectedBehavior(testCases: List<TestCase>, testInfoMatcher: Matcher) =
+        testCases.any { it.unexpectedBehavior } || testInfoMatcher.group("unexpectedBehaviour") != null
 
     private fun getIssues(testCases: List<TestCase>, testInfoMatcher: Matcher): List<String> {
         val issues = mutableListOf<String>()
@@ -203,21 +183,21 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         return issues.distinct()
     }
 
-    private fun parseTestInfo() {
-        val testInfoByFilenameMatcher = Pattern.compile(testPathRegex).matcher(testDataFile.path)
+    fun parseTestInfo() {
+        val testInfoByFilenameMatcher = testPathRegex.matcher(testDataFile.path)
 
         if (!testInfoByFilenameMatcher.find()) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
         }
 
         val fileContent = testDataFile.readText()
-        val testInfoByContentMatcher = Pattern.compile(testContentMetaInfoRegex).matcher(fileContent)
+        val testInfoByContentMatcher = testContentMetaInfoRegex.matcher(fileContent)
 
         if (!testInfoByContentMatcher.find()) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.METAINFO_NOT_VALID)
         }
 
-        val testCasesMatcher = Pattern.compile(testCaseInfo).matcher(fileContent)
+        val testCasesMatcher = testCaseInfo.matcher(fileContent)
         val testCases = getTestCasesInfo(testCasesMatcher, testInfoByContentMatcher)
 
         testInfoByFilename = getTestInfo(testInfoByFilenameMatcher)
@@ -248,18 +228,7 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         }
     }
 
-    fun validateByTestInfo() {
-        this.parseTestInfo()
-    }
-
     fun printTestInfo() {
-        if (!this::testInfoByContent.isInitialized || !this::testInfoByFilename.isInitialized) {
-            throw SpecTestValidationException(SpecTestValidationFailedReason.NOT_PARSED)
-        }
-
-        val specSentenceUrl =
-            "$specUrl#${testInfoByFilename.sectionName}:${testInfoByFilename.paragraphNumber}:${testInfoByFilename.sentenceNumber}"
-
         println("--------------------------------------------------")
         if (testInfoByContent.unexpectedBehavior) {
             println("(!!!) HAS UNEXPECTED BEHAVIOUR (!!!)")

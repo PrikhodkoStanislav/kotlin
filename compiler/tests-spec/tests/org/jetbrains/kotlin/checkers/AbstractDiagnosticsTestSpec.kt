@@ -29,24 +29,15 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         )
 
         private const val MODULE_PATH = "./compiler/tests-spec"
-        private const val HELPERS_PATH = "$MODULE_PATH/testData/diagnostics/_helpers"
+        private const val HELPERS_PATH = "$MODULE_PATH/testData/helpers/diagnostics"
     }
 
     private lateinit var testValidator: DiagnosticSpecTestValidator
 
-    private fun checkDirective(directive: String, testFiles: List<TestFile>): Boolean {
-        var declare = false
+    private fun checkDirective(directive: String, testFiles: List<TestFile>) =
+        testFiles.any { it.directives.contains(directive) }
 
-        testFiles.forEach {
-            declare = declare or it.directives.contains(directive)
-        }
-
-        return declare
-    }
-
-    override fun getConfigurationKind(): ConfigurationKind {
-        return ConfigurationKind.ALL
-    }
+    override fun getConfigurationKind() = ConfigurationKind.ALL
 
     override fun skipDescriptorsValidation(): Boolean = true
 
@@ -54,11 +45,12 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         val ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList
 
         if (includeExtras) {
-            directives.forEach {
-                if (checkDirective(it.key, testFiles)) {
-                    val declarations = File("$HELPERS_PATH/${it.value.first}").readText()
+            for ((name, filenames) in directives) {
+                if (checkDirective(name, testFiles)) {
+                    val (sourceFilename, targetFilename) = filenames
+                    val declarations = File("$HELPERS_PATH/$sourceFilename").readText()
 
-                    ktFiles.add(KotlinTestUtils.createFile(it.value.second, declarations, project))
+                    ktFiles.add(KotlinTestUtils.createFile(targetFilename, declarations, project))
                 }
             }
         }
@@ -70,7 +62,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         testValidator = DiagnosticSpecTestValidator(testDataFile)
 
         try {
-            testValidator.validateByTestInfo()
+            testValidator.parseTestInfo()
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.reason.description)
         }

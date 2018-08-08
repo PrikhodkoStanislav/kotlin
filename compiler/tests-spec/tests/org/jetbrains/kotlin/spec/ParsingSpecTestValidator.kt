@@ -13,16 +13,11 @@ import java.io.File
 class ParsingSpecTestValidator(testDataFile: File) : SpecTestValidator(testDataFile, TestArea.PSI) {
     constructor(testDataFile: String) : this(File(testDataFile))
 
-    private fun findErrorElement(psi: PsiElement): Boolean {
-        psi.children.forEach {
-            if (it is PsiErrorElement || findErrorElement(it)) return true
-        }
-
-        return false
-    }
+    private fun checkErrorElement(psi: PsiElement): Boolean =
+        psi.children.any { it is PsiErrorElement || checkErrorElement(it) }
 
     private fun computeTestType(psiFile: PsiFile): TestType {
-        return if (findErrorElement(psiFile)) TestType.NEGATIVE else TestType.POSITIVE
+        return if (checkErrorElement(psiFile)) TestType.NEGATIVE else TestType.POSITIVE
     }
 
     fun validateTestType(psiFile: PsiFile) {

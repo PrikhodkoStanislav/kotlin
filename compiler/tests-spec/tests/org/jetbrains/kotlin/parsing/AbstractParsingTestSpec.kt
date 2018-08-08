@@ -17,7 +17,7 @@ abstract class AbstractParsingTestSpec : AbstractParsingTest() {
         testValidator = ParsingSpecTestValidator(filePath)
 
         try {
-            testValidator.validateByTestInfo()
+            testValidator.parseTestInfo()
         } catch (e: SpecTestValidationException) {
             Assert.fail(e.reason.description)
         }

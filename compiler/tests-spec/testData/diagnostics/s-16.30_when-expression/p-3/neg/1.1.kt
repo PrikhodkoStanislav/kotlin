@@ -1,5 +1,5 @@
 /*
- KOTLIN DIAGNOSTIC SPEC TEST (NEGATIVE)
+ KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
  SECTION 16.30: When expression
  PARAGRAPH: 3
@@ -9,9 +9,8 @@
  */
 
 // CASE DESCRIPTION: 'When' with break expression (without label).
-fun case_1(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
+fun case_1(value: Int): String {
+    while (true) {
         when {
             value == 1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
         }
@@ -21,37 +20,10 @@ fun case_1(value: Int, value1: MutableList<Int>): String {
 }
 
 // CASE DESCRIPTION: 'When' with continue expression (without label).
-fun case_2(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
+fun case_2(value: Int): String {
+    while (true) {
         when {
             value == 1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
-        }
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with with continue (first) and break (second) expression (without label).
-fun case_3(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
-        when {
-            value == 1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
-            value == 2 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
-        }
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with with continue (second) and break (first) expression (without label).
-fun case_4(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
-        when {
-            value == 1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
-            value == 2 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
         }
     }
 

@@ -45,7 +45,7 @@ A comment with meta information has the following format:
 Example:
 ```
 /*
- KOTLIN DIAGNOSTIC SPEC TEST (NEGATIVE)
+ KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
  SECTION 16.30: When expression
  PARAGRAPH: 3
@@ -92,7 +92,7 @@ If the validation fails, you will receive exception about it.
 During the test run, the following information is displayed for each test:
 
 ```
-<POSITIVE|NEGATIVE> DIAGNOSTIC SPEC TEST
+<POSITIVE|NEGATIVE> DIAGNOSTICS SPEC TEST
 SECTION: <sectionNumber> <sectionName> (paragraph: <paragraphNumber>)
 SENTENCE <sentenceNumber> [<specUrl>]: <sentence>
 TEST NUMBER: <testNumber>
@@ -102,7 +102,7 @@ DIAGNOSTICS: <diagnosticSeverities> | <diagnostics>
 ```
 Example:
 ```
-POSITIVE DIAGNOSTIC SPEC TEST
+POSITIVE DIAGNOSTICS SPEC TEST
 SECTION: 16.30 When expression (paragraph: 5)
 SENTENCE 1 [http://jetbrains.github.io/kotlin-spec/#when-expression:5:1]: The type of the resulting expression is the least upper bound of the types of all the entries.
 TEST NUMBER: 4

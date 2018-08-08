@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
 import java.io.File
 
-class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTIC) {
+class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTICS) {
     private lateinit var diagnostics: MutableList<Diagnostic>
     private lateinit var diagnosticStats: MutableMap<String, Int>
     private lateinit var diagnosticSeverityStats: MutableMap<Severity, Int>
