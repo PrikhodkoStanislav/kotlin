@@ -1,5 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_EXPRESSION
 // !WITH_BASIC_TYPES
+// !WITH_FUNS
+// !WITH_CLASSES
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -8,134 +10,315 @@
  PARAGRAPH: 6
  SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 1
- DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in the control structure body.
+ DESCRIPTION: 'When' with bound value and with different variants of expressions in the control structure body.
  */
 
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Short.
-fun case_1(value: Int, value1: Short, value2: _BasicTypesProvider) {
-    val value3: Short = 32767
-    val value4: Short = -32768
-
+// CASE DESCRIPTION: 'When' with control structure body as literals.
+fun case_1(value: Int) {
     when (value) {
-        1 -> 900.toShort()
-        2 -> value2.getShort(value1.toInt()) - 9234.toShort()
-        3 -> 9234.toShort() * 0.toShort()
-        4 -> -6.toShort() / getShort(-9000)
-        5 -> 6.toShort() % 112.toShort()
-        6 -> -9313.toShort() % 10.toShort()
-        7 -> 6.toShort() - value4
-        8 -> 50.toShort() + value1 * -90.toShort() / value3 % 112.toShort() - value1
-        9 -> {
-            value1 * -112.toShort() / 9234.toShort() - -1.toShort() + value2.getShort(111) / 0.toShort() % -99.toShort() % 9234.toShort() + value4
-        }
+        1 -> true
+        2 -> 100
+        3 -> -.09f
+        4 -> '.'
+        5 -> "..."
+        6 -> null
     }
 }
 
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Int.
-fun case_2(value: Int, value1: Int, value2: _BasicTypesProvider) {
-    val value3 = 912
-    val value4 = 124901924904
-
+// CASE DESCRIPTION: 'When' with control structure body as arithmetic expressions.
+fun case_2(value: Int, value1: Byte, value2: _BasicTypesProvider) {
     when (value) {
-        1 -> 2
-        2 -> 2 + 2
-        3 -> 2 * -2
-        4 -> getInt(-9) / 3
-        5 -> -8 % 3
-        6 -> -4 - 2
-        7 -> value2.getInt(111) + 2 * getInt(2) / -2 % 2 - 2
-        8 -> 32 shl 2
-        9 -> value1 shr -value3
-        10 -> -64 ushr value3
-        11 -> value3 and 4
-        12 -> 16 or -5
-        13 -> value1 xor 55
-        14 -> -55.inv()
-        15 -> value1 * -value3
-        16 -> {
-            value1 * 2 / 10 - 5 + value2.getInt(-500) / 2 % -4 % value4
-        }
+        1 -> -.09 % 10L
+        3 -> value1 / -5
+        2 -> value2.getChar(99) - 11 + 90
+        4 -> 100
     }
 }
 
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Long.
-fun case_3(value: Int, value1: Long, value2: _BasicTypesProvider) {
-    val value3 = 9L
-    val value4 = 124909249042341234L
-
-    when (value) {
-        1 -> 2L
-        2 -> 1249011249042341234L + 412L
-        3 -> -2L * getLong(1000)
-        4 -> 3241019249042341234L / -2L
-        5 -> 324901924942341234L % -2L
-        6 -> 4L - value2.getLong(0)
-        7 -> 2L + -9L * -10000000000000L / 2L % value2.getLong(-99999999) - 2L
-        8 -> value1 * value3
-        9 -> {
-            value1 * 2L / -10L - 92490149042341234L + 1324019249042341234L / 2L % 234124312423452L % value4
-        }
-    }
-}
-
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Float.
-fun case_4(value: Int, value1: Float, value2: _BasicTypesProvider) {
-    val value3 = 912.2134F
-    val value4 = -124901924904.991242f
-
-    when (value) {
-        1 -> 2.1F
-        2 -> 2.1f + value2.getFloat(-1)
-        3 -> getFloat(-10) * 2f
-        4 -> 8.5f / -2.3f
-        5 -> value2.getFloat(1111111) % 2f
-        6 -> 4.0F - 2.1f
-        7 -> 2f + .9f * -.0000000001F / 2F % 2.91f - -2.09F
-        8 -> value1 * -value3
-        9 -> {
-            value1 * 2F / -10.12414141f - .13104141040f + 0.5F / -2F % 4.0f % value4
-        }
-    }
-}
-
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Double.
-fun case_5(value: Int, value1: Double, value2: _BasicTypesProvider) {
-    val value3 = 912.2134
-    val value4 = -124901924904.99124212
-
-    when (value) {
-        1 -> 2.1
-        2 -> 2.1 + 2.5
-        3 -> getDouble(-20) * 2.0
-        4 -> -8.5 / 2.3
-        5 -> 8.0 % value2.getDouble(100000000)
-        6 -> 4.0 - -2.1
-        7 -> 2.4 + -.9 * -.0000000001 / value2.getDouble(-10) % 2.91 - 2.09
-        8 -> -value1 * value3
-        9 -> {
-            value1 * -2.0 / 10.12414141 - .13104141040 + 0.5 / 2.0 % 4.0 % value4
-        }
-    }
-}
-
-// CASE DESCRIPTION: 'When' with control structure body as arithmetic expression with Byte.
-fun case_6(value: Int, value1: Byte, value2: _BasicTypesProvider) {
-    val value3: Byte = -11
-    val value4: Byte = 3
-    val value5: Byte = 127
-    val value6: Byte = 5
-    val value7: Byte = -128
-
+// CASE DESCRIPTION: 'When' with control structure body as boolean expressions (logical, equality and comparison).
+fun case_3(value: Int, value1: Boolean, value2: Long) {
     when (value) {
         1 -> value1
-        2 -> -11.toByte() - value3
-        3 -> 90.toByte() * -value5
-        4 -> 2.toByte() / 100.toByte()
-        5 -> value4 % value5
-        6 -> 0.toByte() - 0.toByte()
-        7 -> value3 + -128.toByte() * 127.toByte() / getByte(-9999) % value5 - value2.getByte(9999999)
-        8 -> {
-            value2.getByte(-100) * value5 / -10.toByte() - value6 + value4 / 9.toByte() % value5 % value1 + value7
+        2 -> !value1
+        3 -> getBoolean() && value1
+        5 -> getChar(10) != 'a'
+        6 -> getList() === getAny()
+        7 -> value2 <= 11
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as concatenations.
+fun case_4(value: Int, value1: String, value2: String) {
+    when (value) {
+        1 -> "..." + value1 + "" + "$value2" + "..."
+        2 -> value1 + getString()
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as when expression.
+fun case_5(value: Int, value1: Int, value2: Boolean?) {
+    when (value) {
+        1 -> when (value2) {
+            value1 > 1000 -> "1"
+            value1 > 100 -> "2"
+            else -> "3"
+        }
+        2 -> when (value2) {
+            value1 > 1000 -> "1"
+            value1 > 100 -> "2"
+        }
+        3 -> when (value2) {}
+        4 -> when (value2) {
+            true -> "1"
+            false -> "2"
+            null -> "3"
+        }
+        5 -> when (value2) {
+            true -> "1"
+            false -> "2"
+        }
+        6 -> when (value2) {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' as expression with control structure body as when expression (must be exhaustive).
+fun case_6(value: Int, value1: Int, value2: Boolean?) = when (value) {
+    1 -> when (value2) {
+        value1 > 1000 -> 1
+        value1 > 100 -> 2
+        else -> 3
+    }
+    else -> when (value2) {
+        true -> 1
+        false -> 2
+        null -> 3
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as if expression.
+fun case_7(value: Int, value1: Int, value2: Boolean?) {
+    when (value) {
+        1 -> if (value1 > 1000) "1"
+        2 -> if (value1 > 1000) "1"
+            else "2"
+        3 -> if (value1 < 100) "1"
+            else if (value1 < 10) "2"
+            else "4"
+        4 -> if (value2 == null) "1"
+            else if (<!DEBUG_INFO_SMARTCAST!>value2<!>) "2"
+            else if (!<!DEBUG_INFO_SMARTCAST!>value2<!>) "3"
+    }
+}
+
+// CASE DESCRIPTION: 'When' as expression with control structure body as if expression (must be exhaustive).
+fun case_8(value: Int, value1: Int) = when (value) {
+    1 -> if (value1 > 1000) "1"
+    else "2"
+    else -> if (value1 < 100) "1"
+    else if (value1 < 10) "2"
+    else "4"
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as try expression.
+fun case_9(value: Int, value1: String, value2: String): Any {
+    return when (value) {
+        1 -> try { 4 } catch (e: Exception) { 5 }
+        2 -> try { throw Exception() } catch (e: Exception) { value1 }
+        else -> try { throw Exception() } catch (e: Exception) { {value2} } finally { }
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as elvis operator expression.
+fun case_10(value: Int, value1: String?, value2: String?) {
+    when (value) {
+        1 -> value1 ?: true
+        2 -> value1 ?: value2 ?: true
+        3 -> value1!! <!USELESS_ELVIS!>?: true<!>
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as range expression.
+fun case_11(value: Int) {
+    when (value) {
+        1 -> 1..10
+        2 -> -100L..100L
+        3 -> -getInt()..getLong()
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as cast expression.
+fun case_12(value: Int, value1: Collection<Int>, value2: Collection<Int>?) {
+    when (value) {
+        1 -> value1 as MutableList<Int>
+        2 -> value1 as? MutableList<Int>
+        3 -> value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!>
+            4 -> (value1 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int>
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as prefix operator expression.
+fun case_13(value: Int, value1: Int, value2: Int, value3: Boolean) {
+    var mutableValue1 = value1
+    var mutableValue2 = value2
+
+    when (value) {
+        1 -> ++mutableValue1
+        2 -> --mutableValue2
+        3 -> !value3
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as postfix operator expression.
+fun case_14(value: Int, value1: Int, value2: Int, value3: Boolean?) {
+    var mutableValue1 = value1
+    var mutableValue2 = value2
+
+    when (value) {
+        1 -> <!UNUSED_CHANGED_VALUE!>mutableValue1++<!>
+        2 -> <!UNUSED_CHANGED_VALUE!>mutableValue2--<!>
+        3 -> value3!!
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as indexing expression.
+fun case_15(value: Int, value1: List<Int>, value2: List<List<List<List<Int>>>>) {
+    when (value) {
+        1 -> value1[0]
+        2 -> value2[0][-4][1][-1]
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as call expression.
+fun case_16(value: Int, value1: _Class, value2: _Class?, value3: Int) {
+    fun __fun_1(): () -> Unit { return fun() { } }
+
+    when (value) {
+        1 -> _fun()
+        2 -> __fun_1()()
+        3 -> value1.fun_2(value3)
+        4 -> value2?.fun_2(value3)
+        5 -> value2!!.fun_2(value3)
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as property access expression.
+fun case_17(value: Int, value1: _Class, value2: _Class?) {
+    when (value) {
+        1 -> value1.prop_1
+        2 -> value2?.prop_1
+        3 -> value1::prop_1.get()
+        4 -> value2!!::prop_3.get()
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as fun literal.
+fun case_18(value: Int) {
+    val fun_1 = fun(): Int { return 0 }
+
+    when (value) {
+        1 -> fun() {}
+        2 -> fun(): Int { return 1 }
+        3 -> fun(): () -> Unit { return fun() {} }
+        4 -> fun_1
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as lambda literal.
+fun case_19(value: Int): Any {
+    val lambda_1 = { 0 }
+
+    return when (value) {
+        1 -> lambda_1
+        2 -> { { {} } }
+        else -> { -> (Int)
+            { arg: Int -> { { println(arg) } } }
+        }
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as object literal.
+fun case_20(value: Int) {
+    val object_1 = object {
+        val prop_1 = 1
+    }
+
+    when (value) {
+        1 -> object {}
+        2 -> object {
+            private fun fun_1() { }
+            val prop_1 = 1
+        }
+        3 -> object_1
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as this expression.
+class A {
+    val prop_1 = 1
+    val lambda_1 = { 1 }
+    fun fun_1(): Int { return 1 }
+
+    fun case_21(value: Int) {
+        when (value) {
+            1 -> this
+            2 -> ((this))
+            3 -> this::prop_1.get()
+            4 -> this.prop_1
+            5 -> this.lambda_1()
+            6 -> this::lambda_1.get()()
+            7 -> this.fun_1()
+            8 -> this::fun_1.invoke()
+        }
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as throw expression.
+fun case_22(value: Int) {
+    when (value) {
+        1 -> throw Exception()
+        2 -> throw throw throw Exception()
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as return expression.
+fun case_23(value: Int) {
+    fun r_1() {
+        when (value) {
+            1 -> return
+            2 -> <!UNREACHABLE_CODE!>return return<!> return
+        }
+    }
+
+    fun r_2(): List<Int>? {
+        when (value) {
+            1 -> return listOf(0, 1, 2)
+            2 -> return null
+        }
+
+        return null
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as continue expression.
+fun case_24(value: Int) {
+    loop1@ while (true) {
+        loop2@ while (true) {
+            when (value) {
+                1 -> continue@loop1
+                2 -> continue@loop2
+            }
+        }
+    }
+}
+
+// CASE DESCRIPTION: 'When' with control structure body as break expression.
+fun case_25(value: Int) {
+    loop1@ while (true) {
+        loop2@ while (true) {
+            when (value) {
+                1 -> break@loop1
+                2 -> break@loop2
+            }
         }
     }
 }

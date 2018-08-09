@@ -1,4 +1,5 @@
 // !WITH_BASIC_TYPES
+// !WITH_CLASSES
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -7,80 +8,25 @@
  PARAGRAPH: 7
  SENTENCE 3: Contains test condition: containment operator followed by an expression.
  NUMBER: 1
- DESCRIPTION: 'When' with bound value and containment operator with range operator.
+ DESCRIPTION: 'When' with bound value and containment operator.
  */
 
-// CASE DESCRIPTION: 'When' with various integer ranges (not exhaustive).
-fun case_1(value: Int, value1: Int, value2: Int, value3: Long, value4: _BasicTypesProvider): String {
+// CASE DESCRIPTION: 'When' with range operator.
+fun case_1(value: Int, value1: Int, value2: Short): String {
     when (value) {
-        in Int.MIN_VALUE..-1000000000000L -> return ""
-        in -1000000000000L..0L -> return ""
-        in 1..10.toShort() -> return ""
-        !in 11.toByte()..value1 -> return ""
+        in Long.MIN_VALUE..-100 -> return ""
+        in -99..0 -> return ""
+        !in 100.toByte()..value1 -> return ""
         in value1..value2 -> return ""
-        !in value2..1000 -> return ""
-        in value2..getInt(value2) -> return ""
-        in getInt(value2)..value4.getLong(value2) -> return ""
-        !in value4.getLong(value2)..value3 -> return ""
     }
 
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with various integer ranges and 'else' branch (exhaustive).
-fun case_2(value: Int, value1: Int, value2: Int, value3: Long, value4: _BasicTypesProvider): String = when (value) {
-    in Int.MIN_VALUE..-1000000000000L -> ""
-    in -1000000000000L..0L -> ""
-    in 1..10.toShort() -> ""
-    in 11.toByte()..value1 -> ""
-    in value1..value2 -> ""
-    in value2..1000 -> ""
-    in value2..getInt(value2) -> ""
-    in getInt(value2)..value4.getLong(value2) -> ""
-    in value4.getLong(value2)..value3 -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with various integer ranges and 'else' branch (exhaustive).
-fun case_3(value: Int, value1: Int, value2: Int, value3: Long, value4: _BasicTypesProvider): String = when (value) {
-    !in Int.MIN_VALUE..-1000000000000L -> ""
-    !in -1000000000000L..0L -> ""
-    !in 1..10.toShort() -> ""
-    !in 11.toByte()..value1 -> ""
-    !in value1..value2 -> ""
-    !in value2..1000 -> ""
-    !in value2..getInt(value2) -> ""
-    !in getInt(value2)..value4.getLong(value2) -> ""
-    !in value4.getLong(value2)..value3 -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with one integer range (not exhaustive).
-fun case_4(value: Int): String {
-    when (value) {
-        in Int.MIN_VALUE..Int.MAX_VALUE -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with one integer range (not exhaustive).
-fun case_5(value: Int): String {
-    when (value) {
-        !in Int.MIN_VALUE..Int.MAX_VALUE -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with one integer range and 'else' branch (exhaustive).
-fun case_6(value: Int): String = when (value) {
-    in Int.MIN_VALUE..Int.MAX_VALUE -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with one integer range and 'else' branch (exhaustive).
-fun case_7(value: Int): String = when (value) {
-    !in Int.MIN_VALUE..Int.MAX_VALUE -> ""
+// CASE DESCRIPTION: 'When' on types with contains method defined.
+fun case_2(value: Int, value1: List<IntArray>, value2: _Class) = when (value) {
+    in value1[0] -> ""
+    !in listOf(0, 1, 2, 3, 4) -> ""
+    !in value2.getIntArray(90) -> ""
     else -> ""
 }

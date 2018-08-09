@@ -1,4 +1,6 @@
 // !WITH_BASIC_TYPES
+// !WITH_FUNS
+// !WITH_CLASSES
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -7,345 +9,280 @@
  PARAGRAPH: 7
  SENTENCE 5: Any other expression.
  NUMBER: 1
- DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in 'when condition'.
+ DESCRIPTION: 'When' with enumeration of the different variants of expressions in 'when condition'.
  */
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Short.
-fun case_1(value: Short, value1: Short, value2: _BasicTypesProvider): String {
-    val value3 = 912.toShort()
-
+// CASE DESCRIPTION: 'When' with condition as literals.
+fun case_1(value: Any?) {
     when (value) {
-        2.toShort() -> return ""
-        (2.toShort() + 2.toShort()).toShort() -> return ""
-        (2.toShort() * 6.toShort()).toShort() -> return ""
-        (8.toShort() / 5.toShort()).toShort() -> return ""
-        (8.toShort() % 5.toShort()).toShort() -> return ""
-        (9.toShort() - 1.toShort()).toShort() -> return ""
-        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> return ""
-        Int.MIN_VALUE.inv().toShort() -> return ""
-        Int.MAX_VALUE.hashCode().inv().toShort() -> return ""
-        (value1 * value3).toShort() -> return ""
-        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> return ""
+        true -> {}
+        100 -> {}
+        -.09f -> {}
+        '.' -> {}
+        "..." -> {}
+        null -> {}
     }
-
-    return ""
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Short, and 'else' branch.
-fun case_2(value: Short, value1: Short, value2: _BasicTypesProvider): String {
-    val value3 = 912.toShort()
+// CASE DESCRIPTION: 'When' with condition as arithmetic expressions.
+fun case_2(value: Number, value1: Int) {
+    when (value) {
+        -.09 % 10L -> {}
+        value1 / -5 -> {}
+        getByte(99) - 11 + 90 -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as boolean expressions (logical, equality and comparison).
+fun case_3(value: Boolean, value1: Boolean, value2: Long) {
+    when (value) {
+        value1 -> {}
+        !value1 -> {}
+        getBoolean() && value1 -> {}
+        getChar(10) != 'a' -> {}
+        getList() === getAny() -> {}
+        value2 <= 11 -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as concatenations.
+fun case_4(value: String, value1: String, value2: String) {
+    when (value) {
+        "..." + value1 + "" + "$value2" + "..." -> {}
+        value1 + getString() -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as when expression.
+fun case_5(value: Int, value1: Int, value2: Boolean?) {
+    when (value) {
+        when {
+            value1 > 1000 -> 1
+            value1 > 100 -> 2
+            else -> 3
+        } -> {}
+        when (value2) {
+            true -> 1
+            false -> 2
+            null -> 3
+        } -> {}
+        when (value2!!) {
+            true -> 1
+            false -> 2
+        } -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as if expression.
+fun case_6(value: Int, value1: Int) {
+    when (value) {
+        if (value1 > 1000) 1
+        else 2 -> {}
+        if (value1 < 100) 1
+        else if (value1 < 10) 2
+        else 3 -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as try expression.
+fun case_7(value: Any, value1: String, value2: String) {
+    when (value) {
+        try { 4 } catch (e: Exception) { 5 } -> {}
+        try { throw Exception() } catch (e: Exception) { value1 } -> {}
+        try { throw Exception() } catch (e: Exception) { {value2} } finally { } -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as elvis operator expression.
+fun case_8(value: Int, value1: Int?, value2: Int?) {
+    when (value) {
+        value1 ?: 0 -> {}
+        value1 ?: value2 ?: 0 -> {}
+        value1!! <!USELESS_ELVIS!>?: 0<!> -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as range expression.
+fun case_9(value: Any) {
+    when (value) {
+        1..10 -> {}
+        -100L..100L -> {}
+        -getInt()..getLong() -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as cast expression.
+fun case_10(value: Collection<Int>, value1: Collection<Int>, value2: Collection<Int>?) {
+    when (value) {
+        value1 as MutableList<Int> -> {}
+        value1 <!USELESS_CAST!>as? MutableList<Int><!> -> {}
+        value2 <!UNCHECKED_CAST!>as? MutableMap<Int, Int><!> -> {}
+        (value1 <!UNCHECKED_CAST!>as? Map<Int, Int><!>) as MutableMap<Int, Int> -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as prefix operator expression.
+fun case_11(value: Any, value1: Int, value2: Int, value3: Boolean) {
+    var mutableValue1 = value1
+    var mutableValue2 = value2
+
+    when (value) {
+        ++mutableValue1 -> {}
+        --mutableValue2 -> {}
+        !value3 -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as postfix operator expression.
+fun case_12(value: Int, value1: Int, value2: Int, value3: Int?) {
+    var mutableValue1 = value1
+    var mutableValue2 = value2
+
+    when (value) {
+        <!UNUSED_CHANGED_VALUE!>mutableValue1++<!> -> {}
+        <!UNUSED_CHANGED_VALUE!>mutableValue2--<!> -> {}
+        value3!! -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as indexing expression.
+fun case_13(value: Int, value1: List<Int>, value2: List<List<List<List<Int>>>>) {
+    when (value) {
+        value1[0] -> {}
+        value2[0][-4][1][-1] -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as call expression.
+fun case_14(value: Any, value1: _Class, value2: _Class?, value3: Int) {
+    fun __fun_1(): () -> Any { return fun() { } }
+
+    when (value) {
+        _fun() -> {}
+        __fun_1()() -> {}
+        value1.fun_2(value3) -> {}
+        value2?.fun_2(value3) -> {}
+        value2!!.fun_2(value3) -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as property access expression.
+fun case_15(value: Int, value1: _Class, value2: _Class?) {
+    when (value) {
+        value1.prop_1 -> {}
+        value2?.prop_2 -> {}
+        value1::prop_1.get() -> {}
+        value2!!::prop_3.get() -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as fun literal.
+fun case_16(value: () -> Any): Any {
+    val fun_1 = fun() { return }
 
     return when (value) {
-        2.toShort() -> ""
-        (2.toShort() + 2.toShort()).toShort() -> ""
-        (2.toShort() * 6.toShort()).toShort() -> ""
-        (8.toShort() / 5.toShort()).toShort() -> ""
-        (8.toShort() % 5.toShort()).toShort() -> ""
-        (9.toShort() - 1.toShort()).toShort() -> ""
-        (2.toShort() + value3 * 2 / 2 % 2 - 2).toShort() -> ""
-        Int.MIN_VALUE.inv().toShort() -> ""
-        Int.MAX_VALUE.hashCode().inv().toShort() -> ""
-        (value1 * value3).toShort() -> ""
-        (value1 * 2.toShort() / 10.toShort() + 5.toShort() + 14.toShort() / getShort(1000) % 4.toShort() * value2.getShort(1000)).toShort() -> ""
-        else -> ""
+        fun() {} -> {}
+        fun() { return } -> {}
+        fun(): () -> Unit { return fun() {} } -> {}
+        fun_1 -> {}
+        else -> {}
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Int.
-fun case_3(value: Int, value1: Int, value2: _BasicTypesProvider): String {
-    val value3 = 912
+// CASE DESCRIPTION: 'When' with condition as lambda literal.
+fun case_17(value: () -> Any) {
+    val lambda_1 = { 0 }
 
     when (value) {
-        2 -> return ""
-        2 + 2 -> return ""
-        2 * 3 -> return ""
-        8 / 1 -> return ""
-        8 % 5 -> return ""
-        4 - 3 -> return ""
-        2 + value3 * 2 / 2 % 2 - 2 -> return ""
-        32 shl value3 -> return ""
-        value1 shr value2.getInt(1000) -> return ""
-        64 ushr getInt(1000) -> return ""
-        value2.getInt(1000) and 4 -> return ""
-        16 or 5 -> return ""
-        value1 xor 55 -> return ""
-        55.inv() -> return ""
-        Int.MIN_VALUE.inv() -> return ""
-        Int.MAX_VALUE.hashCode().inv() -> return ""
-        value1 * value3 -> return ""
-        value1 * 2 / 10 or 5 + 14 / getInt(1000) % 4 ushr value2.getInt(1000) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Int, and 'else' branch.
-fun case_4(value: Int, value1: Int, value2: _BasicTypesProvider): String {
-    val value3 = 912
-
-    return when (value) {
-        2 -> ""
-        2 + 2 -> ""
-        2 * 3 -> ""
-        8 / 1 -> ""
-        8 % 5 -> ""
-        4 - 3 -> ""
-        2 + value3 * 2 / 2 % 2 - 2 -> ""
-        32 shl value3 -> ""
-        value1 shr value2.getInt(1000) -> ""
-        64 ushr getInt(1000) -> ""
-        value2.getInt(1000) and 4 -> ""
-        16 or 5 -> ""
-        value1 xor 55 -> ""
-        55.inv() -> ""
-        Int.MIN_VALUE.inv() -> ""
-        Int.MAX_VALUE.hashCode().inv() -> ""
-        value1 * value3 -> ""
-        value1 * 2 / 10 or 5 + 14 / getInt(1000) % 4 ushr value2.getInt(1000) -> ""
-        else -> ""
+        lambda_1 -> {}
+        { { {} } } -> {}
+        { -> (Int)
+            { arg: Int -> { { println(arg) } } }
+        } -> {}
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Float.
-fun case_5(value: Float, value1: Float, value2: _BasicTypesProvider): String {
-    val value3 = 912.113f
+// CASE DESCRIPTION: 'When' with condition as object literal.
+fun case_18(value: Any) {
+    val object_1 = object {
+        val prop_1 = 1
+    }
 
     when (value) {
-        2f -> return ""
-        2.1f + 2.9F -> return ""
-        94.1243235235f * .9193f -> return ""
-        -.000001f / 3F -> return ""
-        8F % 3.1f -> return ""
-        4.0F - 0.2f -> return ""
-        2.111111f + value3 * 11f / 0.113F % 0.1F - 2.0f -> return ""
-        value1 * getFloat(-100) -> return ""
-        value1 * 2 / 14 / getFloat(1000) % 4 - value2.getFloat(1000) -> return ""
-    }
- 
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Float, and 'else' branch.
-fun case_6(value: Float, value1: Float, value2: _BasicTypesProvider): String {
-    val value3 = 912.113f
-
-    return when (value) {
-        2f -> ""
-        2.1f + 2.9F -> ""
-        94.1243235235f * .9193f -> ""
-        -.000001f / 3F -> ""
-        8F % 3.1f -> ""
-        4.0F - 0.2f -> ""
-        2.111111f + value3 * 11f / 0.113F % 0.1F - 2.0f -> ""
-        value1 * getFloat(-100) -> ""
-        value1 * 2 / 14 / getFloat(1000) % 4 - value2.getFloat(1000) -> ""
-        else -> ""
+        object {} -> {}
+        object {
+            private fun fun_1() { }
+            val prop_1 = 1
+        } -> {}
+        object_1 -> {}
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Double.
-fun case_7(value: Double, value1: Double, value2: _BasicTypesProvider): String {
-    val value3 = 912.113
+// CASE DESCRIPTION: 'When' with condition as this expression.
+class A {
+    val prop_1 = 1
+    val lambda_1 = { 1 }
+    fun fun_1(): Int { return 1 }
 
+    fun case_19(value: Any) {
+        when (value) {
+            this -> {}
+            ((this)) -> {}
+            this::prop_1.get() -> {}
+            this.prop_1 -> {}
+            this.lambda_1() -> {}
+            this::lambda_1.get()() -> {}
+            this.fun_1() -> {}
+            this::fun_1.invoke() -> {}
+        }
+    }
+}
+
+// CASE DESCRIPTION: 'When' with condition as throw expression.
+fun case_20(value: Nothing) {
     when (value) {
-        2.4 -> return ""
-        2.1 + 2.9 -> return ""
-        94.1243235235 * .9193 -> return ""
-        -.000001 / 3.0 -> return ""
-        8.0 % 3.0 -> return ""
-        4.0 - 0.2 -> return ""
-        2.111111 + value3 * 11.1 / 0.113 % 0.1 - 2.0 -> return ""
-        value1 * getDouble(-100) -> return ""
-        value1 * 2.4 / 14.0 / getDouble(1000) % 4.0 * value2.getDouble(1000) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Double, and 'else' branch.
-fun case_8(value: Double, value1: Double, value2: _BasicTypesProvider): String {
-    val value3 = 912.113
-
-    return when (value) {
-        2.4 -> ""
-        2.1 + 2.9 -> ""
-        94.1243235235 * .9193 -> ""
-        -.000001 / 3.0 -> ""
-        8.0 % 3.0 -> ""
-        4.0 - 0.2 -> ""
-        2.111111 + value3 * 11.1 / 0.113 % 0.1 - 2.0 -> ""
-        value1 * getDouble(-100) -> ""
-        value1 * 2.4 / 14.0 / getDouble(1000) % 4.0 * value2.getDouble(1000) -> ""
-        else -> ""
+        <!UNREACHABLE_CODE!>throw Exception() -> {}<!>
+        <!UNREACHABLE_CODE!>throw throw throw Exception() -> {}<!>
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Byte.
-fun case_9(value: Byte, value1: Byte, value2: _BasicTypesProvider): String {
-    val value3 = 912.toByte()
-
-    when (value) {
-        2.toByte() -> return ""
-        (2.toByte() + 2.toByte()).toByte() -> return ""
-        (2.toByte() * 6.toByte()).toByte() -> return ""
-        (8.toByte() / 5.toByte()).toByte() -> return ""
-        (8.toByte() % 5.toByte()).toByte() -> return ""
-        (9.toByte() - 1.toByte()).toByte() -> return ""
-        (2.toByte() + value3 * 2 / 2 % 2 - 2).toByte() -> return ""
-        Int.MIN_VALUE.inv().toByte() -> return ""
-        Int.MAX_VALUE.hashCode().inv().toByte() -> return ""
-        (value1 * value3).toByte() -> return ""
-        (value1 * 2.toByte() / 10.toByte() - 5.toByte() + 14.toByte() / getByte(1000) % 4.toByte() * value2.getByte(1000)).toByte() -> return ""
+// CASE DESCRIPTION: 'When' with condition as return expression.
+fun case_21(value: Nothing) {
+    fun r_1() {
+        when (value) {
+            <!UNREACHABLE_CODE!>return -> 1<!>
+            <!UNREACHABLE_CODE!>return return return -> 2<!>
+        }
     }
 
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Byte, and 'else' branch.
-fun case_10(value: Byte, value1: Byte, value2: _BasicTypesProvider): String {
-    val value3 = 912.toByte()
-
-    return when (value) {
-        2.toByte() -> ""
-        (2.toByte() + 2.toByte()).toByte() -> ""
-        (2.toByte() * 6.toByte()).toByte() -> ""
-        (8.toByte() / 5.toByte()).toByte() -> ""
-        (8.toByte() % 5.toByte()).toByte() -> ""
-        (9.toByte() - 1.toByte()).toByte() -> ""
-        (2.toByte() + value3 * 2 / 2 % 2 - 2).toByte() -> ""
-        Int.MIN_VALUE.inv().toByte() -> ""
-        Int.MAX_VALUE.hashCode().inv().toByte() -> ""
-        (value1 * value3).toByte() -> ""
-        (value1 * 2.toByte() / 10.toByte() - 5.toByte() + 14.toByte() / getByte(1000) % 4.toByte() * value2.getByte(1000)).toByte() -> ""
-        else -> ""
+    fun r_2(): List<Int>? {
+        when (value) {
+            <!UNREACHABLE_CODE!>return listOf(0, 1, 2) -> 1<!>
+            <!UNREACHABLE_CODE!>return null -> 2<!>
+        }
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression (minus and plus of Integer) with Char.
-fun case_11(value: Char): String {
-    when (value) {
-        2.toChar() -> return ""
-        2.toChar() + 2 -> return ""
-        8.toChar() - 2 -> return ""
-        Int.MIN_VALUE.toChar() -> return ""
-        Int.MAX_VALUE.hashCode().toChar() -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression (minus and plus of Integer) with Char, and 'else' branch.
-fun case_12(value: Char): String = when (value) {
-    2.toChar() -> ""
-    2.toChar() + 23 -> ""
-    8.toChar() - 12 -> ""
-    Int.MIN_VALUE.toChar() -> ""
-    Int.MAX_VALUE.hashCode().toChar() -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long.
-fun case_13(value: Long, value1: Long, value2: _BasicTypesProvider): String {
-    val value3: Long = 34939942345L
-
-    when (value) {
-        11345342345L -> return ""
-        2L + 2L -> return ""
-        212452342345L * 2L -> return ""
-        8L / 3L -> return ""
-        8L % 5L -> return ""
-        5323452342345L - 2L -> return ""
-        159345342345L + value3 * 2L / 65939942345L % 2L - 85939942345L -> return ""
-        32L shl value3.toInt() -> return ""
-        value1 shr value2.getLong(1000).toInt() -> return ""
-        64L ushr getLong(1000).toInt() -> return ""
-        value2.getLong(1000) and 4 -> return ""
-        33244523442345L or 5L -> return ""
-        value1 xor 932452342345L -> return ""
-        Int.MIN_VALUE.toLong() -> return ""
-        Int.MAX_VALUE.hashCode().toLong() -> return ""
-        value1 * value3 -> return ""
-        value1 * 2L / 10L or 85939942345L + 14L / getLong(1000) % 4L ushr value2.getLong(1000).toInt() -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long, and 'else' branch.
-fun case_14(value: Long, value1: Long, value2: _BasicTypesProvider): String {
-    val value3: Long = 34939942345L
-
-    return when (value) {
-        11345342345L -> ""
-        2L + 2L -> ""
-        212452342345L * 2L -> ""
-        8L / 3L -> ""
-        8L % 5L -> ""
-        5323452342345L - 2L -> ""
-        159345342345L + value3 * 2L / 65939942345L % 2L - 85939942345L -> ""
-        32L shl value3.toInt() -> ""
-        value1 shr value2.getLong(1000).toInt() -> ""
-        64L ushr getLong(1000).toInt() -> ""
-        value2.getLong(1000) and 4 -> ""
-        33244523442345L or 5L -> ""
-        value1 xor 932452342345L -> ""
-        Int.MIN_VALUE.toLong() -> ""
-        Int.MAX_VALUE.hashCode().toLong() -> ""
-        value1 * value3 -> ""
-        value1 * 2L / 10L or 85939942345L + 14L / getLong(1000) % 4L ushr value2.getLong(1000).toInt() -> ""
-        else -> ""
+// CASE DESCRIPTION: 'When' with condition as continue expression.
+fun case_22(value: Nothing) {
+    loop1@ while (true) {
+        loop2@ while (true) {
+            when (value) {
+                <!UNREACHABLE_CODE!>continue@loop1 -> 1<!>
+                <!UNREACHABLE_CODE!>continue@loop2 -> 2<!>
+            }
+        }
     }
 }
 
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long.
-fun case_15(value: Number, value1: Long, value2: _BasicTypesProvider): String {
-    val value3: Float = -.34939942345f
-
-    when (value) {
-        11345342345L -> return ""
-        (8.toByte() % 5.toByte()).toByte() -> return ""
-        4 - 3 -> return ""
-        -.000001f / 3F -> return ""
-        8L % 5L -> return ""
-        2.4 -> return ""
-        value1 * getDouble(-100) -> return ""
-        32L shl value3.toInt() -> return ""
-        value1 shr value2.getLong(1000).toInt() -> return ""
-        64L ushr getLong(1000).toInt() -> return ""
-        2.111111f + value3 * 11f / 0.113F % 0.1F - 2.0f -> return ""
-        33244523442345L or 5L -> return ""
-        value1 xor 932452342345L -> return ""
-        Int.MIN_VALUE.inv() -> return ""
-        Int.MAX_VALUE.hashCode().toLong() -> return ""
-        value1 * value3 -> return ""
-        (value1 * 2.toByte() / 10.toByte() - 5.toByte() + 14.toByte() / getByte(1000) % 4.toByte() * value2.getByte(1000)).toByte() -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with 'when condition' as arithmetic expression with Long, and 'else' branch.
-fun case_16(value: Number, value1: Long, value2: _BasicTypesProvider): String {
-    val value3: Float = -.34939942345f
-
-    return when (value) {
-        11345342345L -> return ""
-        (8.toByte() % 5.toByte()).toByte() -> ""
-        4 - 3 -> ""
-        -.000001f / 3F -> ""
-        8L % 5L -> ""
-        2.4 -> ""
-        value1 * getDouble(-100) -> ""
-        32L shl value3.toInt() -> ""
-        value1 shr value2.getLong(1000).toInt() -> ""
-        64L ushr getLong(1000).toInt() -> ""
-        2.111111f + value3 * 11f / 0.113F % 0.1F - 2.0f -> ""
-        33244523442345L or 5L -> ""
-        value1 xor 932452342345L -> ""
-        Int.MIN_VALUE.inv() -> ""
-        Int.MAX_VALUE.hashCode().toLong() -> ""
-        value1 * value3 -> ""
-        (value1 * 2.toByte() / 10.toByte() - 5.toByte() + 14.toByte() / getByte(1000) % 4.toByte() * value2.getByte(1000)).toByte() -> ""
-        else -> ""
+// CASE DESCRIPTION: 'When' with condition as break expression.
+fun case_23(value: Nothing) {
+    loop1@ while (true) {
+        loop2@ while (true) {
+            when (value) {
+                <!UNREACHABLE_CODE!>break@loop1 -> 1<!>
+                <!UNREACHABLE_CODE!>break@loop2 -> 2<!>
+            }
+        }
     }
 }

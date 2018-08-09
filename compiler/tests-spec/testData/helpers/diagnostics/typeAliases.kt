@@ -1,5 +1,3 @@
-tests._typeAliases
-
 typealias _TypeAliasAny = Any
 typealias _TypeAliasUnit = Unit
 typealias _TypeAliasNothing = Nothing

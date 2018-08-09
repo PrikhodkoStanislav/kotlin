@@ -9,51 +9,25 @@
  */
 
 // CASE DESCRIPTION: 'When' with break expression (without label).
-fun case_1(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
+fun case_1(value: Int): Int {
+    while (true) {
         when (value) {
-            1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
-        }
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with continue expression (without label).
-fun case_2(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
-        when (value) {
-            1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
-        }
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with with continue (first) and break (second) expression (without label).
-fun case_3(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
-        when (value) {
-            1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
+            1 -> return 1
             2 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
         }
     }
 
-    return ""
+    return 0
 }
 
-// CASE DESCRIPTION: 'When' with with continue (second) and break (first) expression (without label).
-fun case_4(value: Int, value1: MutableList<Int>): String {
-    while (value1.isNotEmpty()) {
-        value1.removeAt(0)
+// CASE DESCRIPTION: 'When' with continue expression (without label).
+fun case_2(value: Int): Int {
+    while (true) {
         when (value) {
-            1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>break<!>
-            2 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
+            1 -> <!BREAK_OR_CONTINUE_IN_WHEN!>continue<!>
+            2 -> return 1
         }
     }
 
-    return ""
+    <!UNREACHABLE_CODE!>return 0<!>
 }

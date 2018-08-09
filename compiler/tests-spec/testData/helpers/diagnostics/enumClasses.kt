@@ -1,5 +1,3 @@
-tests._enumClass
-
 enum class _EnumClass {
     NORTH, SOUTH, WEST, EAST
 }

@@ -1,4 +1,6 @@
 // !WITH_BASIC_TYPES
+// !WITH_SEALED_CLASSES
+// !WITH_ENUM_CLASSES
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -7,62 +9,116 @@
  PARAGRAPH: 3
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 1
- DESCRIPTION: 'When' without bound value and different variants of the boolean conditions (numbers and Char).
+ DESCRIPTION: 'When' without bound value and different variants of the boolean conditions (logical, equality, comparison, type checking operator, containment operator).
  */
 
-// CASE DESCRIPTION: 'When' without 'else' branch.
-fun case_1(
-    value1: Int,
-    value2: Float,
-    value3: Double,
-    value4: Short,
-    value5: Byte,
-    value6: Long,
-    value7: _BasicTypesProvider,
-    value8: Char
-): String {
-    when {
-        value1 == 21 -> return ""
-        value2 > -.000000001 && value2 < 0.000000001 -> return ""
-        value3 > 2.0 && value3 <= 1000.90 -> return ""
-        value4 == 0.toShort() -> return ""
-        value5 > -128 || value5 < 127 -> return ""
-        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> return ""
-        getInt('a') > 100 || getInt('+') < 10 -> return ""
-        value7.getInt(-.00000001f) <= 100 || value7.getInt(4412.11F) >= 10 -> return ""
-        getBoolean(0) || getBoolean(0L) -> return ""
-        value7.getBoolean(0) && value7.getBoolean(0L) -> return ""
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return ""
-        value8 == 127.toChar() -> return ""
+// CASE DESCRIPTION: 'When' with boolean expressions and else branch.
+fun case_1(value1: Boolean, value2: Long): Int {
+    return when {
+        value1 -> 1
+        getBoolean() && value1 -> 2
+        getChar(10) != 'a' -> 3
+        getList() === getAny() -> 4
+        value2 <= 11 -> 5
+        !value1 -> 6
+        else -> 7
     }
-
-    return ""
 }
 
-// CASE DESCRIPTION: 'When' with 'else' branch.
-fun case_2(
-    value1: Int,
-    value2: Float,
-    value3: Double,
-    value4: Short,
-    value5: Byte,
-    value6: Long,
-    value7: _BasicTypesProvider,
-    value8: Char
-): String {
-    return when {
-        value1 == 21 -> ""
-        value2 > -.000000001 && value2 < 0.000000001 -> ""
-        value3 > 2.0 && value3 <= 1000.90 -> ""
-        value4 == 0.toShort() -> ""
-        value5 > -128 || value5 < 127 -> ""
-        value6 > 213412341234L && value6 <= 1100000000000L || value6 == 0L -> ""
-        getInt('a') > 100 || getInt('+') < 10 -> return ""
-        value7.getInt(-.00000001f) <= 100 || value7.getInt(4412.11F) >= 10 -> return ""
-        getBoolean(0) || getBoolean(0L) -> return ""
-        value7.getBoolean(0) && value7.getBoolean(0L) -> return ""
-        11 == 11 || 13123123123123L == 0L || 0f == 0f && !!!(-.0000000001 == -.0000000001) || ((-10).toByte() == 90.toByte()) || 91.toChar() == 127.toChar() -> return ""
-        value8 == 127.toChar() -> return ""
-        else -> ""
+/*
+ CASE DESCRIPTION: 'When' with boolean expressions.
+ NOTE: for potential analysys on exhaustive by enum of when without bound value.
+ */
+fun case_2(value: _EnumClass) {
+    when {
+        value == _EnumClass.NORTH -> {}
+        value == _EnumClass.SOUTH -> {}
+        value == _EnumClass.WEST -> {}
+        value == _EnumClass.EAST -> {}
+    }
+}
+
+/*
+ CASE DESCRIPTION: 'When' with boolean expressions.
+ NOTE: for potential analysys on exhaustive by boolean of when without bound value.
+ */
+fun case_3(value: Boolean) {
+    when {
+        value == true -> return
+        value == false -> return
+    }
+}
+
+/*
+ CASE DESCRIPTION: 'When' with boolean literals.
+ NOTE: for potential mark code after true branch as unreacable.
+ */
+fun case_4(value1: Boolean) {
+    when {
+        false -> return
+        true -> return
+        value1 -> return
+    }
+}
+
+/*
+ CASE DESCRIPTION: 'When' with boolean constants.
+ NOTE: for potential const propagation use in this case.
+ */
+fun case_5(value1: Boolean) {
+    val value2 = false
+    val value3 = false || !!!false || false
+
+    when {
+        value3 -> return
+        value2 -> return
+        value1 -> return
+    }
+}
+
+// CASE DESCRIPTION: 'When' with type checking operator.
+fun case_6(value: Any) {
+    when {
+        value is Nothing -> {}
+        value is Int -> {}
+        value is Boolean -> {}
+        value is String -> {}
+        value is Number -> {}
+        value is Float -> {}
+        <!USELESS_IS_CHECK!>value is Any<!> -> {}
+    }
+}
+
+/*
+ CASE DESCRIPTION: 'When' with invert type checking operator.
+ NOTE: for potential analysys on exhaustive of when without bound value.
+ */
+fun case_7(value: Any) {
+    when {
+        value !is Number -> {}
+        value is Float -> {}
+        <!USELESS_IS_CHECK!>value is Number<!> -> {}
+        <!USELESS_IS_CHECK!>value is Any<!> -> {}
+    }
+}
+
+/*
+ CASE DESCRIPTION: 'When' with type checking operator by sealed class.
+ NOTE: for potential analysys on exhaustive by sealed class of when without bound value.
+ */
+fun case_8(value: _SealedClass) {
+    when {
+        value is _SealedChild1 -> {}
+        value is _SealedChild2 -> {}
+        value is _SealedChild3 -> {}
+    }
+}
+
+// CASE DESCRIPTION: 'When' with containment operator.
+fun case_9(value: Int, value1: IntRange) {
+    when {
+        value in -10..100L -> {}
+        value in value1 -> {}
+        value !in listOf(0, 1, 2) -> {}
     }
 }

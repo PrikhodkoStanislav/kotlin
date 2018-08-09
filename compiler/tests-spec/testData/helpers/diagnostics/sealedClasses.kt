@@ -1,5 +1,3 @@
-tests._sealedClass
-
 sealed class _SealedClass
 data class _SealedChild1(val number: Int) : _SealedClass()
 data class _SealedChild2(val e1: Int, val e2: Int) : _SealedClass()

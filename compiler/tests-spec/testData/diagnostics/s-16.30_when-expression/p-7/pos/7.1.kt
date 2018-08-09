@@ -9,7 +9,7 @@
  */
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and expression as when condition.
-fun case_1(value: Int?): String = when (value) {
+fun case_1(value: Int?) = when (value) {
     0 -> ""
     1 -> ""
     2 -> ""
@@ -17,7 +17,7 @@ fun case_1(value: Int?): String = when (value) {
 }
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and type test as when condition.
-fun case_2(value: Any): String = when (value) {
+fun case_2(value: Any) = when (value) {
     is Int -> ""
     is Boolean -> ""
     is String -> ""
@@ -25,7 +25,7 @@ fun case_2(value: Any): String = when (value) {
 }
 
 // CASE DESCRIPTION: Simple when with bound value, with 'else' branch and range test as when condition.
-fun case_2(value: Int): String = when (value) {
+fun case_2(value: Int) = when (value) {
     in -10..10 -> ""
     in 11..1000 -> ""
     in 1000..Int.MAX_VALUE -> ""

@@ -1,5 +1,3 @@
-tests._classes
-
 class _Class {
     val prop_1 = 1
     val prop_2 = 2

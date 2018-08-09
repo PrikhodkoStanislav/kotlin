@@ -1,4 +1,6 @@
-// !WITH_TYPEALIASES
+// !WITH_CLASSES
+// !WITH_SEALED_CLASSES
+// !WITH_OBJECTS
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -7,39 +9,65 @@
  PARAGRAPH: 7
  SENTENCE 1: Type test condition: type checking operator followed by type.
  NUMBER: 3
- DESCRIPTION: 'When' with bound value and type test condition with type aliases.
+ DESCRIPTION: 'When' with bound value and enumaration of type test conditions.
  */
 
-// CASE DESCRIPTION: 'When' with type checking operator on the two typealiases (one of which is equal to the source type).
-fun case_1(value: Any): String {
+// CASE DESCRIPTION: 'When' with type test condition on the various basic types.
+fun case_1(value: Any) = when (value) {
+    is Int -> {}
+    is Float, is Char, is Boolean -> {}
+    is String -> {}
+    else -> {}
+}
+
+// CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types.
+fun case_2(value: Any?) = when (value) {
+    is Float, is Char, is _SealedClass? -> "" // if value is null then this branch will be executed
+    is Double, is Boolean, is _ClassWithCompanionObject.Companion -> ""
+    else -> ""
+}
+
+/*
+ CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check in the different branches).
+ NOTE: for potential double nulluble type check detecting.
+ */
+fun case_3(value: Any?) = when (value) {
+    is Float, is Char, is Int? -> "" // if value is null then this branch will be executed
+    is _SealedChild2, is Boolean?, is String -> "" // redundant nullable type check
+    else -> ""
+}
+
+/*
+ CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check in the one branch).
+ NOTE: for potential double nulluble type check detecting.
+ */
+fun case_4(value: Any?) = when (value) {
+    is Float, is Char?, is Int? -> "" // double nullable type check in the one branch
+    is _SealedChild1, is Boolean, is String -> ""
+    else -> ""
+}
+
+/*
+ CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check).
+ NOTE: for potential double nulluble type check detecting.
+ */
+fun case_5(value: Any?): String {
     when (value) {
-        is _TypeAliasInt -> return ""
-        <!USELESS_IS_CHECK!>is _TypeAliasAny<!> -> return ""
+        is Float, is Char?, is Int -> return ""
+        is Double, is _EmptyObject, is String -> return ""
+        null -> return "" // null-check redundant
+        else -> return ""
     }
-
-    return ""
 }
 
-// CASE DESCRIPTION: 'When' with type checking operator on the one typealias and 'else' branch.
-fun case_2(value: Any): String = when (value) {
-    is _TypeAliasInt -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with type checking operator on the one typealias which is equal to the source type, and 'else' branch.
-fun case_3(value: Any): String = when (value) {
-    <!USELESS_IS_CHECK!>is _TypeAliasAny<!> -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with type checking operator on the one typealias which is not equal to the source type, and 'else' branch.
-fun case_4(value: Any): String = when (value) {
-    is _TypeAliasUnit -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with type checking operator on the Nothing typealias, and 'else' branch.
-fun case_5(value: Any): String = when (value) {
-    is _TypeAliasNothing -> ""
-    else -> ""
+/*
+ CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two different nullable type check in the one branch).
+ NOTE: for potential double nulluble type check detecting.
+ */
+fun case_6(value: Any?): String {
+    when (value) {
+        is Float, is Char?, null, is Int -> return "" // double nullable type check in the one branch
+        is Double, is _EmptyObject, is String -> return ""
+        else -> return ""
+    }
 }

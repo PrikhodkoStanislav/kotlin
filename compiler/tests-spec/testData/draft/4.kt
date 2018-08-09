@@ -10,7 +10,7 @@
  PARAGRAPH: 7
  SENTENCE 1: Type test condition: type checking operator followed by type.
  NUMBER: 5
- DESCRIPTION: 'When' with bound value and type test condition (with invert type checking operator).
+ DESCRIPTION: 'When' with bound value and type test condition (invert type checking operator).
  */
 
 // CASE DESCRIPTION: 'When' with two subtypes of the sealed class covered and all subtypes other than specified covered via invert type checking operator.
@@ -37,22 +37,6 @@ fun case_3(value: _SealedClass): String = when (value) {
     !is _SealedChild2 -> ""
 }
 
-// CASE DESCRIPTION: 'When' as statement with direct and invert type checking operators on the same subtype of thee sealed class, and 'else' branch.
-fun case_4(value: _SealedClass): String {
-    when (value) {
-        is _SealedChild2 -> return ""
-        !is _SealedChild2 -> return ""
-        else -> return ""
-    }
-}
-
-// CASE DESCRIPTION: 'When' as expression with direct (in the first position) and invert (in the second position) type checking operators on the same subtype of the sealed class, and 'else' branch.
-fun case_5(value: _SealedClass): String = when (value) {
-    is _SealedChild2 -> ""
-    !is _SealedChild2 -> ""
-    <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> ""
-}
-
 // CASE DESCRIPTION: 'When' with direct (in the second position) and invert (in the first position) type checking operators on the same subtype of the sealed class, and 'else' branch (redundant).
 fun case_6(value: _SealedClass): String = when (value) {
     !is _SealedChild1 -> ""
@@ -60,19 +44,6 @@ fun case_6(value: _SealedClass): String = when (value) {
     <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> ""
 }
 
-// CASE DESCRIPTION: 'When' as expression with direct (in the second position) and invert (in the first position) type checking operators on the same subtype of the sealed class.
-fun case_7(value: _SealedClass): String = when (value) {
-    !is _SealedChild1 -> ""
-    <!USELESS_IS_CHECK!>is _SealedChild1<!> -> ""
-}
-
-// CASE DESCRIPTION: 'When' as statement with direct (in the second position) and invert (in the first position) type checking operators on the same subtype of the sealed class.
-fun case_8(value: _SealedClass): String {
-    <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when (value) {
-        !is _SealedChild1 -> return ""
-        <!USELESS_IS_CHECK!>is _SealedChild1<!> -> return ""
-    }<!>
-}
 
 // CASE DESCRIPTION: 'When' with one invert type checking operator on the some subtype of the sealed class, and 'else' branch.
 fun case_9(value: _SealedClass): String = when (value) {

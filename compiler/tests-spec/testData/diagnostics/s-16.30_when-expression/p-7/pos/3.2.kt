@@ -1,3 +1,4 @@
+// !WITH_BASIC_TYPES
 // !WITH_CLASSES
 
 /*
@@ -7,123 +8,21 @@
  PARAGRAPH: 7
  SENTENCE 3: Contains test condition: containment operator followed by an expression.
  NUMBER: 2
- DESCRIPTION: 'When' with bound value and containment operator on the classes with contains operator defined.
+ DESCRIPTION: 'When' with bound value and enumeration of the containment operators.
  */
 
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (IntRange).
-fun case_1(value: Int, value1: List<IntArray>, value2: _Class, value3: IntRange): String {
+// CASE DESCRIPTION: 'When' with range operator.
+fun case_1(value: Int, value1: Int, value2: Short): String {
     when (value) {
-        in value1[0] -> return ""
-        in value1[10] -> return ""
-        in listOf(3, 5, 6, 7, 8) -> return ""
-        in value2 -> return ""
-        in value3 -> return ""
-        in value2.getIntArray(90000) -> return ""
+        in Long.MIN_VALUE..-100, in -99..0 -> return ""
+        !in 100.toByte()..value1, in value1..value2 -> return ""
     }
 
     return ""
 }
 
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (IntRange), and 'else' branch.
-fun case_2(value: Int, value1: List<IntArray>, value2: _Class): String = when (value) {
-    in value1[0] -> ""
-    !in value1[10] -> ""
-    in listOf(3, 5, 6, 7, 8) -> ""
-    in value2 -> ""
-    !in value2.getIntArray(90000) -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (IntRange), and 'else' branch.
-fun case_3(value: Int, value1: List<IntArray>, value2: _Class, value3: IntRange): String {
-    when (value) {
-        !in value1[0] -> return ""
-        !in value1[10] -> return ""
-        !in listOf(3, 5, 6, 7, 8) -> return ""
-        !in value2 -> return ""
-        !in value3 -> return ""
-        !in value2.getIntArray(90000) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined (IntRange).
-fun case_4(value: Int, value1: _Class): String {
-    when (value) {
-        in value1.getIntArray(90000) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined (IntRange), and 'else' branch.
-fun case_5(value: Int, value1: _Class): String = when (value) {
-    in value1.getIntArray(90000) -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined (IntRange).
-fun case_6(value: Int, value1: _Class): String {
-    when (value) {
-        !in value1.getIntArray(90000) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with one contains operator on the class with contains operator defined (IntRange), and 'else' branch.
-fun case_7(value: Int, value1: _Class): String = when (value) {
-    !in value1.getIntArray(90000) -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (LongRange).
-fun case_8(value: Long, value1: List<LongArray>, value2: _Class, value3: LongRange): String {
-    when (value) {
-        in value1[0] -> return ""
-        in value1[10] -> return ""
-        in listOf(3L, 5L, 6L, 7L, 8L) -> return ""
-        in value2 -> return ""
-        in value3 -> return ""
-        in value2.getLongArray(90000L) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (LongRange), and 'else' branch.
-fun case_9(value: Long, value1: List<LongArray>, value2: _Class, value3: LongRange): String = when (value) {
-    in value1[0] -> ""
-    in value1[10] -> ""
-    in listOf(3L, 5L, 6L, 7L, 8L) -> ""
-    in value2 -> ""
-    in value3 -> ""
-    in value2.getLongArray(90000L) -> ""
-    else -> ""
-}
-
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (IntRange).
-fun case_10(value: Char, value1: List<CharArray>, value2: _Class, value3: CharRange): String {
-    when (value) {
-        in value1[0] -> return ""
-        !in value1[10] -> return ""
-        in listOf(3.toChar(), 5.toChar(), 6.toChar(), 7.toChar(), 8.toChar()) -> return ""
-        in value2 -> return ""
-        in value3 -> return ""
-        in value2.getCharArray(90.toChar()) -> return ""
-    }
-
-    return ""
-}
-
-// CASE DESCRIPTION: 'When' with contains operator on the classes with contains operator defined (IntRange), and 'else' branch.
-fun case_11(value: Char, value1: List<CharArray>, value2: _Class, value3: CharRange): String = when (value) {
-    in value1[0] -> ""
-    !in value1[10] -> ""
-    in listOf(3.toChar(), 5.toChar(), 6.toChar(), 7.toChar(), 8.toChar()) -> ""
-    in value2 -> ""
-    !in value3 -> ""
-    in value2.getCharArray(90.toChar()) -> ""
+// CASE DESCRIPTION: 'When' on types with contains method defined.
+fun case_2(value: Int, value1: List<IntArray>, value2: _Class) = when (value) {
+    !in value1[0], !in listOf(0, 1, 2, 3, 4), !in value2.getIntArray(90) -> ""
     else -> ""
 }
