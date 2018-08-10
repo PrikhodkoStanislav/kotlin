@@ -85,11 +85,14 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         private const val TEST_UNEXPECTED_BEHAVIOUR = "(?:\n\\s*(?<unexpectedBehaviour>UNEXPECTED BEHAVIOUR))"
         private const val TEST_ISSUES = "(?:\n\\s*ISSUES:\\s*(?<issues>(KT-[1-9]\\d*)(,\\s*KT-[1-9]\\d*)*))"
 
-        val testPathRegex: Pattern =
+        private val testAreaRegex = "(?<testArea>${TestArea.values().joinToString("|")})"
+        private val testTypeRegex = "(?<testType>${TestType.values().joinToString("|")})"
+
+        val testPathPattern: Pattern =
             Pattern.compile("^.*?/(?<testArea>diagnostics|psi|codegen)/s-(?<sectionNumber>(?:$INTEGER_REGEX)(?:\\.$INTEGER_REGEX)*)_(?<sectionName>[\\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX)/(?<testType>pos|neg)/(?<sentenceNumber>$INTEGER_REGEX)\\.(?<testNumber>$INTEGER_REGEX)\\.kt$")
-        val testContentMetaInfoRegex: Pattern =
-            Pattern.compile("\\/\\*\\s+KOTLIN (?<testArea>DIAGNOSTICS|PSI|CODEGEN) SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$INTEGER_REGEX)(?:\\.$INTEGER_REGEX)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$INTEGER_REGEX)\\s+SENTENCE\\s*(?<sentenceNumber>$INTEGER_REGEX):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$INTEGER_REGEX)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)$TEST_UNEXPECTED_BEHAVIOUR?$TEST_ISSUES?\\s+\\*\\/\\s+")
-        val testCaseInfo: Pattern =
+        val testContentMetaInfoPattern: Pattern =
+            Pattern.compile("\\/\\*\\s+KOTLIN $testAreaRegex SPEC TEST \\($testTypeRegex\\)\\s+SECTION (?<sectionNumber>(?:$INTEGER_REGEX)(?:\\.$INTEGER_REGEX)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$INTEGER_REGEX)\\s+SENTENCE\\s*(?<sentenceNumber>$INTEGER_REGEX):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$INTEGER_REGEX)\\s+DESCRIPTION:\\s*(?<testDescription>.*?)$TEST_UNEXPECTED_BEHAVIOUR?$TEST_ISSUES?\\s+\\*\\/\\s+")
+        val testCaseInfoPattern: Pattern =
             Pattern.compile("(?:(?:\\/\\*\n\\s*)|(?:\\/\\/\\s*))CASE DESCRIPTION:\\s*(?<testCaseDescription>.*?)$TEST_UNEXPECTED_BEHAVIOUR?$TEST_ISSUES?\n(\\s\\*\\/)?")
 
         private fun getTestInfo(
@@ -159,8 +162,8 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
         }
 
         fun testMetaInfoFilter(fileContent: String): String {
-            val fileContentWithoutTestInfo = testContentMetaInfoRegex.matcher(fileContent).replaceAll("")
-            val fileContentWithoutCasesInfo = testCaseInfo.matcher(fileContentWithoutTestInfo).replaceAll("")
+            val fileContentWithoutTestInfo = testContentMetaInfoPattern.matcher(fileContent).replaceAll("")
+            val fileContentWithoutCasesInfo = testCaseInfoPattern.matcher(fileContentWithoutTestInfo).replaceAll("")
 
             return fileContentWithoutCasesInfo
         }
@@ -184,20 +187,20 @@ abstract class SpecTestValidator(private val testDataFile: File, private val tes
     }
 
     fun parseTestInfo() {
-        val testInfoByFilenameMatcher = testPathRegex.matcher(testDataFile.path)
+        val testInfoByFilenameMatcher = testPathPattern.matcher(testDataFile.path)
 
         if (!testInfoByFilenameMatcher.find()) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
         }
 
         val fileContent = testDataFile.readText()
-        val testInfoByContentMatcher = testContentMetaInfoRegex.matcher(fileContent)
+        val testInfoByContentMatcher = testContentMetaInfoPattern.matcher(fileContent)
 
         if (!testInfoByContentMatcher.find()) {
             throw SpecTestValidationException(SpecTestValidationFailedReason.METAINFO_NOT_VALID)
         }
 
-        val testCasesMatcher = testCaseInfo.matcher(fileContent)
+        val testCasesMatcher = testCaseInfoPattern.matcher(fileContent)
         val testCases = getTestCasesInfo(testCasesMatcher, testInfoByContentMatcher)
 
         testInfoByFilename = getTestInfo(testInfoByFilenameMatcher)

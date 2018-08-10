@@ -67,7 +67,7 @@ object TestsStatisticPrinter {
             File(specTestsPath).walkTopDown().forEach areaTests@{
                 if (!it.isFile || it.extension != "kt") return@areaTests
 
-                val testInfoMatcher = SpecTestValidator.testPathRegex.matcher(it.path)
+                val testInfoMatcher = SpecTestValidator.testPathPattern.matcher(it.path)
 
                 if (!testInfoMatcher.find()) return@areaTests
 

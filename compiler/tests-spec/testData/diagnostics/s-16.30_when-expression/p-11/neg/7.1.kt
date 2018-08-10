@@ -43,7 +43,7 @@ fun case_5(value: _EnumClassSingle): String = <!NO_ELSE_IN_WHEN!>when<!>(value) 
 fun case_6(value: _EnumClass): String {
     val west = _EnumClass.WEST
 
-    return <!NO_ELSE_IN_WHEN!>when<!> {
+    return <!NO_ELSE_IN_WHEN!>when<!> (value) {
         _EnumClass.EAST -> ""
         _EnumClass.SOUTH -> ""
         _EnumClass.NORTH -> ""

@@ -8,7 +8,7 @@
  SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 3
  DESCRIPTION: 'When' without bound value and with Nothing in condition (subtype of Boolean).
- UNEXPECTED BEHAVIOUR
+ UNEXPECTED_BEHAVIOUR
  ISSUES: KT-25948
  */
 
@@ -84,7 +84,6 @@ fun case_5(<!UNUSED_PARAMETER!>value1<!>: _BasicTypesProvider, <!UNUSED_PARAMETE
                 when {
                     continue@loop1 <!UNREACHABLE_CODE!>== throw throw throw throw Exception()<!> -> <!UNREACHABLE_CODE!>return<!>
                     <!UNREACHABLE_CODE!>(return return return return) || break@loop1 && break@loop3 -> return<!>
-                    <!UNREACHABLE_CODE!>(return return) == throw throw Exception()<!> -> return<!>
                     <!UNREACHABLE_CODE!>continue@loop1 != 10L && (return return) == continue@loop1 -> return<!>
                     <!UNREACHABLE_CODE!>return continue@loop1 -> return<!>
                     <!UNREACHABLE_CODE!>(throw break@loop1) && break@loop3 -> return<!>

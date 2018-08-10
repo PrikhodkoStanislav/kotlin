@@ -35,11 +35,11 @@ fun case_4(value: Boolean): String = <!NO_ELSE_IN_WHEN!>when<!> {
  DISCUSSION: maybe use const propagation here?
  ISSUES: KT-25265
  */
-fun case_4(value: Boolean): String {
+fun case_5(value: Boolean): String {
     val trueValue = true
-    val falseValue = true
+    val falseValue = false
 
-    return <!NO_ELSE_IN_WHEN!>when<!> {
+    return <!NO_ELSE_IN_WHEN!>when<!> (value) {
         trueValue -> ""
         falseValue -> ""
     }

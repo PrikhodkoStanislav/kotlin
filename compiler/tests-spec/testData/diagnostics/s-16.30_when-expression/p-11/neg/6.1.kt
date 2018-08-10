@@ -64,7 +64,7 @@ fun case_9(value: Number): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
  CASE DESCRIPTION: Checking for not exhaustive 'when' on the Any.
  DISCUSSION: maybe make exhaustive without else?
  */
-fun case_10(value: Any): String = when (value) {
+fun case_10(value: Any): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
     <!USELESS_IS_CHECK!>is Any<!> -> ""
 }
 

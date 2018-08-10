@@ -236,7 +236,7 @@ fun case_23(value: Nothing) {
 
 /*
  CASE DESCRIPTION: 'When' with condition as mixed Nothing expressions.
- UNEXPECTED BEHAVIOUR
+ UNEXPECTED_BEHAVIOUR
  */
 fun case_25(value: Nothing?): String = when (<!DEBUG_INFO_CONSTANT!>value<!>) {
     throw Exception()<!UNREACHABLE_CODE!><!>, <!UNREACHABLE_CODE!>return ""<!> -> <!UNREACHABLE_CODE!>return ""<!>
