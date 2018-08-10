@@ -39,3 +39,28 @@ fun case_4(expr: _SealedClassWithObjects?): String = when (expr) {
     _SealedWithObjectsChild3 -> ""
     null -> ""
 }
+
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects covered + null value covered).
+fun case_5(value: _SealedClassMixed?): String = when (value) {
+    is _SealedMixedChild1 -> ""
+    is _SealedMixedChild2 -> ""
+    is _SealedMixedChild3 -> ""
+    _SealedMixedChildObject1 -> ""
+    _SealedMixedChildObject2 -> ""
+    _SealedMixedChildObject3 -> ""
+    null -> ""
+}
+
+/*
+ CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects (using type checking operator) covered + null value covered).
+ DISCUSSION: is it correct that objects can be checked using the type checking operator?
+ */
+fun case_6(value: _SealedClassMixed?): String = when (value) {
+    is _SealedMixedChild1 -> ""
+    is _SealedMixedChild2 -> ""
+    is _SealedMixedChild3 -> ""
+    is _SealedMixedChildObject1 -> ""
+    is _SealedMixedChildObject2 -> ""
+    is _SealedMixedChildObject3 -> ""
+    null -> ""
+}

@@ -5,3 +5,5 @@ enum class _EnumClass {
 enum class _EnumClassSingle {
     EVERYTHING
 }
+
+enum class _EnumClassEmpty
