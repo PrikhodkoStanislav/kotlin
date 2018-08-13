@@ -10,10 +10,14 @@ import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
 import java.io.File
 
-class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDataFile, TestArea.DIAGNOSTICS) {
+class DiagnosticSpecTestValidator(testFiles: List<BaseDiagnosticsTest.TestFile>) {
     private lateinit var diagnostics: MutableList<Diagnostic>
     private lateinit var diagnosticStats: MutableMap<String, Int>
     private lateinit var diagnosticSeverityStats: MutableMap<Severity, Int>
+
+    init {
+        collectDiagnostics(testFiles)
+    }
 
     private fun collectDiagnosticStatistic() {
         diagnosticSeverityStats = mutableMapOf()
@@ -27,10 +31,6 @@ class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDa
                 diagnosticSeverityStats[severity] = 1
             }
         }
-    }
-
-    private fun computeTestType(): TestType {
-        return if (Severity.ERROR in diagnosticSeverityStats) TestType.NEGATIVE else TestType.POSITIVE
     }
 
     private fun collectDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
@@ -54,11 +54,8 @@ class DiagnosticSpecTestValidator(testDataFile: File) : SpecTestValidator(testDa
         collectDiagnosticStatistic()
     }
 
-    fun validateTestType(files: List<BaseDiagnosticsTest.TestFile>) {
-        if (!this::diagnostics.isInitialized) this.collectDiagnostics(files)
-
-        validateTestType(computeTestType())
-    }
+    fun computeTestType() =
+        if (Severity.ERROR in diagnosticSeverityStats) TestType.NEGATIVE else TestType.POSITIVE
 
     fun printDiagnosticStatistic() {
         val diagnostics = if (diagnosticStats.isNotEmpty()) "$diagnosticSeverityStats | $diagnosticStats" else "does not contain"

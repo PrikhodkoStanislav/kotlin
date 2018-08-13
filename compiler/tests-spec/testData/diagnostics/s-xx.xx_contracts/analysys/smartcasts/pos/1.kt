@@ -1,7 +1,7 @@
 /*
  KOTLIN DIAGNOSTICS FUTURE SPEC TEST (POSITIVE)
 
- SECTION XX.XX: Contracts
+ SECTION: XX.XX Contracts
  CATEGORY: analysys, smartcasts
  NUMBER: 1
  DESCRIPTION: Empty 'when' with bound value.

@@ -1,7 +1,7 @@
 /*
  KOTLIN DIAGNOSTICS FUTURE SPEC TEST (NEGATIVE)
 
- SECTION XX.XX: Contracts
+ SECTION: XX.XX Contracts
  CATEGORY: analysys, controlflow
  NUMBER: 1
  DESCRIPTION: Empty 'when' with bound value.

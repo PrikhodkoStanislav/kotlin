@@ -5,31 +5,29 @@
 
 package org.jetbrains.kotlin.parsing
 
-import org.jetbrains.kotlin.spec.ParsingSpecTestValidator
-import org.jetbrains.kotlin.spec.SpecTestValidationException
-import org.jetbrains.kotlin.spec.SpecTestValidator
+import org.jetbrains.kotlin.spec.*
 import org.junit.Assert
 
 abstract class AbstractParsingTestSpec : AbstractParsingTest() {
-    private lateinit var testValidator: ParsingSpecTestValidator
+    private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>
 
     override fun doParsingTest(filePath: String) {
-        testValidator = ParsingSpecTestValidator(filePath)
+        testValidator = AbstractSpecTestValidator.getInstanceByType(filePath, TestArea.PSI)
 
         try {
             testValidator.parseTestInfo()
         } catch (e: SpecTestValidationException) {
-            Assert.fail(e.reason.description)
+            Assert.fail(e.description)
         }
 
         testValidator.printTestInfo()
 
-        super.doParsingTest(filePath, SpecTestValidator::testMetaInfoFilter)
+        super.doParsingTest(filePath, testValidator::testInfoFilter)
 
         try {
-            testValidator.validateTestType(myFile)
+            testValidator.validateTestType(computedTestType = ParsingSpecTestValidator.computeTestType(myFile))
         } catch (e: SpecTestValidationException) {
-            Assert.fail(e.reason.description)
+            Assert.fail(e.description)
         }
     }
 }

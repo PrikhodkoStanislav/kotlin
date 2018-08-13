@@ -9,8 +9,7 @@ import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.spec.DiagnosticSpecTestValidator
-import org.jetbrains.kotlin.spec.SpecTestValidationException
+import org.jetbrains.kotlin.spec.*
 import org.jetbrains.kotlin.test.*
 import org.junit.Assert
 import java.io.File
@@ -32,7 +31,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         private const val HELPERS_PATH = "$MODULE_PATH/testData/helpers/diagnostics"
     }
 
-    private lateinit var testValidator: DiagnosticSpecTestValidator
+    private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>
 
     private fun checkDirective(directive: String, testFiles: List<TestFile>) =
         testFiles.any { it.directives.contains(directive) }
@@ -59,12 +58,12 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
-        testValidator = DiagnosticSpecTestValidator(testDataFile)
+        testValidator = AbstractSpecTestValidator.getInstanceByType(testDataFile, TestArea.DIAGNOSTICS)
 
         try {
             testValidator.parseTestInfo()
         } catch (e: SpecTestValidationException) {
-            Assert.fail(e.reason.description)
+            Assert.fail(e.description)
         }
 
         testValidator.printTestInfo()
@@ -80,12 +79,13 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         moduleBindings: Map<TestModule?, BindingContext>,
         languageVersionSettingsByModule: Map<TestModule?, LanguageVersionSettings>
     ) {
+        val diagnosticValidator = DiagnosticSpecTestValidator(testFiles)
         try {
-            testValidator.validateTestType(testFiles)
+            testValidator.validateTestType(computedTestType = diagnosticValidator.computeTestType())
         } catch (e: SpecTestValidationException) {
-            Assert.fail(e.reason.description)
+            Assert.fail(e.description)
         } finally {
-            testValidator.printDiagnosticStatistic()
+            diagnosticValidator.printDiagnosticStatistic()
         }
     }
 }

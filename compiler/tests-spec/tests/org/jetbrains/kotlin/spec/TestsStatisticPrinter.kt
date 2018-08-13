@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.spec
 
 import java.io.File
+import java.util.regex.Pattern
 
 private abstract class StatElement {
     var counter = 0
@@ -67,7 +68,12 @@ object TestsStatisticPrinter {
             File(specTestsPath).walkTopDown().forEach areaTests@{
                 if (!it.isFile || it.extension != "kt") return@areaTests
 
-                val testInfoMatcher = SpecTestValidator.testPathPattern.matcher(it.path)
+                val testInfoMatcher = Pattern.compile(
+                    AbstractSpecTestValidator.testPathRegexTemplate.format(
+                        SpecTestValidator.pathPartRegex,
+                        SpecTestValidator.filenameRegex
+                    )
+                ).matcher(it.path)
 
                 if (!testInfoMatcher.find()) return@areaTests
 
