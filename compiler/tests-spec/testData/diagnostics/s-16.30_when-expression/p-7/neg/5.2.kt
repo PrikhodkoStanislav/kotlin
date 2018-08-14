@@ -1,9 +1,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 7
- SENTENCE 5: Any other expression.
+ SENTENCE: [5] Any other expression.
  NUMBER: 2
  DESCRIPTION: 'When' with bound value and not allowed break and continue expression (without labels) in 'when condition'.
  */

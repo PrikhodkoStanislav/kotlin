@@ -1,9 +1,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 3
- SENTENCE 1: When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
+ SENTENCE: [1] When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 2
  DESCRIPTION: 'When' without bound value and not allowed (if when used as expression) return in the control structure body.
  TODO: Move to section, which will be say about fun asiignment

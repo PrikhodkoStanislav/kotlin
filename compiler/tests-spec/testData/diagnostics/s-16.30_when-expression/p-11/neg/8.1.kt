@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 11
- SENTENCE 8: The bound expression is of a nullable type and one of the cases above is met for its non-nullable counterpart and, in addition, there is a condition containing literal null.
+ SENTENCE: [8] The bound expression is of a nullable type and one of the cases above is met for its non-nullable counterpart and, in addition, there is a condition containing literal null.
  NUMBER: 1
  DESCRIPTION: Checking for not exhaustive 'when' on the nullable Boolean.
  */

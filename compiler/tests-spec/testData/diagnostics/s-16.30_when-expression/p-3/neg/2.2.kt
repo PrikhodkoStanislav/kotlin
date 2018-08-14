@@ -3,9 +3,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 3
- SENTENCE 2: Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
+ SENTENCE: [2] Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 2
  DESCRIPTION: 'When' without bound value and not allowed comma in when entry.
  */

@@ -5,9 +5,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 7
- SENTENCE 5: Any other expression.
+ SENTENCE: [5] Any other expression.
  NUMBER: 2
  DESCRIPTION: 'When' with different variants of the arithmetic expressions (additive expression and multiplicative expression) in 'when condition'.
  */

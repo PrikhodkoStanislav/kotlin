@@ -5,9 +5,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 11
- SENTENCE 7: The bound expression is of an Enum classes type and all enumerated values are checked for equality using constant conditions;
+ SENTENCE: [7] The bound expression is of an Enum classes type and all enumerated values are checked for equality using constant conditions;
  NUMBER: 1
  DESCRIPTION: Checking for not exhaustive when when not covered by all enumerated values.
  */

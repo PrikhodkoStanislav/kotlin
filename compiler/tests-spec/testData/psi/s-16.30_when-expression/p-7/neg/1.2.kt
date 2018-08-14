@@ -1,9 +1,9 @@
 /*
  KOTLIN PSI SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 7
- SENTENCE 1: Type test condition: type checking operator followed by type.
+ SENTENCE: [1] Type test condition: type checking operator followed by type.
  NUMBER: 2
  DESCRIPTION: 'When' with bound value and 'when condition' with type checking operator and non-type value.
  */

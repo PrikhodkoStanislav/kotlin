@@ -5,9 +5,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 9
- SENTENCE 1: The type of the resulting expression is the least upper bound of the types of all the entries.
+ SENTENCE: [1] The type of the resulting expression is the least upper bound of the types of all the entries.
  NUMBER: 4
  DESCRIPTION: 'When' least upper bound of the types check (when exhaustive via sealed class).
  */

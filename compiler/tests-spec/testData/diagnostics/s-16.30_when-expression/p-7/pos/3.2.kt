@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 7
- SENTENCE 3: Contains test condition: containment operator followed by an expression.
+ SENTENCE: [3] Contains test condition: containment operator followed by an expression.
  NUMBER: 2
  DESCRIPTION: 'When' with bound value and enumeration of the containment operators.
  */

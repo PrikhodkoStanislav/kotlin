@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 11
- SENTENCE 1: It has an else entry;
+ SENTENCE: [1] It has an else entry;
  NUMBER: 2
  DESCRIPTION: Checking for not exhaustive when with bound value when there is no else branch.
  */

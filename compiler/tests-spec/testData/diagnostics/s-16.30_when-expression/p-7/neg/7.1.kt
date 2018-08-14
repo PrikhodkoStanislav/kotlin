@@ -3,9 +3,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 7
- SENTENCE 7: The else condition, which works the exact same way as it would in the form without bound expression.
+ SENTENCE: [7] The else condition, which works the exact same way as it would in the form without bound expression.
  NUMBER: 1
  DESCRIPTION: 'When' with bound value and with else branch not in the last position.
  */

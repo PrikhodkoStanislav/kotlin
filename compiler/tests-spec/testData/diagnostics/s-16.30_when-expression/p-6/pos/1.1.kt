@@ -6,9 +6,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 6
- SENTENCE 1: When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
+ SENTENCE: [1] When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 1
  DESCRIPTION: 'When' with bound value and with different variants of expressions in the control structure body.
  */

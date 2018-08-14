@@ -104,7 +104,7 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
 
         val testAreaRegex = """(?<testArea>${TestArea.values().joinToString("|")})"""
         val testTypeRegex = """(?<testType>${TestType.values().joinToString("|")})"""
-        val testInfoElementPattern: Pattern = Pattern.compile("""\s*(?<name>[A-Z ]*?):\s*(?<value>.*?)\n""")
+        val testInfoElementPattern: Pattern = Pattern.compile("""\s*(?<name>[A-Z ]+?):\s*(?<value>.*?)\n""")
 
         val testPathBaseRegexTemplate = """^.*?/(?<testArea>diagnostics|psi|codegen)/%s"""
         val testPathRegexTemplate = """$testPathBaseRegexTemplate/(?<testType>pos|neg)/%s$"""

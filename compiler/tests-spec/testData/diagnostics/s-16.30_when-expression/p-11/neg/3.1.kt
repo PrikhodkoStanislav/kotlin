@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 11
- SENTENCE 3: The bound expression is of type kotlin.Boolean and the conditions contain both:
+ SENTENCE: [3] The bound expression is of type kotlin.Boolean and the conditions contain both:
  NUMBER: 1
  DESCRIPTION: Checking for not exhaustive 'when' when not contains by all Boolean values or 'when' does not have bound value.
  */

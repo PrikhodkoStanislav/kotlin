@@ -46,7 +46,7 @@ class FutureSpecTest(
     private fun checkConsistency(other: FutureSpecTest): Boolean {
         return this.testArea == other.testArea
                 && this.testType == other.testType
-                && this.categories == other.categories
+                && this.categories.joinToString(",") == other.categories.joinToString(",")
                 && this.testNumber == other.testNumber
     }
 }
@@ -79,7 +79,7 @@ class FutureSpecTestValidator(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
             sectionMatcher.group("name"),
-            testInfoElements[FutureSpecTestFileInfoElementType.CATEGORY]!!.content.split(","),
+            testInfoElements[FutureSpecTestFileInfoElementType.CATEGORY]!!.content.split(Regex(""",\s*""")),
             testInfoElements[FutureSpecTestFileInfoElementType.NUMBER]!!.content.toInt(),
             testInfoElements[FutureSpecTestFileInfoElementType.DESCRIPTION]!!.content,
             testCases,

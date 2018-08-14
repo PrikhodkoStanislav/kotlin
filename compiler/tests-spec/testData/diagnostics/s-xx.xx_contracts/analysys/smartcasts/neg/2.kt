@@ -10,6 +10,8 @@
  DESCRIPTION: Check the lack of smartcasts after non-null assertions or assignment in lambdas with contract and 'at most once' or 'unknown' CallsInPlace effects.
  */
 
+import kotlin.internal.contracts.*
+
 inline fun funWithContractAtMostOnce(block: () -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
@@ -28,26 +30,30 @@ inline fun funWithContractUnknown(block: () -> Unit) {
 fun case_1(arg: Int?) {
     funWithContractAtMostOnce { arg!! }
 
-    arg.inc()
+    arg<!UNSAFE_CALL!>.<!>inc()
 }
 
 // CASE DESCRIPTION: lambdas with non-null assertions and 'unknown' CallsInPlace effect.
 fun case_2(arg: Int?) {
     funWithContractUnknown { arg!! }
 
-    arg.inc()
+    arg<!UNSAFE_CALL!>.<!>inc()
 }
 
 // CASE DESCRIPTION: lambdas with non-null assignment and 'at most once' CallsInPlace effect.
-fun case_3(arg: Boolean?) {
-    funWithContractAtMostOnce { arg = false }
+fun case_3() {
+    val value: Boolean?
 
-    arg.not()
+    funWithContractAtMostOnce { value = false }
+
+    <!UNINITIALIZED_VARIABLE!>value<!><!UNSAFE_CALL!>.<!>not()
 }
 
 // CASE DESCRIPTION: lambdas with non-null assignment and 'unknown' CallsInPlace effect.
-fun case_4(arg: Int?) {
-    funWithContractUnknown { arg = true }
+fun case_4() {
+    val value: Boolean?
 
-    arg.not()
+    funWithContractUnknown { <!VAL_REASSIGNMENT!>value<!> = true }
+
+    <!UNINITIALIZED_VARIABLE!>value<!><!UNSAFE_CALL!>.<!>not()
 }

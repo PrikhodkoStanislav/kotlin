@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION 16.30: When valueession
+ SECTION: 16.30 When valueession
  PARAGRAPH: 11
- SENTENCE 6: The bound valueession is of a sealed class type and all its possible subtypes are covered using type test conditions of this valueession;
+ SENTENCE: [6] The bound valueession is of a sealed class type and all its possible subtypes are covered using type test conditions of this valueession;
  NUMBER: 1
  DESCRIPTION: Check when exhaustive when possible subtypes of the sealed class are covered.
  */

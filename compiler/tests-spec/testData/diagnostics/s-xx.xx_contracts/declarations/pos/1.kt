@@ -14,7 +14,7 @@
 
 import kotlin.internal.contracts.*
 
-fun myRun(block: () -> Unit) {
+fun funWithContractExactlyOnce(block: () -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
@@ -23,8 +23,6 @@ fun myRun(block: () -> Unit) {
 
 fun case_1() {
     val tt: Int
-
-    myRun({ tt = 10 })
-
+    funWithContractExactlyOnce { tt = 10 }
     tt.inc()
 }

@@ -11,6 +11,8 @@
  UNEXPECTED BEHAVIOUR
  */
 
+import kotlin.internal.contracts.*
+
 inline fun funWithContractExactlyOnce(block: () -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -29,26 +31,30 @@ inline fun funWithContractAtLeastOnce(block: () -> Unit) {
 fun case_1(arg: Int?) {
     funWithContractExactlyOnce { arg!! }
 
-    arg.inc()
+    arg<!UNSAFE_CALL!>.<!>inc()
 }
 
 // CASE DESCRIPTION: lambdas with non-null assertions and 'at least once' CallsInPlace effect.
 fun case_2(arg: Int?) {
     funWithContractAtLeastOnce { arg!! }
 
-    arg.inc()
+    arg<!UNSAFE_CALL!>.<!>inc()
 }
 
 // CASE DESCRIPTION: lambdas with not-null assignment and 'exactly once' CallsInPlace effect.
-fun case_3(arg: Boolean?) {
-    funWithContractExactlyOnce { arg = false }
+fun case_3() {
+    val value: Boolean?
 
-    arg.not()
+    funWithContractExactlyOnce { value = false }
+
+    value<!UNSAFE_CALL!>.<!>not()
 }
 
 // CASE DESCRIPTION: lambdas with not-null assignment and 'at least once' CallsInPlace effect.
-fun case_4(arg: Int?) {
-    funWithContractAtLeastOnce { arg = true }
+fun case_4() {
+    val value: Boolean?
 
-    arg.not()
+    funWithContractAtLeastOnce { <!VAL_REASSIGNMENT!>value<!> = true }
+
+    value<!UNSAFE_CALL!>.<!>not()
 }

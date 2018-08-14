@@ -4,9 +4,9 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 11
- SENTENCE 6: The bound expression is of a sealed class type and all its possible subtypes are covered using type test conditions of this expression;
+ SENTENCE: [6] The bound expression is of a sealed class type and all its possible subtypes are covered using type test conditions of this expression;
  NUMBER: 1
  DESCRIPTION: Checking for not exhaustive 'when' when not covered by all possible subtypes or 'when' does not have bound value.
  */

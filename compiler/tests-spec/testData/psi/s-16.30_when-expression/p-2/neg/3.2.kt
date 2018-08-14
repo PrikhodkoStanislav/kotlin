@@ -1,9 +1,9 @@
 /*
  KOTLIN PSI SPEC TEST (NEGATIVE)
 
- SECTION 16.30: When expression
+ SECTION: 16.30 When expression
  PARAGRAPH: 2
- SENTENCE 3: When expression has two different forms: with bound value and without it.
+ SENTENCE: [3] When expression has two different forms: with bound value and without it.
  NUMBER: 2
  DESCRIPTION: Empty 'when' with missed 'when entries' section.
  */
