@@ -670,6 +670,11 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                         runTest("compiler/tests-spec/testData/diagnostics/s-xx.xx_contracts/analysys/smartcasts/neg/1.kt");
                     }
 
+                    @TestMetadata("2.kt")
+                    public void test2() throws Exception {
+                        runTest("compiler/tests-spec/testData/diagnostics/s-xx.xx_contracts/analysys/smartcasts/neg/2.kt");
+                    }
+
                     public void testAllFilesPresentInNeg() throws Exception {
                         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/s-xx.xx_contracts/analysys/smartcasts/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
                     }
