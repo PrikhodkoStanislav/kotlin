@@ -1,3 +1,6 @@
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+
 /*
  KOTLIN DIAGNOSTICS FUTURE SPEC TEST (NEGATIVE)
 
@@ -9,15 +12,20 @@
 
 import kotlin.internal.contracts.*
 
-fun isString(x: Any?): Boolean {
+fun myRun(block: () -> Unit) {
     contract {
-        returns(true) implies (x is String)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    return x is String
+    return block()
 }
 
-fun test(x: Any?) {
-    if (isString(x)) {
-        <!DEBUG_INFO_SMARTCAST!>x<!>.length
+fun implicitCastWithIf() {
+    val tt: Int
+    myRun {
+        tt = 10
     }
+}
+
+fun main(args : Array<String>) {
+    implicitCastWithIf()
 }
