@@ -2,10 +2,10 @@
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
 
 /*
- KOTLIN DIAGNOSTICS FUTURE SPEC TEST (POSITIVE)
+ KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: XX.XX Contracts
- CATEGORY: declarations
+ SECTION: Contracts
+ CATEGORY: descriptions
  NUMBER: 1
  DESCRIPTION: Check that fun with contract and callsInPlace effect (EXACTLY_ONCE) is an inline function.
  UNEXPECTED BEHAVIOUR
@@ -14,7 +14,7 @@
 
 import kotlin.internal.contracts.*
 
-fun funWithContractExactlyOnce(block: () -> Unit) {
+fun funWithContractExactlyOnce(block: () -> Unit) { // report about not-inline function is expected
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
@@ -22,7 +22,7 @@ fun funWithContractExactlyOnce(block: () -> Unit) {
 }
 
 fun case_1() {
-    val tt: Int
-    funWithContractExactlyOnce { tt = 10 }
-    tt.inc()
+    val value: Int
+    funWithContractExactlyOnce { value = 10 }
+    value.inc()
 }

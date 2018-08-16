@@ -70,8 +70,8 @@ object TestsStatisticPrinter {
 
                 val testInfoMatcher = Pattern.compile(
                     AbstractSpecTestValidator.testPathRegexTemplate.format(
-                        SpecTestValidator.pathPartRegex,
-                        SpecTestValidator.filenameRegex
+                        LinkedSpecTestValidator.pathPartRegex,
+                        LinkedSpecTestValidator.filenameRegex
                     )
                 ).matcher(it.path)
 

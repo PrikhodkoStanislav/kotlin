@@ -35,7 +35,7 @@ enum class SpecTestCaseInfoElementType(
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
     CASE_DESCRIPTION(required = true),
-    ISSUES(valuePattern = SpecTestFileInfoElementType.ISSUES.valuePattern),
+    ISSUES(valuePattern = LinkedSpecTestFileInfoElementType.ISSUES.valuePattern),
     UNEXPECTED_BEHAVIOUR,
     DISCUSSION,
     NOTE
@@ -112,10 +112,10 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
         val testCaseInfoMultilinePattern: Pattern = Pattern.compile(MULTILINE_COMMENT_REGEX.format(TESTCASE_INFO_REGEX))
 
         fun getInstanceByType(testFile: File, testArea: TestArea) = when {
-            Pattern.compile(testPathBaseRegexTemplate.format(SpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
-                SpecTestValidator(testFile, testArea)
-            Pattern.compile(testPathBaseRegexTemplate.format(FutureSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
-                FutureSpecTestValidator(testFile, testArea)
+            Pattern.compile(testPathBaseRegexTemplate.format(LinkedSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
+                LinkedSpecTestValidator(testFile, testArea)
+            Pattern.compile(testPathBaseRegexTemplate.format(NotLinkedSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
+                NotLinkedSpecTestValidator(testFile, testArea)
             else -> throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
         }
 
@@ -250,8 +250,8 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
             testInfoByContentMatcher,
             testInfoElements,
             testCases = testCases,
-            unexpectedBehavior = testInfoElements.contains(SpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR) || testCases.any { it.unexpectedBehavior },
-            issues = getIssues(testCases, parseIssues(testInfoElements[SpecTestFileInfoElementType.ISSUES]))
+            unexpectedBehavior = testInfoElements.contains(LinkedSpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR) || testCases.any { it.unexpectedBehavior },
+            issues = getIssues(testCases, parseIssues(testInfoElements[LinkedSpecTestFileInfoElementType.ISSUES]))
         )
 
         if (!testInfoByFilename.checkConsistency(testInfoByContent))

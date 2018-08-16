@@ -9,7 +9,7 @@ import java.io.File
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-enum class SpecTestFileInfoElementType(
+enum class LinkedSpecTestFileInfoElementType(
     override val valuePattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
@@ -30,7 +30,7 @@ enum class SpecTestFileInfoElementType(
     NOTE
 }
 
-class SpecTest(
+class LinkedSpecTest(
     testArea: TestArea,
     testType: TestType,
     val sectionNumber: String,
@@ -45,9 +45,9 @@ class SpecTest(
     issues: Set<String>? = null
 ) : AbstractSpecTest(testArea, testType, sectionName, testNumber, description, cases, unexpectedBehavior, issues) {
     override fun checkConsistency(other: AbstractSpecTest) =
-        if (other is SpecTest) checkConsistency(other) else false
+        if (other is LinkedSpecTest) checkConsistency(other) else false
 
-    private fun checkConsistency(other: SpecTest): Boolean {
+    private fun checkConsistency(other: LinkedSpecTest): Boolean {
         return this.testArea == other.testArea
                 && this.testType == other.testType
                 && this.sectionNumber == other.sectionNumber
@@ -57,10 +57,10 @@ class SpecTest(
     }
 }
 
-class SpecTestValidator(
+class LinkedSpecTestValidator(
     private val testDataFile: File,
     private val testArea: TestArea
-) : AbstractSpecTestValidator<SpecTest>(testDataFile, testArea) {
+) : AbstractSpecTestValidator<LinkedSpecTest>(testDataFile, testArea) {
     override val testPathPattern: Pattern =
         Pattern.compile(testPathRegexTemplate.format(pathPartRegex, filenameRegex))
     override val testInfoPattern: Pattern =
@@ -78,28 +78,28 @@ class SpecTestValidator(
         testCases: List<SpecTestCase>,
         unexpectedBehavior: Boolean,
         issues: Set<String>?
-    ): SpecTest {
-        val sectionMatcher = testInfoElements[SpecTestFileInfoElementType.SECTION]!!.additionalMatcher!!
-        val sentenceMatcher = testInfoElements[SpecTestFileInfoElementType.SENTENCE]!!.additionalMatcher!!
+    ): LinkedSpecTest {
+        val sectionMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.SECTION]!!.additionalMatcher!!
+        val sentenceMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.SENTENCE]!!.additionalMatcher!!
 
-        return SpecTest(
+        return LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
             sectionMatcher.group("number"),
             sectionMatcher.group("name"),
-            testInfoElements[SpecTestFileInfoElementType.PARAGRAPH]!!.content.toInt(),
+            testInfoElements[LinkedSpecTestFileInfoElementType.PARAGRAPH]!!.content.toInt(),
             sentenceMatcher.group("number").toInt(),
             sentenceMatcher.group("text"),
-            testInfoElements[SpecTestFileInfoElementType.NUMBER]!!.content.toInt(),
-            testInfoElements[SpecTestFileInfoElementType.DESCRIPTION]!!.content,
+            testInfoElements[LinkedSpecTestFileInfoElementType.NUMBER]!!.content.toInt(),
+            testInfoElements[LinkedSpecTestFileInfoElementType.DESCRIPTION]!!.content,
             testCases,
             unexpectedBehavior,
             issues
         )
     }
 
-    override fun getTestInfo(testInfoMatcher: Matcher): SpecTest {
-        return SpecTest(
+    override fun getTestInfo(testInfoMatcher: Matcher): LinkedSpecTest {
+        return LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.fromValue(testInfoMatcher.group("testType"))!!,
             testInfoMatcher.group("sectionNumber"),
@@ -110,7 +110,7 @@ class SpecTestValidator(
         )
     }
 
-    override fun parseTestInfo() = parseTestInfo(SpecTestFileInfoElementType.values())
+    override fun parseTestInfo() = parseTestInfo(LinkedSpecTestFileInfoElementType.values())
 
     override fun printTestInfo() {
         println("--------------------------------------------------")
@@ -129,8 +129,8 @@ class SpecTestValidator(
 
     override fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) = SpecTestCase(
         1,
-        description = testInfoElements[SpecTestFileInfoElementType.DESCRIPTION]!!.content,
-        unexpectedBehavior = testInfoElements.contains(SpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR),
-        issues = parseIssues(testInfoElements[SpecTestFileInfoElementType.ISSUES])
+        description = testInfoElements[LinkedSpecTestFileInfoElementType.DESCRIPTION]!!.content,
+        unexpectedBehavior = testInfoElements.contains(LinkedSpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR),
+        issues = parseIssues(testInfoElements[LinkedSpecTestFileInfoElementType.ISSUES])
     )
 }

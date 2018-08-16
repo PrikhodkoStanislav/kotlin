@@ -2,9 +2,9 @@
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
 
 /*
- KOTLIN DIAGNOSTICS FUTURE SPEC TEST (NEGATIVE)
+ KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: XX.XX Contracts
+ SECTION: Contracts
  CATEGORY: analysys, smartcasts
  NUMBER: 1
  DESCRIPTION: Check smartcasts after non-null assertions or assignment in lambdas with contract and 'exactly once' or 'at least once' CallsInPlace effects.
