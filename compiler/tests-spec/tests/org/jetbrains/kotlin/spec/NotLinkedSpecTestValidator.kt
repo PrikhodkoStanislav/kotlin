@@ -59,7 +59,7 @@ class NotLinkedSpecTestValidator(
 
     companion object {
         val pathPartRegex =
-            """not-linked/(?<sectionName>[\w-]+)/(?<categories>(?:\w+)(?:/\w+)*?)"""
+            """not-linked/(?<sectionName>[\w-]+)/(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
         val filenameRegex = """(?<testNumber>$INTEGER_REGEX)\.kt"""
     }
 

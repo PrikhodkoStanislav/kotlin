@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions
+ CATEGORY: descriptions, common
  NUMBER: 1
  DESCRIPTION: Check that fun with contract and callsInPlace effect (EXACTLY_ONCE) is an inline function.
  UNEXPECTED BEHAVIOUR
@@ -23,6 +23,6 @@ fun funWithContractExactlyOnce(block: () -> Unit) { // report about not-inline f
 
 fun case_1() {
     val value: Int
-    funWithContractExactlyOnce { value = 10 }
+    funWithContractExactlyOnce { value = 10 } // back-end exception
     value.inc()
 }

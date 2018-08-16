@@ -1,4 +1,5 @@
 // !WITH_SEALED_CLASSES
+// !DIAGNOSTICS: -UNUSED_PARAMETER
 
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
@@ -63,4 +64,49 @@ fun case_6(value: _SealedClassMixed?): String = when (value) {
     is _SealedMixedChildObject2 -> ""
     is _SealedMixedChildObject3 -> ""
     null -> ""
+}
+
+/*
+ CASE DESCRIPTION: Checking for exhaustive 'when' on the object of sealed class with custom equals.
+ UNEXPECTED BEHAVIOUR: runtime expecption kotlin.NoWhenBranchMatchedException is thrown
+ */
+sealed class case_7_SealedClassWithCustomEquals {
+    override fun equals(other: Any?) = false
+}
+object case_7_objectWithCustomEquals : case_7_SealedClassWithCustomEquals()
+fun case_7(value: case_7_SealedClassWithCustomEquals) {
+    return when (value) {
+        case_7_objectWithCustomEquals -> {}
+    }
+}
+
+/*
+ CASE DESCRIPTION: Checking for exhaustive 'when' on the object and class of sealed class with custom equals.
+ UNEXPECTED BEHAVIOUR: runtime expecption kotlin.NoWhenBranchMatchedException is thrown
+ */
+sealed class case_8_SealedClassWithCustomEquals {
+    override fun equals(other: Any?) = false
+}
+object case_8_objectWithCustomEquals : case_8_SealedClassWithCustomEquals()
+class case_8_classWithCustomEquals : case_8_SealedClassWithCustomEquals()
+fun case_8(value: case_8_SealedClassWithCustomEquals) {
+    return when (value) {
+        case_8_objectWithCustomEquals -> {}
+        is case_8_classWithCustomEquals -> {}
+    }
+}
+
+/*
+ CASE DESCRIPTION: Checking for exhaustive 'when' on the object of sealed class with custom equals (using type checing operator).
+ */
+sealed class case_9_SealedClassWithCustomEquals {
+    override fun equals(other: Any?) = false
+}
+
+object case_9_objectWithCustomEquals : case_9_SealedClassWithCustomEquals()
+
+fun case_9(value: case_9_SealedClassWithCustomEquals) {
+    return when (value) {
+        is case_9_objectWithCustomEquals -> {}
+    }
 }

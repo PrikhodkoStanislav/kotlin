@@ -9,3 +9,7 @@ fun _fun(value1: List<Int>): Int {
 fun _fun(): Int {
     return Any().hashCode().toInt()
 }
+
+fun _funWithAnyArg(value1: Any): Int {
+    return value1.hashCode()
+}

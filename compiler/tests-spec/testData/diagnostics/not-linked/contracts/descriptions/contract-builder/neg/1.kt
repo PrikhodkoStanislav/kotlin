@@ -1,0 +1,47 @@
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -UNUSED_VARIABLE -UNUSED_PARAMETER -UNREACHABLE_CODE -UNUSED_EXPRESSION
+
+/*
+ KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
+
+ SECTION: Contracts
+ CATEGORY: descriptions, contract-builder
+ NUMBER: 1
+ DESCRIPTION: Contract isn't first statement.
+ */
+
+import kotlin.internal.contracts.*
+
+// CASE DESCRIPTION: assignment statement before contract description
+inline fun case_1(block: () -> Unit) {
+    val value = 1
+    <!CONTRACT_NOT_ALLOWED!>contract { }<!>
+    return block()
+}
+
+// CASE DESCRIPTION: expression before contract description
+inline fun case_2(block: () -> Unit) {
+    10 - 1
+    <!CONTRACT_NOT_ALLOWED!>contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }<!>
+    return block()
+}
+
+// CASE DESCRIPTION: throwing an exception before contract description
+inline fun case_3(block: () -> Unit) {
+    throw Exception()
+    <!CONTRACT_NOT_ALLOWED!>contract {
+        callsInPlace(block, InvocationKind.UNKNOWN)
+    }<!>
+    return block()
+}
+
+// CASE DESCRIPTION: contract in return expression after numeric literal
+// это в негативные,
+inline fun case_4(block: () -> Unit) {
+    .0009
+    return contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+}
