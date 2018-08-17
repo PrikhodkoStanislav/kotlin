@@ -43,7 +43,7 @@ fun case_2(value: Int): String {
 
 /*
  CASE DESCRIPTION: Checking correctness type (numbers) in 'when' without bound value.
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  ISSUES: KT-25268
  */
 fun case_3(value: Int): String {
@@ -63,7 +63,7 @@ fun case_3(value: Int): String {
 
 /*
  CASE DESCRIPTION: Checking correctness type (numbers) in 'when' with bound value.
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  ISSUES: KT-25268
  */
 fun case_4(value: Int): String {

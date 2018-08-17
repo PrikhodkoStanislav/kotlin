@@ -29,3 +29,8 @@ val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateCo
 val printSpecTestsStatistic by smartJavaExec {
     main = "org.jetbrains.kotlin.tasks.PrintSpecTestsStatisticKt"
 }
+
+val generateJsonTestsMap by smartJavaExec {
+    classpath = javaPluginConvention().sourceSets.getByName("test").runtimeClasspath
+    main = "org.jetbrains.kotlin.tasks.GenerateJsonTestsMapKt"
+}

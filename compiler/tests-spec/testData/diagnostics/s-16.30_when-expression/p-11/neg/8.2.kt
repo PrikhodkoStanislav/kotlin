@@ -66,7 +66,7 @@ fun case_8(value: _SealedClassMixed?): String = <!NO_ELSE_IN_WHEN!>when<!>(value
 
 /*
  CASE DESCRIPTION: Checking for not exhaustive 'when' on the empty sealed class (without subtypes).
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  */
 fun case_9(value: _SealedClassEmpty?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
     null -> ""
@@ -83,7 +83,7 @@ fun case_10(value: Any?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
 
 /*
  CASE DESCRIPTION: Checking for not exhaustive 'when' on opposite types.
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  */
 fun case_11(value: _SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
     is _SealedChild1, !is _SealedChild3?, <!USELESS_IS_CHECK!>is _SealedChild3?<!> -> ""
@@ -91,7 +91,7 @@ fun case_11(value: _SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
 
 /*
  CASE DESCRIPTION: Checking for not exhaustive 'when' on opposite types.
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  */
 fun case_12(value: _SealedClass?): String = <!NO_ELSE_IN_WHEN!>when<!> (value) {
     is _SealedChild1, !is _SealedChild3 -> ""

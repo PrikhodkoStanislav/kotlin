@@ -24,7 +24,7 @@ fun case_1(value: Int, value1: _EmptyClass, value2: Int, value3: Any): String {
 
 /*
  CASE DESCRIPTION: 'When' with values of Nothing (all existing contains operators used here).
- UNEXPECTED_BEHAVIOUR
+ UNEXPECTED BEHAVIOUR
  ISSUES: KT-25948
  */
 fun case_2(value: Int, value3: Nothing) {

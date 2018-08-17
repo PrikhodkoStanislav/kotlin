@@ -23,12 +23,12 @@ object TestsJsonMapGenerator {
     val sectionFolderRegex = "s-(?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*)_(?<sectionName>[\\w-]+)"
     val testPathRegex =
         "^.*?/(?<testArea>${specTestAreas.joinToString("|")})/$sectionFolderRegex/p-(?<paragraphNumber>$integerRegex)/(?<testType>pos|neg)/(?<sentenceNumber>$integerRegex)\\.(?<testNumber>$integerRegex)\\.kt$"
-    val testUnexpectedBehaviour = "(?:\n\\s*(?<unexpectedBehaviour>UNEXPECTED BEHAVIOUR))"
-    val testIssues = "(?:\n\\s*ISSUES:\\s*(?<issues>(KT-[1-9]\\d*)(,\\s*KT-[1-9]\\d*)*))"
+    val testUnexpectedBehaviour = "(?:\\s*(?<unexpectedBehaviour>UNEXPECTED BEHAVIOUR)\n)"
+    val testIssues = "(?:\\s*ISSUES:\\s*(?<issues>(KT-[1-9]\\d*)(,\\s*KT-[1-9]\\d*)*)\n)"
     val testContentRegex =
-        "\\/\\*\\s+KOTLIN SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\\s+SECTION (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*):\\s*(?<sectionName>.*?)\\s+PARAGRAPH:\\s*(?<paragraphNumber>$integerRegex)\\s+SENTENCE\\s*(?<sentenceNumber>$integerRegex):\\s*(?<sentence>.*?)\\s+NUMBER:\\s*(?<testNumber>$integerRegex)\\s+DESCRIPTION:\\s*(?<description>.*?)$testUnexpectedBehaviour?$testIssues?\\s+\\*\\/\\s+"
+        "\\/\\*\\s+KOTLIN (?<testArea>DIAGNOSTICS|PSI|CODEGEN) SPEC TEST \\((?<testType>POSITIVE|NEGATIVE)\\)\n\\s+SECTION: (?<sectionNumber>(?:$integerRegex)(?:\\.$integerRegex)*)\\s*(?<sectionName>.*?)\n\\s+PARAGRAPH:\\s*(?<paragraphNumber>$integerRegex)\n\\s+SENTENCE:\\s*\\[(?<sentenceNumber>$integerRegex)\\]\\s*(?<sentence>.*?)\n\\s+NUMBER:\\s*(?<testNumber>$integerRegex)\n\\s+DESCRIPTION:\\s*(?<description>.*?)\n$testUnexpectedBehaviour?$testIssues?\\s*[\\s\\S]*?\\*\\/"
     val testCaseInfo =
-        "(?:(?:\\/\\*\n\\s*)|(?:\\/\\/\\s*))CASE DESCRIPTION:\\s*(?<description>.*?)$testUnexpectedBehaviour?$testIssues?\n(\\s\\*\\/)?"
+        "(?:(?:\\/\\*\n\\s*)|(?:\\/\\/\\s*))CASE DESCRIPTION:\\s*(?<description>.*?)\n$testUnexpectedBehaviour?$testIssues?(\\s*\\*\\/)?"
 
     val stringListType = object : TypeToken<List<String>>() {}.getType()
 
@@ -77,6 +77,8 @@ object TestsJsonMapGenerator {
             val testInfoByContentMatcher = Pattern.compile(testContentRegex).matcher(testFileContent)
             val testCaseInfoMatcher = Pattern.compile(testCaseInfo).matcher(testFileContent)
 
+            println(testContentRegex)
+            println(testFileContent)
             testInfoByContentMatcher.find()
 
             addInfoToTestElement(testNumberElement, testInfoByContentMatcher)
