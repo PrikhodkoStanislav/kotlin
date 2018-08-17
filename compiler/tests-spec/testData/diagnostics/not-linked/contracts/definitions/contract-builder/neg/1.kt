@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, contract-builder
+ CATEGORY: definitions, contract-builder
  NUMBER: 1
  DESCRIPTION: Contract isn't first statement.
  */

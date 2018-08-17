@@ -9,6 +9,7 @@
  NUMBER: 1
  DESCRIPTION: Check smartcasts after non-null assertions or assignment in lambdas with contract and 'exactly once' or 'at least once' CallsInPlace effects.
  UNEXPECTED BEHAVIOUR
+ ISSUES: KT-26148
  */
 
 import kotlin.internal.contracts.*

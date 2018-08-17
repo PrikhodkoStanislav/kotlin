@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, contract-builder
+ CATEGORY: definitions, contract-builder
  NUMBER: 1
  DESCRIPTION: Functions with contracts written simply.
  */
@@ -34,7 +34,7 @@ inline fun case_2(block: () -> Unit) {
 /*
  CASE DESCRIPTION: simple contract with two effects
  */
-inline fun case_3(value: Int?, block: () -> Unit) {
+inline fun case_3(value: Int?, block: () -> Unit): Boolean {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
         returns(true) implies (value != null)

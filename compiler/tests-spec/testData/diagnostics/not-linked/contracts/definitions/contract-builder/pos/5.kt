@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, contract-builder
+ CATEGORY: definitions, contract-builder
  NUMBER: 5
  DESCRIPTION: Functions with contracts and external contract builder.
  UNEXPECTED BEHAVIOUR

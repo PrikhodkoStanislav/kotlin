@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, common
+ CATEGORY: definitions, common
  NUMBER: 1
  DESCRIPTION: Check that fun with contract and callsInPlace effect (EXACTLY_ONCE) is an inline function.
  UNEXPECTED BEHAVIOUR

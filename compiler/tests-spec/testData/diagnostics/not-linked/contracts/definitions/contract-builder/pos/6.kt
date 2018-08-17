@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, contract-builder
+ CATEGORY: definitions, contract-builder
  NUMBER: 6
  DESCRIPTION: Functions with contracts and external effect builder.
  UNEXPECTED BEHAVIOUR
@@ -17,7 +17,7 @@ import kotlin.internal.contracts.*
 internal inline fun ContractBuilder.callsInPlaceEffectBuilder(block: () -> Unit) =
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 
-internal inline fun ContractBuilder.returnsEffectBuilder(value: Int?) =
+internal fun ContractBuilder.returnsEffectBuilder(value: Int?) =
     returns(true) implies (value != null)
 
 // CASE DESCRIPTION: contract with one effect as result of external function in the parentheses using with parameter name

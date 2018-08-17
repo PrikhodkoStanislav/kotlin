@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: descriptions, effects, callsInPlace
+ CATEGORY: definitions, effects, callsInPlace
  NUMBER: 2
  DESCRIPTION: functions with contract and duplicate callsInPlace.
  UNEXPECTED BEHAVIOUR
@@ -27,8 +27,7 @@ inline fun case_1(block: () -> Unit) {
 inline fun case_2(block: () -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE) // front-end exception
     }
     return block()
 }
-
