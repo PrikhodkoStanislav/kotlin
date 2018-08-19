@@ -25,6 +25,11 @@ enum class TestArea {
     CODEGEN
 }
 
+enum class SpecTestLinkedType {
+    LINKED,
+    NOT_LINKED
+}
+
 interface SpecTestInfoElementType {
     val valuePattern: Pattern?
     val required: Boolean
@@ -72,6 +77,12 @@ class SpecTestValidationException(reason: SpecTestValidationFailedReason, detail
 }
 
 typealias SpecTestInfoElements<T> = Map<T, SpecTestInfoElementContent>
+
+interface SpecTestValidatorHelperObject {
+    abstract val pathPartRegex: String
+    abstract val filenameRegex: String
+    abstract fun getPathPattern(): Pattern
+}
 
 abstract class AbstractSpecTest(
     val testArea: TestArea,

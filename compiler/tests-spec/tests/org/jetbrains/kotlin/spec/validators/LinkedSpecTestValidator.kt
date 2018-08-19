@@ -61,19 +61,18 @@ class LinkedSpecTestValidator(
     private val testDataFile: File,
     private val testArea: TestArea
 ) : AbstractSpecTestValidator<LinkedSpecTest>(testDataFile, testArea) {
-    override val testPathPattern: Pattern =
-        Pattern.compile(
-            testPathRegexTemplate.format(
-                pathPartRegex,
-                filenameRegex
-            ))
+    override val testPathPattern = getPathPattern()
     override val testInfoPattern: Pattern =
         Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
 
-    companion object {
-        val pathPartRegex =
+    companion object : SpecTestValidatorHelperObject {
+        override val pathPartRegex =
             """(?:s-(?<sectionNumber>(?:$INTEGER_REGEX)(?:\.$INTEGER_REGEX)*)_(?<sectionName>[\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX))"""
-        val filenameRegex = """(?<sentenceNumber>$INTEGER_REGEX)\.(?<testNumber>$INTEGER_REGEX)\.kt"""
+        override val filenameRegex = """(?<sentenceNumber>$INTEGER_REGEX)\.(?<testNumber>$INTEGER_REGEX)\.kt"""
+
+        override fun getPathPattern(): Pattern = Pattern.compile(
+            testPathRegexTemplate.format(pathPartRegex, filenameRegex)
+        )
     }
 
     override fun getTestInfo(

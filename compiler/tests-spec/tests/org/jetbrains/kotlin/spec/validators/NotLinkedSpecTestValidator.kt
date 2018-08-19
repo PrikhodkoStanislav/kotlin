@@ -52,19 +52,18 @@ class NotLinkedSpecTestValidator(
     private val testDataFile: File,
     private val testArea: TestArea
 ) : AbstractSpecTestValidator<NotLinkedSpecTest>(testDataFile, testArea) {
-    override val testPathPattern: Pattern =
-        Pattern.compile(
-            testPathRegexTemplate.format(
-                pathPartRegex,
-                filenameRegex
-            ))
+    override val testPathPattern = getPathPattern()
     override val testInfoPattern: Pattern =
         Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex NOT LINKED SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
 
-    companion object {
-        val pathPartRegex =
+    companion object : SpecTestValidatorHelperObject {
+        override val pathPartRegex =
             """not-linked/(?<sectionName>[\w-]+)/(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
-        val filenameRegex = """(?<testNumber>$INTEGER_REGEX)\.kt"""
+        override val filenameRegex = """(?<testNumber>$INTEGER_REGEX)\.kt"""
+
+        override fun getPathPattern(): Pattern = Pattern.compile(
+            testPathRegexTemplate.format(pathPartRegex, filenameRegex)
+        )
     }
 
     override fun getTestInfo(

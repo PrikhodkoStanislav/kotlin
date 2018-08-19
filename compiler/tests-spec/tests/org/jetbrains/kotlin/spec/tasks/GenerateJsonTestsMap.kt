@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.tasks
+package org.jetbrains.kotlin.spec.tasks
 
 import org.jetbrains.kotlin.spec.TestsJsonMapGenerator
 
