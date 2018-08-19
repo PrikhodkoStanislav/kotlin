@@ -3,14 +3,13 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec
+package org.jetbrains.kotlin.spec.validators
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
-import java.io.File
 
-object ParsingSpecTestValidator {
+object ParsingTestTypeValidator {
     private fun checkErrorElement(psi: PsiElement): Boolean =
         psi.children.any { it is PsiErrorElement || checkErrorElement(it) }
 

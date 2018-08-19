@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec
+package org.jetbrains.kotlin.spec.validators
 
 import java.io.File
 import java.util.regex.Matcher
@@ -53,7 +53,11 @@ class NotLinkedSpecTestValidator(
     private val testArea: TestArea
 ) : AbstractSpecTestValidator<NotLinkedSpecTest>(testDataFile, testArea) {
     override val testPathPattern: Pattern =
-        Pattern.compile(testPathRegexTemplate.format(pathPartRegex, filenameRegex))
+        Pattern.compile(
+            testPathRegexTemplate.format(
+                pathPartRegex,
+                filenameRegex
+            ))
     override val testInfoPattern: Pattern =
         Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex NOT LINKED SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
 
@@ -109,10 +113,11 @@ class NotLinkedSpecTestValidator(
         }
     }
 
-    override fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) = SpecTestCase(
-        1,
-        description = testInfoElements[NotLinkedSpecTestFileInfoElementType.DESCRIPTION]!!.content,
-        unexpectedBehavior = testInfoElements.contains(NotLinkedSpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR),
-        issues = parseIssues(testInfoElements[NotLinkedSpecTestFileInfoElementType.ISSUES])
-    )
+    override fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) =
+        SpecTestCase(
+            1,
+            description = testInfoElements[NotLinkedSpecTestFileInfoElementType.DESCRIPTION]!!.content,
+            unexpectedBehavior = testInfoElements.contains(NotLinkedSpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR),
+            issues = parseIssues(testInfoElements[NotLinkedSpecTestFileInfoElementType.ISSUES])
+        )
 }

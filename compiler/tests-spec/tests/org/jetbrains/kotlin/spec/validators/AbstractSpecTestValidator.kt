@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec
+package org.jetbrains.kotlin.spec.validators
 
 import java.io.File
 import java.util.regex.Matcher
@@ -88,7 +88,8 @@ abstract class AbstractSpecTest(
 
 abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
     private val testDataFile: File,
-    private val testArea: TestArea) {
+    private val testArea: TestArea
+) {
     private val testInfo by lazy { testInfoByContent }
 
     protected lateinit var testInfoByFilename: T
@@ -108,8 +109,14 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
 
         val testPathBaseRegexTemplate = """^.*?/(?<testArea>diagnostics|psi|codegen)/%s"""
         val testPathRegexTemplate = """$testPathBaseRegexTemplate/(?<testType>pos|neg)/%s$"""
-        val testCaseInfoSinglelinePattern: Pattern = Pattern.compile(SINGLELINE_COMMENT_REGEX.format(TESTCASE_INFO_REGEX))
-        val testCaseInfoMultilinePattern: Pattern = Pattern.compile(MULTILINE_COMMENT_REGEX.format(TESTCASE_INFO_REGEX))
+        val testCaseInfoSinglelinePattern: Pattern = Pattern.compile(
+            SINGLELINE_COMMENT_REGEX.format(
+                TESTCASE_INFO_REGEX
+            ))
+        val testCaseInfoMultilinePattern: Pattern = Pattern.compile(
+            MULTILINE_COMMENT_REGEX.format(
+                TESTCASE_INFO_REGEX
+            ))
 
         fun getInstanceByType(testFile: File, testArea: TestArea) = when {
             Pattern.compile(testPathBaseRegexTemplate.format(LinkedSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
@@ -119,7 +126,8 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
             else -> throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
         }
 
-        fun getInstanceByType(testPath: String, testArea: TestArea) = getInstanceByType(File(testPath), testArea)
+        fun getInstanceByType(testPath: String, testArea: TestArea) =
+            getInstanceByType(File(testPath), testArea)
 
         private fun getTestInfoElements(
             testInfoElementRules: Array<out SpecTestInfoElementType>,
@@ -146,7 +154,8 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
                         "'$testInfoElementValue' in '$testInfoElementName' is not parsed."
                     )
 
-                testInfoElementsMap[testInfoElementName] = SpecTestInfoElementContent(testInfoElementValue, testInfoElementValueMatcher)
+                testInfoElementsMap[testInfoElementName] =
+                        SpecTestInfoElementContent(testInfoElementValue, testInfoElementValueMatcher)
             }
 
             testInfoElementRules.forEach {
@@ -241,7 +250,10 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
         if (!testInfoByContentMatcher.find())
             throw SpecTestValidationException(SpecTestValidationFailedReason.TESTINFO_NOT_VALID)
 
-        val testInfoElements = getTestInfoElements(testInfoElementsRules, testInfoByContentMatcher.group("infoElements"))
+        val testInfoElements = getTestInfoElements(
+            testInfoElementsRules,
+            testInfoByContentMatcher.group("infoElements")
+        )
         val testCases = getTestCasesInfo(testCaseInfoSinglelinePattern.matcher(fileContent), testInfoElements) +
                 getTestCasesInfo(testCaseInfoMultilinePattern.matcher(fileContent), testInfoElements)
 
@@ -251,7 +263,12 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
             testInfoElements,
             testCases = testCases,
             unexpectedBehavior = testInfoElements.contains(LinkedSpecTestFileInfoElementType.UNEXPECTED_BEHAVIOUR) || testCases.any { it.unexpectedBehavior },
-            issues = getIssues(testCases, parseIssues(testInfoElements[LinkedSpecTestFileInfoElementType.ISSUES]))
+            issues = getIssues(
+                testCases,
+                parseIssues(
+                    testInfoElements[LinkedSpecTestFileInfoElementType.ISSUES]
+                )
+            )
         )
 
         if (!testInfoByFilename.checkConsistency(testInfoByContent))

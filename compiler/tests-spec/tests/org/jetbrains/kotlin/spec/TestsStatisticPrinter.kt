@@ -5,6 +5,8 @@
 
 package org.jetbrains.kotlin.spec
 
+import org.jetbrains.kotlin.spec.validators.AbstractSpecTestValidator
+import org.jetbrains.kotlin.spec.validators.LinkedSpecTestValidator
 import java.io.File
 import java.util.regex.Pattern
 

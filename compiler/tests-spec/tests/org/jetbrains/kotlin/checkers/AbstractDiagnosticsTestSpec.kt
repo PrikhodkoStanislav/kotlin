@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.spec.*
+import org.jetbrains.kotlin.spec.validators.*
 import org.jetbrains.kotlin.test.*
 import org.junit.Assert
 import java.io.File
@@ -79,7 +79,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         moduleBindings: Map<TestModule?, BindingContext>,
         languageVersionSettingsByModule: Map<TestModule?, LanguageVersionSettings>
     ) {
-        val diagnosticValidator = DiagnosticSpecTestValidator(testFiles)
+        val diagnosticValidator = DiagnosticTestTypeValidator(testFiles)
         try {
             testValidator.validateTestType(computedTestType = diagnosticValidator.computeTestType())
         } catch (e: SpecTestValidationException) {

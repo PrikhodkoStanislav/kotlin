@@ -3,14 +3,13 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec
+package org.jetbrains.kotlin.spec.validators
 
 import org.jetbrains.kotlin.checkers.BaseDiagnosticsTest
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
-import java.io.File
 
-class DiagnosticSpecTestValidator(testFiles: List<BaseDiagnosticsTest.TestFile>) {
+class DiagnosticTestTypeValidator(testFiles: List<BaseDiagnosticsTest.TestFile>) {
     private lateinit var diagnostics: MutableList<Diagnostic>
     private lateinit var diagnosticStats: MutableMap<String, Int>
     private lateinit var diagnosticSeverityStats: MutableMap<Severity, Int>
