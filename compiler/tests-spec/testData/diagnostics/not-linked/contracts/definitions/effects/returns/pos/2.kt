@@ -23,11 +23,12 @@ fun case_1(x: Any?): Boolean {
 }
 
 // CASE DESCRIPTION: equality with string as implies argument
-fun case_2(x: Any?): Boolean {
+fun case_2(x: Any?) {
     contract {
-        returns(true) implies (x == "...")
+        returns implies (x == "...")
     }
-    return x !is Number
+
+    if (x != "...") throw Exception()
 }
 
 // CASE DESCRIPTION: equality with char as implies argument
