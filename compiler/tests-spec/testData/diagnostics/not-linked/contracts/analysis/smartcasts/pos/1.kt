@@ -1,12 +1,12 @@
-// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: definitions, effects, returns
- NUMBER: 3
+ CATEGORY: analysis, smartcasts
+ NUMBER: 1
  DESCRIPTION: Smartcast using returns effect with type checking conditions.
  */
 
@@ -22,7 +22,7 @@ fun case_1_require(cond: Boolean) {
 fun case_1() {
     val value: Any? = "sf"
     case_1_require(value is String)
-    println(value.length)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
 }
 
 // CASE DESCRIPTION: string smartcast using return effect with type checking condition (in implies parameter)
@@ -35,5 +35,5 @@ fun case_2_require(value: Any?) {
 fun case_2() {
     val value: Any? = "sf"
     case_2_require(value)
-    println(value.length)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
 }

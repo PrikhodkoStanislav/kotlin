@@ -27,7 +27,7 @@ fun case_1(value1: Boolean, value2: Long): Int {
 
 /*
  CASE DESCRIPTION: 'When' with boolean expressions.
- NOTE: for potential analysys on exhaustive by enum of when without bound value.
+ NOTE: for potential analysis on exhaustive by enum of when without bound value.
  */
 fun case_2(value: _EnumClass) {
     when {
@@ -40,7 +40,7 @@ fun case_2(value: _EnumClass) {
 
 /*
  CASE DESCRIPTION: 'When' with boolean expressions.
- NOTE: for potential analysys on exhaustive by boolean of when without bound value.
+ NOTE: for potential analysis on exhaustive by boolean of when without bound value.
  */
 fun case_3(value: Boolean) {
     when {
@@ -91,7 +91,7 @@ fun case_6(value: Any) {
 
 /*
  CASE DESCRIPTION: 'When' with invert type checking operator.
- NOTE: for potential analysys on exhaustive of when without bound value.
+ NOTE: for potential analysis on exhaustive of when without bound value.
  */
 fun case_7(value: Any) {
     when {
@@ -104,7 +104,7 @@ fun case_7(value: Any) {
 
 /*
  CASE DESCRIPTION: 'When' with type checking operator by sealed class.
- NOTE: for potential analysys on exhaustive by sealed class of when without bound value.
+ NOTE: for potential analysis on exhaustive by sealed class of when without bound value.
  */
 fun case_8(value: _SealedClass) {
     when {

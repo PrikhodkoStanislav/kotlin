@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
  SECTION: Contracts
- CATEGORY: analysys, smartcasts
+ CATEGORY: analysis, smartcasts
  NUMBER: 3
  DESCRIPTION: Using invert type checking operator in function contract (returns effect) and invert condition ('not' operator).
  UNEXPECTED BEHAVIOUR

@@ -27,7 +27,7 @@ fun case_2(value: Boolean): String = when (value) {
 
 /*
  CASE DESCRIPTION: Checking for exhaustive 'when' with constant bound value (value check branch and 'else' branch).
- NOTE: for potential bound value constant analysys.
+ NOTE: for potential bound value constant analysis.
  */
 fun case_3(): String = when (true) {
     true -> ""

@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
  SECTION: Contracts
- CATEGORY: analysys, smartcasts
+ CATEGORY: analysis, smartcasts
  NUMBER: 1
  DESCRIPTION: Check smartcasts after non-null assertions or assignment in lambdas with contract and 'exactly once' or 'at least once' CallsInPlace effects.
  UNEXPECTED BEHAVIOUR

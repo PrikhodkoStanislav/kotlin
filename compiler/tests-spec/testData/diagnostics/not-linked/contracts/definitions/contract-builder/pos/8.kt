@@ -6,7 +6,7 @@
 
  SECTION: Contracts
  CATEGORY: definitions, contract-builder
- NUMBER: 7
+ NUMBER: 8
  DESCRIPTION: Contract with callsInPlace effect on the not last function parameter lambda.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26229
@@ -20,13 +20,14 @@ private inline fun case_1(block1: () -> Unit, block2: () -> Unit) {
         callsInPlace(block1, InvocationKind.EXACTLY_ONCE)
         callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
     }
-    block()
+    block1()
+    block2()
 }
 
 // CASE DESCRIPTION: one callsInPlace effects on the not last function parameter lambda
-private inline fun case_2(block1: () -> Unit, number: Int) {
+private inline fun case_2(block: () -> Unit) {
     contract {
-        callsInPlace(block1, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     block()
 }

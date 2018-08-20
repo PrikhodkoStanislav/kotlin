@@ -6,7 +6,7 @@
 
  SECTION: Contracts
  CATEGORY: definitions, effects, returns
- NUMBER: 4
+ NUMBER: 5
  DESCRIPTION: Returns effect with various conditions on 'this'.
  */
 
@@ -25,7 +25,7 @@ fun case_2(value1: Any?, value2: Any?, value3: Any?) {
     contract {
         returns() implies (value1 is String? || value2 !is Int && value3 !is Nothing?)
     }
-    if (value !is String) throw Exception()
+    if (!(value1 is String? || value2 !is Int && value3 !is Nothing?)) throw Exception()
 }
 
 // CASE DESCRIPTION: return effect with complex condition composed of null-check conditions of function parameters
@@ -33,5 +33,5 @@ fun case_3(value1: Any?, value2: Any?, value3: Any?) {
     contract {
         returns() implies (value1 == null || value2 != null && value3 == null)
     }
-    if (value is String?) throw Exception()
+    if (!(value1 == null || value2 != null && value3 == null)) throw Exception()
 }

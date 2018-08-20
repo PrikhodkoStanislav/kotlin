@@ -19,13 +19,13 @@ fun case_1(x: Any?): Boolean {
     contract {
         returns(true) implies (x == .15f)
     }
-    return x !is Number
+    return x == .15f
 }
 
 // CASE DESCRIPTION: equality with string as implies argument
 fun case_2(x: Any?) {
     contract {
-        returns implies (x == "...")
+        returns() implies (x == "...")
     }
 
     if (x != "...") throw Exception()
@@ -36,5 +36,5 @@ fun case_3(x: Any?): Boolean {
     contract {
         returns(true) implies (x == '-')
     }
-    return x !is Number
+    return x == '-'
 }

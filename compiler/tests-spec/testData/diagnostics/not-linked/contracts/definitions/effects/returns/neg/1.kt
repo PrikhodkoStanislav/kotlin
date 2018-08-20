@@ -32,11 +32,11 @@ fun case_2(x: Any?): Boolean {
 }
 
 // CASE DESCRIPTION: equality between two arguments
-fun case_3(x: Any?, y: Any?): Boolean {
+fun case_3(x: Int, y: Int): Boolean {
     contract {
-        returns(true) implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>x == y<!>)
+        returns(true) implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>x > y<!>)
     }
-    return x !is Number
+    return x > y
 }
 
 // CASE DESCRIPTION: equality with call expression

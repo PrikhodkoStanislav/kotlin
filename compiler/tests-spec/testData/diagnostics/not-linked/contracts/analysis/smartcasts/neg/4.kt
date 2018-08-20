@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
  SECTION: Contracts
- CATEGORY: analysys, smartcasts
+ CATEGORY: analysis, smartcasts
  NUMBER: 4
  DESCRIPTION: Using equality with null in function contract (returns effect) and invert condition ('not' operator).
  UNEXPECTED BEHAVIOUR

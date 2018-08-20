@@ -6,7 +6,7 @@
 
  SECTION: Contracts
  CATEGORY: definitions, effects, callsInPlace
- NUMBER: 7
+ NUMBER: 1
  DESCRIPTION: Check for lack of callsInPlace effect on the not last function parameter lambda.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26229
@@ -20,31 +20,32 @@ private inline fun case_1_funWithContract(block1: () -> Unit, block2: () -> Unit
         callsInPlace(block1, InvocationKind.EXACTLY_ONCE)
         callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
     }
-    block()
+    block1()
+    block2()
 }
-private inline fun case_1() {
-    val t1: Int
-    val t2: Int
-    funWithContract({
-        t1 = 11 // reassignment
+private fun case_1() {
+    val value_1: Int
+    val value_2: Int
+    case_1_funWithContract({
+        <!CAPTURED_VAL_INITIALIZATION!>value_1<!> = 11
     }) {
-        t2 = 10
+        value_2 = 10
     }
-    t1.inc() // must be initialized
-    t2.inc()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+    value_2.inc()
 }
 
 // CASE DESCRIPTION: one callsInPlace effects on the not last function parameter lambda
-private inline fun case_2_funWithContract(block1: () -> Unit, number: Int) {
+private inline fun case_2_funWithContract(block: () -> Unit) {
     contract {
-        callsInPlace(block1, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     block()
 }
-private inline fun case_2() {
-    val t1: Int
+private fun case_2() {
+    val value_1: Int
     case_2_funWithContract({
-        t1 = 11 // reassignment
-    }, 100)
-    t1.inc() // must be initialized
+        <!CAPTURED_VAL_INITIALIZATION!>value_1<!> = 11 // reassignment
+    })
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc() // must be initialized
 }
