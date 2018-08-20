@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: definitions, contract-builder
+ CATEGORY: definitions, contract_builder
  NUMBER: 4
  DESCRIPTION: Functions with contract and builder lambda in parentheses.
  */

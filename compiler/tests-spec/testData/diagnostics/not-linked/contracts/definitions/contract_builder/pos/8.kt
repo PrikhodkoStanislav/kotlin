@@ -5,7 +5,7 @@
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
  SECTION: Contracts
- CATEGORY: definitions, contract-builder
+ CATEGORY: definitions, contract_builder
  NUMBER: 8
  DESCRIPTION: Contract with callsInPlace effect on the not last function parameter lambda.
  UNEXPECTED BEHAVIOUR

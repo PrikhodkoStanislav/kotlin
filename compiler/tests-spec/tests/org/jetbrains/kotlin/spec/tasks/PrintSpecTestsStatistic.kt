@@ -6,7 +6,6 @@
 package org.jetbrains.kotlin.spec.tasks
 
 import org.jetbrains.kotlin.spec.SpecTestsStatElement
-import org.jetbrains.kotlin.spec.SpecTestsStatElementType
 import org.jetbrains.kotlin.spec.TestsStatisticCollector
 import org.jetbrains.kotlin.spec.validators.SpecTestLinkedType
 import org.jetbrains.kotlin.spec.validators.TestType
@@ -40,7 +39,7 @@ fun notLinkedSpecTestsPrintCategory(elements: Map<Any, SpecTestsStatElement>, le
     for ((name, element) in elements) {
         print("   ")
         for (i in 0..level) print("  ")
-        print("CATEGORY $name: ${element.number} tests")
+        print("$name: ${element.number} tests")
         val isTypeChildElements = element.elements[TestType.POSITIVE.type] != null || element.elements[TestType.NEGATIVE.type] != null
         if (isTypeChildElements) {
             val testsStatByType = mutableListOf<String>()
