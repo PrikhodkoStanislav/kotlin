@@ -1,5 +1,5 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
-// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !WITH_CONTRACT_FUNCTIONS
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
@@ -10,54 +10,35 @@
  DESCRIPTION: Check for lack of unreachable code report when 'at most once' and 'unknown' calls in place effect used.
  */
 
-import kotlin.internal.contracts.*
-
 // CASE DESCRIPTION: lack of unreachable code with 'exactly once' calls in place effect
-inline fun case_1_funWithContract(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-    }
-}
 fun case_1() {
-    case_1_funWithContract {
+    funWithAtMostOnceCallsInPlace {
         throw Exception()
     }
-    case_1_funWithContract {
+    funWithAtMostOnceCallsInPlace {
         return
     }
     println("1")
 }
 
 // CASE DESCRIPTION: lack of unreachable code with 'at least once' calls in place effect
-inline fun case_2_funWithContract(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.UNKNOWN)
-    }
-    block()
-}
 fun case_2() {
-    case_2_funWithContract {
+    funWithUnknownCallsInPlace {
         throw Exception()
     }
-    case_1_funWithContract {
+    funWithUnknownCallsInPlace {
         return
     }
     println("1")
 }
 
 // CASE DESCRIPTION: lack of unreachable code with 'exactly once' calls in place effect and local return
-inline fun case_3_funWithContract(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
-    block()
-}
 fun case_3() {
-    case_3_funWithContract {
-        return@case_3_funWithContract
+    funWithExacltyOnceCallsInPlace {
+        return@funWithExacltyOnceCallsInPlace
     }
     println("1")
-    case_3_funWithContract {
+    funWithExacltyOnceCallsInPlace {
         fun nestedFun() {
             return@nestedFun
         }
@@ -65,7 +46,7 @@ fun case_3() {
     println("1")
     fun case_3_nestedFun_1() {
         fun case_3_nestedFun_2() {
-            case_3_funWithContract {
+            funWithExacltyOnceCallsInPlace {
                 return@case_3_nestedFun_2
             }
         }
@@ -75,18 +56,12 @@ fun case_3() {
 }
 
 // CASE DESCRIPTION: lack of unreachable code with 'at least once' calls in place effect and local return
-inline fun case_4_funWithContract(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.AT_LEAST_ONCE)
-    }
-    block()
-}
 fun case_4() {
-    case_4_funWithContract {
-        return@case_4_funWithContract
+    funWithAtLeastOnceCallsInPlace {
+        return@funWithAtLeastOnceCallsInPlace
     }
     println("1")
-    case_4_funWithContract {
+    funWithAtLeastOnceCallsInPlace {
         fun nestedFun() {
             return@nestedFun
         }
@@ -94,7 +69,7 @@ fun case_4() {
     println("1")
     fun case_4_nestedFun_1() {
         fun case_4_nestedFun_2() {
-            case_4_funWithContract {
+            funWithAtLeastOnceCallsInPlace {
                 return@case_4_nestedFun_2
             }
         }

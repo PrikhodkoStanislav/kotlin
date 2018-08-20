@@ -22,9 +22,10 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
             "WITH_CLASSES" to Pair("classes.kt", "CLASSES.kt"),
             "WITH_ENUM_CLASSES" to Pair("enumClasses.kt", "ENUM_CLASSES.kt"),
             "WITH_SEALED_CLASSES" to Pair("sealedClasses.kt", "SEALED_CLASSES.kt"),
-            "WITH_FUNS" to Pair("funs.kt", "FUNS.kt"),
+            "WITH_FUNCTIONS" to Pair("funs.kt", "FUNS.kt"),
             "WITH_OBJECTS" to Pair("objects.kt", "OBJECTS.kt"),
-            "WITH_TYPEALIASES" to Pair("typeAliases.kt", "TYPE_ALIASES.kt")
+            "WITH_TYPEALIASES" to Pair("typeAliases.kt", "TYPE_ALIASES.kt"),
+            "WITH_CONTRACT_FUNCTIONS" to Pair("contractFunctions.kt", "CONTRACT_FUNCTIONS.kt")
         )
 
         private const val MODULE_PATH = "./compiler/tests-spec"

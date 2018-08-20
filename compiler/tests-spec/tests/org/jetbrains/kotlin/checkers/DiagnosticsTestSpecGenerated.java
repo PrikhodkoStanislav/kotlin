@@ -89,6 +89,24 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
                         }
 
+                        @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/neg")
+                        @TestDataPath("$PROJECT_ROOT")
+                        @RunWith(JUnit3RunnerWithInners.class)
+                        public static class Neg extends AbstractDiagnosticsTestSpec {
+                            private void runTest(String testDataFilePath) throws Exception {
+                                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                            }
+
+                            @TestMetadata("1.kt")
+                            public void test1() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/neg/1.kt");
+                            }
+
+                            public void testAllFilesPresentInNeg() throws Exception {
+                                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                            }
+                        }
+
                         @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/pos")
                         @TestDataPath("$PROJECT_ROOT")
                         @RunWith(JUnit3RunnerWithInners.class)
@@ -110,6 +128,21 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                             @TestMetadata("3.kt")
                             public void test3() throws Exception {
                                 runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/pos/3.kt");
+                            }
+
+                            @TestMetadata("4.kt")
+                            public void test4() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/pos/4.kt");
+                            }
+
+                            @TestMetadata("5.kt")
+                            public void test5() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/pos/5.kt");
+                            }
+
+                            @TestMetadata("6.kt")
+                            public void test6() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code/pos/6.kt");
                             }
 
                             public void testAllFilesPresentInPos() throws Exception {
