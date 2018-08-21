@@ -42,3 +42,31 @@ inline fun funWithUnknownCallsInPlace(block: () -> Unit) {
     }
     block()
 }
+
+fun funWithReturns(cond: Boolean) {
+    contract {
+        returns() implies (cond)
+    }
+    if (!cond) throw Exception()
+}
+
+fun funWithReturnsAndInvertCondition(cond: Boolean) {
+    contract {
+        returns() implies (!cond)
+    }
+    if (cond) throw Exception()
+}
+
+fun funWithReturnsAndTypeCheck(value: Any?) {
+    contract {
+        returns() implies (value is String)
+    }
+    if (value !is String) throw Exception()
+}
+
+fun funWithReturnsAndNotNullCheck(value: Any?) {
+    contract {
+        returns() implies (value != null)
+    }
+    if (value == null) throw Exception()
+}

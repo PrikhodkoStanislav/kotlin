@@ -7,10 +7,10 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 2
- DESCRIPTION: nested val/var init and usage
+ DESCRIPTION: Nested val/var wrong assignments or uninitialized usages based on 'call in place' effect with wrong invocation kind
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: reassignment and uninitialized usage inside nested calls in place contract functions: 'at least once', 'at most once' (reassignment) / 'exactly once' (uninitialized usage)
 fun case_1() {
     val value: Int
 
@@ -30,7 +30,7 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized usage (init in 'at most onces' calls in place contract function) inside nested calls in place contract functions: 'at most once', 'at least once'
 fun case_2() {
     val value: Int
 
@@ -50,7 +50,7 @@ fun case_2() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized usage (init in 'at most once' calls in place contract function) inside nested calls in place contract functions: 'at least once', 'exactly once'
 fun case_3() {
     var value: Int
 
@@ -70,7 +70,7 @@ fun case_3() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized usage (init in 'unknown' calls in place contract function) inside nested calls in place contract functions: 'at least once', 'at least once'
 fun case_4() {
     var value: Int
 

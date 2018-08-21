@@ -8,10 +8,10 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 3
- DESCRIPTION: with compelx control flow inside/outside lambda of contract function
+ DESCRIPTION: Wrong assignments or uninitialized usages in compelx control flow inside/outside lambda of contract function with calls in place effect
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: Uninitialized usages after assignments in non-exhaustive when.
 fun case_1(value1: _EnumClass?) {
     val value2: Int
 
@@ -25,7 +25,7 @@ fun case_1(value1: _EnumClass?) {
     <!UNINITIALIZED_VARIABLE!>value2<!>.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: Uninitialized usages after assignment in 'at most once' contract function, which is in one of the condition branches.
 fun case_2(value1: Any?) {
     val value2: Int
 
@@ -42,7 +42,7 @@ fun case_2(value1: Any?) {
     value2.dec()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: Uninitialized usages and wrong initialization of class field (if expression with wrong contract function in branches).
 class case_3(value1: Any?) {
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value2: Int<!>
 
@@ -61,27 +61,26 @@ class case_3(value1: Any?) {
     }
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: Uninitialized usages after exhaustive when, but with unsutable effect of contract function in one of the branches.
 fun case_4(value1: _EnumClassSingle?) {
     var value2: Int
 
     funWithAtMostOnceCallsInPlace {
-        <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when (value1) {
+        when (value1) {
             _EnumClassSingle.EVERYTHING -> {
                 funWithExactlyOnceCallsInPlace { value2 = 1 }
                 ++value2
             }
             null -> {
                 funWithUnknownCallsInPlace { value2 = 2 }
-                --<!UNINITIALIZED_VARIABLE!>value2<!>
             }
-        }<!>
-        value2.minus(5)
+        }
+        <!UNINITIALIZED_VARIABLE!>value2<!>.minus(5)
     }
     value2.minus(5)
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: Uninitialized usages after try expression with unsutable effect of contract function in catch block.
 fun case_5() {
     var value2: Int
 

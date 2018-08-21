@@ -7,10 +7,10 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 1
- DESCRIPTION: simple val/var assinments
+ DESCRIPTION: Simple val/var assignments in contract functions with 'call in place' effect and subsequent usages
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: val initialization and subsequent usage
 fun case_1() {
     val value: Int
 
@@ -19,7 +19,7 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: var initialization and subsequent usage
 fun case_2() {
     var value1: Int
     var value2: Int
@@ -31,7 +31,7 @@ fun case_2() {
     value2.div(10)
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: class val/var fields initialization
 class case_3 {
     val value1: Int
     var value2: Int

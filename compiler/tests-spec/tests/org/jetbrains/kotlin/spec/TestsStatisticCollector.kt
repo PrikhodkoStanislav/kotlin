@@ -20,7 +20,6 @@ open class SpecTestsStatElement(
     var number = 0
     fun increment() {
         number++
-        parent?.increment()
     }
 }
 

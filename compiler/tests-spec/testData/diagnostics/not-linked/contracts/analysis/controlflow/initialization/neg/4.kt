@@ -7,10 +7,10 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 4
- DESCRIPTION: with name shadowing
+ DESCRIPTION: Calls in place contract functions with name shadowing and wrong invocation kind of calls in place effect
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized variable after initialization of variable with same name (name shadowing) in calls in place contract functions with 'exactly once' invocation kind
 fun case_1() {
     val value: Int
 
@@ -22,7 +22,7 @@ fun case_1() {
     <!UNINITIALIZED_VARIABLE!>value<!>.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized variable after initialization (with two nesting levels) of variable with same name (name shadowing) in calls in place contract functions with 'exactly once' invocation kind
 fun case_2() {
     val value: Int
 
@@ -39,7 +39,7 @@ fun case_2() {
     <!UNINITIALIZED_VARIABLE!>value<!>.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized variable after initialization in 'at most once' and initialization (with two nesting levels) of variable with same name (name shadowing) in calls in place contract functions with 'exactly once' invocation kind
 fun case_3() {
     val value: Int
 
@@ -59,7 +59,7 @@ fun case_3() {
     <!UNINITIALIZED_VARIABLE!>value<!>.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized variable (var) after initialization in 'at most once' and initialization (with two nesting levels) of variable (val) with same name (name shadowing) in calls in place contract functions with 'exactly once' invocation kind
 fun case_6() {
     var value: Int
 
@@ -81,7 +81,7 @@ fun case_6() {
     <!UNINITIALIZED_VARIABLE!>value<!>.dec()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: uninitialized variable (val) after initialization in 'at most once' and initialization (with two nesting levels) of variable (var) with same name (name shadowing) in calls in place contract functions with 'exactly once' invocation kind
 fun case_7() {
     val value: Int
 

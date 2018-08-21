@@ -7,10 +7,10 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 2
- DESCRIPTION: nested val/var init and usage
+ DESCRIPTION: Nested val/var assignments and usages based on 'call in place' effect
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of val inside nested calls in place contract functions: 'exactly once' + 'exactly once'
 fun case_1() {
     val value: Int
 
@@ -30,7 +30,7 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of val inside nested calls in place contract functions: 'at most once' + 'exactly once'
 fun case_2() {
     val value: Int
 
@@ -48,7 +48,7 @@ fun case_2() {
     }
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of var inside nested calls in place contract functions: 'at exactly once' + 'exactly once'
 fun case_3() {
     var value: Int
 
@@ -68,7 +68,7 @@ fun case_3() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of var inside nested calls in place contract functions: 'at most once' + 'at least once'
 fun case_4() {
     var value: Int
 
@@ -89,7 +89,7 @@ fun case_4() {
     }
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of var inside nested calls in place contract functions: 'at least once' + 'at least once'
 fun case_7() {
     var value: Int
 
@@ -109,7 +109,7 @@ fun case_7() {
     value.inc()
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of var inside nested calls in place contract functions: 'unknown once' + 'at most once' + 'at least once'
 fun case_8() {
     var value: Int
 
@@ -134,7 +134,7 @@ fun case_8() {
     }
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
+// CASE DESCRIPTION: assignment and subsequent usage of var inside nested calls in place contract functions: 'at most once' + 'unknown' + 'exactly once'
 fun case_9() {
     var value: Int
 
