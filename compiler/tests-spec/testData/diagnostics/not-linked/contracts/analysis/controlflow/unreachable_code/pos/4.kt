@@ -12,9 +12,9 @@
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_1() {
-    funWithExacltyOnceCallsInPlace {
-        funWithExacltyOnceCallsInPlace {
-            funWithExacltyOnceCallsInPlace {
+    funWithExactlyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
                 throw Exception()
             }
             <!UNREACHABLE_CODE!>println("1")<!>
@@ -43,10 +43,10 @@ fun case_2() {
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_3() {
-    funWithExacltyOnceCallsInPlace {
-        funWithExacltyOnceCallsInPlace {
-            funWithExacltyOnceCallsInPlace {
-                return<!LABEL_NAME_CLASH!>@funWithExacltyOnceCallsInPlace<!>
+    funWithExactlyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
+                return<!LABEL_NAME_CLASH!>@funWithExactlyOnceCallsInPlace<!>
             }
             println("1")
         }

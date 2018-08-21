@@ -1,20 +1,20 @@
 import kotlin.internal.contracts.*
 
-inline fun <T> funWithExacltyOnceCallsInPlace(block: () -> Unit): T {
+inline fun <T> funWithExactlyOnceCallsInPlace(block: () -> T): T {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     return block()
 }
 
-inline fun funWithExacltyOnceCallsInPlace(block: () -> Unit) {
+inline fun funWithExactlyOnceCallsInPlace(block: () -> Unit) {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     block()
 }
 
-inline fun <T> funWithAtLeastOnceCallsInPlace(block: () -> Unit): T {
+inline fun <T> funWithAtLeastOnceCallsInPlace(block: () -> T): T {
     contract {
         callsInPlace(block, InvocationKind.AT_LEAST_ONCE)
     }

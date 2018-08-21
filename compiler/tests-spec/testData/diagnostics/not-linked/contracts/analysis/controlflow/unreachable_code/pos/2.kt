@@ -34,11 +34,11 @@ fun case_2() {
 
 // CASE DESCRIPTION: lack of unreachable code with 'exactly once' calls in place effect and local return
 fun case_3() {
-    funWithExacltyOnceCallsInPlace {
-        return@funWithExacltyOnceCallsInPlace
+    funWithExactlyOnceCallsInPlace {
+        return@funWithExactlyOnceCallsInPlace
     }
     println("1")
-    funWithExacltyOnceCallsInPlace {
+    funWithExactlyOnceCallsInPlace {
         fun nestedFun() {
             return@nestedFun
         }
@@ -46,7 +46,7 @@ fun case_3() {
     println("1")
     fun case_3_nestedFun_1() {
         fun case_3_nestedFun_2() {
-            funWithExacltyOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
                 return@case_3_nestedFun_2
             }
         }

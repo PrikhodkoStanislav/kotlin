@@ -12,7 +12,7 @@
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_1(b: Boolean?) {
-    funWithExacltyOnceCallsInPlace {
+    funWithExactlyOnceCallsInPlace {
         if (b == null) {
             return
         }
@@ -42,7 +42,7 @@ fun case_2(b: Boolean?, c: Boolean) {
             }
             else -> {
                 if (b == null) {
-                    funWithExacltyOnceCallsInPlace {
+                    funWithExactlyOnceCallsInPlace {
                         when {
                             c == true -> throw Exception()
                             else -> funWithAtLeastOnceCallsInPlace { return }

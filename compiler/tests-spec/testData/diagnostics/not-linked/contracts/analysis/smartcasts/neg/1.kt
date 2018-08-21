@@ -14,7 +14,7 @@
 
 // CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
 fun case_1(arg: Int?) {
-    funWithExacltyOnceCallsInPlace { arg!! }
+    funWithExactlyOnceCallsInPlace { arg!! }
 
     arg<!UNSAFE_CALL!>.<!>inc()
 }
@@ -30,7 +30,7 @@ fun case_2(arg: Int?) {
 fun case_3() {
     val value: Boolean?
 
-    funWithExacltyOnceCallsInPlace { value = false }
+    funWithExactlyOnceCallsInPlace { value = false }
 
     value<!UNSAFE_CALL!>.<!>not()
 }

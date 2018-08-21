@@ -77,6 +77,85 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
                     }
 
+                    @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization")
+                    @TestDataPath("$PROJECT_ROOT")
+                    @RunWith(JUnit3RunnerWithInners.class)
+                    public static class Initialization extends AbstractDiagnosticsTestSpec {
+                        private void runTest(String testDataFilePath) throws Exception {
+                            KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                        }
+
+                        public void testAllFilesPresentInInitialization() throws Exception {
+                            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                        }
+
+                        @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg")
+                        @TestDataPath("$PROJECT_ROOT")
+                        @RunWith(JUnit3RunnerWithInners.class)
+                        public static class Neg extends AbstractDiagnosticsTestSpec {
+                            private void runTest(String testDataFilePath) throws Exception {
+                                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                            }
+
+                            @TestMetadata("1.kt")
+                            public void test1() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg/1.kt");
+                            }
+
+                            @TestMetadata("2.kt")
+                            public void test2() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg/2.kt");
+                            }
+
+                            @TestMetadata("3.kt")
+                            public void test3() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg/3.kt");
+                            }
+
+                            @TestMetadata("4.kt")
+                            public void test4() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg/4.kt");
+                            }
+
+                            public void testAllFilesPresentInNeg() throws Exception {
+                                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                            }
+                        }
+
+                        @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos")
+                        @TestDataPath("$PROJECT_ROOT")
+                        @RunWith(JUnit3RunnerWithInners.class)
+                        public static class Pos extends AbstractDiagnosticsTestSpec {
+                            private void runTest(String testDataFilePath) throws Exception {
+                                KotlinTestUtils.runTest(this::doTest, TargetBackend.ANY, testDataFilePath);
+                            }
+
+                            @TestMetadata("1.kt")
+                            public void test1() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos/1.kt");
+                            }
+
+                            @TestMetadata("2.kt")
+                            public void test2() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos/2.kt");
+                            }
+
+                            @TestMetadata("3.kt")
+                            public void test3() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos/3.kt");
+                            }
+
+                            @TestMetadata("4.kt")
+                            public void test4() throws Exception {
+                                runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos/4.kt");
+                            }
+
+                            public void testAllFilesPresentInPos() throws Exception {
+                                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/initialization/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                            }
+                        }
+                    }
+
                     @TestMetadata("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/controlflow/unreachable_code")
                     @TestDataPath("$PROJECT_ROOT")
                     @RunWith(JUnit3RunnerWithInners.class)

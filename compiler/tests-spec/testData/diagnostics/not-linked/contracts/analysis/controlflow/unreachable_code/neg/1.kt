@@ -13,14 +13,14 @@
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_1(cond: Boolean) {
     while (cond) {
-        funWithExacltyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>
         }
         println("1")
     }
 
     loop@ for (i in 0..10) {
-        funWithExacltyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break@loop<!>
         }
         println("1")
@@ -30,14 +30,14 @@ fun case_1(cond: Boolean) {
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_2(cond: Boolean) {
     for (i in 0..10) {
-        funWithExacltyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>continue<!>
         }
         println("1")
     }
 
     loop@ while (cond) {
-        funWithExacltyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>continue@loop<!>
         }
         println("1")

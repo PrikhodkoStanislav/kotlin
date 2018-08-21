@@ -112,7 +112,7 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
         const val INTEGER_REGEX = """[1-9]\d*"""
         const val TESTCASE_INFO_REGEX = """(?<infoElements>CASE DESCRIPTION:[\s\S]*?\n)"""
         const val SINGLELINE_COMMENT_REGEX = """\/\/\s*%s"""
-        const val MULTILINE_COMMENT_REGEX = """\/\*\s*%s\s+\*\/"""
+        const val MULTILINE_COMMENT_REGEX = """\/\*\s*%s\s+\*\/\n*"""
 
         val testAreaRegex = """(?<testArea>${TestArea.values().joinToString("|")})"""
         val testTypeRegex = """(?<testType>${TestType.values().joinToString("|")})"""

@@ -12,7 +12,7 @@
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
 fun case_1() {
-    funWithExacltyOnceCallsInPlace {
+    funWithExactlyOnceCallsInPlace {
         throw Exception()
     }
     <!UNREACHABLE_CODE!>println("1")<!>
@@ -28,7 +28,7 @@ fun case_2() {
 
 // CASE DESCRIPTION: unreachable code with 'exactly once' calls in place effect and non-local return
 fun case_3() {
-    funWithExacltyOnceCallsInPlace {
+    funWithExactlyOnceCallsInPlace {
         return
     }
     <!UNREACHABLE_CODE!>println("1")<!>
@@ -72,14 +72,14 @@ fun case_5(args: Array<String>) {
 // CASE DESCRIPTION: unreachable code with 'at least once' calls in place effect and explicit labeled return to lambda
 fun case_6(args: Array<String>) {
     args.forEach {
-        funWithExacltyOnceCallsInPlace {
+        funWithExactlyOnceCallsInPlace {
             return@forEach
         }
         <!UNREACHABLE_CODE!>println("1")<!>
     }
     args.forEach {
         fun case_6_nestedFun_2() {
-            funWithExacltyOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
                 return@case_6_nestedFun_2
             }
             <!UNREACHABLE_CODE!>println("1")<!>
@@ -87,7 +87,7 @@ fun case_6(args: Array<String>) {
     }
     args.forEach {
         fun case_6_nestedFun_3() {
-            funWithExacltyOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
                 return
             }
             <!UNREACHABLE_CODE!>println("1")<!>
