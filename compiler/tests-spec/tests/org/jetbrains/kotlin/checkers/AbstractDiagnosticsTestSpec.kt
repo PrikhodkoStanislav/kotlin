@@ -28,18 +28,28 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
             "WITH_CONTRACT_FUNCTIONS" to Pair("contractFunctions.kt", "CONTRACT_FUNCTIONS.kt")
         )
 
+        private val withDescriptorsTestGroups = listOf(
+            "not-linked/contracts/definitions/"
+        )
+
         private const val MODULE_PATH = "./compiler/tests-spec"
-        private const val HELPERS_PATH = "$MODULE_PATH/testData/helpers/diagnostics"
+        private const val TESTDATA_PATH = "$MODULE_PATH/testData"
+        private const val HELPERS_PATH = "$TESTDATA_PATH/helpers/diagnostics"
     }
 
     private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>
+    private var skipDescriptors = true
 
     private fun checkDirective(directive: String, testFiles: List<TestFile>) =
         testFiles.any { it.directives.contains(directive) }
 
+    private fun enableDescriptorsGenerationIfNeeded(testDataFile: File) {
+        skipDescriptors = !withDescriptorsTestGroups.any { testDataFile.path.startsWith("$TESTDATA_PATH/$it") }
+    }
+
     override fun getConfigurationKind() = ConfigurationKind.ALL
 
-    override fun skipDescriptorsValidation(): Boolean = true
+    override fun skipDescriptorsValidation() = skipDescriptors
 
     override fun getKtFiles(testFiles: List<TestFile>, includeExtras: Boolean): List<KtFile> {
         val ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList
@@ -59,6 +69,8 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     }
 
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
+        enableDescriptorsGenerationIfNeeded(testDataFile)
+
         testValidator = AbstractSpecTestValidator.getInstanceByType(testDataFile, TestArea.DIAGNOSTICS)
 
         try {
