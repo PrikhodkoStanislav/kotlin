@@ -32,8 +32,9 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
             "not-linked/contracts/definitions/"
         )
 
-        private const val MODULE_PATH = "./compiler/tests-spec"
+        private const val MODULE_PATH = "compiler/tests-spec"
         private const val TESTDATA_PATH = "$MODULE_PATH/testData"
+        private const val DIAGNOSTICS_TESTDATA_PATH = "$TESTDATA_PATH/diagnostics"
         private const val HELPERS_PATH = "$TESTDATA_PATH/helpers/diagnostics"
     }
 
@@ -44,12 +45,18 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         testFiles.any { it.directives.contains(directive) }
 
     private fun enableDescriptorsGenerationIfNeeded(testDataFile: File) {
-        skipDescriptors = !withDescriptorsTestGroups.any { testDataFile.path.startsWith("$TESTDATA_PATH/$it") }
+        skipDescriptors = !withDescriptorsTestGroups.any {
+            val testGroupAbsolutePath = File("$DIAGNOSTICS_TESTDATA_PATH/$it").absolutePath
+            testDataFile.absolutePath.startsWith(testGroupAbsolutePath)
+        }
     }
 
     override fun getConfigurationKind() = ConfigurationKind.ALL
 
-    override fun skipDescriptorsValidation() = skipDescriptors
+    override fun skipDescriptorsValidation(): Boolean {
+        println(skipDescriptors)
+        return skipDescriptors
+    }
 
     override fun getKtFiles(testFiles: List<TestFile>, includeExtras: Boolean): List<KtFile> {
         val ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList

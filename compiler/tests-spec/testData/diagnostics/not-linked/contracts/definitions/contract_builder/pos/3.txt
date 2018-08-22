@@ -1,0 +1,3 @@
+package
+
+public inline fun case_1(/*0*/ block2: () -> kotlin.Unit): kotlin.Unit
