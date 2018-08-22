@@ -61,11 +61,7 @@ fun <T>T.case_6(): Boolean {
     return !(this is Char || this == null)
 }
 
-/*
- CASE DESCRIPTION: complex condition with the null check, type checking and boolean value check of the current extensible class
- UNEXPECTED BEHAVIOUR
- ISSUES: KT-1982
- */
+// CASE DESCRIPTION: complex condition with the null check, type checking and boolean value check of the current extensible class
 fun <T>T?.case_7() {
     contract {
         returns() implies (this@case_7 == null || this@case_7 is Boolean? && !<!DEBUG_INFO_SMARTCAST!>this@case_7<!>) // duplicate of null-check
@@ -75,11 +71,7 @@ fun <T>T?.case_7() {
 
 class A<T> : _ClassLevel5() {
     inner class B {
-        /*
-         CASE DESCRIPTION: complex condition with the null check and type checking of the current extensible class, inner and top-level classes
-         UNEXPECTED BEHAVIOUR
-         ISSUES: KT-1982
-         */
+        // CASE DESCRIPTION: complex condition with the null check and type checking of the current extensible class, inner and top-level classes
         fun <K : Number?>K.case_8() {
             contract {
                 returns() implies (this@B !is _ClassLevel1 && <!SENSELESS_COMPARISON!>this@B != null<!> || <!USELESS_IS_CHECK!>this@A is _ClassLevel1<!> && this@case_8 is Float)
@@ -87,11 +79,7 @@ class A<T> : _ClassLevel5() {
             if (!(this@B !is _ClassLevel1 && <!SENSELESS_COMPARISON!>this@B != null<!> || <!USELESS_IS_CHECK!>this@A is _ClassLevel1<!> && this is Float)) throw Exception()
         }
 
-        /*
-         CASE DESCRIPTION: complex condition with the null check and type checking of the inner and top-level classes
-         UNEXPECTED BEHAVIOUR
-         ISSUES: KT-1982
-         */
+        // CASE DESCRIPTION: complex condition with the null check and type checking of the inner and top-level classes
         fun case_9() {
             contract {
                 returns() implies (this@B !is _ClassLevel1 || <!USELESS_IS_CHECK!>this@A is _ClassLevel1<!> || <!SENSELESS_COMPARISON!>this@B == null<!>)
