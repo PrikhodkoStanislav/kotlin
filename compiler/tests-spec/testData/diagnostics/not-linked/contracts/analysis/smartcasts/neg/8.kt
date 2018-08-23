@@ -82,7 +82,7 @@ fun case_4(value1: Number, value2: Any?, value3: (() -> Unit)?) {
     } else if (contracts.case_4(value1, value2, value3) == false) {
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     } else if (contracts.case_4(value1, value2, value3) != null) {
-        <!DEBUG_INFO_CONSTANT, UNSAFE_IMPLICIT_INVOKE_CALL!>value3<!>()
+        <!UNSAFE_IMPLICIT_INVOKE_CALL, DEBUG_INFO_CONSTANT!>value3<!>()
     }
 }
 
@@ -92,6 +92,6 @@ fun case_5(value1: Number, value2: Any?, value3: (() -> Unit)?) {
     } else if (value3.case_5(value1, value2) == false) {
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     } else if (value3.case_5(value1, value2) != null) {
-        <!DEBUG_INFO_CONSTANT, UNSAFE_IMPLICIT_INVOKE_CALL!>value3<!>()
+        <!UNSAFE_IMPLICIT_INVOKE_CALL, DEBUG_INFO_CONSTANT!>value3<!>()
     }
 }
