@@ -69,12 +69,22 @@ fun case_4_funWithContract_2(value1: Any?, value2: Any?): Boolean {
     }
     return value1 is String && value2 is Number
 }
+fun case_4_funWithContract_3(value1: Any?, value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 is String && value2 is Number)
+    }
+    return value1 is String && value2 is Number
+}
 fun case_4(value1: Any?, value2: Any?) {
     if (case_4_funWithContract_1(value1, value2)) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
     if (!case_4_funWithContract_2(value1, value2)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+    }
+    if (case_4_funWithContract_3(value1, value2) != null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
@@ -93,12 +103,22 @@ fun case_5_funWithContract_2(value1: Any?, value2: Any?): Boolean {
     }
     return value1 is String && value2 == null
 }
+fun case_5_funWithContract_3(value1: Any?, value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 is String && value2 == null)
+    }
+    return value1 is String && value2 == null
+}
 fun case_5(value1: Any?, value2: Any?) {
     if (case_5_funWithContract_1(value1, value2)) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_CONSTANT!>value2<!>?.toByte())
     }
     if (!case_5_funWithContract_2(value1, value2)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+        println(<!DEBUG_INFO_CONSTANT!>value2<!>?.toByte())
+    }
+    if (case_5_funWithContract_3(value1, value2) != null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_CONSTANT!>value2<!>?.toByte())
     }
@@ -117,6 +137,12 @@ fun case_6_funWithContract_2(value1: Any?, value2: Any?, value3: Any?, value4: A
     }
     return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
 }
+fun case_6_funWithContract_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null)
+    }
+    return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
+}
 class case_6_class {
     val prop_1: Int? = 10
     fun case_6(value1: Any?, value2: Number?) {
@@ -127,6 +153,11 @@ class case_6_class {
             println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))
         }
         if (!case_6_funWithContract_2(value1, value2, o.prop_1, this.prop_1)) {
+            println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
+            println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
+            println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))
+        }
+        if (case_6_funWithContract_3(value1, value2, o.prop_1, this.prop_1) != null) {
             println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
             println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
             println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))

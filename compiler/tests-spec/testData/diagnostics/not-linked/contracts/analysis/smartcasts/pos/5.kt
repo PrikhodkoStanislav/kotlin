@@ -61,10 +61,21 @@ fun case_3(value1: Any?) {
     }
     return this != null && this is String
 }
-fun case_4(value1: Any?, value2: Any?) {
+<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_4_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_4_funWithContract_3 != null && this@case_4_funWithContract_3 is String)
+    }
+    return this != null && this is String
+}
+fun case_4(value1: Any?, value2: Any?, value3: Any?) {
     when {
         value1.case_4_funWithContract_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+    }
+    when {
         !value2.case_4_funWithContract_2() -> println(<!DEBUG_INFO_SMARTCAST!>value2<!>.length)
+    }
+    when {
+        value3.case_4_funWithContract_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value3<!>.length)
     }
 }
 
@@ -81,11 +92,19 @@ fun <T : Number?> T.case_5_funWithContract_2(): Boolean {
     }
     return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
-fun case_5(value1: Number?, value2: Number?) {
+fun <T : Number?> T.case_5_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_5_funWithContract_3 is Int && <!SENSELESS_COMPARISON!>this@case_5_funWithContract_3 != null<!>)
+    }
+    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
+fun case_5(value1: Number?, value2: Number?, value3: Number?) {
     if (value1.case_5_funWithContract_1())
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     if (!value2.case_5_funWithContract_2())
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.inv())
+    if (value3.case_5_funWithContract_3() != null)
+        println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
 }
 
 // CASE DESCRIPTION: string smartcast using return effect with type checking condition (in function parameter)
@@ -101,9 +120,17 @@ inline fun <reified T : Any?> T?.case_6_funWithContract_2(): Boolean {
     }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
-fun case_6(value1: Any?, value2: Any?) {
+inline fun <reified T : Any?> T?.case_6_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_6_funWithContract_3 is Number && this@case_6_funWithContract_3 is Int && <!SENSELESS_COMPARISON!>this@case_6_funWithContract_3 != null<!>)
+    }
+    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
+fun case_6(value1: Any?, value2: Any?, value3: Any?) {
     if (value1.case_6_funWithContract_1())
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     if (!value2.case_6_funWithContract_2())
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.inv())
+    if (value3.case_6_funWithContract_3() != null)
+        println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
 }

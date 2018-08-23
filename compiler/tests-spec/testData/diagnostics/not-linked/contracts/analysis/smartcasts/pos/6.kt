@@ -78,7 +78,13 @@ fun <T> T?.case_5_funWithContract_2(value: Int?): Boolean {
     }
     return this != null && this is String && value != null
 }
-fun case_5(value1: Any?, value2: Int?, value3: Any?, value4: Int?) {
+fun <T> T?.case_5_funWithContract_3(value: Int?): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_5_funWithContract_3 != null && this@case_5_funWithContract_3 is String && value != null)
+    }
+    return this != null && this is String && value != null
+}
+fun case_5(value1: Any?, value2: Int?, value3: Any?, value4: Int?, value5: Any?, value6: Int?) {
     when {
         value1.case_5_funWithContract_1(value2) -> {
             println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
@@ -89,6 +95,12 @@ fun case_5(value1: Any?, value2: Int?, value3: Any?, value4: Int?) {
         !value3.case_5_funWithContract_2(value4) -> {
             println(<!DEBUG_INFO_SMARTCAST!>value3<!>.length)
             println(<!DEBUG_INFO_SMARTCAST!>value4<!>.inv())
+        }
+    }
+    when {
+        value5.case_5_funWithContract_3(value6) != null -> {
+            println(<!DEBUG_INFO_SMARTCAST!>value5<!>.length)
+            println(<!DEBUG_INFO_SMARTCAST!>value6<!>.inv())
         }
     }
 }
@@ -106,7 +118,13 @@ fun <T : Number?> T.case_6_funWithContract_2(value2: Any?): Boolean {
     }
     return this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 is Number && <!SENSELESS_COMPARISON!>value2 != null<!>
 }
-fun case_6(value1: Number?, value2: Any?, value3: Number?, value4: Any?) {
+fun <T : Number?> T.case_6_funWithContract_3(value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_6_funWithContract_3 is Int && <!SENSELESS_COMPARISON!>this@case_6_funWithContract_3 != null<!> && value2 is Number && <!SENSELESS_COMPARISON!>value2 != null<!>)
+    }
+    return this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 is Number && <!SENSELESS_COMPARISON!>value2 != null<!>
+}
+fun case_6(value1: Number?, value2: Any?, value3: Number?, value4: Any?, value5: Number?, value6: Any?) {
     if (value1.case_6_funWithContract_1(value2)) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
@@ -114,6 +132,10 @@ fun case_6(value1: Number?, value2: Any?, value3: Number?, value4: Any?) {
     if (!value3.case_6_funWithContract_2(value4)) {
         println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
         println(<!DEBUG_INFO_SMARTCAST!>value4<!>.toByte())
+    }
+    if (value5.case_6_funWithContract_3(value6) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value5<!>.inv())
+        println(<!DEBUG_INFO_SMARTCAST!>value6<!>.toByte())
     }
 }
 
@@ -130,7 +152,13 @@ fun case_6(value1: Number?, value2: Any?, value3: Number?, value4: Any?) {
     }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 != null
 }
-fun case_7(value1: Any?, value2: String?, value3: Any?, value4: String?) {
+<!NOTHING_TO_INLINE!>inline<!> fun <T : Any?> T?.case_7_funWithContract_3(value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_7_funWithContract_3 is Number && this@case_7_funWithContract_3 is Int && <!SENSELESS_COMPARISON!>this@case_7_funWithContract_3 != null<!> && value2 != null)
+    }
+    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 != null
+}
+fun case_7(value1: Any?, value2: String?, value3: Any?, value4: String?, value5: Any?, value6: String?) {
     if (value1.case_7_funWithContract_1(value2)) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.length)
@@ -138,6 +166,10 @@ fun case_7(value1: Any?, value2: String?, value3: Any?, value4: String?) {
     if (value3.case_7_funWithContract_2(value4)) {
         println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
         println(<!DEBUG_INFO_SMARTCAST!>value4<!>.length)
+    }
+    if (value5.case_7_funWithContract_3(value6) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value5<!>.inv())
+        println(<!DEBUG_INFO_SMARTCAST!>value6<!>.length)
     }
 }
 
@@ -151,6 +183,12 @@ inline fun <reified T : Any?> T?.case_8_funWithContract_1(value2: Number, value3
 inline fun <reified T : Any?> T?.case_8_funWithContract_2(value2: Number, value3: Any?, value4: String?): Boolean {
     contract {
         returns(false) implies ((this@case_8_funWithContract_2 is Number || this@case_8_funWithContract_2 is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null)
+    }
+    return (this is Number || this is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null
+}
+inline fun <reified T : Any?> T?.case_8_funWithContract_3(value2: Number, value3: Any?, value4: String?): Boolean? {
+    contract {
+        returnsNotNull() implies ((this@case_8_funWithContract_3 is Number || this@case_8_funWithContract_3 is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null)
     }
     return (this is Number || this is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null
 }
@@ -172,5 +210,14 @@ fun case_8(value1: Any?, value2: Number, value3: Any?, value4: String?, value5: 
     }
     when {
         !value5.case_8_funWithContract_2(value6, value7, value8) -> println(<!DEBUG_INFO_SMARTCAST!>value8<!>.length)
+    }
+    when {
+        value5.case_8_funWithContract_3(value6, value7, value8) != null -> println(<!DEBUG_INFO_SMARTCAST!>value6<!>.inv())
+    }
+    when {
+        value5.case_8_funWithContract_3(value6, value7, value8) != null -> println(<!DEBUG_INFO_SMARTCAST!>value7<!>.toByte())
+    }
+    when {
+        value5.case_8_funWithContract_3(value6, value7, value8) != null -> println(<!DEBUG_INFO_SMARTCAST!>value8<!>.length)
     }
 }

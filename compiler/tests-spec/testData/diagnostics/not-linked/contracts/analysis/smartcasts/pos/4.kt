@@ -17,7 +17,7 @@ fun <T> T.case_1_funWithContract() {
     contract {
         returns() implies (this@case_1_funWithContract is String)
     }
-    if (this@case_1_funWithContract !is String) throw Exception()
+    if (this !is String) throw Exception()
 }
 fun case_1(value1: Any?) {
     value1.case_1_funWithContract()
@@ -28,7 +28,7 @@ fun <T : Number> T.case_2_funWithContract() {
     contract {
         returns() implies (this@case_2_funWithContract is Int)
     }
-    if (this@case_2_funWithContract !is Int) throw Exception()
+    if (this !is Int) throw Exception()
 }
 fun case_2(value1: Number) {
     value1.case_2_funWithContract()
@@ -39,13 +39,13 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_funWithContract_1() {
     contract {
         returns() implies (this@case_3_funWithContract_1 != null)
     }
-    if (this@case_3_funWithContract_1 == null) throw Exception()
+    if (this == null) throw Exception()
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_funWithContract_2() {
     contract {
         returns() implies (this@case_3_funWithContract_2 == null)
     }
-    if (this@case_3_funWithContract_2 != null) throw Exception()
+    if (this != null) throw Exception()
 }
 fun case_3(value1: String?, value2: String?) {
     value1.case_3_funWithContract_1()
@@ -58,13 +58,13 @@ fun <T : String?> T.case_4_funWithContract_1() {
     contract {
         returns() implies (this@case_4_funWithContract_1 != null)
     }
-    if (this@case_4_funWithContract_1 == null) throw Exception()
+    if (this == null) throw Exception()
 }
 fun <T : String?> T.case_4_funWithContract_2() {
     contract {
         returns() implies (this@case_4_funWithContract_2 == null)
     }
-    if (this@case_4_funWithContract_2 != null) throw Exception()
+    if (this != null) throw Exception()
 }
 fun case_4(value1: String?, value2: String?) {
     value1.case_4_funWithContract_1()
@@ -86,11 +86,20 @@ fun <T> T.case_5_funWithContract_2(): Boolean {
     }
     return this is String
 }
+fun <T> T.case_5_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_5_funWithContract_3 is String)
+    }
+    return this is String
+}
 fun case_5(value1: Any?) {
     if (value1.case_5_funWithContract_1()) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     }
     if (!value1.case_5_funWithContract_2()) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+    }
+    if (value1.case_5_funWithContract_3() != null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     }
 }
@@ -107,12 +116,21 @@ fun <T : Number> T.case_6_funWithContract_2(): Boolean {
     }
     return this is Int
 }
+fun <T : Number> T.case_6_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_6_funWithContract_3 is Int)
+    }
+    return this is Int
+}
 fun case_6(value1: Number) {
     when {
         value1.case_6_funWithContract_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     }
     when {
         !value1.case_6_funWithContract_2() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
+    }
+    when {
+        value1.case_6_funWithContract_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     }
 }
 
@@ -128,11 +146,20 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_funWithContract_2(): Boolean 
     }
     return this == null
 }
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_7_funWithContract_3 == null)
+    }
+    return this == null
+}
 fun case_7(value1: String?, value2: String?) {
     if (value1.case_7_funWithContract_1()) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     }
     if (value2.case_7_funWithContract_2()) {
+        println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+    }
+    if (!(value2.case_7_funWithContract_3() == null)) {
         println(<!DEBUG_INFO_CONSTANT!>value2<!>)
     }
 }
@@ -149,11 +176,20 @@ fun <T : String?> T.case_8_funWithContract_2(): Boolean {
     }
     return this == null
 }
+fun <T : String?> T.case_8_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_8_funWithContract_3 == null)
+    }
+    return this == null
+}
 fun case_8(value1: String?, value2: String?) {
     when {
         value1.case_8_funWithContract_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     }
     when {
         value2.case_8_funWithContract_2() -> println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+    }
+    when {
+        !(value2.case_8_funWithContract_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>)
     }
 }

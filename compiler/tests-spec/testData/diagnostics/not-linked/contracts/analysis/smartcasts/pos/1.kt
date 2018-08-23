@@ -68,6 +68,12 @@ fun case_8(value: Any?) {
     if (!funWithReturnsFalseAndInvertCondition(value !is String)) {
         println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
     }
+    if (funWithReturnsNotNull(value is String) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
+    if (!(funWithReturnsNotNull(value is String) == null)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
 }
 
 // CASE DESCRIPTION: string smartcast using return effect with type checking condition (in function parameter)
@@ -84,6 +90,15 @@ fun case_9(value: String?) {
     if (!funWithReturnsFalseAndInvertCondition(value == null)) {
         println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
     }
+    if (funWithReturnsNotNull(value != null) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
+    if (!(funWithReturnsNotNull(value != null) == null)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
+    if (!(funWithReturnsNotNullAndInvertCondition(value == null) == null)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
 }
 
 // CASE DESCRIPTION: string smartcast using return effect with type checking condition (in implies parameter)
@@ -92,6 +107,12 @@ fun case_10(value: Any?) {
         println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
     }
     if (!funWithReturnsFalseAndTypeCheck(value)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
+    if (funWithReturnsNotNullAndTypeCheck(value) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+    }
+    if (!(funWithReturnsNotNullAndTypeCheck(value) == null)) {
         println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
     }
 }
@@ -110,10 +131,16 @@ fun case_11(value: Number?) {
     if (!funWithReturnsFalseAndNotNullCheck(value)) {
         println(<!DEBUG_INFO_SMARTCAST!>value<!>.toByte())
     }
-    if (funWithReturnsFalseAndNotNullCheck(value)) {
-        println(value)
-    }
     if (!funWithReturnsFalseAndNullCheck(value)) {
+        println(<!DEBUG_INFO_CONSTANT!>value<!>)
+    }
+    if (!(funWithReturnsNotNullAndNotNullCheck(value) == null)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.toByte())
+    }
+    if (funWithReturnsNotNullAndNotNullCheck(value) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value<!>.toByte())
+    }
+    if (funWithReturnsNotNullAndNullCheck(value) != null) {
         println(<!DEBUG_INFO_CONSTANT!>value<!>)
     }
 }

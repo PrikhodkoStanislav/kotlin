@@ -47,6 +47,9 @@ fun case_4(value: Any?) {
     if (funWithReturnsFalseAndInvertCondition(value is String)) {
         println(value.<!UNRESOLVED_REFERENCE!>length<!>)
     }
+    if (!(funWithReturnsNotNullAndInvertCondition(value !is String) != null)) {
+        println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
 }
 
 // CASE DESCRIPTION: contract function with invert condition in implies
@@ -87,6 +90,12 @@ fun case_8(value: Number?) {
     if (funWithReturnsFalseAndNullCheck(value)) {
         println(value<!UNSAFE_CALL!>.<!>toByte())
     }
+    if (funWithReturnsFalseAndNotNullCheck(value)) {
+        println(value)
+    }
+    if (!(funWithReturnsNotNullAndNullCheck(value) != null)) {
+        println(value)
+    }
 }
 
 // CASE DESCRIPTION: contract function with invert condition in implies
@@ -119,6 +128,10 @@ fun case_11(value1: Any?, value2: Any?) {
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
+    if (funWithReturnsNotNull(value1 !is String || value2 !is Number) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
 }
 
 // CASE DESCRIPTION: contract function with invert condition in implies
@@ -133,6 +146,18 @@ fun case_12(value1: Any?, value2: Any?) {
     }
     if (funWithReturnsFalseAndInvertCondition(value1 is String && value2 == null)) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 is Number) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 == null) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNull(value1 is Float? && value1 != null && value2 != null) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
@@ -153,6 +178,11 @@ class case_13_class {
             println(value2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
+        if (funWithReturnsNotNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) == null) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
     }
 }
 
@@ -169,12 +199,22 @@ fun case_14_funWithContract_2(value1: Any?, value2: Any?): Boolean {
     }
     return value1 is String && value2 is Number
 }
+fun case_14_funWithContract_3(value1: Any?, value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 !is String || value2 !is Number)
+    }
+    return value1 is String && value2 is Number
+}
 fun case_14(value1: Any?, value2: Any?) {
     if (!case_14_funWithContract_1(value1, value2)) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
     if (case_14_funWithContract_2(value1, value2)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (!(case_14_funWithContract_3(value1, value2) != null)) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
@@ -193,12 +233,22 @@ fun case_15_funWithContract_2(value1: Any?, value2: Any?): Boolean {
     }
     return value1 is String && value2 == null
 }
+fun case_15_funWithContract_3(value1: Any?, value2: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 !is String || value2 != null)
+    }
+    return value1 is String && value2 == null
+}
 fun case_15(value1: Any?, value2: Any?) {
     if (!case_15_funWithContract_1(value1, value2)) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
     if (case_15_funWithContract_2(value1, value2)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (case_15_funWithContract_3(value1, value2) == null) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
@@ -216,6 +266,12 @@ fun case_16_funWithContract_2(value1: Any?, value2: Any?, value3: Any?, value4: 
     }
     return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
 }
+fun case_16_funWithContract_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null)
+    }
+    return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
+}
 class case_16_class {
     val prop_1: Int? = 10
     fun case_16(value1: Any?, value2: Number?) {
@@ -230,6 +286,13 @@ class case_16_class {
             println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
             println(value2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+            println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+        if (case_16_funWithContract_3(value1, value2, o.prop_1, this.prop_1) == null) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+            println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
     }
 }
@@ -246,11 +309,20 @@ fun <T> T.case_17_funWithContract_2(): Boolean {
     }
     return this is String
 }
+fun <T> T.case_17_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_17_funWithContract_3 is String)
+    }
+    return this is String
+}
 fun case_17(value1: Any?) {
     if (!value1.case_17_funWithContract_1()) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
     }
     if (value1.case_17_funWithContract_2()) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
+    if (value1.case_17_funWithContract_3() == null) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
     }
 }
@@ -264,6 +336,12 @@ fun <T : Number> T.case_18_funWithContract_1(): Boolean {
 fun <T : Number> T.case_18_funWithContract_2(): Boolean {
     contract {
         returns(false) implies (this@case_18_funWithContract_2 is Int)
+    }
+    return this is Int
+}
+fun <T : Number> T.case_18_funWithContract_3(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_18_funWithContract_3 is Int)
     }
     return this is Int
 }
@@ -300,15 +378,15 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_19_funWithContract_4(): Boolean
     }
     return this == null
 }
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_19_funWithContract_5(): Boolean {
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_19_funWithContract_5(): Boolean? {
     contract {
-        returns(false) implies (this@case_19_funWithContract_5 != null)
+        returnsNotNull() implies (this@case_19_funWithContract_5 != null)
     }
     return this != null
 }
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_19_funWithContract_6(): Boolean {
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_19_funWithContract_6(): Boolean? {
     contract {
-        returns(false) implies (this@case_19_funWithContract_6 == null)
+        returnsNotNull() implies (this@case_19_funWithContract_6 == null)
     }
     return this == null
 }
@@ -321,15 +399,23 @@ fun case_19(value1: String?, value2: String?, value3: String?, value4: String?, 
     }
     if (!value3.case_19_funWithContract_3()) {
         println(value3)
+    } else {
+        println(value6<!UNSAFE_CALL!>.<!>length)
     }
     if (!value4.case_19_funWithContract_4()) {
         println(value4<!UNSAFE_CALL!>.<!>length)
+    } else {
+        println(value4)
     }
-    if (value5.case_19_funWithContract_5()) {
+    if (value5.case_19_funWithContract_5() == null) {
         println(value5)
+    } else {
+        println(value5<!UNSAFE_CALL!>.<!>length)
     }
-    if (value6.case_19_funWithContract_6()) {
+    if (value6.case_19_funWithContract_6() == null) {
         println(value6<!UNSAFE_CALL!>.<!>length)
+    } else {
+        println(value6)
     }
 }
 
@@ -357,17 +443,17 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_20_funWithContract_4(): Boolean
     }
     return this != null
 }
-fun <T : String?> T.case_20_funWithContract_5(): Boolean {
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_20_funWithContract_5(): Boolean? {
     contract {
-        returns(false) implies (this@case_20_funWithContract_5 != null)
-    }
-    return this != null
-}
-fun <T : String?> T.case_20_funWithContract_6(): Boolean {
-    contract {
-        returns(false) implies (this@case_20_funWithContract_6 == null)
+        returnsNotNull() implies (this@case_20_funWithContract_5 != null)
     }
     return this == null
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_20_funWithContract_6(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_20_funWithContract_6 == null)
+    }
+    return this != null
 }
 fun case_20(value1: String?, value2: String?, value3: String?, value4: String?, value5: String?, value6: String?) {
     when {
@@ -378,63 +464,104 @@ fun case_20(value1: String?, value2: String?, value3: String?, value4: String?, 
     }
     when {
         !value3.case_20_funWithContract_3() -> println(value3<!UNSAFE_CALL!>.<!>length)
+        value3.case_20_funWithContract_3() -> println(value3)
     }
     when {
         !value4.case_20_funWithContract_4() -> println(value4)
+        value4.case_20_funWithContract_4() -> println(value4<!UNSAFE_CALL!>.<!>length)
     }
     when {
-        !value5.case_20_funWithContract_5() -> println(value5<!UNSAFE_CALL!>.<!>length)
+        value5.case_20_funWithContract_5() == null ->  println(value5<!UNSAFE_CALL!>.<!>length)
+        value5.case_20_funWithContract_5() != null ->  println(value5)
     }
     when {
-        !value6.case_20_funWithContract_6() -> println(value6)
+        value6.case_20_funWithContract_6() == null -> println(value6)
+        value6.case_20_funWithContract_6() != null -> println(value6<!UNSAFE_CALL!>.<!>length)
     }
 }
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_21_funWithContract(): Boolean {
+<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_21_funWithContract_1(): Boolean {
     contract {
-        returns(false) implies (this@case_21_funWithContract == null || this@case_21_funWithContract !is String)
+        returns(false) implies (this@case_21_funWithContract_1 == null || this@case_21_funWithContract_1 !is String)
     }
     return this != null && this is String
 }
-fun case_21(value1: Any?) {
+<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_21_funWithContract_2(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_21_funWithContract_2 == null || this@case_21_funWithContract_2 !is String)
+    }
+    return this != null && this is String
+}
+fun case_21(value1: Any?, value2: Any?) {
     when {
-        value1.case_21_funWithContract() -> println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        value1.case_21_funWithContract_1() -> println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
+    when {
+        value2.case_21_funWithContract_2() == null -> println(value2.<!UNRESOLVED_REFERENCE!>length<!>)
     }
 }
 
-fun <T : Number?> T.case_22_funWithContract(): Boolean {
+fun <T : Number?> T.case_22_funWithContract_1(): Boolean {
     contract {
-        returns(false) implies (this@case_22_funWithContract !is Int || <!SENSELESS_COMPARISON!>this@case_22_funWithContract == null<!>)
+        returns(false) implies (this@case_22_funWithContract_1 !is Int || <!SENSELESS_COMPARISON!>this@case_22_funWithContract_1 == null<!>)
     }
     return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
-fun case_5(value1: Number?) {
-    if (value1.case_22_funWithContract())
+fun <T : Number?> T.case_22_funWithContract_2(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_22_funWithContract_2 !is Int || <!SENSELESS_COMPARISON!>this@case_22_funWithContract_2 == null<!>)
+    }
+    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
+fun case_5(value1: Number?, value2: Number?) {
+    if (value1.case_22_funWithContract_1())
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value2.case_22_funWithContract_2() == null)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
-inline fun <reified T : Any?> T?.case_23_funWithContract(): Boolean {
+inline fun <reified T : Any?> T?.case_23_funWithContract_1(): Boolean {
     contract {
-        returns(false) implies (this@case_23_funWithContract !is Number || this@case_23_funWithContract !is Int || <!SENSELESS_COMPARISON!>this@case_23_funWithContract == null<!>)
+        returns(false) implies (this@case_23_funWithContract_1 !is Number || this@case_23_funWithContract_1 !is Int || <!SENSELESS_COMPARISON!>this@case_23_funWithContract_1 == null<!>)
     }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
-fun case_23(value1: Any?) {
-    if (value1.case_23_funWithContract())
+inline fun <reified T : Any?> T?.case_23_funWithContract_2(): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_23_funWithContract_2 !is Number || this@case_23_funWithContract_2 !is Int || <!SENSELESS_COMPARISON!>this@case_23_funWithContract_2 == null<!>)
+    }
+    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
+fun case_23(value1: Any?, value2: Any?) {
+    if (value1.case_23_funWithContract_1())
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value2.case_23_funWithContract_2() != null)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
-fun <T> T?.case_24_funWithContract(value: Int?): Boolean {
+fun <T> T?.case_24_funWithContract_1(value: Int?): Boolean {
     contract {
-        returns(false) implies (this@case_24_funWithContract == null || this@case_24_funWithContract !is String || value == null)
+        returns(false) implies (this@case_24_funWithContract_1 == null || this@case_24_funWithContract_1 !is String || value == null)
     }
     return this != null && this is String && value != null
 }
-fun case_24(value1: Any?, value2: Int?) {
+fun <T> T?.case_24_funWithContract_2(value: Int?): Boolean? {
+    contract {
+        returnsNotNull() implies (this@case_24_funWithContract_2 == null || this@case_24_funWithContract_2 !is String || value == null)
+    }
+    return this != null && this is String && value != null
+}
+fun case_24(value1: Any?, value2: Int?, value3: Any?, value4: Int?) {
     when {
-        value1.case_24_funWithContract(value2) -> {
+        value1.case_24_funWithContract_1(value2) -> {
             println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
             println(value2<!UNSAFE_CALL!>.<!>inv())
+        }
+    }
+    when {
+        value3.case_24_funWithContract_2(value4) == null -> {
+            println(value3.<!UNRESOLVED_REFERENCE!>length<!>)
+            println(value4<!UNSAFE_CALL!>.<!>inv())
         }
     }
 }

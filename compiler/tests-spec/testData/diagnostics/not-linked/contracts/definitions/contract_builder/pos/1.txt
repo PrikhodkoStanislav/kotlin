@@ -7,3 +7,10 @@ public inline fun case_2(/*0*/ block: () -> kotlin.Unit): kotlin.Unit
 public inline fun case_3(/*0*/ value: kotlin.Int?, /*1*/ block: () -> kotlin.Unit): kotlin.Boolean
     CallsInPlace(block, EXACTLY_ONCE)
     Returns(TRUE) -> value != null
+
+public inline fun </*0*/ T> T?.case_4(/*0*/ value1: kotlin.Int?, /*1*/ value2: kotlin.Boolean, /*2*/ value3: kotlin.Int?, /*3*/ block: () -> kotlin.Unit): kotlin.Boolean?
+    CallsInPlace(block, EXACTLY_ONCE)
+    Returns(TRUE) -> value1 != null
+    Returns(FALSE) -> !value2
+    Returns(NOT_NULL) -> <this> != null && value3 != null
+

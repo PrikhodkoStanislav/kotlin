@@ -44,3 +44,19 @@ inline fun case_3(value: Int?, block: () -> Unit): Boolean {
 
     return value != null
 }
+
+/*
+ CASE DESCRIPTION: simple contract with four effects
+ */
+inline fun <T> T?.case_4(value1: Int?, value2: Boolean, value3: Int?, block: () -> Unit): Boolean? {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        returns(true) implies (value1 != null)
+        returns(false) implies (!value2)
+        returnsNotNull() implies (this@case_4 != null && value3 != null)
+    }
+
+    block()
+
+    return value1 != null
+}

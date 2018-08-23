@@ -161,3 +161,45 @@ fun funWithReturnsFalseAndNullCheck(value: Number?): Boolean {
     }
     return value == null
 }
+
+fun funWithReturnsNotNull(cond: Boolean): Boolean? {
+    contract {
+        returnsNotNull() implies (cond)
+    }
+    return cond
+}
+
+fun funWithReturnsNotNullAndInvertCondition(cond: Boolean): Boolean? {
+    contract {
+        returnsNotNull() implies (!cond)
+    }
+    return !cond
+}
+
+fun funWithReturnsNotNullAndTypeCheck(value: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value is String)
+    }
+    return value is String
+}
+
+fun funWithReturnsNotNullAndInvertTypeCheck(value: Any?): Boolean? {
+    contract {
+        returnsNotNull() implies (value !is String)
+    }
+    return value !is String
+}
+
+fun funWithReturnsNotNullAndNotNullCheck(value: Number?): Boolean? {
+    contract {
+        returnsNotNull() implies (value != null)
+    }
+    return value != null
+}
+
+fun funWithReturnsNotNullAndNullCheck(value: Number?): Boolean? {
+    contract {
+        returnsNotNull() implies (value == null)
+    }
+    return value == null
+}
