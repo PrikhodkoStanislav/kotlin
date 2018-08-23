@@ -10,7 +10,7 @@
  DESCRIPTION: Simple val/var wrong assignments or usages (uninitialized variable) based on 'call in place' effect with wrong invocation kind
  */
 
-// CASE DESCRIPTION: assignment inside lambda of contract function with 'at least once' call in place effect
+// CASE KEYWORDS: atLeastOnce, valReassignment, smartValInitialization
 fun case_1() {
     val value: Int
 
@@ -19,7 +19,7 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: wrong usage and assignment val inside lambda of contract function with 'at most once' call in place effect
+// CASE KEYWORDS: atMostOnce, callsInPlace, valReassignment, smartValInitialization
 fun case_2() {
     val value: Int
 

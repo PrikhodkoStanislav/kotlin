@@ -39,7 +39,10 @@ inline fun <T> T?.case_2(value1: Int?, value2: Any?, block: () -> Unit): Boolean
 
     block()
 
-    return value1 != null
+    if (value1 == null) return null
+    if (value2 is Boolean? || this != null) return false
+
+    return true
 }
 
 // FILE: usages.kt
