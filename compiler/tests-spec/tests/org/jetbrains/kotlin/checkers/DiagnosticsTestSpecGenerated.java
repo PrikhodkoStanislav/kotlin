@@ -287,6 +287,26 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                             runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/1.kt");
                         }
 
+                        @TestMetadata("10.kt")
+                        public void test10() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/10.kt");
+                        }
+
+                        @TestMetadata("11.kt")
+                        public void test11() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/11.kt");
+                        }
+
+                        @TestMetadata("12.kt")
+                        public void test12() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/12.kt");
+                        }
+
+                        @TestMetadata("13.kt")
+                        public void test13() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/13.kt");
+                        }
+
                         @TestMetadata("2.kt")
                         public void test2() throws Exception {
                             runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/2.kt");
@@ -317,6 +337,16 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                             runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/7.kt");
                         }
 
+                        @TestMetadata("8.kt")
+                        public void test8() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/8.kt");
+                        }
+
+                        @TestMetadata("9.kt")
+                        public void test9() throws Exception {
+                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg/9.kt");
+                        }
+
                         public void testAllFilesPresentInNeg() throws Exception {
                             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
                         }
@@ -333,11 +363,6 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                         @TestMetadata("1.kt")
                         public void test1() throws Exception {
                             runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/pos/1.kt");
-                        }
-
-                        @TestMetadata("10.kt")
-                        public void test10() throws Exception {
-                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/pos/10.kt");
                         }
 
                         @TestMetadata("2.kt")
@@ -373,11 +398,6 @@ public class DiagnosticsTestSpecGenerated extends AbstractDiagnosticsTestSpec {
                         @TestMetadata("8.kt")
                         public void test8() throws Exception {
                             runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/pos/8.kt");
-                        }
-
-                        @TestMetadata("9.kt")
-                        public void test9() throws Exception {
-                            runTest("compiler/tests-spec/testData/diagnostics/not-linked/contracts/analysis/smartcasts/pos/9.kt");
                         }
 
                         public void testAllFilesPresentInPos() throws Exception {

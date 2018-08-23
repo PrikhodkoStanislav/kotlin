@@ -1,4 +1,4 @@
-// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !WITH_CONTRACT_FUNCTIONS
 
 /*
@@ -7,37 +7,128 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 2
- DESCRIPTION: Check the lack of smartcasts after non-null assertions or assignment in lambdas with contract and 'at most once' or 'unknown' CallsInPlace effects.
+ DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as paremeter of contract function.
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'at most once' CallsInPlace effect.
-fun case_1(arg: Int?) {
-    funWithAtMostOnceCallsInPlace { arg!! }
-
-    arg<!UNSAFE_CALL!>.<!>inc()
+fun case_1(value1: Any?, value2: Any?) {
+    funWithReturns(value1 !is String || value2 !is Number)
+    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'unknown' CallsInPlace effect.
-fun case_2(arg: Int?) {
-    funWithUnknownCallsInPlace { arg!! }
-
-    arg<!UNSAFE_CALL!>.<!>inc()
+fun case_2(value1: Any?, value2: Any?) {
+    funWithReturnsAndInvertCondition(value1 is String && value2 is Number)
+    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-// CASE DESCRIPTION: lambdas with non-null assignment and 'at most once' CallsInPlace effect.
-fun case_3() {
-    val value: Boolean?
-
-    funWithAtMostOnceCallsInPlace { value = false }
-
-    <!UNINITIALIZED_VARIABLE!>value<!><!UNSAFE_CALL!>.<!>not()
+fun case_3(value1: Any?, value2: Any?) {
+    funWithReturnsAndInvertCondition(value1 is String && value2 == null)
+    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-// CASE DESCRIPTION: lambdas with non-null assignment and 'unknown' CallsInPlace effect.
-fun case_4() {
-    val value: Boolean?
+fun case_4(value1: Any?, value2: Number?) {
+    funWithReturns(value1 !is Float? || value1 == null || value2 == null)
+    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+    println(value2?.toByte())
+}
 
-    funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value<!> = true }
+class case_5_class {
+    val prop_1: Int? = 10
 
-    <!UNINITIALIZED_VARIABLE!>value<!><!UNSAFE_CALL!>.<!>not()
+    fun case_5(value1: Any?, value2: Number?) {
+        val o = case_5_class()
+        funWithReturns(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null)
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value2?.toByte())
+        println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+    }
+}
+
+fun case_6(value1: Any?, value2: Any) {
+    if (funWithReturnsTrue(value1 !is String || value2 !is Number)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (!funWithReturnsFalse(value1 !is String || value2 !is Number)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNull(value1 !is String || value2 !is Number) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+}
+
+fun case_7(value1: Any?, value2: Any?) {
+    if (funWithReturnsTrueAndInvertCondition(value1 is String && value2 is Number)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (!funWithReturnsFalseAndInvertCondition(value1 is String && value2 is Number)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 is Number) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+}
+
+fun case_8(value1: Any?, value2: Any?) {
+    if (funWithReturnsTrueAndInvertCondition(value1 is String && value2 == null)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (!funWithReturnsFalseAndInvertCondition(value1 is String && value2 == null)) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 == null) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+}
+
+fun case_9(value1: Any?, value2: Number?) {
+    if (funWithReturnsTrue(value1 !is Float? || value1 == null || value2 == null)) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value2?.toByte())
+    }
+    if (!funWithReturnsFalse(value1 !is Float? || value1 == null || value2 == null)) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value2?.toByte())
+    }
+    if (funWithReturnsNotNull(value1 is Float? && value1 != null && value2 != null) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value2?.toByte())
+    }
+}
+
+/*
+ UNEXPECTED BEHAVIOUR: in the commented last line
+ ISSUES: KT-26300
+ */
+class case_10_class {
+    val prop_1: Int? = 10
+
+    fun case_10(value1: Any?, value2: Number?) {
+        val o = case_10_class()
+        if (funWithReturnsTrue(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null)) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+        if (!funWithReturnsFalse(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null)) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+        if (funWithReturnsNotNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) != null) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+    }
 }

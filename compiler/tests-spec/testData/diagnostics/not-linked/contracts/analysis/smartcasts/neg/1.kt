@@ -1,4 +1,4 @@
-// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !WITH_CONTRACT_FUNCTIONS
 
 /*
@@ -7,39 +7,79 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 1
- DESCRIPTION: Check smartcasts after non-null assertions or assignment in lambdas with contract and 'exactly once' or 'at least once' CallsInPlace effects.
- UNEXPECTED BEHAVIOUR
- ISSUES: KT-26148
+ DESCRIPTION: Smartcast using returns effect with simple type checking and not-null conditions.
  */
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'exactly once' CallsInPlace effect.
-fun case_1(arg: Int?) {
-    funWithExactlyOnceCallsInPlace { arg!! }
-
-    arg<!UNSAFE_CALL!>.<!>inc()
+fun case_1(value: Any?) {
+    funWithReturns(value is String)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
 }
 
-// CASE DESCRIPTION: lambdas with non-null assertions and 'at least once' CallsInPlace effect.
-fun case_2(arg: Int?) {
-    funWithAtLeastOnceCallsInPlace { arg!! }
-
-    arg<!UNSAFE_CALL!>.<!>inc()
+fun case_2(value: Int?) {
+    funWithReturns(value != null)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.inc())
 }
 
-// CASE DESCRIPTION: lambdas with not-null assignment and 'exactly once' CallsInPlace effect.
-fun case_3() {
-    val value: Boolean?
-
-    funWithExactlyOnceCallsInPlace { value = false }
-
-    value<!UNSAFE_CALL!>.<!>not()
+fun case_3(value: Int?) {
+    funWithReturns(value == null)
+    println(<!DEBUG_INFO_CONSTANT!>value<!>)
 }
 
-// CASE DESCRIPTION: lambdas with not-null assignment and 'at least once' CallsInPlace effect.
-fun case_4() {
-    val value: Boolean?
+fun case_4(value: Any?) {
+    funWithReturnsAndTypeCheck(value)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+}
 
-    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value<!> = true }
+fun case_5(value: String?) {
+    funWithReturnsAndNotNullCheck(value)
+    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+}
 
-    value<!UNSAFE_CALL!>.<!>not()
+fun case_6(value: String?) {
+    funWithReturnsAndNullCheck(value)
+    println(<!DEBUG_INFO_CONSTANT!>value<!>)
+}
+
+object case_7_object {
+    val prop_1: Int? = 10
+}
+fun case_7() {
+    funWithReturnsAndInvertCondition(case_7_object.prop_1 == null)
+    <!DEBUG_INFO_SMARTCAST!>case_7_object.prop_1<!>.inc()
+}
+
+fun case_8(value: Any?) {
+    if (!funWithReturnsTrue(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!funWithReturnsTrueAndInvertCondition(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalse(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalseAndInvertCondition(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsNotNull(value is String) == null) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if ((funWithReturnsNotNull(value is String) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+}
+
+fun case_9(value: String?) {
+    if (!funWithReturnsTrue(value != null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if (!funWithReturnsTrueAndInvertCondition(value == null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsFalse(value != null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsFalseAndInvertCondition(value == null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNotNull(value != null) == null) println(value<!UNSAFE_CALL!>.<!>length)
+    if ((funWithReturnsNotNull(value != null) == null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if ((funWithReturnsNotNullAndInvertCondition(value == null) == null)) println(value<!UNSAFE_CALL!>.<!>length)
+}
+
+fun case_10(value: Any?) {
+    if (!funWithReturnsTrueAndTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!funWithReturnsFalseAndTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNotNullAndTypeCheck(value) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!(funWithReturnsNotNullAndTypeCheck(value) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+}
+
+fun case_11(value: Number?) {
+    if (!funWithReturnsTrueAndNotNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (!funWithReturnsTrueAndNullCheck(value)) println(value)
+    if (funWithReturnsFalseAndNotNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (funWithReturnsFalseAndNullCheck(value)) println(value)
+    if ((funWithReturnsNotNullAndNotNullCheck(value) == null)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (!!!(funWithReturnsNotNullAndNotNullCheck(value) != null)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (!!(funWithReturnsNotNullAndNullCheck(value) == null)) println(value)
 }
