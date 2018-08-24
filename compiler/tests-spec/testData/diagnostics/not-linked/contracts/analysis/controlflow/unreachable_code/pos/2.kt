@@ -10,7 +10,14 @@
  DESCRIPTION: Check for lack of unreachable code report when 'at most once' and 'unknown' calls in place effect used.
  */
 
-// CASE DESCRIPTION: lack of unreachable code with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce
+    return
+    throw
+    unrechableCode
+ */
 fun case_1() {
     funWithAtMostOnceCallsInPlace {
         throw Exception()
@@ -21,7 +28,14 @@ fun case_1() {
     println("1")
 }
 
-// CASE DESCRIPTION: lack of unreachable code with 'at least once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:unknown
+    return
+    throw
+    unrechableCode
+ */
 fun case_2() {
     funWithUnknownCallsInPlace {
         throw Exception()
@@ -32,7 +46,14 @@ fun case_2() {
     println("1")
 }
 
-// CASE DESCRIPTION: lack of unreachable code with 'exactly once' calls in place effect and local return
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    return:local,nonlocal
+    unrechableCode
+    fun:nested
+ */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         return@funWithExactlyOnceCallsInPlace
@@ -55,7 +76,14 @@ fun case_3() {
     println("1")
 }
 
-// CASE DESCRIPTION: lack of unreachable code with 'at least once' calls in place effect and local return
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    return:local,nonlocal
+    unrechableCode
+    fun:nested
+ */
 fun case_4() {
     funWithAtLeastOnceCallsInPlace {
         return@funWithAtLeastOnceCallsInPlace

@@ -11,7 +11,15 @@
  DESCRIPTION: Wrong assignments or uninitialized usages in compelx control flow inside/outside lambda of contract function with calls in place effect
  */
 
-// CASE DESCRIPTION: Uninitialized usages after assignments in non-exhaustive when.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+    when:nonExhaustive
+ */
 fun case_1(value1: _EnumClass?) {
     val value2: Int
 
@@ -25,7 +33,16 @@ fun case_1(value1: _EnumClass?) {
     <!UNINITIALIZED_VARIABLE!>value2<!>.inc()
 }
 
-// CASE DESCRIPTION: Uninitialized usages after assignment in 'at most once' contract function, which is in one of the condition branches.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce
+        nested
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+    if:else,elseIf
+ */
 fun case_2(value1: Any?) {
     val value2: Int
 
@@ -42,7 +59,18 @@ fun case_2(value1: Any?) {
     value2.dec()
 }
 
-// CASE DESCRIPTION: Uninitialized usages and wrong initialization of class field (if expression with wrong contract function in branches).
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeaseOnce,unknown
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+    if:else,elseIf
+    class:
+        fields:init,uninitialized
+        init
+ */
 class case_3(value1: Any?) {
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value2: Int<!>
 
@@ -61,7 +89,16 @@ class case_3(value1: Any?) {
     }
 }
 
-// CASE DESCRIPTION: Uninitialized usages after exhaustive when, but with unsutable effect of contract function in one of the branches.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,unknown,atMostOnce
+        nested
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+    when:exhaustive
+ */
 fun case_4(value1: _EnumClassSingle?) {
     var value2: Int
 
@@ -80,7 +117,15 @@ fun case_4(value1: _EnumClassSingle?) {
     value2.minus(5)
 }
 
-// CASE DESCRIPTION: Uninitialized usages after try expression with unsutable effect of contract function in catch block.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,atLeastOnce
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+    try
+ */
 fun case_5() {
     var value2: Int
 

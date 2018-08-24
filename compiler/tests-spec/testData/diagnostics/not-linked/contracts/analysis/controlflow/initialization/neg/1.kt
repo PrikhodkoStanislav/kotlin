@@ -10,7 +10,14 @@
  DESCRIPTION: Simple val/var wrong assignments or usages (uninitialized variable) based on 'call in place' effect with wrong invocation kind
  */
 
-// CASE KEYWORDS: atLeastOnce, valReassignment, smartValInitialization
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    reassignment:val
+    smartInit:val
+    smartcast:inited
+ */
 fun case_1() {
     val value: Int
 
@@ -19,7 +26,14 @@ fun case_1() {
     value.inc()
 }
 
-// CASE KEYWORDS: atMostOnce, callsInPlace, valReassignment, smartValInitialization
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+ */
 fun case_2() {
     val value: Int
 
@@ -28,7 +42,15 @@ fun case_2() {
     <!UNINITIALIZED_VARIABLE!>value<!>.inc()
 }
 
-// CASE DESCRIPTION: wrong usage and assignment val inside lambda of contract function with 'unknown' call in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:unknown
+    reassignment:val
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+ */
 fun case_3() {
     val value: Int
 
@@ -37,7 +59,14 @@ fun case_3() {
     <!UNINITIALIZED_VARIABLE!>value<!>.inc()
 }
 
-// CASE DESCRIPTION: wrong usage and assignment var inside lambda of contract function with 'at most once' and 'unknown' call in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,unknown
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+ */
 fun case_4() {
     var value1: Int
     var value2: Int
@@ -49,7 +78,17 @@ fun case_4() {
     <!UNINITIALIZED_VARIABLE!>value2<!>.div(10)
 }
 
-// CASE DESCRIPTION: wrong assignments of class fields
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,unknown,atLeastOnce
+    reassignment:val
+    uninitialized:val,var
+    smartInit:val,var
+    class:
+        fields:init,uninitialized
+        init
+ */
 class case_5 {
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value1: Int<!>
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value2: Int<!>

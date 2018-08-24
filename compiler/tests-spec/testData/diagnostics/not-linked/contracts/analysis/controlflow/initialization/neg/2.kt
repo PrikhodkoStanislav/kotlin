@@ -10,7 +10,16 @@
  DESCRIPTION: Nested val/var wrong assignments or uninitialized usages based on 'call in place' effect with wrong invocation kind
  */
 
-// CASE DESCRIPTION: reassignment and uninitialized usage inside nested calls in place contract functions: 'at least once', 'at most once' (reassignment) / 'exactly once' (uninitialized usage)
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,exactlyOnce,atLeastOnce
+        nested
+    reassignment:val
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+ */
 fun case_1() {
     val value: Int
 
@@ -30,7 +39,15 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: uninitialized usage (init in 'at most onces' calls in place contract function) inside nested calls in place contract functions: 'at most once', 'at least once'
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,unknown,atLeastOnce
+        nested
+    uninitialized:val
+    smartInit:val
+    smartcast:inited
+ */
 fun case_2() {
     val value: Int
 
@@ -50,7 +67,15 @@ fun case_2() {
     value.inc()
 }
 
-// CASE DESCRIPTION: uninitialized usage (init in 'at most once' calls in place contract function) inside nested calls in place contract functions: 'at least once', 'exactly once'
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atMostOnce,atLeastOnce
+        nested
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+ */
 fun case_3() {
     var value: Int
 
@@ -70,7 +95,15 @@ fun case_3() {
     value.inc()
 }
 
-// CASE DESCRIPTION: uninitialized usage (init in 'unknown' calls in place contract function) inside nested calls in place contract functions: 'at least once', 'at least once'
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:unknown,exactlyOnce,atLeastOnce
+        nested
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+ */
 fun case_4() {
     var value: Int
 

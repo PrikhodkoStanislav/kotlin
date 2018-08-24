@@ -11,7 +11,13 @@
  DESCRIPTION: Unreachable code detection based on the callsInPlace effect
  */
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    throw
+    unrechableCode
+ */
 fun case_1() {
     funWithExactlyOnceCallsInPlace {
         throw Exception()
@@ -19,7 +25,13 @@ fun case_1() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'at least once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    throw
+    unrechableCode
+ */
 fun case_2() {
     funWithAtLeastOnceCallsInPlace {
         throw Exception()
@@ -27,7 +39,13 @@ fun case_2() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-// CASE DESCRIPTION: unreachable code with 'exactly once' calls in place effect and non-local return
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    return:nonlocal
+    unrechableCode
+ */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         return
@@ -35,7 +53,13 @@ fun case_3() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-// CASE DESCRIPTION: unreachable code with 'at least once' calls in place effect and non-local return
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    return:nonlocal
+    unrechableCode
+ */
 fun case_4() {
     funWithAtLeastOnceCallsInPlace {
         return
@@ -43,7 +67,15 @@ fun case_4() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-// CASE DESCRIPTION: unreachable code with 'at least once' calls in place effect and explicit labeled return (to nested fun)
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    return:labeled,nonlocal
+    unrechableCode
+    fun:nested
+    lambda
+ */
 fun case_5(args: Array<String>) {
     fun case_5_nestedFun_1() {
         funWithAtLeastOnceCallsInPlace {
@@ -70,7 +102,15 @@ fun case_5(args: Array<String>) {
     }
 }
 
-// CASE DESCRIPTION: unreachable code with 'at least once' calls in place effect and explicit labeled return (to lambda)
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    return:labeled,nonlocal
+    unrechableCode
+    fun:nested
+    lambda
+ */
 fun case_6(args: Array<String>) {
     args.forEach {
         funWithExactlyOnceCallsInPlace {

@@ -10,7 +10,14 @@
  DESCRIPTION: Unreachable code detection based on the nested contract functions with callsInPlace effect
  */
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+        nested
+    throw
+    unrechableCode
+ */
 fun case_1() {
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {
@@ -24,7 +31,15 @@ fun case_1() {
     <!UNREACHABLE_CODE!>println("3")<!>
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'at least once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+        nested
+    unrechableCode
+    return:nonlocal
+    lambda:labeled
+ */
 fun case_2() {
     funWithAtLeastOnceCallsInPlace {
         funWithAtLeastOnceCallsInPlace label_1@ {
@@ -41,7 +56,14 @@ fun case_2() {
     <!UNREACHABLE_CODE!>println("3")<!>
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+        nested
+    unrechableCode
+    return:local,labelClash
+ */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {

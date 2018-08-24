@@ -10,7 +10,14 @@
  DESCRIPTION: Unreachable code detection based on the local functions or labdas combined with contract functions with callsInPlace effect
  */
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    while
+        break:labeled
+    unrechableCode
+ */
 fun case_1(cond: Boolean) {
     while (cond) {
         funWithExactlyOnceCallsInPlace {
@@ -27,7 +34,14 @@ fun case_1(cond: Boolean) {
     }
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    for
+        continue:labeled
+    unrechableCode
+ */
 fun case_2(cond: Boolean) {
     for (i in 0..10) {
         funWithExactlyOnceCallsInPlace {

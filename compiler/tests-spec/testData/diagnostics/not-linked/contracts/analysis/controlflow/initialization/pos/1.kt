@@ -10,7 +10,13 @@
  DESCRIPTION: Simple val/var assignments in contract functions with 'call in place' effect and subsequent usages
  */
 
-// CASE DESCRIPTION: val initialization and subsequent usage
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    smartInit:val
+    smartcast:inited
+ */
 fun case_1() {
     val value: Int
 
@@ -19,7 +25,13 @@ fun case_1() {
     value.inc()
 }
 
-// CASE DESCRIPTION: var initialization and subsequent usage
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce
+    smartInit:var
+    smartcast:inited
+ */
 fun case_2() {
     var value1: Int
     var value2: Int
@@ -31,7 +43,15 @@ fun case_2() {
     value2.div(10)
 }
 
-// CASE DESCRIPTION: class val/var fields initialization
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce
+    smartInit:var,val
+    class:
+        fields:init
+        init
+ */
 class case_3 {
     val value1: Int
     var value2: Int

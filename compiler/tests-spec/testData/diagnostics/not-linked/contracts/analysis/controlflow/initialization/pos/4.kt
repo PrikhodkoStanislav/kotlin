@@ -10,7 +10,12 @@
  DESCRIPTION: Calls in place contract functions with name shadowing
  */
 
-// CASE DESCRIPTION: usage val with an existing name (name shadowing) after initialization in calls in place contract functions with 'exactly once' invocation kind
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+        nameShadowing:val
+ */
 fun case_1() {
     val <!UNUSED_VARIABLE!>value<!>: Int
 
@@ -20,7 +25,15 @@ fun case_1() {
     }
 }
 
-// CASE DESCRIPTION: usage val with an existing name (name shadowing) after initialization (with two nesting levels) in calls in place contract functions with 'exactly once' invocation kind
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce
+        nameShadowing:val
+        nested
+    smartInit:val
+    smartcast:inited
+ */
 fun case_2() {
     val <!UNUSED_VARIABLE!>value<!>: Int
 
@@ -36,7 +49,15 @@ fun case_2() {
     }
 }
 
-// CASE DESCRIPTION: usage top-level val and val with same name (name shadowing) after initialization in correct contract functions ('at least once' + 'exactly once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce,atMostOnce
+        nameShadowing:val
+        nested
+    smartInit:val
+    smartcast:inited
+ */
 fun case_3() {
     val value: Int
 
@@ -56,7 +77,15 @@ fun case_3() {
     value.inc()
 }
 
-// CASE DESCRIPTION: usage top-level val and val with same name (name shadowing) after initialization in correct contract functions ('at most once' + 'exactly once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,unknown,atMostOnce
+        nameShadowing:val
+        nested
+    smartInit:val
+    smartcast:inited
+ */
 fun case_4() {
     val value: Int
 
@@ -76,7 +105,15 @@ fun case_4() {
     value.inc()
 }
 
-// CASE DESCRIPTION: usage top-level val and val with same name (name shadowing) after initialization in correct contract functions ('unknown' + 'exactly once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,unknown,atMostOnce
+        nameShadowing:val
+        nested
+    smartInit:val
+    smartcast:inited
+ */
 fun case_5() {
     val value: Int
 
@@ -95,7 +132,15 @@ fun case_5() {
     value.inc()
 }
 
-// CASE DESCRIPTION: usage top-level var and val with same name (name shadowing) after initialization in correct contract functions ('at least once' + 'at least once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce,atMostOnce
+        nameShadowing:var,val
+        nested
+    smartInit:var,val
+    smartcast:inited
+ */
 fun case_6() {
     var value: Int
 
@@ -117,7 +162,15 @@ fun case_6() {
     value.dec()
 }
 
-// CASE DESCRIPTION: usage top-level val and var with same name (name shadowing) after initialization in correct contract functions ('at least once' + 'exactly once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atLeastOnce,unknown
+        nameShadowing:val,var
+        nested
+    smartInit:var,val
+    smartcast:inited
+ */
 fun case_7() {
     val value: Int
 
@@ -139,7 +192,15 @@ fun case_7() {
     value.dec()
 }
 
-// CASE DESCRIPTION: usage top-level var and var with same name (name shadowing) after initialization in correct contract functions ('at least once' + 'at least once').
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+        nameShadowing:var
+        nested
+    smartInit:var
+    smartcast:inited
+ */
 fun case_8() {
     var value: Int
 

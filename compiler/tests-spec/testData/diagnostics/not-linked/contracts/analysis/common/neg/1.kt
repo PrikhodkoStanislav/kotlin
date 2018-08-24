@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
 
 /*
- KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
+ KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
  SECTION: Contracts
  CATEGORY: analysis, common
@@ -22,11 +22,11 @@ import kotlin.internal.contracts.*
     effectsDefinition
         2
         returns:true:implies:notNullCheck
-        callsInPlace:exactlyOnce
+        callsInPlace:atMostOnce
  */
 inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
         returns(true) implies (value1 != null)
     }
 
@@ -42,11 +42,11 @@ inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
         4
         returnsNotNull:implies:notNullCheck
         returns:false:implies:nullableBooleanTypeCheck,receiverNotNullCheck
-        callsInPlace:atLeastOnce
+        callsInPlace:atMostOnce
  */
 inline fun <T> T?.case_2(value1: Int?, value2: Any?, block: () -> Unit): Boolean? {
     contract {
-        callsInPlace(block, InvocationKind.AT_LEAST_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
         returnsNotNull() implies (value1 != null)
         returns(false) implies (value2 is Boolean?)
         returns(false) implies (this@case_2 != null)
@@ -68,18 +68,20 @@ import contracts.*
  CASE KEYWORDS:
     effectsUsage
         returns:true
-        callsInPlace:exactlyOnce
+        callsInPlace:atMostOnce
+    uninitialized:val
+    unsafeCall
     smartInit:val
     smartcast:notNull
     if:else
  */
 fun case_1(value1: Int?) {
-    val value3: Int
-    if (contracts.case_1(value1) { value3 = 10 }) {
-        <!DEBUG_INFO_SMARTCAST!>value1<!>.inv()
-        println(value3)
+    val value2: Int
+    if (contracts.case_1(value1) { value2 = 10 }) {
+        println(<!UNINITIALIZED_VARIABLE!>value2<!>)
     } else {
-        println(value3)
+        value1<!UNSAFE_CALL!>.<!>inv()
+        println(value2)
     }
 }
 
@@ -88,22 +90,24 @@ fun case_1(value1: Int?) {
     effectsUsage
         returnsNotNull
         returns:false
-        callsInPlace:atLeastOnce
+        callsInPlace:atMostOnce
         nested
     smartInit:var
     smartcast:notNull,nullableBoolean
+    uninitialized:val
+    unsafeCall
     if:else,nested
  */
 fun case_2(value1: Int?, value2: Any?) {
     var value3: Int
     if (value1.case_2(value1, value2) { value3 = 10 } != null) {
-        <!DEBUG_INFO_SMARTCAST!>value1<!>.inv()
-        println(value3)
-    } else {
         if (value1.case_2(value1, value2) { value3 = 10 } == false) {
             println(<!DEBUG_INFO_SMARTCAST!>value2<!>?.xor(true))
-            println(value3)
+            println(<!UNINITIALIZED_VARIABLE!>value3<!>)
             println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
         }
+        println(value3)
+    } else {
+        value1<!UNSAFE_CALL!>.<!>inv()
     }
 }

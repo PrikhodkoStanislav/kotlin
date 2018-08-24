@@ -11,7 +11,14 @@
  DESCRIPTION: Assignments or subsequent usages in compelx control flow inside/outside lambda of contract function with calls in place effect
  */
 
-// CASE DESCRIPTION: Val usages after assignments in exhaustive when.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    smartInit:val
+    smartcast:inited
+    when:exhaustive
+ */
 fun case_1(value1: _EnumClass?) {
     val value2: Int
 
@@ -26,7 +33,14 @@ fun case_1(value1: _EnumClass?) {
     value2.inc()
 }
 
-// CASE DESCRIPTION: Val usages after assignment in exhaustive if.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atMostOnce,exactlyOnce
+    smartInit:val
+    smartcast:inited
+    if:else,elseIf
+ */
 fun case_2(value1: Any?) {
     val value2: Int
 
@@ -43,9 +57,19 @@ fun case_2(value1: Any?) {
     }
 }
 
-// CASE DESCRIPTION: Var class field initialization in exhaustive if.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,exactlyOnce
+    smartInit:val
+    smartcast:inited
+    if:else,elseIf
+    class:
+        fields:init,uninitialized
+        init
+ */
 class case_3(value1: Any?) {
-    var value2: Int
+    val value2: Int
 
     init {
         if (value1 is String) {
@@ -62,7 +86,14 @@ class case_3(value1: Any?) {
     }
 }
 
-// CASE DESCRIPTION: Var usages after assignment in exhaustive when with contract functions in branches.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,atMostOnce,exactlyOnce
+    smartInit:var
+    smartcast:inited
+    when:exhaustive
+ */
 fun case_4(value1: _EnumClassSingle?) {
     var value2: Int
 
@@ -81,7 +112,14 @@ fun case_4(value1: _EnumClassSingle?) {
     }
 }
 
-// CASE DESCRIPTION: Var usages after assignment in try expression with contract functions in try/catch blocks.
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,exactlyOnce
+    smartInit:var
+    smartcast:inited
+    try
+ */
 fun case_5() {
     var value2: Int
 

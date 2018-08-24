@@ -10,7 +10,16 @@
  DESCRIPTION: Unreachable code detection based on the contract functions with complex control flow inside
  */
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    unrechableCode
+    return
+    throw
+    when:exhaustive
+    smartcast:notNull
+ */
 fun case_1(b: Boolean?) {
     funWithExactlyOnceCallsInPlace {
         if (b == null) {
@@ -32,7 +41,17 @@ fun case_1(b: Boolean?) {
     <!UNREACHABLE_CODE!>println(3)<!>
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'at least once' calls in place effect
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+        nested
+    unrechableCode
+    return
+    throw
+    when:exhaustive
+    if:else
+ */
 fun case_2(b: Boolean?, c: Boolean) {
     funWithAtLeastOnceCallsInPlace {
         when (b) {
