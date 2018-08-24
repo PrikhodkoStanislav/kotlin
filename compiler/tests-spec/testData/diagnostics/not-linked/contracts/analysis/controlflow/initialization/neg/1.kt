@@ -104,3 +104,63 @@ class case_5 {
         funWithUnknownCallsInPlace { value5 = 3 }
     }
 }
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    uninitialized:val
+    reassignment:val
+    smartInit:val
+    smartcast:inited
+    for
+ */
+fun case_6() {
+    val value1: Int
+
+    for (i in 0..1) {
+        funWithExactlyOnceCallsInPlace { <!VAL_REASSIGNMENT!>value1<!> = 10 }
+    }
+
+    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+    while
+ */
+fun case_7() {
+    var value1: Int
+    var i = 0
+
+    while (i < 10) {
+        funWithExactlyOnceCallsInPlace { value1 = 10 }
+        i++
+    }
+
+    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    uninitialized:var
+    smartInit:var
+    smartcast:inited
+    if
+ */
+fun case_8() {
+    var value1: Int
+
+    if (true) {
+        funWithAtLeastOnceCallsInPlace { value1 = 10 }
+    }
+
+    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+}

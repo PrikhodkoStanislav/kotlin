@@ -137,3 +137,138 @@ fun case_5() {
 
     <!UNINITIALIZED_VARIABLE!>value2<!>++
 }
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce
+    smartInit:var
+    smartcast:inited
+    try:finally
+    throw
+ */
+fun case_6() {
+    var value2: Int
+
+    try {
+        funWithAtLeastOnceCallsInPlace { value2 = 10 }
+    } catch (e: Exception) {
+        throw Exception()
+    } finally {
+        println(<!UNINITIALIZED_VARIABLE!>value2<!>.inc())
+    }
+
+    value2++
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,atMostOnce
+    smartInit:var
+    smartcast:inited
+    try
+    return
+ */
+fun case_7() {
+    var value1: Int
+
+    try {
+        funWithAtLeastOnceCallsInPlace { value1 = 10 }
+    } catch (e: Exception) {
+        try {
+            funWithAtLeastOnceCallsInPlace { value1 = 10 }
+        } catch (e: Exception) {
+            funWithAtMostOnceCallsInPlace { value1 = 10 }
+        }
+    }
+
+    println(<!UNINITIALIZED_VARIABLE!>value1<!>.inc())
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,mostOnce
+    smartInit:val
+    smartcast:inited
+ */
+fun case_8() {
+    val x: Int
+    funWithExactlyOnceCallsInPlace outer@ {
+        funWithAtMostOnceCallsInPlace {
+            funWithExactlyOnceCallsInPlace {
+                x = 42
+                return@outer
+            }
+        }
+        throw Exception()
+    }
+    println(x.inc())
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:exactlyOnce,atMostOnce,unknown
+    smartInit:val
+    smartcast:inited
+    return:nonlocal
+    throw
+ */
+fun case_9() {
+    val x: Int
+    funWithExactlyOnceCallsInPlace outer@ {
+        funWithAtMostOnceCallsInPlace {
+            funWithUnknownCallsInPlace {
+                <!VAL_REASSIGNMENT!>x<!> = 42
+            }
+            return@outer
+        }
+        throw Exception()
+    }
+    println(<!UNINITIALIZED_VARIABLE!>x<!>.inc())
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,exactlyOnce
+    smartInit:val
+    smartcast:inited
+    return:nonlocal
+ */
+fun case_10() {
+    val x: Int
+    funWithExactlyOnceCallsInPlace outer@ {
+        funWithAtMostOnceCallsInPlace {
+            x = 42
+            return@outer
+        }
+    }
+    println(<!UNINITIALIZED_VARIABLE!>x<!>.inc())
+}
+
+/*
+ CASE KEYWORDS:
+    effectsUsage
+        callsInPlace:atLeastOnce,unknown
+    smartInit:var
+    smartcast:inited
+    return:nonlocal
+ */
+fun case_11() {
+    var x: Int
+    funWithAtLeastOnceCallsInPlace outer@ {
+        funWithAtMostOnceCallsInPlace {
+            x = 41
+            return@outer
+        }
+        funWithUnknownCallsInPlace {
+            x = 42
+            return@outer
+        }
+        return@outer
+    }
+    println(<!UNINITIALIZED_VARIABLE!>x<!>.inc())
+}

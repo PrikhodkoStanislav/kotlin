@@ -121,7 +121,7 @@ fun case_6() {
         nameShadowing:val,var
         nested
     uninitialized:val
-    reassignment:val
+    §
     smartInit:val,var
     smartcast:inited
  */

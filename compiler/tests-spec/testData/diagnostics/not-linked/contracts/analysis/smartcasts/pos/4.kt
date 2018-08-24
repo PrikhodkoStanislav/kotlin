@@ -96,6 +96,16 @@ fun <T : String?> T.case_8_3(): Boolean? {
     return this == null
 }
 
+fun <T : Number?> T.case_9(): Boolean? {
+    contract { returnsNotNull() implies (this@case_9 != null) }
+    return this != null
+}
+
+fun <T : Number?> T.case_10(): Boolean? {
+    contract { returns(null) implies (this@case_10 != null) }
+    return this != null
+}
+
 // FILE: usages.kt
 
 import contracts.*
@@ -157,5 +167,23 @@ fun case_8(value1: String?, value2: String?) {
     }
     when {
         !(value2.case_8_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+    }
+}
+
+fun case_9(value1: Number?) {
+    if (value1?.case_9() != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+    }
+}
+
+/*
+ UNEXPECTED BEHAVIOUR
+ ISSUES: KT-26382
+ */
+fun case_10(value1: Number?) {
+    if (value1?.case_10() == null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+    } else {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
     }
 }
