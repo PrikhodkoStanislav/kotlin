@@ -26,7 +26,7 @@ fun <T : Number?> T.case_2(value2: Any?) {
     if (!(this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 is Number && <!SENSELESS_COMPARISON!>value2 != null<!>)) throw Exception()
 }
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T : Any?> T?.case_3(value2: Any?) {
+fun <T : Any?> T?.case_3(value2: Any?) {
     contract { returns() implies (this@case_3 is Number && this@case_3 is Int && <!SENSELESS_COMPARISON!>this@case_3 != null<!> && value2 != null) }
     if (!(this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>)) throw Exception()
 }
@@ -62,15 +62,15 @@ fun <T : Number?> T.case_6_3(value2: Any?): Boolean? {
     return this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 is Number && <!SENSELESS_COMPARISON!>value2 != null<!>
 }
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T : Any?> T?.case_7_1(value2: Any?): Boolean {
+fun <T : Any?> T?.case_7_1(value2: Any?): Boolean {
     contract { returns(true) implies (this@case_7_1 is Number && this@case_7_1 is Int && <!SENSELESS_COMPARISON!>this@case_7_1 != null<!> && value2 != null) }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 != null
 }
-<!NOTHING_TO_INLINE!>inline<!> fun <T : Any?> T?.case_7_2(value2: Any?): Boolean {
+fun <T : Any?> T?.case_7_2(value2: Any?): Boolean {
     contract { returns(true) implies (this@case_7_2 is Number && this@case_7_2 is Int && <!SENSELESS_COMPARISON!>this@case_7_2 != null<!> && value2 != null) }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 != null
 }
-<!NOTHING_TO_INLINE!>inline<!> fun <T : Any?> T?.case_7_3(value2: Any?): Boolean? {
+fun <T : Any?> T?.case_7_3(value2: Any?): Boolean? {
     contract { returnsNotNull() implies (this@case_7_3 is Number && this@case_7_3 is Int && <!SENSELESS_COMPARISON!>this@case_7_3 != null<!> && value2 != null) }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!> && value2 != null
 }

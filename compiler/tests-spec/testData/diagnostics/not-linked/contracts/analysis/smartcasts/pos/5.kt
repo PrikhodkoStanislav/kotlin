@@ -16,7 +16,7 @@ package contracts
 
 import kotlin.internal.contracts.*
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_1() {
+fun <T> T?.case_1() {
     contract { returns() implies (this@case_1 != null && this@case_1 is String) }
     if (this@case_1 !is String) throw Exception()
 }
@@ -31,15 +31,15 @@ inline fun <reified T : Any?> T?.case_3() {
     if (!(this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>)) throw Exception()
 }
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_4_1(): Boolean {
+fun <T> T?.case_4_1(): Boolean {
     contract { returns(true) implies (this@case_4_1 != null && this@case_4_1 is String) }
     return this != null && this is String
 }
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_4_2(): Boolean {
+fun <T> T?.case_4_2(): Boolean {
     contract { returns(false) implies (this@case_4_2 != null && this@case_4_2 is String) }
     return this != null && this is String
 }
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_4_3(): Boolean? {
+fun <T> T?.case_4_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_4_3 != null && this@case_4_3 is String) }
     return this != null && this is String
 }

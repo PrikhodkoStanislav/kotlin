@@ -146,11 +146,11 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_6(): Boolean? {
     return this != null
 }
 
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_23_1(): Boolean {
+fun <T> T?.case_23_1(): Boolean {
     contract { returns(false) implies (this@case_23_1 == null || this@case_23_1 !is String) }
     return this != null && this is String
 }
-<!NOTHING_TO_INLINE!>inline<!> fun <T> T?.case_23_2(): Boolean? {
+fun <T> T?.case_23_2(): Boolean? {
     contract { returnsNotNull() implies (this@case_23_2 == null || this@case_23_2 !is String) }
     return this != null && this is String
 }
