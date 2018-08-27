@@ -56,6 +56,10 @@ fun <T> T.case_5_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_5_3 is String) }
     return this is String
 }
+fun <T> T.case_5_4(): Boolean? {
+    contract { returns(null) implies (this@case_5_4 is String) }
+    return this is String
+}
 
 fun <T : Number> T.case_6_1(): Boolean {
     contract { returns(true) implies (this@case_6_1 is Int) }
@@ -67,6 +71,10 @@ fun <T : Number> T.case_6_2(): Boolean {
 }
 fun <T : Number> T.case_6_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_6_3 is Int) }
+    return this is Int
+}
+fun <T : Number> T.case_6_4(): Boolean? {
+    contract { returns(null) implies (this@case_6_4 is Int) }
     return this is Int
 }
 
@@ -82,6 +90,10 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_7_3 == null) }
     return this == null
 }
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_4(): Boolean? {
+    contract { returns(null) implies (this@case_7_4 == null) }
+    return this == null
+}
 
 fun <T : String?> T.case_8_1(): Boolean {
     contract { returns(true) implies (this@case_8_1 != null) }
@@ -95,15 +107,27 @@ fun <T : String?> T.case_8_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_8_3 == null) }
     return this == null
 }
+fun <T : String?> T.case_8_4(): Boolean? {
+    contract { returns(null) implies (this@case_8_4 == null) }
+    return this == null
+}
 
-fun <T : Number?> T.case_9(): Boolean? {
-    contract { returnsNotNull() implies (this@case_9 != null) }
+fun <T : Number?> T.case_9_1(): Boolean? {
+    contract { returnsNotNull() implies (this@case_9_1 != null) }
+    return this != null
+}
+fun <T : Number?> T.case_9_2(): Boolean? {
+    contract { returns(null) implies (this@case_9_2 != null) }
     return this != null
 }
 
-fun <T : Number?> T.case_10(): Boolean? {
-    contract { returns(null) implies (this@case_10 != null) }
+fun <T : Number?> T.case_10_1(): Boolean? {
+    contract { returns(null) implies (this@case_10_1 != null) }
     return this != null
+}
+fun <T : Number?> T.case_10_2(): Boolean? {
+    contract { returns(null) implies (this@case_10_2 != null) }
+    return this == null
 }
 
 // FILE: usages.kt
@@ -138,52 +162,51 @@ fun case_5(value1: Any?) {
     if (value1.case_5_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     if (!value1.case_5_2()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     if (value1.case_5_3() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+    if (value1.case_5_4() == null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
 }
 
 fun case_6(value1: Number) {
-    when {
-        value1.case_6_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
-    }
-    when {
-        !value1.case_6_2() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
-    }
-    when {
-        value1.case_6_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
-    }
+    when { value1.case_6_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
+    when { !value1.case_6_2() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
+    when { value1.case_6_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
+    when { value1.case_6_4() == null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
 }
 
 fun case_7(value1: String?, value2: String?) {
     if (value1.case_7_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
     if (value2.case_7_2()) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
     if (!(value2.case_7_3() == null)) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+    if (!(value2.case_7_4() != null)) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
 }
 
 fun case_8(value1: String?, value2: String?) {
-    when {
-        value1.case_8_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    }
-    when {
-        value2.case_8_2() -> println(<!DEBUG_INFO_CONSTANT!>value2<!>)
-    }
-    when {
-        !(value2.case_8_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>)
-    }
+    when { value1.case_8_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length) }
+    when { value2.case_8_2() -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
+    when { !(value2.case_8_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
+    when { !(value2.case_8_4() != null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
 }
 
+/*
+ UNEXPECTED BEHAVIOUR
+ */
 fun case_9(value1: Number?) {
-    if (value1?.case_9() != null) {
-        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
-    }
+    if (value1?.case_9_1() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+    if (value1?.case_9_2() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
 }
 
 /*
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26382
  */
-fun case_10(value1: Number?) {
-    if (value1?.case_10() == null) {
+fun case_10(value1: Number?, value2: Number?) {
+    if (value1?.case_10_1() == null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
     } else {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+    }
+    if (value2?.case_10_2() != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+    } else {
+        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
 }

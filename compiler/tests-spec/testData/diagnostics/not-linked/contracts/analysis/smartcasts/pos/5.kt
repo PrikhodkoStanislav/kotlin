@@ -43,6 +43,10 @@ fun <T> T?.case_4_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_4_3 != null && this@case_4_3 is String) }
     return this != null && this is String
 }
+fun <T> T?.case_4_4(): Boolean? {
+    contract { returns(null) implies (this@case_4_4 != null && this@case_4_4 is String) }
+    return this != null && this is String
+}
 
 fun <T : Number?> T.case_5_1(): Boolean {
     contract { returns(true) implies (this@case_5_1 is Int && <!SENSELESS_COMPARISON!>this@case_5_1 != null<!>) }
@@ -56,6 +60,10 @@ fun <T : Number?> T.case_5_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_5_3 is Int && <!SENSELESS_COMPARISON!>this@case_5_3 != null<!>) }
     return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
+fun <T : Number?> T.case_5_4(): Boolean? {
+    contract { returns(null) implies (this@case_5_4 is Int && <!SENSELESS_COMPARISON!>this@case_5_4 != null<!>) }
+    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
 
 inline fun <reified T : Any?> T?.case_6_1(): Boolean {
     contract { returns(true) implies (this@case_6_1 is Number && this@case_6_1 is Int && <!SENSELESS_COMPARISON!>this@case_6_1 != null<!>) }
@@ -67,6 +75,10 @@ inline fun <reified T : Any?> T?.case_6_2(): Boolean {
 }
 inline fun <reified T : Any?> T?.case_6_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_6_3 is Number && this@case_6_3 is Int && <!SENSELESS_COMPARISON!>this@case_6_3 != null<!>) }
+    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+}
+inline fun <reified T : Any?> T?.case_6_4(): Boolean? {
+    contract { returns(null) implies (this@case_6_4 is Number && this@case_6_4 is Int && <!SENSELESS_COMPARISON!>this@case_6_4 != null<!>) }
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
 
@@ -93,16 +105,19 @@ fun case_4(value1: Any?, value2: Any?, value3: Any?) {
     when { value1.case_4_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length) }
     when { !value2.case_4_2() -> println(<!DEBUG_INFO_SMARTCAST!>value2<!>.length) }
     when { value3.case_4_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value3<!>.length) }
+    when { value3.case_4_4() == null -> println(<!DEBUG_INFO_SMARTCAST!>value3<!>.length) }
 }
 
 fun case_5(value1: Number?, value2: Number?, value3: Number?) {
     if (value1.case_5_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     if (!value2.case_5_2()) println(<!DEBUG_INFO_SMARTCAST!>value2<!>.inv())
     if (value3.case_5_3() != null) println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
+    if (value3.case_5_4() == null) println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
 }
 
 fun case_6(value1: Any?, value2: Any?, value3: Any?) {
     if (value1.case_6_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
     if (!value2.case_6_2()) println(<!DEBUG_INFO_SMARTCAST!>value2<!>.inv())
     if (value3.case_6_3() != null) println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
+    if (value3.case_6_4() == null) println(<!DEBUG_INFO_SMARTCAST!>value3<!>.inv())
 }

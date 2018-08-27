@@ -110,6 +110,10 @@ class case_5_class {
             boolean
                 invertTypeCheck:string,number
                 disjunction
+        returnsNull
+            boolean
+                invertTypeCheck:string,number
+                disjunction
     smartcast:string,number
  */
 fun case_6(value1: Any?, value2: Any) {
@@ -122,6 +126,10 @@ fun case_6(value1: Any?, value2: Any) {
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
     if (funWithReturnsNotNull(value1 !is String || value2 !is Number) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNull(value1 !is String || value2 !is Number) == null) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
@@ -139,6 +147,10 @@ fun case_6(value1: Any?, value2: Any) {
                 typeCheck:string,number
                 conjunction
         returnsNotNull
+            invertBoolean
+                typeCheck:string,number
+                conjunction
+        returnsNull
             invertBoolean
                 typeCheck:string,number
                 conjunction
@@ -157,6 +169,10 @@ fun case_7(value1: Any?, value2: Any?) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
+    if (funWithReturnsNullAndInvertCondition(value1 is String && value2 is Number) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
 }
 
 /*
@@ -173,6 +189,11 @@ fun case_7(value1: Any?, value2: Any?) {
                 conjunction
                 notNullCheck
         returnsNotNull
+            invertBoolean
+                typeCheck:string
+                conjunction
+                notNullCheck
+        returnsNull
             invertBoolean
                 typeCheck:string
                 conjunction
@@ -192,6 +213,10 @@ fun case_8(value1: Any?, value2: Any?) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
+    if (funWithReturnsNullAndInvertCondition(value1 is String && value2 == null) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
 }
 
 /*
@@ -208,6 +233,11 @@ fun case_8(value1: Any?, value2: Any?) {
                 disjunction
                 nullCheck
         returnsNotNull
+            invertBoolean
+                inverTypeCheck:nullableFloat
+                disjunction
+                nullCheck
+        returnsNull
             invertBoolean
                 inverTypeCheck:nullableFloat
                 disjunction
@@ -227,6 +257,10 @@ fun case_9(value1: Any?, value2: Number?) {
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
         println(value2?.toByte())
     }
+    if (funWithReturnsNull(value1 is Float? && value1 != null && value2 != null) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value2?.toByte())
+    }
 }
 
 /*
@@ -243,6 +277,11 @@ fun case_9(value1: Any?, value2: Number?) {
                 conjunction
                 nullCheck:property
         returnsNotNull
+            invertBoolean
+                inverTypeCheck:nullableFloat
+                conjunction
+                nullCheck:property
+        returnsNull
             invertBoolean
                 inverTypeCheck:nullableFloat
                 conjunction
@@ -266,6 +305,11 @@ class case_10_class {
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
         if (funWithReturnsNotNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) != null) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+        if (funWithReturnsNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) == null) {
             println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
             println(value2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))

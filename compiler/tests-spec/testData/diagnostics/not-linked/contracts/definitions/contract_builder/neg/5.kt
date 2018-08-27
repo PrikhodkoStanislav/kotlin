@@ -41,6 +41,7 @@ fun case_4(): Boolean {
 
 /*
  CASE DESCRIPTION: expression before contract description
+ NOTE: check for indirect recursion
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26386
  */

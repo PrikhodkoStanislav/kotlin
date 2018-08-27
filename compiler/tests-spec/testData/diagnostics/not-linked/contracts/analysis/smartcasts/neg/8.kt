@@ -36,11 +36,31 @@ fun case_4(value1: Number, value2: Any?, block: (() -> Unit)?): Boolean? {
     return <!SENSELESS_COMPARISON!>value1 == null<!>
 }
 
-fun <T> T?.case_5(value1: Number, value2: Any?): Boolean? {
+fun case_5(value1: Number, value2: Any?, block: (() -> Unit)?): Boolean? {
     contract {
         returns(true) implies (value2 !is Boolean?)
         returns(false) implies (value1 !is Int)
-        returnsNotNull() implies (this@case_5 == null)
+        returns(null) implies (block == null)
+    }
+
+    return <!SENSELESS_COMPARISON!>value1 == null<!>
+}
+
+fun <T> T?.case_6(value1: Number, value2: Any?): Boolean? {
+    contract {
+        returns(true) implies (value2 !is Boolean?)
+        returns(false) implies (value1 !is Int)
+        returnsNotNull() implies (this@case_6 == null)
+    }
+
+    return <!SENSELESS_COMPARISON!>value1 == null<!>
+}
+
+fun <T> T?.case_7(value1: Number, value2: Any?): Boolean? {
+    contract {
+        returns(true) implies (value2 !is Boolean?)
+        returns(false) implies (value1 !is Int)
+        returns(null) implies (this@case_7 == null)
     }
 
     return <!SENSELESS_COMPARISON!>value1 == null<!>
@@ -87,11 +107,31 @@ fun case_4(value1: Number, value2: Any?, value3: (() -> Unit)?) {
 }
 
 fun case_5(value1: Number, value2: Any?, value3: (() -> Unit)?) {
-    if (value3.case_5(value1, value2) == true) {
+    if (contracts.case_5(value1, value2, value3) == true) {
         value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>xor<!>(false)
-    } else if (value3.case_5(value1, value2) == false) {
+    } else if (contracts.case_5(value1, value2, value3) == false) {
         println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    } else if (value3.case_5(value1, value2) != null) {
+    } else if (contracts.case_5(value1, value2, value3) == null) {
+        <!UNSAFE_IMPLICIT_INVOKE_CALL, DEBUG_INFO_CONSTANT!>value3<!>()
+    }
+}
+
+fun case_6(value1: Number, value2: Any?, value3: (() -> Unit)?) {
+    if (value3.case_6(value1, value2) == true) {
+        value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>xor<!>(false)
+    } else if (value3.case_6(value1, value2) == false) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    } else if (value3.case_6(value1, value2) != null) {
+        <!UNSAFE_IMPLICIT_INVOKE_CALL, DEBUG_INFO_CONSTANT!>value3<!>()
+    }
+}
+
+fun case_7(value1: Number, value2: Any?, value3: (() -> Unit)?) {
+    if (value3.case_7(value1, value2) == true) {
+        value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>xor<!>(false)
+    } else if (value3.case_7(value1, value2) == false) {
+        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    } else if (value3.case_7(value1, value2) == null) {
         <!UNSAFE_IMPLICIT_INVOKE_CALL, DEBUG_INFO_CONSTANT!>value3<!>()
     }
 }

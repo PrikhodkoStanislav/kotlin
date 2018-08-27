@@ -59,6 +59,10 @@ fun case_6(value1: Any?, value2: Any) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
+    if (funWithReturnsNull(value1 is String && value2 is Number) == null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+    }
 }
 
 fun case_7(value1: Any?, value2: Any?) {
@@ -71,6 +75,10 @@ fun case_7(value1: Any?, value2: Any?) {
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
     if (funWithReturnsNotNullAndInvertCondition(value1 !is String || value2 !is Number) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+    }
+    if (funWithReturnsNullAndInvertCondition(value1 !is String || value2 !is Number) == null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
     }
@@ -89,6 +97,10 @@ fun case_8(value1: Any?, value2: Any?) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
         println(<!DEBUG_INFO_CONSTANT!>value2<!>?.toByte())
     }
+    if (funWithReturnsNullAndInvertCondition(value1 !is String || value2 != null) == null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+        println(<!DEBUG_INFO_CONSTANT!>value2<!>?.toByte())
+    }
 }
 
 fun case_9(value1: Any?, value2: Number?) {
@@ -101,6 +113,10 @@ fun case_9(value1: Any?, value2: Number?) {
         println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
     }
     if (funWithReturnsNotNull(value1 is Float? && value1 != null && value2 != null) != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
+        println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
+    }
+    if (funWithReturnsNull(value1 is Float? && value1 != null && value2 != null) == null) {
         println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
         println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
     }
@@ -126,6 +142,11 @@ class case_10_class {
             println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))
         }
         if (funWithReturnsNotNull(value1 is Float? && value1 != null && value2 != null && o.prop_1 != null && this.prop_1 != null) != null) {
+            println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
+            println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
+            println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))
+        }
+        if (funWithReturnsNull(value1 is Float? && value1 != null && value2 != null && o.prop_1 != null && this.prop_1 != null) == null) {
             println(<!DEBUG_INFO_SMARTCAST!>value1<!>.dec())
             println(value2<!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
             println(<!DEBUG_INFO_SMARTCAST!>o.prop_1<!>.plus(3))

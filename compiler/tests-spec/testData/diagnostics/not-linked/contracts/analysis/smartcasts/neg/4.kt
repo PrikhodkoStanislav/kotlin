@@ -85,6 +85,7 @@ fun <T : String?> T.case_4_2() {
         returnsTrue:implies:invertTypeCheck:string
         returnsFalse:implies:invertTypeCheck:string
         returnsNotNull:implies:invertTypeCheck:string
+        returnsNull:implies:invertTypeCheck:string
     fun:extension:generic
  */
 fun <T> T.case_5_1(): Boolean {
@@ -99,6 +100,10 @@ fun <T> T.case_5_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_5_3 !is String) }
     return this !is String
 }
+fun <T> T.case_5_4(): Boolean? {
+    contract { returns(null) implies (this@case_5_4 !is String) }
+    return this !is String
+}
 
 /*
  CASE KEYWORDS:
@@ -107,6 +112,7 @@ fun <T> T.case_5_3(): Boolean? {
         returnsTrue:implies:invertTypeCheck:int
         returnsFalse:implies:invertTypeCheck:int
         returnsNotNull:implies:invertTypeCheck:int
+        returnsNull:implies:invertTypeCheck:int
     fun:extension:generic:upperBound
  */
 fun <T : Number> T.case_6_1(): Boolean {
@@ -121,6 +127,10 @@ fun <T : Number> T.case_6_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_6_3 !is Int) }
     return this !is Int
 }
+fun <T : Number> T.case_6_4(): Boolean? {
+    contract { returns(null) implies (this@case_6_4 !is Int) }
+    return this !is Int
+}
 
 /*
  CASE KEYWORDS:
@@ -129,6 +139,7 @@ fun <T : Number> T.case_6_3(): Boolean? {
         returnsTrue:implies:nullCheck
         returnsFalse:implies:notNullCheck
         returnsNotNull:implies:notNullCheck
+        returnsNull:implies:notNullCheck
     fun:extension
         generic:upperBound
         nullable
@@ -145,6 +156,10 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_7_3 != null) }
     return this != null
 }
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_4(): Boolean? {
+    contract { returns(null) implies (this@case_7_4 != null) }
+    return this != null
+}
 
 /*
  CASE KEYWORDS:
@@ -153,6 +168,7 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_3(): Boolean? {
         returnsTrue:implies:nullCheck
         returnsFalse:implies:notNullCheck
         returnsNotNull:implies:notNullCheck
+        returnsNull:implies:notNullCheck
     fun:extension
         generic:upperBound
         nullable
@@ -169,12 +185,17 @@ fun <T : String?> T.case_8_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_8_3 != null) }
     return this != null
 }
+fun <T : String?> T.case_8_4(): Boolean? {
+    contract { returns(null) implies (this@case_8_4 != null) }
+    return this != null
+}
 
 /*
  CASE KEYWORDS:
     effectsDefinition
         1
         returnsNotNull:implies:notNullCheck
+        returnsNull:implies:notNullCheck
     fun:extension
         generic:upperBound
         nullable
@@ -189,6 +210,7 @@ fun <T : Number?> T.case_9(): Boolean? {
     effectsDefinition
         1
         returnsNotNull:implies:nullCheck
+        returnsNull:implies:nullCheck
     fun:extension
         generic:upperBound
         nullable
@@ -256,6 +278,7 @@ fun case_4(value1: String?, value2: String?) {
         returnsTrue:invertTypeCheck:string
         returnsFalse:invertTypeCheck:string
         returnsNotNull:invertTypeCheck:string
+        returnsNull:invertTypeCheck:string
     smartcast:string
     if
  */
@@ -263,6 +286,7 @@ fun case_5(value1: Any?) {
     if (value1.case_5_1()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
     if (!value1.case_5_2()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
     if (value1.case_5_3() != null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value1.case_5_4() == null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -271,6 +295,7 @@ fun case_5(value1: Any?) {
         returnsTrue:invertTypeCheck:int
         returnsFalse:invertTypeCheck:int
         returnsNotNull:invertTypeCheck:int
+        returnsNull:invertTypeCheck:int
     smartcast:int
     when
  */
@@ -278,6 +303,7 @@ fun case_6(value1: Number) {
     when { value1.case_6_1() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
     when { !value1.case_6_2() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
     when { value1.case_6_3() != null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value1.case_6_4() != null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
 }
 
 /*
@@ -286,6 +312,7 @@ fun case_6(value1: Number) {
         returnsTrue:nullCheck
         returnsFalse:notNullCheck
         returnsNotNull:notNullCheck
+        returnsNull:notNullCheck
     smartcast:notNull,nullConstant
     if
  */
@@ -293,6 +320,7 @@ fun case_7(value1: String?, value2: String?) {
     if (value1.case_7_1()) println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length)
     if (value2.case_7_2()) println(value2)
     if (!(value2.case_7_3() == null)) println(value2)
+    if (value2.case_7_3() == null) println(value2)
 }
 
 /*
@@ -301,6 +329,7 @@ fun case_7(value1: String?, value2: String?) {
         returnsTrue:nullCheck
         returnsFalse:notNullCheck
         returnsNotNull:notNullCheck
+        returnsNull:notNullCheck
     smartcast:notNull,nullConstant
     when
  */
@@ -308,23 +337,26 @@ fun case_8(value1: String?, value2: String?) {
     when { value1.case_8_1() -> println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length) }
     when { value2.case_8_2() -> println(value2) }
     when { !(value2.case_8_3() == null) -> println(value2) }
+    when { value2.case_8_3() == null -> println(value2) }
 }
 
 /*
  CASE KEYWORDS:
     effectsUsage
         returnsNotNull:notNullCheck
+        returnsNull:notNullCheck
     smartcast:notNull,nullConstant
     if
  */
 fun case_9(value1: Number?) {
-    if (value1?.case_9() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+    if (value1?.case_9() == null) println(value1<!UNSAFE_CALL!>.<!>toByte())
 }
 
 /*
  CASE KEYWORDS:
     effectsUsage
         returnsNotNull:nullCheck
+        returnsNull:nullCheck
     smartcast:notNull,nullConstant
     unreachableCode
     if

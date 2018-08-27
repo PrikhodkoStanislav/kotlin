@@ -80,6 +80,14 @@ fun case_5_6(value: Int?): Boolean? {
     contract { returnsNotNull() implies (value == null) }
     return value == null
 }
+fun case_5_7(value: Int?): Boolean? {
+    contract { returns(null) implies (value != null) }
+    return value != null
+}
+fun case_5_8(value: Int?): Boolean? {
+    contract { returns(null) implies (value == null) }
+    return value == null
+}
 
 fun case_6_1(value: Number?): Boolean {
     contract { returns(true) implies (value is Float) }
@@ -105,6 +113,14 @@ fun case_6_6(value: Number?): Boolean? {
     contract { returnsNotNull() implies (value is Int) }
     return value is Int
 }
+fun case_6_7(value: Number?): Boolean? {
+    contract { returns(null) implies (value is Float) }
+    return value is Float
+}
+fun case_6_8(value: Number?): Boolean? {
+    contract { returns(null) implies (value is Int) }
+    return value is Int
+}
 
 fun case_7_1(value: Any?): Boolean {
     contract { returns(true) implies (value is String) }
@@ -128,6 +144,14 @@ fun case_7_5(value: Any?): Boolean? {
 }
 fun case_7_6(value: Any?): Boolean? {
     contract { returnsNotNull() implies (value !is String) }
+    return value !is String
+}
+fun case_7_7(value: Any?): Boolean? {
+    contract { returns(null) implies (value is String) }
+    return value is String
+}
+fun case_7_8(value: Any?): Boolean? {
+    contract { returns(null) implies (value !is String) }
     return value !is String
 }
 
@@ -165,6 +189,18 @@ fun case_8_8(value: Number?): Boolean? {
 }
 fun case_8_9(value: Number): Boolean? {
     contract { returnsNotNull() implies (value is Int) }
+    return value is Int
+}
+fun case_8_10(value: Any?): Boolean? {
+    contract { returns(null) implies (value is Number?) }
+    return value is Number?
+}
+fun case_8_11(value: Number?): Boolean? {
+    contract { returns(null) implies (value != null) }
+    return value != null
+}
+fun case_8_12(value: Number): Boolean? {
+    contract { returns(null) implies (value is Int) }
     return value is Int
 }
 
@@ -209,7 +245,6 @@ fun case_5(value1: Int?, value2: Int?) {
         <!DEBUG_INFO_SMARTCAST!>value1<!>.inv()
         if (case_5_2(value1)) {
             <!DEBUG_INFO_SMARTCAST!>value1<!>.<!UNREACHABLE_CODE!>inv()<!>
-            <!UNREACHABLE_CODE!>case_5_1(value1)<!>
             <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value1<!>.inv()<!>
         }
     }
@@ -217,7 +252,6 @@ fun case_5(value1: Int?, value2: Int?) {
         <!DEBUG_INFO_SMARTCAST!>value2<!>.inv()
         if (!case_5_4(value2)) {
             <!DEBUG_INFO_SMARTCAST!>value2<!>.<!UNREACHABLE_CODE!>inv()<!>
-            <!UNREACHABLE_CODE!>case_5_1(value2)<!>
             <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value2<!>.inv()<!>
         }
     }
@@ -225,7 +259,13 @@ fun case_5(value1: Int?, value2: Int?) {
         <!DEBUG_INFO_SMARTCAST!>value2<!>.inv()
         if (case_5_6(value2) != null) {
             <!DEBUG_INFO_SMARTCAST!>value2<!>.<!UNREACHABLE_CODE!>inv()<!>
-            <!UNREACHABLE_CODE!>case_5_1(value2)<!>
+            <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value2<!>.inv()<!>
+        }
+    }
+    if (case_5_7(value2) == null) {
+        <!DEBUG_INFO_SMARTCAST!>value2<!>.inv()
+        if (case_5_8(value2) == null) {
+            <!DEBUG_INFO_SMARTCAST!>value2<!>.<!UNREACHABLE_CODE!>inv()<!>
             <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value2<!>.inv()<!>
         }
     }
@@ -250,6 +290,12 @@ fun case_6(value1: Number?, value2: Number?) {
             when { case_6_6(value2) != null -> <!DEBUG_INFO_SMARTCAST!>value2<!>.inv() }
         }
     }
+    when {
+        case_6_7(value2) == null -> {
+            <!DEBUG_INFO_SMARTCAST!>value2<!>.toByte()
+            when { case_6_8(value2) == null -> <!DEBUG_INFO_SMARTCAST!>value2<!>.inv() }
+        }
+    }
 }
 
 fun case_7(value1: Any?, value2: Any?) {
@@ -264,6 +310,10 @@ fun case_7(value1: Any?, value2: Any?) {
     if (case_7_5(value2) != null) {
         <!DEBUG_INFO_SMARTCAST!>value2<!>.length
         if (case_7_6(value2) != null) <!DEBUG_INFO_SMARTCAST!>value2<!>.length
+    }
+    if (case_7_7(value2) == null) {
+        <!DEBUG_INFO_SMARTCAST!>value2<!>.length
+        if (case_7_8(value2) == null) <!DEBUG_INFO_SMARTCAST!>value2<!>.length
     }
 }
 
@@ -287,6 +337,13 @@ fun case_8(value1: Any?, value2: Any?) {
         if (case_8_8(<!DEBUG_INFO_SMARTCAST!>value2<!>) != null) {
             <!DEBUG_INFO_SMARTCAST!>value2<!>.toByte()
             if (case_8_9(<!DEBUG_INFO_SMARTCAST!>value2<!>) != null) <!DEBUG_INFO_SMARTCAST!>value2<!>.inv()
+        }
+    }
+    if (case_8_10(value2) == null) {
+        <!DEBUG_INFO_SMARTCAST!>value2<!>?.toByte()
+        if (case_8_11(<!DEBUG_INFO_SMARTCAST!>value2<!>) == null) {
+            <!DEBUG_INFO_SMARTCAST!>value2<!>.toByte()
+            if (case_8_12(<!DEBUG_INFO_SMARTCAST!>value2<!>) == null) <!DEBUG_INFO_SMARTCAST!>value2<!>.inv()
         }
     }
 }

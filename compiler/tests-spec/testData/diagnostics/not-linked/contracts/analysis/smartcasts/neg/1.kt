@@ -111,6 +111,11 @@ fun case_7() {
                 typeCheck:string
             invertBoolean
                 invertTypeCheck:string
+        returnsNull
+            boolean
+                typeCheck:string
+            invertBoolean
+                invertTypeCheck:string
         returnsNotNull
             boolean
                 typeCheck:string
@@ -126,6 +131,8 @@ fun case_8(value: Any?) {
     if (funWithReturnsFalseAndInvertCondition(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
     if (funWithReturnsNotNull(value is String) == null) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
     if (!(funWithReturnsNotNull(value is String) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNull(value is String) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsNull(value is String) != null) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -138,6 +145,9 @@ fun case_8(value: Any?) {
             boolean:notNullCheck
             invertBoolean:nullCheck
         returnsNotNull
+            boolean:notNullCheck
+            invertBoolean:nullCheck
+        returnsNull
             boolean:notNullCheck
             invertBoolean:nullCheck
     smartcast:null,notNull
@@ -149,8 +159,9 @@ fun case_9(value: String?) {
     if (funWithReturnsFalse(value != null)) println(value<!UNSAFE_CALL!>.<!>length)
     if (funWithReturnsFalseAndInvertCondition(value == null)) println(value<!UNSAFE_CALL!>.<!>length)
     if (funWithReturnsNotNull(value != null) == null) println(value<!UNSAFE_CALL!>.<!>length)
-    if ((funWithReturnsNotNull(value != null) == null)) println(value<!UNSAFE_CALL!>.<!>length)
-    if ((funWithReturnsNotNullAndInvertCondition(value == null) == null)) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNotNullAndInvertCondition(value == null) == null) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNull(value != null) != null) println(value<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNullAndInvertCondition(value == null) != null) println(value<!UNSAFE_CALL!>.<!>length)
 }
 
 /*
@@ -162,6 +173,8 @@ fun case_9(value: String?) {
             typeCheck:string
         returnsNotNull
             typeCheck:string
+        returnsNull
+            typeCheck:string
     smartcast:string
     if
  */
@@ -170,6 +183,8 @@ fun case_10(value: Any?) {
     if (!!funWithReturnsFalseAndTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
     if (!(funWithReturnsNotNullAndTypeCheck(value) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
     if (!!(funWithReturnsNotNullAndTypeCheck(value) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!(funWithReturnsNullAndTypeCheck(value) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNullAndTypeCheck(value) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -189,4 +204,7 @@ fun case_11(value: Number?) {
     if ((funWithReturnsNotNullAndNotNullCheck(value) == null)) println(value<!UNSAFE_CALL!>.<!>toByte())
     if (!!!(funWithReturnsNotNullAndNotNullCheck(value) != null)) println(value<!UNSAFE_CALL!>.<!>toByte())
     if (!!(funWithReturnsNotNullAndNullCheck(value) == null)) println(value)
+    if (!(funWithReturnsNullAndNotNullCheck(value) == null)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (!!(funWithReturnsNullAndNotNullCheck(value) != null)) println(value<!UNSAFE_CALL!>.<!>toByte())
+    if (!!!(funWithReturnsNullAndNullCheck(value) == null)) println(value)
 }

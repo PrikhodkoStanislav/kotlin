@@ -89,6 +89,11 @@ inline fun <reified T : Any?> T?.case_3() {
                 invertTypeCheck:string
                 disjunction
                 nullCheck:receiver
+        returnsNull
+            implies
+                invertTypeCheck:string
+                disjunction
+                nullCheck:receiver
     fun:extension:generic,nullable
  */
 fun <T> T?.case_4_1(): Boolean {
@@ -101,6 +106,10 @@ fun <T> T?.case_4_2(): Boolean {
 }
 fun <T> T?.case_4_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_4_3 == null || this@case_4_3 !is String) }
+    return this == null || this !is String
+}
+fun <T> T?.case_4_4(): Boolean? {
+    contract { returns(null) implies (this@case_4_4 == null || this@case_4_4 !is String) }
     return this == null || this !is String
 }
 
@@ -119,6 +128,11 @@ fun <T> T?.case_4_3(): Boolean? {
                 disjunction
                 nullCheck:receiver
         returnsNotNull
+            implies
+                invertTypeCheck:int
+                disjunction
+                nullCheck:receiver
+        returnsNull
             implies
                 invertTypeCheck:int
                 disjunction
@@ -139,6 +153,10 @@ fun <T : Number?> T.case_5_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_5_3 !is Int || <!SENSELESS_COMPARISON!>this@case_5_3 == null<!>) }
     return this !is Int || <!SENSELESS_COMPARISON!>this == null<!>
 }
+fun <T : Number?> T.case_5_4(): Boolean? {
+    contract { returns(null) implies (this@case_5_4 !is Int || <!SENSELESS_COMPARISON!>this@case_5_4 == null<!>) }
+    return this !is Int || <!SENSELESS_COMPARISON!>this == null<!>
+}
 
 /*
  CASE KEYWORDS:
@@ -159,6 +177,11 @@ fun <T : Number?> T.case_5_3(): Boolean? {
                 invertTypeCheck:number,int
                 disjunction
                 nullCheck:receiver
+        returnsNull
+            implies
+                invertTypeCheck:number,int
+                disjunction
+                nullCheck:receiver
     fun
         inline
         extension
@@ -175,6 +198,10 @@ inline fun <reified T : Any?> T?.case_6_2(): Boolean {
 }
 inline fun <reified T : Any?> T?.case_6_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_6_3 is Number && this@case_6_3 is Int && <!SENSELESS_COMPARISON!>this@case_6_3 != null<!>) }
+    return this !is Number || this !is Int || <!SENSELESS_COMPARISON!>this == null<!>
+}
+inline fun <reified T : Any?> T?.case_6_4(): Boolean? {
+    contract { returns(null) implies (this@case_6_4 is Number && this@case_6_4 is Int && <!SENSELESS_COMPARISON!>this@case_6_4 != null<!>) }
     return this !is Number || this !is Int || <!SENSELESS_COMPARISON!>this == null<!>
 }
 
@@ -239,12 +266,17 @@ fun case_3(value1: Any?) {
             invertTypeCheck:string
             disjunction
             nullCheck:receiver
+        returnsNull
+            invertTypeCheck:string
+            disjunction
+            nullCheck:receiver
     smartcast:notNull,string
  */
 fun case_4(value1: Any?, value2: Any?, value3: Any?) {
     when { value1.case_4_1() -> println(value1.<!UNRESOLVED_REFERENCE!>length<!>) }
     when { !value2.case_4_2() -> println(value2.<!UNRESOLVED_REFERENCE!>length<!>) }
     when { value3.case_4_3() != null -> println(value3.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { value3.case_4_4() == null -> println(value3.<!UNRESOLVED_REFERENCE!>length<!>) }
 }
 
 /*
@@ -259,6 +291,10 @@ fun case_4(value1: Any?, value2: Any?, value3: Any?) {
             disjunction
             nullCheck:receiver
         returnsNotNull
+            invertTypeCheck:int
+            disjunction
+            nullCheck:receiver
+        returnsNull
             invertTypeCheck:int
             disjunction
             nullCheck:receiver
@@ -268,6 +304,7 @@ fun case_5(value1: Number?, value2: Number?, value3: Number?) {
     if (value1.case_5_1()) println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     if (!value2.case_5_2()) println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     if (value3.case_5_3() != null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value3.case_5_4() == null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 /*
@@ -285,10 +322,15 @@ fun case_5(value1: Number?, value2: Number?, value3: Number?) {
             invertTypeCheck:number,int
             disjunction
             nullCheck:receiver
+        returnsNull
+            invertTypeCheck:number,int
+            disjunction
+            nullCheck:receiver
     smartcast:notNull,int
  */
 fun case_6(value1: Any?, value2: Any?, value3: Any?) {
     if (value1.case_6_1()) println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     if (!value2.case_6_2()) println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     if (value3.case_6_3() == null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value3.case_6_4() != null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }

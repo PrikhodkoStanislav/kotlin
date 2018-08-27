@@ -76,6 +76,10 @@ fun case_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?) {
             implies
                 invertTypeCheck:string,number
                 disjunction
+        returnsNull
+            implies
+                invertTypeCheck:string,number
+                disjunction
  */
 fun case_4_1(value1: Any?, value2: Any?): Boolean {
     contract { returns(true) implies (value1 !is String || value2 !is Number) }
@@ -87,6 +91,10 @@ fun case_4_2(value1: Any?, value2: Any?): Boolean {
 }
 fun case_4_3(value1: Any?, value2: Any?): Boolean? {
     contract { returnsNotNull() implies (value1 !is String || value2 !is Number) }
+    return value1 !is String || value2 !is Number
+}
+fun case_4_4(value1: Any?, value2: Any?): Boolean? {
+    contract { returns(null) implies (value1 !is String || value2 !is Number) }
     return value1 !is String || value2 !is Number
 }
 
@@ -109,6 +117,11 @@ fun case_4_3(value1: Any?, value2: Any?): Boolean? {
                 typeCheck:string
                 conjunction
                 nullCheck
+        returnsNull
+            implies
+                typeCheck:string
+                conjunction
+                nullCheck
  */
 fun case_5_1(value1: Any?, value2: Any?): Boolean {
     contract { returns(true) implies (value1 !is String || value2 != null) }
@@ -120,6 +133,10 @@ fun case_5_2(value1: Any?, value2: Any?): Boolean {
 }
 fun case_5_3(value1: Any?, value2: Any?): Boolean? {
     contract { returnsNotNull() implies (value1 is String && value2 == null) }
+    return value1 !is String || value2 != null
+}
+fun case_5_4(value1: Any?, value2: Any?): Boolean? {
+    contract { returns(null) implies (value1 is String && value2 == null) }
     return value1 !is String || value2 != null
 }
 
@@ -142,6 +159,11 @@ fun case_5_3(value1: Any?, value2: Any?): Boolean? {
                 typeCheck:nullableFloat
                 conjunction
                 notNullCheck
+        returnsNull
+            implies
+                typeCheck:nullableFloat
+                conjunction
+                notNullCheck
  */
 fun case_6_1(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
     contract { returns(true) implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
@@ -153,6 +175,10 @@ fun case_6_2(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
 }
 fun case_6_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
     contract { returnsNotNull() implies (value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null) }
+    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+}
+fun case_6_4(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
+    contract { returns(null) implies (value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null) }
     return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
 }
 
@@ -222,6 +248,9 @@ class case_3_class {
         returnsNotNull
             invertTypeCheck:string,number
             disjunction
+        returnsNull
+            invertTypeCheck:string,number
+            disjunction
     smartcast:string,number
  */
 fun case_4(value1: Any?, value2: Any?) {
@@ -234,6 +263,10 @@ fun case_4(value1: Any?, value2: Any?) {
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
     if (contracts.case_4_3(value1, value2) != null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (contracts.case_4_4(value1, value2) == null) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
@@ -254,6 +287,10 @@ fun case_4(value1: Any?, value2: Any?) {
             typeCheck:string
             conjunction
             nullCheck
+        returnsNull
+            typeCheck:string
+            conjunction
+            nullCheck
     smartcast:string,notNull
  */
 fun case_5(value1: Any?, value2: Any?) {
@@ -266,6 +303,10 @@ fun case_5(value1: Any?, value2: Any?) {
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
     if (contracts.case_5_3(value1, value2) == null) {
+        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (contracts.case_5_4(value1, value2) != null) {
         println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
         println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
@@ -283,6 +324,10 @@ fun case_5(value1: Any?, value2: Any?) {
             disjunction
             nullCheck
         returnsNotNull
+            typeCheck:nullableFloat
+            conjunction
+            notNullCheck
+        returnsNull
             typeCheck:nullableFloat
             conjunction
             notNullCheck
@@ -304,6 +349,11 @@ class case_6_class {
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
         if (contracts.case_6_3(value1, value2, o.prop_1, this.prop_1) == null) {
+            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value2?.toByte())
+            println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
+        }
+        if (contracts.case_6_4(value1, value2, o.prop_1, this.prop_1) != null) {
             println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
             println(value2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
