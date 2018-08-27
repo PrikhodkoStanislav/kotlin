@@ -25,9 +25,9 @@ import kotlin.internal.contracts.*
                 invertTypeCheck:string,number
                 disjunction
  */
-fun case_1(value1: Any?, value2: Any?) {
-    contract { returns() implies (value1 !is String || value2 !is Number) }
-    if (value1 is String && value2 is Number) throw Exception()
+fun case_1(value_1: Any?, value_2: Any?) {
+    contract { returns() implies (value_1 !is String || value_2 !is Number) }
+    if (value_1 is String && value_2 is Number) throw Exception()
 }
 
 /*
@@ -40,9 +40,9 @@ fun case_1(value1: Any?, value2: Any?) {
                 disjunction
                 notNullCheck
  */
-fun case_2(value1: Any?, value2: Any?) {
-    contract { returns() implies (value1 !is String || value2 != null) }
-    if (value1 is String && value2 == null) throw Exception()
+fun case_2(value_1: Any?, value_2: Any?) {
+    contract { returns() implies (value_1 !is String || value_2 != null) }
+    if (value_1 is String && value_2 == null) throw Exception()
 }
 
 /*
@@ -55,9 +55,9 @@ fun case_2(value1: Any?, value2: Any?) {
                 disjunction
                 nullCheck
  */
-fun case_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?) {
-    contract { returns() implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    if (!(value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null)) throw Exception()
+fun case_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?) {
+    contract { returns() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    if (!(value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null)) throw Exception()
 }
 
 /*
@@ -81,21 +81,21 @@ fun case_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?) {
                 invertTypeCheck:string,number
                 disjunction
  */
-fun case_4_1(value1: Any?, value2: Any?): Boolean {
-    contract { returns(true) implies (value1 !is String || value2 !is Number) }
-    return value1 !is String || value2 !is Number
+fun case_4_1(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(true) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 !is String || value_2 !is Number
 }
-fun case_4_2(value1: Any?, value2: Any?): Boolean {
-    contract { returns(false) implies (value1 !is String || value2 !is Number) }
-    return value1 !is String || value2 !is Number
+fun case_4_2(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 !is String || value_2 !is Number
 }
-fun case_4_3(value1: Any?, value2: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 !is String || value2 !is Number) }
-    return value1 !is String || value2 !is Number
+fun case_4_3(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 !is String || value_2 !is Number) }
+    return value_1 !is String || value_2 !is Number
 }
-fun case_4_4(value1: Any?, value2: Any?): Boolean? {
-    contract { returns(null) implies (value1 !is String || value2 !is Number) }
-    return value1 !is String || value2 !is Number
+fun case_4_4(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returns(null) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 !is String || value_2 !is Number
 }
 
 /*
@@ -123,21 +123,21 @@ fun case_4_4(value1: Any?, value2: Any?): Boolean? {
                 conjunction
                 nullCheck
  */
-fun case_5_1(value1: Any?, value2: Any?): Boolean {
-    contract { returns(true) implies (value1 !is String || value2 != null) }
-    return value1 !is String || value2 != null
+fun case_5_1(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(true) implies (value_1 !is String || value_2 != null) }
+    return value_1 !is String || value_2 != null
 }
-fun case_5_2(value1: Any?, value2: Any?): Boolean {
-    contract { returns(false) implies (value1 !is String || value2 != null) }
-    return value1 !is String || value2 != null
+fun case_5_2(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is String || value_2 != null) }
+    return value_1 !is String || value_2 != null
 }
-fun case_5_3(value1: Any?, value2: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 is String && value2 == null) }
-    return value1 !is String || value2 != null
+fun case_5_3(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 is String && value_2 == null) }
+    return value_1 !is String || value_2 != null
 }
-fun case_5_4(value1: Any?, value2: Any?): Boolean? {
-    contract { returns(null) implies (value1 is String && value2 == null) }
-    return value1 !is String || value2 != null
+fun case_5_4(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returns(null) implies (value_1 is String && value_2 == null) }
+    return value_1 !is String || value_2 != null
 }
 
 /*
@@ -165,21 +165,21 @@ fun case_5_4(value1: Any?, value2: Any?): Boolean? {
                 conjunction
                 notNullCheck
  */
-fun case_6_1(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
-    contract { returns(true) implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+fun case_6_1(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
+    contract { returns(true) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
 }
-fun case_6_2(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
-    contract { returns(false) implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+fun case_6_2(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
 }
-fun case_6_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null) }
-    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+fun case_6_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) }
+    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
 }
-fun case_6_4(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
-    contract { returns(null) implies (value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null) }
-    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+fun case_6_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
+    contract { returns(null) implies (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) }
+    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
 }
 
 // FILE: usages.kt
@@ -194,10 +194,10 @@ import contracts.*
             disjunction
     smartcast:string,number
  */
-fun case_1(value1: Any?, value2: Any?) {
-    contracts.case_1(value1, value2)
-    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_1(value_1: Any?, value_2: Any?) {
+    contracts.case_1(value_1, value_2)
+    println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
 /*
@@ -209,10 +209,10 @@ fun case_1(value1: Any?, value2: Any?) {
             notNull
     smartcast:string,notNull
  */
-fun case_2(value1: Any?, value2: Any?) {
-    contracts.case_2(value1, value2)
-    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_2(value_1: Any?, value_2: Any?) {
+    contracts.case_2(value_1, value_2)
+    println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
 /*
@@ -227,11 +227,11 @@ fun case_2(value1: Any?, value2: Any?) {
  */
 class case_3_class {
     val prop_1: Int? = 10
-    fun case_3(value1: Any?, value2: Number?) {
+    fun case_3(value_1: Any?, value_2: Number?) {
         val o = case_3_class()
-        contracts.case_3(value1, value2, o.prop_1, this.prop_1)
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-        println(value2?.toByte())
+        contracts.case_3(value_1, value_2, o.prop_1, this.prop_1)
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value_2?.toByte())
         println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
     }
 }
@@ -253,22 +253,22 @@ class case_3_class {
             disjunction
     smartcast:string,number
  */
-fun case_4(value1: Any?, value2: Any?) {
-    if (contracts.case_4_1(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_4(value_1: Any?, value_2: Any?) {
+    if (contracts.case_4_1(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (!contracts.case_4_2(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (!contracts.case_4_2(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_4_3(value1, value2) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_4_3(value_1, value_2) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_4_4(value1, value2) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_4_4(value_1, value_2) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
@@ -293,22 +293,22 @@ fun case_4(value1: Any?, value2: Any?) {
             nullCheck
     smartcast:string,notNull
  */
-fun case_5(value1: Any?, value2: Any?) {
-    if (contracts.case_5_1(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_5(value_1: Any?, value_2: Any?) {
+    if (contracts.case_5_1(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (!contracts.case_5_2(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (!contracts.case_5_2(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_5_3(value1, value2) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_5_3(value_1, value_2) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_5_4(value1, value2) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_5_4(value_1, value_2) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
@@ -336,26 +336,26 @@ fun case_5(value1: Any?, value2: Any?) {
  */
 class case_6_class {
     val prop_1: Int? = 10
-    fun case_6(value1: Any?, value2: Number?) {
+    fun case_6(value_1: Any?, value_2: Number?) {
         val o = case_6_class()
-        if (contracts.case_6_1(value1, value2, o.prop_1, this.prop_1)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_6_1(value_1, value_2, o.prop_1, this.prop_1)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (!contracts.case_6_2(value1, value2, o.prop_1, this.prop_1)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (!contracts.case_6_2(value_1, value_2, o.prop_1, this.prop_1)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (contracts.case_6_3(value1, value2, o.prop_1, this.prop_1) == null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_6_3(value_1, value_2, o.prop_1, this.prop_1) == null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (contracts.case_6_4(value1, value2, o.prop_1, this.prop_1) != null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_6_4(value_1, value_2, o.prop_1, this.prop_1) != null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
     }

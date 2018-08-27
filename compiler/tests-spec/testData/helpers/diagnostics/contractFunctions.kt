@@ -57,25 +57,25 @@ fun funWithReturnsAndInvertCondition(cond: Boolean) {
     if (cond) throw Exception()
 }
 
-fun funWithReturnsAndTypeCheck(value: Any?) {
+fun funWithReturnsAndTypeCheck(value_1: Any?) {
     contract {
-        returns() implies (value is String)
+        returns() implies (value_1 is String)
     }
-    if (value !is String) throw Exception()
+    if (value_1 !is String) throw Exception()
 }
 
-fun funWithReturnsAndNotNullCheck(value: Any?) {
+fun funWithReturnsAndNotNullCheck(value_1: Any?) {
     contract {
-        returns() implies (value != null)
+        returns() implies (value_1 != null)
     }
-    if (value == null) throw Exception()
+    if (value_1 == null) throw Exception()
 }
 
-fun funWithReturnsAndNullCheck(value: Any?) {
+fun funWithReturnsAndNullCheck(value_1: Any?) {
     contract {
-        returns() implies (value == null)
+        returns() implies (value_1 == null)
     }
-    if (value != null) throw Exception()
+    if (value_1 != null) throw Exception()
 }
 
 fun funWithReturnsTrue(cond: Boolean): Boolean {
@@ -92,32 +92,32 @@ fun funWithReturnsTrueAndInvertCondition(cond: Boolean): Boolean {
     return !cond
 }
 
-fun funWithReturnsTrueAndTypeCheck(value: Any?): Boolean {
+fun funWithReturnsTrueAndTypeCheck(value_1: Any?): Boolean {
     contract {
-        returns(true) implies (value is String)
+        returns(true) implies (value_1 is String)
     }
-    return value is String
+    return value_1 is String
 }
 
-fun funWithReturnsTrueAndInvertTypeCheck(value: Any?): Boolean {
+fun funWithReturnsTrueAndInvertTypeCheck(value_1: Any?): Boolean {
     contract {
-        returns(true) implies (value !is String)
+        returns(true) implies (value_1 !is String)
     }
-    return value !is String
+    return value_1 !is String
 }
 
-fun funWithReturnsTrueAndNotNullCheck(value: Number?): Boolean {
+fun funWithReturnsTrueAndNotNullCheck(value_1: Any?): Boolean {
     contract {
-        returns(true) implies (value != null)
+        returns(true) implies (value_1 != null)
     }
-    return value != null
+    return value_1 != null
 }
 
-fun funWithReturnsTrueAndNullCheck(value: Number?): Boolean {
+fun funWithReturnsTrueAndNullCheck(value_1: Any?): Boolean {
     contract {
-        returns(true) implies (value == null)
+        returns(true) implies (value_1 == null)
     }
-    return value == null
+    return value_1 == null
 }
 
 fun funWithReturnsFalse(cond: Boolean): Boolean {
@@ -134,32 +134,32 @@ fun funWithReturnsFalseAndInvertCondition(cond: Boolean): Boolean {
     return !cond
 }
 
-fun funWithReturnsFalseAndTypeCheck(value: Any?): Boolean {
+fun funWithReturnsFalseAndTypeCheck(value_1: Any?): Boolean {
     contract {
-        returns(false) implies (value is String)
+        returns(false) implies (value_1 is String)
     }
-    return value is String
+    return value_1 is String
 }
 
-fun funWithReturnsFalseAndInvertTypeCheck(value: Any?): Boolean {
+fun funWithReturnsFalseAndInvertTypeCheck(value_1: Any?): Boolean {
     contract {
-        returns(false) implies (value !is String)
+        returns(false) implies (value_1 !is String)
     }
-    return value !is String
+    return value_1 !is String
 }
 
-fun funWithReturnsFalseAndNotNullCheck(value: Number?): Boolean {
+fun funWithReturnsFalseAndNotNullCheck(value_1: Number?): Boolean {
     contract {
-        returns(false) implies (value != null)
+        returns(false) implies (value_1 != null)
     }
-    return value != null
+    return value_1 != null
 }
 
-fun funWithReturnsFalseAndNullCheck(value: Number?): Boolean {
+fun funWithReturnsFalseAndNullCheck(value_1: Number?): Boolean {
     contract {
-        returns(false) implies (value == null)
+        returns(false) implies (value_1 == null)
     }
-    return value == null
+    return value_1 == null
 }
 
 fun funWithReturnsNull(cond: Boolean): Boolean? {
@@ -176,32 +176,32 @@ fun funWithReturnsNullAndInvertCondition(cond: Boolean): Boolean? {
     return !cond
 }
 
-fun funWithReturnsNullAndTypeCheck(value: Any?): Boolean? {
+fun funWithReturnsNullAndTypeCheck(value_1: Any?): Boolean? {
     contract {
-        returns(null) implies (value is String)
+        returns(null) implies (value_1 is String)
     }
-    return value is String
+    return value_1 is String
 }
 
-fun funWithReturnsNullAndInvertTypeCheck(value: Any?): Boolean? {
+fun funWithReturnsNullAndInvertTypeCheck(value_1: Any?): Boolean? {
     contract {
-        returns(null) implies (value !is String)
+        returns(null) implies (value_1 !is String)
     }
-    return value !is String
+    return value_1 !is String
 }
 
-fun funWithReturnsNullAndNotNullCheck(value: Number?): Boolean? {
+fun funWithReturnsNullAndNotNullCheck(value_1: Number?): Boolean? {
     contract {
-        returns(null) implies (value != null)
+        returns(null) implies (value_1 != null)
     }
-    return value != null
+    return value_1 != null
 }
 
-fun funWithReturnsNullAndNullCheck(value: Number?): Boolean? {
+fun funWithReturnsNullAndNullCheck(value_1: Number?): Boolean? {
     contract {
-        returns(null) implies (value == null)
+        returns(null) implies (value_1 == null)
     }
-    return value == null
+    return value_1 == null
 }
 
 fun funWithReturnsNotNull(cond: Boolean): Boolean? {
@@ -218,30 +218,30 @@ fun funWithReturnsNotNullAndInvertCondition(cond: Boolean): Boolean? {
     return !cond
 }
 
-fun funWithReturnsNotNullAndTypeCheck(value: Any?): Boolean? {
+fun funWithReturnsNotNullAndTypeCheck(value_1: Any?): Boolean? {
     contract {
-        returnsNotNull() implies (value is String)
+        returnsNotNull() implies (value_1 is String)
     }
-    return value is String
+    return value_1 is String
 }
 
-fun funWithReturnsNotNullAndInvertTypeCheck(value: Any?): Boolean? {
+fun funWithReturnsNotNullAndInvertTypeCheck(value_1: Any?): Boolean? {
     contract {
-        returnsNotNull() implies (value !is String)
+        returnsNotNull() implies (value_1 !is String)
     }
-    return value !is String
+    return value_1 !is String
 }
 
-fun funWithReturnsNotNullAndNotNullCheck(value: Number?): Boolean? {
+fun funWithReturnsNotNullAndNotNullCheck(value_1: Number?): Boolean? {
     contract {
-        returnsNotNull() implies (value != null)
+        returnsNotNull() implies (value_1 != null)
     }
-    return value != null
+    return value_1 != null
 }
 
-fun funWithReturnsNotNullAndNullCheck(value: Number?): Boolean? {
+fun funWithReturnsNotNullAndNullCheck(value_1: Number?): Boolean? {
     contract {
-        returnsNotNull() implies (value == null)
+        returnsNotNull() implies (value_1 == null)
     }
-    return value == null
+    return value_1 == null
 }

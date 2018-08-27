@@ -10,7 +10,7 @@ KtFile: 7.1.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -27,7 +27,7 @@ KtFile: 7.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('value_1')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')
@@ -50,7 +50,7 @@ KtFile: 7.1.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -67,7 +67,7 @@ KtFile: 7.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('value_1')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')
@@ -97,7 +97,7 @@ KtFile: 7.1.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -114,7 +114,7 @@ KtFile: 7.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('value_1')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')
@@ -177,7 +177,7 @@ KtFile: 7.1.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -194,7 +194,7 @@ KtFile: 7.1.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         REFERENCE_EXPRESSION
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('value_1')
         PsiElement(RPAR)(')')
         PsiWhiteSpace(' ')
         PsiElement(LBRACE)('{')

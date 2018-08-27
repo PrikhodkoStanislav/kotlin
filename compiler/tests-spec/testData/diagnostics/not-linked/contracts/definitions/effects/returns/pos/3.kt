@@ -46,19 +46,19 @@ fun <T : Boolean>T.case_4(): Boolean? {
 }
 
 // CASE DESCRIPTION: type checking condition on the function parameter
-fun case_5(value: Any?) {
+fun case_5(value_1: Any?) {
     contract {
-        returns() implies (value is String)
+        returns() implies (value_1 is String)
     }
-    if (value !is String) throw Exception()
+    if (value_1 !is String) throw Exception()
 }
 
 // CASE DESCRIPTION: invert type checking condition on the function nullable parameter
-fun case_6(value: Any?) {
+fun case_6(value_1: Any?) {
     contract {
-        returns() implies (value !is String?)
+        returns() implies (value_1 !is String?)
     }
-    if (value is String?) throw Exception()
+    if (value_1 is String?) throw Exception()
 }
 
 // CASE DESCRIPTION: type checking condition on the currect object (extension function)
@@ -86,19 +86,19 @@ fun <T : Number?>T.case_9(): Boolean? {
 }
 
 // CASE DESCRIPTION: null check condition on the function parameter
-fun case_10(value: Any?) {
+fun case_10(value_1: Any?) {
     contract {
-        returns() implies (value == null)
+        returns() implies (value_1 == null)
     }
-    if (value != null) throw Exception()
+    if (value_1 != null) throw Exception()
 }
 
 // CASE DESCRIPTION: not-null check condition on the function parameter
-fun case_11(value: Any?): Boolean? {
+fun case_11(value_1: Any?): Boolean? {
     contract {
-        returns(null) implies (value != null)
+        returns(null) implies (value_1 != null)
     }
-    return if (value != null) null else true
+    return if (value_1 != null) null else true
 }
 
 // CASE DESCRIPTION: null check condition on the not-null currect object (extension function)
@@ -146,7 +146,7 @@ class SampleClass : _ClassLevel3() {
         return this@case_16 is Number
     }
 
-    // CASE DESCRIPTION: invert boolean value check on the current extensible class of Boolean type (generic extension function within class)
+    // CASE DESCRIPTION: invert boolean value_1 check on the current extensible class of Boolean type (generic extension function within class)
     fun <T : Boolean>T.case_17() {
         contract {
             returns() implies (!this@case_17)

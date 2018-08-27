@@ -218,9 +218,9 @@ import contracts.*
             nullCheck:receiver
     smartcast:notNull,string
  */
-fun case_1(value1: Any?) {
-    value1.case_1()
-    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_1(value_1: Any?) {
+    value_1.case_1()
+    println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -232,9 +232,9 @@ fun case_1(value1: Any?) {
             nullCheck:receiver
     smartcast:notNull,int
  */
-fun case_2(value1: Number?) {
-    value1.case_2()
-    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_2(value_1: Number?) {
+    value_1.case_2()
+    println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 /*
@@ -246,9 +246,9 @@ fun case_2(value1: Number?) {
             nullCheck:receiver
     smartcast:notNull,int
  */
-fun case_3(value1: Any?) {
-    value1.case_3()
-    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_3(value_1: Any?) {
+    value_1.case_3()
+    println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 /*
@@ -272,11 +272,11 @@ fun case_3(value1: Any?) {
             nullCheck:receiver
     smartcast:notNull,string
  */
-fun case_4(value1: Any?, value2: Any?, value3: Any?) {
-    when { value1.case_4_1() -> println(value1.<!UNRESOLVED_REFERENCE!>length<!>) }
-    when { !value2.case_4_2() -> println(value2.<!UNRESOLVED_REFERENCE!>length<!>) }
-    when { value3.case_4_3() != null -> println(value3.<!UNRESOLVED_REFERENCE!>length<!>) }
-    when { value3.case_4_4() == null -> println(value3.<!UNRESOLVED_REFERENCE!>length<!>) }
+fun case_4(value_1: Any?, value_2: Any?, value_3: Any?) {
+    when { value_1.case_4_1() -> println(value_1.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { !value_2.case_4_2() -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { value_3.case_4_3() != null -> println(value_3.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { value_3.case_4_4() == null -> println(value_3.<!UNRESOLVED_REFERENCE!>length<!>) }
 }
 
 /*
@@ -300,11 +300,11 @@ fun case_4(value1: Any?, value2: Any?, value3: Any?) {
             nullCheck:receiver
     smartcast:notNull,int
  */
-fun case_5(value1: Number?, value2: Number?, value3: Number?) {
-    if (value1.case_5_1()) println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (!value2.case_5_2()) println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value3.case_5_3() != null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value3.case_5_4() == null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_5(value_1: Number?, value_2: Number?, value_3: Number?) {
+    if (value_1.case_5_1()) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (!value_2.case_5_2()) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_3.case_5_3() != null) println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_3.case_5_4() == null) println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 /*
@@ -328,9 +328,9 @@ fun case_5(value1: Number?, value2: Number?, value3: Number?) {
             nullCheck:receiver
     smartcast:notNull,int
  */
-fun case_6(value1: Any?, value2: Any?, value3: Any?) {
-    if (value1.case_6_1()) println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (!value2.case_6_2()) println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value3.case_6_3() == null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value3.case_6_4() != null) println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_6(value_1: Any?, value_2: Any?, value_3: Any?) {
+    if (value_1.case_6_1()) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (!value_2.case_6_2()) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_3.case_6_3() == null) println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_3.case_6_4() != null) println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }

@@ -21,17 +21,17 @@ fun Any?.case_1(): Boolean {
 }
 
 // CASE DESCRIPTION: return effect with complex condition composed of type checking conditions of function parameters
-fun case_2(value1: Any?, value2: Any?, value3: Any?) {
+fun case_2(value_1: Any?, value_2: Any?, value_3: Any?) {
     contract {
-        returns() implies (value1 is String? || value2 !is Int && value3 !is Nothing?)
+        returns() implies (value_1 is String? || value_2 !is Int && value_3 !is Nothing?)
     }
-    if (!(value1 is String? || value2 !is Int && value3 !is Nothing?)) throw Exception()
+    if (!(value_1 is String? || value_2 !is Int && value_3 !is Nothing?)) throw Exception()
 }
 
 // CASE DESCRIPTION: return effect with complex condition composed of null-check conditions of function parameters
-fun case_3(value1: Any?, value2: Any?, value3: Any?) {
+fun case_3(value_1: Any?, value_2: Any?, value_3: Any?) {
     contract {
-        returns() implies (value1 == null || value2 != null && value3 == null)
+        returns() implies (value_1 == null || value_2 != null && value_3 == null)
     }
-    if (!(value1 == null || value2 != null && value3 == null)) throw Exception()
+    if (!(value_1 == null || value_2 != null && value_3 == null)) throw Exception()
 }

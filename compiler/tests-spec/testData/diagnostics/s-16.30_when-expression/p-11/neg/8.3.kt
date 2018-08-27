@@ -12,7 +12,7 @@
  */
 
 // CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class without null-check branch.
-fun case_1(value: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+fun case_1(value_1: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     _EnumClass.EAST -> ""
     _EnumClass.SOUTH -> ""
     _EnumClass.NORTH -> ""
@@ -20,7 +20,7 @@ fun case_1(value: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class with null-check branch, but all possible values not covered.
-fun case_2(value: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+fun case_2(value_1: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     _EnumClass.EAST -> ""
     _EnumClass.SOUTH -> ""
     _EnumClass.NORTH -> ""
@@ -28,20 +28,20 @@ fun case_2(value: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class with null-check branch, but all possible values not covered.
-fun case_3(value: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+fun case_3(value_1: _EnumClass?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     _EnumClass.EAST, null, _EnumClass.SOUTH, _EnumClass.NORTH -> ""
 }
 
 // CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class without branches.
-fun case_4(value: _EnumClassSingle): Int = <!NO_ELSE_IN_WHEN!>when<!>(value) {}
+fun case_4(value_1: _EnumClassSingle): Int = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {}
 
-// CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class (with only one value) without null-check branch.
-fun case_5(value: _EnumClassSingle?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class (with only one value_1) without null-check branch.
+fun case_5(value_1: _EnumClassSingle?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     _EnumClassSingle.EVERYTHING -> ""
 }
 
-// CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class (with only one value) with null-check branch, but value not covered.
-fun case_6(value: _EnumClassSingle?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+// CASE DESCRIPTION: Checking for not exhaustive 'when' on the Enum class (with only one value_1) with null-check branch, but value_1 not covered.
+fun case_6(value_1: _EnumClassSingle?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     null -> ""
 }
 
@@ -49,6 +49,6 @@ fun case_6(value: _EnumClassSingle?): String = <!NO_ELSE_IN_WHEN!>when<!>(value)
  CASE DESCRIPTION: Checking for not exhaustive 'when' on the empty nullable enum class.
  UNEXPECTED BEHAVIOUR
  */
-fun case_7(value: _EnumClassEmpty?): String = <!NO_ELSE_IN_WHEN!>when<!>(value) {
+fun case_7(value_1: _EnumClassEmpty?): String = <!NO_ELSE_IN_WHEN!>when<!>(value_1) {
     null -> ""
 }

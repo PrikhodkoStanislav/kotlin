@@ -20,17 +20,17 @@
     smartcast:inited
     when:nonExhaustive
  */
-fun case_1(value1: _EnumClass?) {
-    val value2: Int
+fun case_1(value_1: _EnumClass?) {
+    val value_2: Int
 
-    <!NON_EXHAUSTIVE_WHEN!>when<!> (value1) {
-        _EnumClass.NORTH -> funWithExactlyOnceCallsInPlace { value2 = 1 }
-        _EnumClass.SOUTH -> funWithExactlyOnceCallsInPlace { value2 = 2 }
-        _EnumClass.EAST -> funWithExactlyOnceCallsInPlace { value2 = 4 }
-        null -> funWithExactlyOnceCallsInPlace { value2 = 5 }
+    <!NON_EXHAUSTIVE_WHEN!>when<!> (value_1) {
+        _EnumClass.NORTH -> funWithExactlyOnceCallsInPlace { value_2 = 1 }
+        _EnumClass.SOUTH -> funWithExactlyOnceCallsInPlace { value_2 = 2 }
+        _EnumClass.EAST -> funWithExactlyOnceCallsInPlace { value_2 = 4 }
+        null -> funWithExactlyOnceCallsInPlace { value_2 = 5 }
     }
 
-    <!UNINITIALIZED_VARIABLE!>value2<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>value_2<!>.inc()
 }
 
 /*
@@ -43,20 +43,20 @@ fun case_1(value1: _EnumClass?) {
     smartcast:inited
     if:else,elseIf
  */
-fun case_2(value1: Any?) {
-    val value2: Int
+fun case_2(value_1: Any?) {
+    val value_2: Int
 
     funWithAtMostOnceCallsInPlace {
-        if (value1 is String) {
-            value2 = 0
-        } else if (value1 == null) {
-            value2 = 1
+        if (value_1 is String) {
+            value_2 = 0
+        } else if (value_1 == null) {
+            value_2 = 1
         } else {
-            funWithAtMostOnceCallsInPlace { value2 = 2 }
+            funWithAtMostOnceCallsInPlace { value_2 = 2 }
         }
-        <!UNINITIALIZED_VARIABLE!>value2<!>.dec()
+        <!UNINITIALIZED_VARIABLE!>value_2<!>.dec()
     }
-    value2.dec()
+    value_2.dec()
 }
 
 /*
@@ -71,21 +71,21 @@ fun case_2(value1: Any?) {
         fields:init,uninitialized
         init
  */
-class case_3(value1: Any?) {
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value2: Int<!>
+class case_3(value_1: Any?) {
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value_2: Int<!>
 
     init {
-        if (value1 is String) {
-            funWithUnknownCallsInPlace { value2 = 0 }
-            <!UNINITIALIZED_VARIABLE!>value2<!>.div(10)
-        } else if (value1 == null) {
-            funWithAtLeastOnceCallsInPlace { value2 = 1 }
-            value2.div(10)
+        if (value_1 is String) {
+            funWithUnknownCallsInPlace { value_2 = 0 }
+            <!UNINITIALIZED_VARIABLE!>value_2<!>.div(10)
+        } else if (value_1 == null) {
+            funWithAtLeastOnceCallsInPlace { value_2 = 1 }
+            value_2.div(10)
         } else {
-            value2 = 2
+            value_2 = 2
         }
 
-        <!UNINITIALIZED_VARIABLE!>value2<!>.div(10)
+        <!UNINITIALIZED_VARIABLE!>value_2<!>.div(10)
     }
 }
 
@@ -99,22 +99,22 @@ class case_3(value1: Any?) {
     smartcast:inited
     when:exhaustive
  */
-fun case_4(value1: _EnumClassSingle?) {
-    var value2: Int
+fun case_4(value_1: _EnumClassSingle?) {
+    var value_2: Int
 
     funWithAtMostOnceCallsInPlace {
-        when (value1) {
+        when (value_1) {
             _EnumClassSingle.EVERYTHING -> {
-                funWithExactlyOnceCallsInPlace { value2 = 1 }
-                ++value2
+                funWithExactlyOnceCallsInPlace { value_2 = 1 }
+                ++value_2
             }
             null -> {
-                funWithUnknownCallsInPlace { value2 = 2 }
+                funWithUnknownCallsInPlace { value_2 = 2 }
             }
         }
-        <!UNINITIALIZED_VARIABLE!>value2<!>.minus(5)
+        <!UNINITIALIZED_VARIABLE!>value_2<!>.minus(5)
     }
-    value2.minus(5)
+    value_2.minus(5)
 }
 
 /*
@@ -127,15 +127,15 @@ fun case_4(value1: _EnumClassSingle?) {
     try
  */
 fun case_5() {
-    var value2: Int
+    var value_2: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value2 = 10 }
+        funWithAtLeastOnceCallsInPlace { value_2 = 10 }
     } catch (e: Exception) {
-        funWithAtMostOnceCallsInPlace { value2 = 1 }
+        funWithAtMostOnceCallsInPlace { value_2 = 1 }
     }
 
-    <!UNINITIALIZED_VARIABLE!>value2<!>++
+    <!UNINITIALIZED_VARIABLE!>value_2<!>++
 }
 
 /*
@@ -148,17 +148,17 @@ fun case_5() {
     throw
  */
 fun case_6() {
-    var value2: Int
+    var value_2: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value2 = 10 }
+        funWithAtLeastOnceCallsInPlace { value_2 = 10 }
     } catch (e: Exception) {
         throw Exception()
     } finally {
-        println(<!UNINITIALIZED_VARIABLE!>value2<!>.inc())
+        println(<!UNINITIALIZED_VARIABLE!>value_2<!>.inc())
     }
 
-    value2++
+    value_2++
 }
 
 /*
@@ -171,19 +171,19 @@ fun case_6() {
     return
  */
 fun case_7() {
-    var value1: Int
+    var value_1: Int
 
     try {
-        funWithAtLeastOnceCallsInPlace { value1 = 10 }
+        funWithAtLeastOnceCallsInPlace { value_1 = 10 }
     } catch (e: Exception) {
         try {
-            funWithAtLeastOnceCallsInPlace { value1 = 10 }
+            funWithAtLeastOnceCallsInPlace { value_1 = 10 }
         } catch (e: Exception) {
-            funWithAtMostOnceCallsInPlace { value1 = 10 }
+            funWithAtMostOnceCallsInPlace { value_1 = 10 }
         }
     }
 
-    println(<!UNINITIALIZED_VARIABLE!>value1<!>.inc())
+    println(<!UNINITIALIZED_VARIABLE!>value_1<!>.inc())
 }
 
 /*

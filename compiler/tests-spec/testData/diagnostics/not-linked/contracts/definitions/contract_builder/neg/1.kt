@@ -14,7 +14,7 @@ import kotlin.internal.contracts.*
 
 // CASE DESCRIPTION: assignment statement before contract description
 inline fun case_1(block: () -> Unit) {
-    val value = 1
+    val value_1 = 1
     <!CONTRACT_NOT_ALLOWED!>contract { }<!>
     return block()
 }

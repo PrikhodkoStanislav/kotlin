@@ -5,26 +5,26 @@
  PARAGRAPH: 3
  SENTENCE: [2] Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 2
- DESCRIPTION: 'When' without bound value and with invalid list of the boolean conditions in 'when entry'.
+ DESCRIPTION: 'When' without bound value_1 and with invalid list of the boolean conditions in 'when entry'.
  */
 
 // CASE DESCRIPTION: 'When' with list of expressions and an extra comma at the end.
-fun case_1(value1: Int, value2: Any, value3: IntRange): String {
+fun case_1(value_1: Int, value_2: Any, value_3: IntRange): String {
     when {
-        value1 == 21, -> return ""
-        value2 is Int, value2 is String, -> return ""
-        value1 in -100..100, value in value3, -> return ""
+        value_1 == 21, -> return ""
+        value_2 is Int, value_2 is String, -> return ""
+        value_1 in -100..100, value_1 in value_3, -> return ""
     }
 
     return ""
 }
 
 // CASE DESCRIPTION: 'When' with list of expressions and an double comma.
-fun case_2(value1: Int, value2: Any, value3: IntRange): String {
+fun case_2(value_1: Int, value_2: Any, value_3: IntRange): String {
     when {
-        value1 == 21, , -> return ""
-        value2 is Int, ,value2 is String -> return ""
-        value1 in -100..100, ,value in value3 -> return ""
+        value_1 == 21, , -> return ""
+        value_2 is Int, ,value_2 is String -> return ""
+        value_1 in -100..100, ,value_1 in value_3 -> return ""
     }
 
     return ""
@@ -40,21 +40,21 @@ fun case_3(): String {
 }
 
 // CASE DESCRIPTION: 'When' with list of expressions and a comma at the beginning.
-fun case_4(value1: Int, value2: Any, value3: IntRange): String {
+fun case_4(value_1: Int, value_2: Any, value_3: IntRange): String {
     when {
-        , value1 == 21 -> return ""
-        , value2 is Int, value2 is String -> return ""
-        , value1 in -100..100, value in value3 -> return ""
+        , value_1 == 21 -> return ""
+        , value_2 is Int, value_2 is String -> return ""
+        , value_1 in -100..100, value_1 in value_3 -> return ""
     }
 
     return ""
 }
 
 // CASE DESCRIPTION: 'When' with list of expressions and missed comma.
-fun case_5(value1: Int, value2: Any): String {
+fun case_5(value_1: Int, value_2: Any): String {
     when {
-        value2 is Int value2 is String -> return ""
-        value1 in -100..100 value in value3 -> return ""
+        value_2 is Int value_2 is String -> return ""
+        value_1 in -100..100 value_1 in value_3 -> return ""
     }
 
     return ""

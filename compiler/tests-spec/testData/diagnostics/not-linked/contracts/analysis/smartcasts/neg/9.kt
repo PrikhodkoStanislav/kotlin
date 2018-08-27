@@ -28,18 +28,18 @@ fun case_2(arg: Int?) {
 
 // CASE KEYWORDS: notNullAssignment, notNullSmartCast, exactlyOnce, callsInPlace
 fun case_3() {
-    val value: Boolean?
+    val value_1: Boolean?
 
-    funWithExactlyOnceCallsInPlace { value = false }
+    funWithExactlyOnceCallsInPlace { value_1 = false }
 
-    value<!UNSAFE_CALL!>.<!>not()
+    value_1<!UNSAFE_CALL!>.<!>not()
 }
 
 // CASE KEYWORDS: notNullAssignment, notNullSmartCast, atLeastOnce, callsInPlace
 fun case_4() {
-    val value: Boolean?
+    val value_1: Boolean?
 
-    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value<!> = true }
+    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = true }
 
-    value<!UNSAFE_CALL!>.<!>not()
+    value_1<!UNSAFE_CALL!>.<!>not()
 }

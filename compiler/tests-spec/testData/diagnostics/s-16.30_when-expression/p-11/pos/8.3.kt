@@ -11,7 +11,7 @@
  DESCRIPTION: Check when exhaustive when possible subtypes of the sealed class are covered and contains a null check.
  */
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class subtypes and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class subtypes and null value_1 covered).
 fun case_1(expr: _SealedClass?): Int = when (expr) {
     is _SealedChild1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.number
     is _SealedChild2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.e1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.e2
@@ -19,13 +19,13 @@ fun case_1(expr: _SealedClass?): Int = when (expr) {
     null -> 0
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (sealed class itself and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (sealed class itself and null value_1 covered).
 fun case_2(expr: _SealedClass?): String = when (expr) {
     is _SealedClass -> ""
     null -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class with methods subtypes and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class with methods subtypes and null value_1 covered).
 fun case_3(expr: _SealedClassWithMethods?): String = when (expr) {
     is _SealedWithMethodsChild1 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m1()
     is _SealedWithMethodsChild2 -> <!DEBUG_INFO_SMARTCAST!>expr<!>.m2()
@@ -33,7 +33,7 @@ fun case_3(expr: _SealedClassWithMethods?): String = when (expr) {
     null -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (all objects covered using implicit equality operator and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all objects covered using implicit equality operator and null value_1 covered).
 fun case_4(expr: _SealedClassWithObjects?): String = when (expr) {
     _SealedWithObjectsChild1 -> ""
     _SealedWithObjectsChild2 -> ""
@@ -41,8 +41,8 @@ fun case_4(expr: _SealedClassWithObjects?): String = when (expr) {
     null -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects covered + null value covered).
-fun case_5(value: _SealedClassMixed?): String = when (value) {
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects covered + null value_1 covered).
+fun case_5(value_1: _SealedClassMixed?): String = when (value_1) {
     is _SealedMixedChild1 -> ""
     is _SealedMixedChild2 -> ""
     is _SealedMixedChild3 -> ""
@@ -53,10 +53,10 @@ fun case_5(value: _SealedClassMixed?): String = when (value) {
 }
 
 /*
- CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects (using type checking operator) covered + null value covered).
+ CASE DESCRIPTION: Checking for exhaustive 'when' (all subtypes and objects (using type checking operator) covered + null value_1 covered).
  DISCUSSION: is it correct that objects can be checked using the type checking operator?
  */
-fun case_6(value: _SealedClassMixed?): String = when (value) {
+fun case_6(value_1: _SealedClassMixed?): String = when (value_1) {
     is _SealedMixedChild1 -> ""
     is _SealedMixedChild2 -> ""
     is _SealedMixedChild3 -> ""
@@ -74,8 +74,8 @@ sealed class case_7_SealedClassWithCustomEquals {
     override fun equals(other: Any?) = false
 }
 object case_7_objectWithCustomEquals : case_7_SealedClassWithCustomEquals()
-fun case_7(value: case_7_SealedClassWithCustomEquals) {
-    return when (value) {
+fun case_7(value_1: case_7_SealedClassWithCustomEquals) {
+    return when (value_1) {
         case_7_objectWithCustomEquals -> {}
     }
 }
@@ -89,8 +89,8 @@ sealed class case_8_SealedClassWithCustomEquals {
 }
 object case_8_objectWithCustomEquals : case_8_SealedClassWithCustomEquals()
 class case_8_classWithCustomEquals : case_8_SealedClassWithCustomEquals()
-fun case_8(value: case_8_SealedClassWithCustomEquals) {
-    return when (value) {
+fun case_8(value_1: case_8_SealedClassWithCustomEquals) {
+    return when (value_1) {
         case_8_objectWithCustomEquals -> {}
         is case_8_classWithCustomEquals -> {}
     }
@@ -105,8 +105,8 @@ sealed class case_9_SealedClassWithCustomEquals {
 
 object case_9_objectWithCustomEquals : case_9_SealedClassWithCustomEquals()
 
-fun case_9(value: case_9_SealedClassWithCustomEquals) {
-    return when (value) {
+fun case_9(value_1: case_9_SealedClassWithCustomEquals) {
+    return when (value_1) {
         is case_9_objectWithCustomEquals -> {}
     }
 }

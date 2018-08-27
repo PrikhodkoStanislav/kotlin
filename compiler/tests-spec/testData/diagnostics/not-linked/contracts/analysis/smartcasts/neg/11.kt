@@ -31,55 +31,55 @@ fun case_2(x: Any?): Boolean {
     return x !is Number?
 }
 
-fun case_16_1(value1: Any?, value2: Any?): Boolean {
-    contract { returns(true) implies (value1 !is String || value2 !is Number) }
-    return value1 !is String || value2 !is Number
+fun case_16_1(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(true) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 !is String || value_2 !is Number
 }
-fun case_16_2(value1: Any?, value2: Any?): Boolean {
-    contract { returns(false) implies (value1 !is String || value2 !is Number) }
-    return value1 is String && value2 is Number
+fun case_16_2(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 is String && value_2 is Number
 }
-fun case_16_3(value1: Any?, value2: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 !is String || value2 !is Number) }
-    return value1 is String && value2 is Number
+fun case_16_3(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 !is String || value_2 !is Number) }
+    return value_1 is String && value_2 is Number
 }
-fun case_16_4(value1: Any?, value2: Any?): Boolean? {
-    contract { returns(null) implies (value1 !is String || value2 !is Number) }
-    return value1 is String && value2 is Number
-}
-
-fun case_17_1(value1: Any?, value2: Any?): Boolean {
-    contract { returns(true) implies (value1 !is String || value2 != null) }
-    return value1 !is String || value2 != null
-}
-fun case_17_2(value1: Any?, value2: Any?): Boolean {
-    contract { returns(false) implies (value1 !is String || value2 != null) }
-    return value1 is String && value2 == null
-}
-fun case_17_3(value1: Any?, value2: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 !is String || value2 != null) }
-    return value1 is String && value2 == null
-}
-fun case_17_4(value1: Any?, value2: Any?): Boolean? {
-    contract { returns(null) implies (value1 !is String || value2 != null) }
-    return value1 is String && value2 == null
+fun case_16_4(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returns(null) implies (value_1 !is String || value_2 !is Number) }
+    return value_1 is String && value_2 is Number
 }
 
-fun case_18_1(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
-    contract { returns() implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null
+fun case_17_1(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(true) implies (value_1 !is String || value_2 != null) }
+    return value_1 !is String || value_2 != null
 }
-fun case_18_2(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean {
-    contract { returns(false) implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
+fun case_17_2(value_1: Any?, value_2: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is String || value_2 != null) }
+    return value_1 is String && value_2 == null
 }
-fun case_18_3(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
-    contract { returnsNotNull() implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
+fun case_17_3(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 !is String || value_2 != null) }
+    return value_1 is String && value_2 == null
 }
-fun case_18_4(value1: Any?, value2: Any?, value3: Any?, value4: Any?): Boolean? {
-    contract { returns(null) implies (value1 !is Float? || value1 == null || value2 == null || value3 == null || value4 == null) }
-    return value1 is Float? && value1 != null && value2 != null && value3 != null && value4 != null
+fun case_17_4(value_1: Any?, value_2: Any?): Boolean? {
+    contract { returns(null) implies (value_1 !is String || value_2 != null) }
+    return value_1 is String && value_2 == null
+}
+
+fun case_18_1(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
+    contract { returns() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
+}
+fun case_18_2(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
+    contract { returns(false) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+}
+fun case_18_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
+    contract { returnsNotNull() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+}
+fun case_18_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
+    contract { returns(null) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
 }
 
 fun <T> T.case_19_1(): Boolean {
@@ -221,17 +221,17 @@ inline fun <reified T : Any?> T?.case_25_3(): Boolean? {
     return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
 }
 
-fun <T> T?.case_26_1(value: Int?): Boolean {
-    contract { returns(false) implies (this@case_26_1 == null || this@case_26_1 !is String || value == null) }
-    return this != null && this is String && value != null
+fun <T> T?.case_26_1(value_1: Int?): Boolean {
+    contract { returns(false) implies (this@case_26_1 == null || this@case_26_1 !is String || value_1 == null) }
+    return this != null && this is String && value_1 != null
 }
-fun <T> T?.case_26_2(value: Int?): Boolean? {
-    contract { returnsNotNull() implies (this@case_26_2 == null || this@case_26_2 !is String || value == null) }
-    return this != null && this is String && value != null
+fun <T> T?.case_26_2(value_1: Int?): Boolean? {
+    contract { returnsNotNull() implies (this@case_26_2 == null || this@case_26_2 !is String || value_1 == null) }
+    return this != null && this is String && value_1 != null
 }
-fun <T> T?.case_26_3(value: Int?): Boolean? {
-    contract { returns(null) implies (this@case_26_3 == null || this@case_26_3 !is String || value == null) }
-    return this != null && this is String && value != null
+fun <T> T?.case_26_3(value_1: Int?): Boolean? {
+    contract { returns(null) implies (this@case_26_3 == null || this@case_26_3 !is String || value_1 == null) }
+    return this != null && this is String && value_1 != null
 }
 
 // FILE: usages.kt
@@ -256,347 +256,351 @@ fun case_4(number: Int?) {
     if (!funWithReturnsFalseAndNotNullCheck(number)) number<!UNSAFE_CALL!>.<!>inc()
 }
 
-fun case_5(value: Any?) {
-    if (!funWithReturnsTrue(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_5(value_1: Any?) {
+    if (!funWithReturnsTrue(value_1 !is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_6(value: Any?) {
-    if (!funWithReturnsTrueAndInvertCondition(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalse(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalseAndInvertCondition(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNotNullAndInvertCondition(value !is String) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNullAndInvertCondition(value !is String) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_6(value_1: Any?) {
+    if (!funWithReturnsTrueAndInvertCondition(value_1 is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalse(value_1 !is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalseAndInvertCondition(value_1 is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNotNullAndInvertCondition(value_1 !is String) != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNullAndInvertCondition(value_1 !is String) == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_7(value: Any?) {
-    if (!funWithReturnsTrue(value == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_7(value_1: Any?) {
+    if (!funWithReturnsTrue(value_1 == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_8(value: Any?) {
-    if (!funWithReturnsTrueAndInvertCondition(value != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalse(value == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalseAndInvertCondition(value != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_8(value_1: Any?) {
+    if (!funWithReturnsTrueAndInvertCondition(value_1 != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalse(value_1 == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalseAndInvertCondition(value_1 != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_9(value: Any?) {
-    if (!funWithReturnsTrueAndInvertTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalseAndInvertTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_9(value_1: Any?) {
+    if (!funWithReturnsTrueAndInvertTypeCheck(value_1)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalseAndInvertTypeCheck(value_1)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_10(value: Number?) {
-    if (!funWithReturnsTrueAndNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (funWithReturnsFalseAndNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (funWithReturnsFalseAndNotNullCheck(value)) println(value)
-    if (!(funWithReturnsNotNullAndNullCheck(value) != null)) println(value)
-    if (!(funWithReturnsNullAndNullCheck(value) == null)) println(value)
+fun case_10(value_1: Number?) {
+    if (!funWithReturnsTrueAndNullCheck(value_1)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (funWithReturnsFalseAndNullCheck(value_1)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (funWithReturnsFalseAndNotNullCheck(value_1)) println(value_1)
+    if (!(funWithReturnsNotNullAndNullCheck(value_1) != null)) println(value_1)
+    if (!(funWithReturnsNullAndNullCheck(value_1) == null)) println(value_1)
 }
 
-fun case_11(value1: Any?, value2: Any?) {
-    if (!funWithReturnsTrueAndInvertCondition(value1 is String && value2 is Number)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    }
-}
-
-fun case_12(value1: Any?, value2: Any?) {
-    if (!funWithReturnsTrue(value1 !is String || value2 !is Number)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    }
-    if (funWithReturnsFalse(value1 !is String || value2 !is Number)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_11(value_1: Any?, value_2: Any?) {
+    if (!funWithReturnsTrueAndInvertCondition(value_1 is String && value_2 is Number)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
-fun case_13(value1: Any?, value2: Any?) {
-    if (!funWithReturnsTrue(value1 !is String || value2 != null)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_12(value_1: Any?, value_2: Any?) {
+    if (!funWithReturnsTrue(value_1 !is String || value_2 !is Number)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsFalse(value1 !is Float? || value1 == null || value2 == null)) {
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    }
-    if (funWithReturnsNotNull(value1 !is String || value2 !is Number) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    }
-    if (funWithReturnsNull(value1 !is String || value2 !is Number) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsFalse(value_1 !is String || value_2 !is Number)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
-fun case_14(value1: Any?, value2: Any?) {
-    if (!funWithReturnsTrueAndInvertCondition(value1 is Float? && value1 != null && value2 != null)) {
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_13(value_1: Any?, value_2: Any?) {
+    if (!funWithReturnsTrue(value_1 !is String || value_2 != null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsFalseAndInvertCondition(value1 is String && value2 is Number)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsFalse(value_1 !is Float? || value_1 == null || value_2 == null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsFalseAndInvertCondition(value1 is String && value2 == null)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsNotNull(value_1 !is String || value_2 !is Number) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 is Number) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsNull(value_1 !is String || value_2 !is Number) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNotNullAndInvertCondition(value1 is String && value2 == null) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+}
+
+fun case_14(value_1: Any?, value_2: Any?) {
+    if (!funWithReturnsTrueAndInvertCondition(value_1 is Float? && value_1 != null && value_2 != null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNotNull(value1 is Float? && value1 != null && value2 != null) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsFalseAndInvertCondition(value_1 is String && value_2 is Number)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNullAndInvertCondition(value1 is String && value2 is Number) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsFalseAndInvertCondition(value_1 is String && value_2 == null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNullAndInvertCondition(value1 is String && value2 == null) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsNotNullAndInvertCondition(value_1 is String && value_2 is Number) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (funWithReturnsNull(value1 is Float? && value1 != null && value2 != null) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsNotNullAndInvertCondition(value_1 is String && value_2 == null) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNotNull(value_1 is Float? && value_1 != null && value_2 != null) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNullAndInvertCondition(value_1 is String && value_2 is Number) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNullAndInvertCondition(value_1 is String && value_2 == null) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    }
+    if (funWithReturnsNull(value_1 is Float? && value_1 != null && value_2 != null) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
 class case_15_class {
     val prop_1: Int? = 10
 
-    fun case_15(value1: Any?, value2: Number?) {
+    fun case_15(value_1: Any?, value_2: Number?) {
         val o = case_15_class()
-        if (!funWithReturnsTrueAndInvertCondition(value1 is Float? && value1 != null && value2 != null && o.prop_1 != null)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (!funWithReturnsTrueAndInvertCondition(value_1 is Float? && value_1 != null && value_2 != null && o.prop_1 != null)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (funWithReturnsFalse(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (funWithReturnsFalse(value_1 !is Float? || value_1 == null || value_2 == null || o.prop_1 == null || this.prop_1 == null)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (funWithReturnsNotNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) == null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (funWithReturnsNotNull(value_1 !is Float? || value_1 == null || value_2 == null || o.prop_1 == null || this.prop_1 == null) == null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (funWithReturnsNull(value1 !is Float? || value1 == null || value2 == null || o.prop_1 == null || this.prop_1 == null) != null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (funWithReturnsNull(value_1 !is Float? || value_1 == null || value_2 == null || o.prop_1 == null || this.prop_1 == null) != null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
     }
 }
 
-fun case_16(value1: Any?, value2: Any?) {
-    if (!contracts.case_16_1(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_16(value_1: Any?, value_2: Any?) {
+    if (!contracts.case_16_1(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_16_2(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_16_2(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (!(contracts.case_16_3(value1, value2) != null)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (!(contracts.case_16_3(value_1, value_2) != null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (!(contracts.case_16_4(value1, value2) == null)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (!(contracts.case_16_4(value_1, value_2) == null)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
-fun case_17(value1: Any?, value2: Any?) {
-    if (!contracts.case_17_1(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_17(value_1: Any?, value_2: Any?) {
+    if (!contracts.case_17_1(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_17_2(value1, value2)) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_17_2(value_1, value_2)) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_17_3(value1, value2) == null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_17_3(value_1, value_2) == null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
-    if (contracts.case_17_4(value1, value2) != null) {
-        println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-        println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (contracts.case_17_4(value_1, value_2) != null) {
+        println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
 class case_18_class {
     val prop_1: Int? = 10
-    fun case_18(value1: Any?, value2: Number?) {
+    fun case_18(value_1: Any?, value_2: Number?) {
         val o = case_18_class()
-        if (contracts.case_18_1(value1, value2, o.prop_1, this.prop_1)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_18_1(value_1, value_2, o.prop_1, this.prop_1)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (contracts.case_18_2(value1, value2, o.prop_1, this.prop_1)) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_18_2(value_1, value_2, o.prop_1, this.prop_1)) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (contracts.case_18_3(value1, value2, o.prop_1, this.prop_1) == null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_18_3(value_1, value_2, o.prop_1, this.prop_1) == null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
-        if (contracts.case_18_4(value1, value2, o.prop_1, this.prop_1) != null) {
-            println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
-            println(value2?.toByte())
+        if (contracts.case_18_4(value_1, value_2, o.prop_1, this.prop_1) != null) {
+            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+            println(value_2?.toByte())
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         }
     }
 }
 
-fun case_19(value1: Any?) {
-    if (!value1.case_19_1()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value1.case_19_2()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value1.case_19_3() == null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value1.case_19_4() != null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_19(value_1: Any?) {
+    if (!value_1.case_19_1()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value_1.case_19_2()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value_1.case_19_3() == null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value_1.case_19_4() != null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-fun case_20(value1: Number) {
+fun case_20(value_1: Number) {
     when {
-        !value1.case_20_1() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+        !value_1.case_20_1() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
     when {
-        value1.case_20_2() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+        value_1.case_20_2() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
     when {
-        value1.case_20_3() == null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+        value_1.case_20_3() == null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
     when {
-        value1.case_20_4() != null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    }
-}
-
-fun case_21(value1: String?, value2: String?, value3: String?, value4: String?, value5: String?, value6: String?) {
-    if (!value1.case_21_1()) println(value1)
-    if (!value2.case_21_2()) println(value2<!UNSAFE_CALL!>.<!>length)
-    if (!value3.case_21_3()) println(value3)
-        else println(value6<!UNSAFE_CALL!>.<!>length)
-    if (!value4.case_21_4()) println(value4<!UNSAFE_CALL!>.<!>length)
-        else println(value4)
-    if (value5.case_21_5() == null) println(value5)
-        else println(value5<!UNSAFE_CALL!>.<!>length)
-    if (value6.case_21_6() == null) println(value6<!UNSAFE_CALL!>.<!>length)
-        else println(value6)
-    if (value5.case_21_7() != null) println(value5)
-        else println(value5<!UNSAFE_CALL!>.<!>length)
-    if (value6.case_21_8() != null) println(value6<!UNSAFE_CALL!>.<!>length)
-        else println(value6)
-}
-
-fun case_22(value1: String?, value2: String?, value3: String?, value4: String?, value5: String?, value6: String?) {
-    when {
-        !value1.case_22_1() -> println(value1)
-    }
-    when {
-        !value2.case_22_2() -> println(value2<!UNSAFE_CALL!>.<!>length)
-    }
-    when {
-        !value3.case_22_3() -> println(value3<!UNSAFE_CALL!>.<!>length)
-        value3.case_22_3() -> println(value3)
-    }
-    when {
-        !value4.case_22_4() -> println(value4)
-        value4.case_22_4() -> println(value4<!UNSAFE_CALL!>.<!>length)
-    }
-    when {
-        value5.case_22_5() == null ->  println(value5<!UNSAFE_CALL!>.<!>length)
-        value5.case_22_5() != null ->  println(value5)
-    }
-    when {
-        value6.case_22_6() == null -> println(value6)
-        value6.case_22_6() != null -> println(value6<!UNSAFE_CALL!>.<!>length)
-    }
-    when {
-        value5.case_22_7() != null ->  println(value5<!UNSAFE_CALL!>.<!>length)
-        value5.case_22_7() == null ->  println(value5)
-    }
-    when {
-        value6.case_22_8() != null -> println(value6)
-        value6.case_22_8() == null -> println(value6<!UNSAFE_CALL!>.<!>length)
+        value_1.case_20_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
 }
 
-fun case_23(value1: Any?, value2: Any?) {
+fun case_21(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
+    if (!value_1.case_21_1()) println(value_1)
+    if (!value_2.case_21_2()) println(value_2<!UNSAFE_CALL!>.<!>length)
+    when (value_3.case_21_3()) {
+        true -> println(value_6<!UNSAFE_CALL!>.<!>length)
+        false -> println(value_3)
+    }
+    if (!value_4.case_21_4()) println(value_4<!UNSAFE_CALL!>.<!>length)
+        else println(value_4)
+    when (value_5.case_21_5() == null) {
+        true -> println(value_5)
+        false -> println(value_5<!UNSAFE_CALL!>.<!>length)
+    }
+    if (value_6.case_21_6() == null) println(value_6<!UNSAFE_CALL!>.<!>length)
+        else println(value_6)
+    if (value_5.case_21_7() != null) println(value_5)
+        else println(value_5<!UNSAFE_CALL!>.<!>length)
+    if (value_6.case_21_8() != null) println(value_6<!UNSAFE_CALL!>.<!>length)
+        else println(value_6)
+}
+
+fun case_22(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
     when {
-        value1.case_23_1() -> println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+        !value_1.case_22_1() -> println(value_1)
     }
     when {
-        value2.case_23_2() == null -> println(value2.<!UNRESOLVED_REFERENCE!>length<!>)
+        !value_2.case_22_2() -> println(value_2<!UNSAFE_CALL!>.<!>length)
     }
     when {
-        value2.case_23_3() != null -> println(value2.<!UNRESOLVED_REFERENCE!>length<!>)
+        !value_3.case_22_3() -> println(value_3<!UNSAFE_CALL!>.<!>length)
+        value_3.case_22_3() -> println(value_3)
+    }
+    when {
+        !value_4.case_22_4() -> println(value_4)
+        value_4.case_22_4() -> println(value_4<!UNSAFE_CALL!>.<!>length)
+    }
+    when {
+        value_5.case_22_5() == null ->  println(value_5<!UNSAFE_CALL!>.<!>length)
+        value_5.case_22_5() != null ->  println(value_5)
+    }
+    when {
+        value_6.case_22_6() == null -> println(value_6)
+        value_6.case_22_6() != null -> println(value_6<!UNSAFE_CALL!>.<!>length)
+    }
+    when {
+        value_5.case_22_7() != null ->  println(value_5<!UNSAFE_CALL!>.<!>length)
+        value_5.case_22_7() == null ->  println(value_5)
+    }
+    when {
+        value_6.case_22_8() != null -> println(value_6)
+        value_6.case_22_8() == null -> println(value_6<!UNSAFE_CALL!>.<!>length)
     }
 }
 
-fun case_24(value1: Number?, value2: Number?) {
-    if (value1.case_24_1())
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value2.case_24_2() == null)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value2.case_24_3() != null)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-}
-
-fun case_25(value1: Any?, value2: Any?) {
-    if (value1.case_25_1())
-        println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value2.case_25_2() != null)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value2.case_25_3() == null)
-        println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-}
-
-fun case_26(value1: Any?, value2: Int?, value3: Any?, value4: Int?) {
+fun case_23(value_1: Any?, value_2: Any?) {
     when {
-        value1.case_26_1(value2) -> {
-            println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-            println(value2<!UNSAFE_CALL!>.<!>inv())
+        value_1.case_23_1() -> println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
+    when {
+        value_2.case_23_2() == null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
+    when {
+        value_2.case_23_3() != null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>)
+    }
+}
+
+fun case_24(value_1: Number?, value_2: Number?) {
+    if (value_1.case_24_1())
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_24_2() == null)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_24_3() != null)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+}
+
+fun case_25(value_1: Any?, value_2: Any?) {
+    if (value_1.case_25_1())
+        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_25_2() != null)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_25_3() == null)
+        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+}
+
+fun case_26(value_1: Any?, value_2: Int?, value_3: Any?, value_4: Int?) {
+    when {
+        value_1.case_26_1(value_2) -> {
+            println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+            println(value_2<!UNSAFE_CALL!>.<!>inv())
         }
     }
     when {
-        value3.case_26_2(value4) == null -> {
-            println(value3.<!UNRESOLVED_REFERENCE!>length<!>)
-            println(value4<!UNSAFE_CALL!>.<!>inv())
+        value_3.case_26_2(value_4) == null -> {
+            println(value_3.<!UNRESOLVED_REFERENCE!>length<!>)
+            println(value_4<!UNSAFE_CALL!>.<!>inv())
         }
     }
     when {
-        value3.case_26_3(value4) != null -> {
-            println(value3.<!UNRESOLVED_REFERENCE!>length<!>)
-            println(value4<!UNSAFE_CALL!>.<!>inv())
+        value_3.case_26_3(value_4) != null -> {
+            println(value_3.<!UNRESOLVED_REFERENCE!>length<!>)
+            println(value_4<!UNSAFE_CALL!>.<!>inv())
         }
     }
 }
 
-fun case_27(value1: Any?, value2: Any?, value3: Any?) {
-    funWithReturnsAndInvertCondition(value1 !is String? || value2 !is Number && value3 !is Float)
-    println(value1!!.<!UNRESOLVED_REFERENCE!>length<!>)
-    println(value2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+fun case_27(value_1: Any?, value_2: Any?, value_3: Any?) {
+    funWithReturnsAndInvertCondition(value_1 !is String? || value_2 !is Number && value_3 !is Float)
+    println(value_1!!.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
 }
 
-fun case_28(value1: Any?, value2: Any?, value3: Any?) {
-    funWithReturnsAndInvertCondition(value1 !is String || value2 !is Number || <!USELESS_IS_CHECK!>value3 !is Any?<!>)
-    println(value1!!.<!UNRESOLVED_REFERENCE!>length<!>)
-    println(value2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    println(value3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
+fun case_28(value_1: Any?, value_2: Any?, value_3: Any?) {
+    funWithReturnsAndInvertCondition(value_1 !is String || value_2 !is Number || <!USELESS_IS_CHECK!>value_3 !is Any?<!>)
+    println(value_1!!.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
 }

@@ -13,25 +13,25 @@
 import kotlin.internal.contracts.*
 
 // CASE DESCRIPTION: assignment statement before contract description
-fun case_1(value1: Boolean): Boolean {
-    contract { returns(true) implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value1 == true<!>) }
+fun case_1(value_1: Boolean): Boolean {
+    contract { returns(true) implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value_1 == true<!>) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_2(value1: Boolean): Boolean {
-    contract { returnsNotNull() implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value1 != false<!>) }
+fun case_2(value_1: Boolean): Boolean {
+    contract { returnsNotNull() implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value_1 != false<!>) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_3(value1: String): Boolean {
-    contract { returns(false) implies (value1 != "") }
+fun case_3(value_1: String): Boolean {
+    contract { returns(false) implies (value_1 != "") }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_4(value1: Int): Boolean? {
-    contract { returns(null) implies (value1 == 0) }
+fun case_4(value_1: Int): Boolean? {
+    contract { returns(null) implies (value_1 == 0) }
     return null
 }

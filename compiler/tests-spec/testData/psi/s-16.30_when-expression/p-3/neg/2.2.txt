@@ -10,7 +10,7 @@ KtFile: 2.2.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value1')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -20,7 +20,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value2')
+        PsiElement(IDENTIFIER)('value_2')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -30,7 +30,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value3')
+        PsiElement(IDENTIFIER)('value_3')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -57,7 +57,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -82,7 +82,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -96,7 +96,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -123,7 +123,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -143,13 +143,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value3')
+                PsiElement(IDENTIFIER)('value_3')
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           WHEN_CONDITION_WITH_EXPRESSION
@@ -182,7 +182,7 @@ KtFile: 2.2.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value1')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -192,7 +192,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value2')
+        PsiElement(IDENTIFIER)('value_2')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -202,7 +202,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value3')
+        PsiElement(IDENTIFIER)('value_3')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -229,7 +229,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -257,7 +257,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -273,7 +273,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -296,7 +296,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -318,13 +318,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value3')
+                PsiElement(IDENTIFIER)('value_3')
           PsiWhiteSpace(' ')
           PsiElement(ARROW)('->')
           PsiWhiteSpace(' ')
@@ -405,7 +405,7 @@ KtFile: 2.2.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value1')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -415,7 +415,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value2')
+        PsiElement(IDENTIFIER)('value_2')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -425,7 +425,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value3')
+        PsiElement(IDENTIFIER)('value_3')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -455,7 +455,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -479,7 +479,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -493,7 +493,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -519,7 +519,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -539,13 +539,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value3')
+                PsiElement(IDENTIFIER)('value_3')
           PsiWhiteSpace(' ')
           PsiElement(ARROW)('->')
           PsiWhiteSpace(' ')
@@ -574,7 +574,7 @@ KtFile: 2.2.kt
     VALUE_PARAMETER_LIST
       PsiElement(LPAR)('(')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value1')
+        PsiElement(IDENTIFIER)('value_1')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -584,7 +584,7 @@ KtFile: 2.2.kt
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       VALUE_PARAMETER
-        PsiElement(IDENTIFIER)('value2')
+        PsiElement(IDENTIFIER)('value_2')
         PsiElement(COLON)(':')
         PsiWhiteSpace(' ')
         TYPE_REFERENCE
@@ -611,7 +611,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value2')
+                PsiElement(IDENTIFIER)('value_2')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -622,7 +622,7 @@ KtFile: 2.2.kt
                     PsiElement(IDENTIFIER)('Int')
           PsiWhiteSpace(' ')
           PsiErrorElement:Expecting '->'
-            PsiElement(IDENTIFIER)('value2')
+            PsiElement(IDENTIFIER)('value_2')
           PsiErrorElement:Expecting an element
             <empty list>
         PsiWhiteSpace(' ')
@@ -648,7 +648,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value1')
+                PsiElement(IDENTIFIER)('value_1')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -667,13 +667,13 @@ KtFile: 2.2.kt
                       PsiElement(INTEGER_LITERAL)('100')
                   PsiWhiteSpace(' ')
                   OPERATION_REFERENCE
-                    PsiElement(IDENTIFIER)('value')
+                    PsiElement(IDENTIFIER)('value_1')
                   PsiWhiteSpace(' ')
                   PsiErrorElement:Expecting an element
                     PsiElement(in)('in')
                 PsiWhiteSpace(' ')
                 OPERATION_REFERENCE
-                  PsiElement(IDENTIFIER)('value3')
+                  PsiElement(IDENTIFIER)('value_3')
                 PsiErrorElement:Expecting an element
                   <empty list>
           PsiWhiteSpace(' ')

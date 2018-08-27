@@ -3,11 +3,11 @@
 
  SECTION: 16.30 When expression
  PARAGRAPH: 2
- SENTENCE: [3] When expression has two different forms: with bound value and without it.
+ SENTENCE: [3] When expression has two different forms: with bound value_1 and without it.
  NUMBER: 1
- DESCRIPTION: Empty 'when' with bound value.
+ DESCRIPTION: Empty 'when' with bound value_1.
  */
 
-fun case_1(value: Int) {
-    when (<!UNUSED_EXPRESSION!>value<!>) {}
+fun case_1(value_1: Int) {
+    when (<!UNUSED_EXPRESSION!>value_1<!>) {}
 }

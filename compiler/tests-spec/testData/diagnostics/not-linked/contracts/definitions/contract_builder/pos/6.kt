@@ -17,8 +17,8 @@ import kotlin.internal.contracts.*
 internal inline fun ContractBuilder.callsInPlaceEffectBuilder(block: () -> Unit) =
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 
-internal fun ContractBuilder.returnsEffectBuilder(value: Int?) =
-    returns(true) implies (value != null)
+internal fun ContractBuilder.returnsEffectBuilder(value_1: Int?) =
+    returns(true) implies (value_1 != null)
 
 // CASE DESCRIPTION: contract with one effect as result of external function in the parentheses using with parameter name
 internal inline fun case_1(block: () -> Unit) {
@@ -33,7 +33,7 @@ internal inline fun case_2(block: () -> Unit) {
 }
 
 // CASE DESCRIPTION: contract with two effects as result of external functions outside in the parentheses
-internal inline fun case_3(value: Int?, block: () -> Unit) {
-    contract({ returnsEffectBuilder(value); callsInPlaceEffectBuilder(block) })
+internal inline fun case_3(value_1: Int?, block: () -> Unit) {
+    contract({ returnsEffectBuilder(value_1); callsInPlaceEffectBuilder(block) })
     return block()
 }

@@ -9,11 +9,11 @@
  PARAGRAPH: 7
  SENTENCE: [1] Type test condition: type checking operator followed by type.
  NUMBER: 3
- DESCRIPTION: 'When' with bound value and enumaration of type test conditions.
+ DESCRIPTION: 'When' with bound value_1 and enumaration of type test conditions.
  */
 
 // CASE DESCRIPTION: 'When' with type test condition on the various basic types.
-fun case_1(value: Any) = when (value) {
+fun case_1(value_1: Any) = when (value_1) {
     is Int -> {}
     is Float, is Char, is Boolean -> {}
     is String -> {}
@@ -21,8 +21,8 @@ fun case_1(value: Any) = when (value) {
 }
 
 // CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types.
-fun case_2(value: Any?) = when (value) {
-    is Float, is Char, is _SealedClass? -> "" // if value is null then this branch will be executed
+fun case_2(value_1: Any?) = when (value_1) {
+    is Float, is Char, is _SealedClass? -> "" // if value_1 is null then this branch will be executed
     is Double, is Boolean, is _ClassWithCompanionObject.Companion -> ""
     else -> ""
 }
@@ -31,8 +31,8 @@ fun case_2(value: Any?) = when (value) {
  CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check in the different branches).
  NOTE: for potential double nulluble type check detecting.
  */
-fun case_3(value: Any?) = when (value) {
-    is Float, is Char, is Int? -> "" // if value is null then this branch will be executed
+fun case_3(value_1: Any?) = when (value_1) {
+    is Float, is Char, is Int? -> "" // if value_1 is null then this branch will be executed
     is _SealedChild2, is Boolean?, is String -> "" // redundant nullable type check
     else -> ""
 }
@@ -41,7 +41,7 @@ fun case_3(value: Any?) = when (value) {
  CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check in the one branch).
  NOTE: for potential double nulluble type check detecting.
  */
-fun case_4(value: Any?) = when (value) {
+fun case_4(value_1: Any?) = when (value_1) {
     is Float, is Char?, is Int? -> "" // double nullable type check in the one branch
     is _SealedChild1, is Boolean, is String -> ""
     else -> ""
@@ -51,8 +51,8 @@ fun case_4(value: Any?) = when (value) {
  CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two nullable type check).
  NOTE: for potential double nulluble type check detecting.
  */
-fun case_5(value: Any?): String {
-    when (value) {
+fun case_5(value_1: Any?): String {
+    when (value_1) {
         is Float, is Char?, is Int -> return ""
         is Double, is _EmptyObject, is String -> return ""
         null -> return "" // null-check redundant
@@ -64,8 +64,8 @@ fun case_5(value: Any?): String {
  CASE DESCRIPTION: 'When' with 'else' branch and type test condition on the various nullable basic types (two different nullable type check in the one branch).
  NOTE: for potential double nulluble type check detecting.
  */
-fun case_6(value: Any?): String {
-    when (value) {
+fun case_6(value_1: Any?): String {
+    when (value_1) {
         is Float, is Char?, null, is Int -> return "" // double nullable type check in the one branch
         is Double, is _EmptyObject, is String -> return ""
         else -> return ""

@@ -39,3 +39,21 @@ fun case_2() {
     f1 { throw Exception() }
     println("1") // not unreachable code
 }
+
+object case_3 {
+    fun case_3(block: () -> Unit) {
+        contract {
+            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        }
+        return block()
+    }
+}
+
+class case_4 {
+    fun case_4(block: () -> Unit) {
+        contract {
+            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        }
+        return block()
+    }
+}

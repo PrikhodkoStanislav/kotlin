@@ -5,12 +5,12 @@
  PARAGRAPH: 7
  SENTENCE: [3] Contains test condition: containment operator followed by an expression.
  NUMBER: 1
- DESCRIPTION: 'When' with bound value and 'when condition' with range expression, but without contains operator.
+ DESCRIPTION: 'When' with bound value_1 and 'when condition' with range expression, but without contains operator.
  */
 
 // CASE DESCRIPTION: 'When' with one contains operator.
-fun case_1(value: Int): String {
-    when (value) {
+fun case_1(value_1: Int): String {
+    when (value_1) {
         in -> return ""
     }
 
@@ -18,8 +18,8 @@ fun case_1(value: Int): String {
 }
 
 // CASE DESCRIPTION: 'When' with two contains operators.
-fun case_2(value: Int): String {
-    when (value) {
+fun case_2(value_1: Int): String {
+    when (value_1) {
         in -> return ""
         in -> return ""
     }

@@ -13,37 +13,37 @@
 import kotlin.internal.contracts.*
 
 // CASE DESCRIPTION: assignment statement before contract description
-fun case_1(value1: Boolean?): Boolean {
-    contract { returns(true) implies (value1 != null && <!ERROR_IN_CONTRACT_DESCRIPTION!>value1 == false<!>) }
+fun case_1(value_1: Boolean?): Boolean {
+    contract { returns(true) implies (value_1 != null && <!ERROR_IN_CONTRACT_DESCRIPTION!>value_1 == false<!>) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_2(value1: Boolean, value2: Boolean): Boolean {
-    contract { returnsNotNull() implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value1 != false<!> || value2) }
+fun case_2(value_1: Boolean, value_2: Boolean): Boolean {
+    contract { returnsNotNull() implies (<!ERROR_IN_CONTRACT_DESCRIPTION!>value_1 != false<!> || value_2) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_3(value1: String?, value2: Boolean): Boolean {
-    contract { returns(false) implies (value1 != null && <!ERROR_IN_CONTRACT_DESCRIPTION!>value2 != true<!>) }
+fun case_3(value_1: String?, value_2: Boolean): Boolean {
+    contract { returns(false) implies (value_1 != null && <!ERROR_IN_CONTRACT_DESCRIPTION!>value_2 != true<!>) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_4(value1: Nothing?, value2: Boolean?): Boolean {
-    contract { returns(null) implies (<!SENSELESS_COMPARISON!><!DEBUG_INFO_CONSTANT!>value1<!> == null<!> || value2 != null || <!ERROR_IN_CONTRACT_DESCRIPTION!><!DEBUG_INFO_CONSTANT!>value2<!> == false<!>) }
+fun case_4(value_1: Nothing?, value_2: Boolean?): Boolean {
+    contract { returns(null) implies (<!SENSELESS_COMPARISON!><!DEBUG_INFO_CONSTANT!>value_1<!> == null<!> || value_2 != null || <!ERROR_IN_CONTRACT_DESCRIPTION!><!DEBUG_INFO_CONSTANT!>value_2<!> == false<!>) }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_5(value1: Any?, value2: String?): Boolean {
-    contract { returns(null) implies (value1 != null && value2 != null || value2 == ".") }
+fun case_5(value_1: Any?, value_2: String?): Boolean {
+    contract { returns(null) implies (value_1 != null && value_2 != null || value_2 == ".") }
     return true
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_6(value1: Boolean, value2: Int?): Boolean {
-    contract { returns(null) implies (value2 == null && value1 || value2 == 0) }
+fun case_6(value_1: Boolean, value_2: Int?): Boolean {
+    contract { returns(null) implies (value_2 == null && value_1 || value_2 == 0) }
     return true
 }

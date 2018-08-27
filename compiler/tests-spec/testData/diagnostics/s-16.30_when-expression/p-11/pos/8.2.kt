@@ -10,7 +10,7 @@
  DESCRIPTION: Check when exhaustive when enumerated values are checked and contains a null check.
  */
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (both enum values and null value covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (both enum values and null value_1 covered).
 fun case_1(dir: _EnumClass?): String = when (dir) {
     _EnumClass.EAST -> ""
     _EnumClass.NORTH -> ""
@@ -19,8 +19,8 @@ fun case_1(dir: _EnumClass?): String = when (dir) {
     null -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (single enum value and null value covered).
-fun case_2(value: _EnumClassSingle?): String = when (value) {
+// CASE DESCRIPTION: Checking for exhaustive 'when' (single enum value_1 and null value_1 covered).
+fun case_2(value_1: _EnumClassSingle?): String = when (value_1) {
     _EnumClassSingle.EVERYTHING -> ""
     null -> ""
 }

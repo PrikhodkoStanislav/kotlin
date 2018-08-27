@@ -13,8 +13,8 @@
  */
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when'.
-fun case_1(value: _EnumClass): String {
-    val whenValue = when (value) {
+fun case_1(value_1: _EnumClass): String {
+    val whenValue = when (value_1) {
         _EnumClass.EAST -> _ClassLevel2()
         _EnumClass.NORTH -> _ClassLevel3()
         _EnumClass.SOUTH -> _ClassLevel4()
@@ -33,8 +33,8 @@ fun case_1(value: _EnumClass): String {
 }
 
 // CASE DESCRIPTION: Checking all types except the correct one in 'when' with null-check branch.
-fun case_2(value: _EnumClass?): String {
-    val whenValue = when (value) {
+fun case_2(value_1: _EnumClass?): String {
+    val whenValue = when (value_1) {
         _EnumClass.EAST -> _ClassLevel2()
         _EnumClass.NORTH -> _ClassLevel3()
         _EnumClass.SOUTH -> _ClassLevel4()
@@ -56,8 +56,8 @@ fun case_2(value: _EnumClass?): String {
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when'.
-fun case_3(value: _EnumClass): String {
-    val whenValue = when (value) {
+fun case_3(value_1: _EnumClass): String {
+    val whenValue = when (value_1) {
         _EnumClass.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         _EnumClass.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         _EnumClass.SOUTH -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}
@@ -75,8 +75,8 @@ fun case_3(value: _EnumClass): String {
 }
 
 // CASE DESCRIPTION: Checking all types except the Any (implicit cast to any) in 'when' with null-check branch.
-fun case_4(value: _EnumClass?): String {
-    val whenValue = when (value) {
+fun case_4(value_1: _EnumClass?): String {
+    val whenValue = when (value_1) {
         _EnumClass.EAST -> <!IMPLICIT_CAST_TO_ANY!>10<!>
         _EnumClass.NORTH -> <!IMPLICIT_CAST_TO_ANY!>""<!>
         _EnumClass.SOUTH -> {<!IMPLICIT_CAST_TO_ANY!>{}<!>}

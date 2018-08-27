@@ -24,15 +24,15 @@ import kotlin.internal.contracts.*
         returns:true:implies:notNullCheck
         callsInPlace:atMostOnce
  */
-inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
+inline fun case_1(value_1: Int?, block: () -> Unit): Boolean {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-        returns(true) implies (value1 != null)
+        returns(true) implies (value_1 != null)
     }
 
     block()
 
-    return value1 != null
+    return value_1 != null
 }
 
 /*
@@ -44,18 +44,18 @@ inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
         returns:false:implies:nullableBooleanTypeCheck,receiverNotNullCheck
         callsInPlace:atMostOnce
  */
-inline fun <T> T?.case_2(value1: Int?, value2: Any?, block: () -> Unit): Boolean? {
+inline fun <T> T?.case_2(value_1: Int?, value_2: Any?, block: () -> Unit): Boolean? {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-        returnsNotNull() implies (value1 != null)
-        returns(false) implies (value2 is Boolean?)
+        returnsNotNull() implies (value_1 != null)
+        returns(false) implies (value_2 is Boolean?)
         returns(false) implies (this@case_2 != null)
     }
 
     block()
 
-    if (value1 == null) return null
-    if (value2 is Boolean? || this != null) return false
+    if (value_1 == null) return null
+    if (value_2 is Boolean? || this != null) return false
 
     return true
 }
@@ -75,13 +75,13 @@ import contracts.*
     smartcast:notNull
     if:else
  */
-fun case_1(value1: Int?) {
-    val value2: Int
-    if (contracts.case_1(value1) { value2 = 10 }) {
-        println(<!UNINITIALIZED_VARIABLE!>value2<!>)
+fun case_1(value_1: Int?) {
+    val value_2: Int
+    if (contracts.case_1(value_1) { value_2 = 10 }) {
+        println(<!UNINITIALIZED_VARIABLE!>value_2<!>)
     } else {
-        value1<!UNSAFE_CALL!>.<!>inv()
-        println(value2)
+        value_1<!UNSAFE_CALL!>.<!>inv()
+        println(value_2)
     }
 }
 
@@ -98,16 +98,16 @@ fun case_1(value1: Int?) {
     unsafeCall
     if:else,nested
  */
-fun case_2(value1: Int?, value2: Any?) {
-    var value3: Int
-    if (value1.case_2(value1, value2) { value3 = 10 } != null) {
-        if (value1.case_2(value1, value2) { value3 = 10 } == false) {
-            println(<!DEBUG_INFO_SMARTCAST!>value2<!>?.xor(true))
-            println(<!UNINITIALIZED_VARIABLE!>value3<!>)
-            println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
+fun case_2(value_1: Int?, value_2: Any?) {
+    var value_3: Int
+    if (value_1.case_2(value_1, value_2) { value_3 = 10 } != null) {
+        if (value_1.case_2(value_1, value_2) { value_3 = 10 } == false) {
+            println(<!DEBUG_INFO_SMARTCAST!>value_2<!>?.xor(true))
+            println(<!UNINITIALIZED_VARIABLE!>value_3<!>)
+            println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv())
         }
-        println(value3)
+        println(value_3)
     } else {
-        value1<!UNSAFE_CALL!>.<!>inv()
+        value_1<!UNSAFE_CALL!>.<!>inv()
     }
 }

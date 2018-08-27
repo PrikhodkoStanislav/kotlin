@@ -18,11 +18,11 @@
     smartcast:inited
  */
 fun case_1() {
-    val value: Int
+    val value_1: Int
 
-    funWithExactlyOnceCallsInPlace { value = 10 }
+    funWithExactlyOnceCallsInPlace { value_1 = 10 }
 
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -33,14 +33,14 @@ fun case_1() {
     smartcast:inited
  */
 fun case_2() {
-    var value1: Int
-    var value2: Int
+    var value_1: Int
+    var value_2: Int
 
-    funWithExactlyOnceCallsInPlace { value1 = 10 }
-    funWithAtLeastOnceCallsInPlace { value2 = 10 }
+    funWithExactlyOnceCallsInPlace { value_1 = 10 }
+    funWithAtLeastOnceCallsInPlace { value_2 = 10 }
 
-    value1.dec()
-    value2.div(10)
+    value_1.dec()
+    value_2.div(10)
 }
 
 /*
@@ -53,13 +53,13 @@ fun case_2() {
         init
  */
 class case_3 {
-    val value1: Int
-    var value2: Int
-    var value3: Int
+    val value_1: Int
+    var value_2: Int
+    var value_3: Int
 
     init {
-        funWithExactlyOnceCallsInPlace { value1 = 1 }
-        funWithExactlyOnceCallsInPlace { value2 = 2 }
-        funWithAtLeastOnceCallsInPlace { value3 = 3 }
+        funWithExactlyOnceCallsInPlace { value_1 = 1 }
+        funWithExactlyOnceCallsInPlace { value_2 = 2 }
+        funWithAtLeastOnceCallsInPlace { value_3 = 3 }
     }
 }

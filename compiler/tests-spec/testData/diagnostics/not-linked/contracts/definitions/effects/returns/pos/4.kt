@@ -13,7 +13,7 @@
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: complex condition with boolean value check of the function parameters
+// CASE DESCRIPTION: complex condition with boolean value_1 check of the function parameters
 fun case_1(cond1: Boolean, cond2: Boolean, cond3: Boolean) {
     contract {
         returns() implies (cond1 && !cond2 || cond3)
@@ -22,22 +22,22 @@ fun case_1(cond1: Boolean, cond2: Boolean, cond3: Boolean) {
 }
 
 // CASE DESCRIPTION: complex condition with the type checking of the function parameters
-fun case_2(value1: Any?, value2: Any?, value3: Any?) {
+fun case_2(value_1: Any?, value_2: Any?, value_3: Any?) {
     contract {
-        returns() implies (value1 is String? || value2 !is Int && value3 !is Nothing?)
+        returns() implies (value_1 is String? || value_2 !is Int && value_3 !is Nothing?)
     }
-    if (!(value1 is String? || value2 !is Int && value3 !is Nothing?)) throw Exception()
+    if (!(value_1 is String? || value_2 !is Int && value_3 !is Nothing?)) throw Exception()
 }
 
 // CASE DESCRIPTION: complex condition with the null checks of the function parameters
-fun case_3(value1: Any?, value2: Any?, value3: Any?) {
+fun case_3(value_1: Any?, value_2: Any?, value_3: Any?) {
     contract {
-        returns() implies (value1 == null || value2 != null && value3 == null)
+        returns() implies (value_1 == null || value_2 != null && value_3 == null)
     }
-    if (!(value1 == null || value2 != null && value3 == null)) throw Exception()
+    if (!(value_1 == null || value_2 != null && value_3 == null)) throw Exception()
 }
 
-// CASE DESCRIPTION: complex condition with the null check and boolean value check of the current extensible class
+// CASE DESCRIPTION: complex condition with the null check and boolean value_1 check of the current extensible class
 fun Boolean?.case_4(): Boolean {
     contract {
         returns(true) implies (this@case_4 != null && <!DEBUG_INFO_SMARTCAST!>this@case_4<!>)
@@ -45,7 +45,7 @@ fun Boolean?.case_4(): Boolean {
     return this != null && <!DEBUG_INFO_SMARTCAST!>this<!>
 }
 
-// CASE DESCRIPTION: complex condition with the null check, type checking and boolean value check of the current extensible class (generic extension function with upper bound type)
+// CASE DESCRIPTION: complex condition with the null check, type checking and boolean value_1 check of the current extensible class (generic extension function with upper bound type)
 fun <T : Boolean>T?.case_5(): Boolean {
     contract {
         returns(true) implies (this@case_5 != null && this@case_5 !is Nothing && <!DEBUG_INFO_SMARTCAST!>this@case_5<!>)
@@ -61,7 +61,7 @@ fun <T>T.case_6(): Boolean {
     return !(this is Char || this == null)
 }
 
-// CASE DESCRIPTION: complex condition with the null check, type checking and boolean value check of the current extensible class
+// CASE DESCRIPTION: complex condition with the null check, type checking and boolean value_1 check of the current extensible class
 fun <T>T?.case_7() {
     contract {
         returns() implies (this@case_7 == null || this@case_7 is Boolean? && !<!DEBUG_INFO_SMARTCAST!>this@case_7<!>) // duplicate of null-check

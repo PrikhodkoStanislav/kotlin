@@ -19,9 +19,9 @@ fun <T : Number?> T.case_1() {
     if (!(<!USELESS_IS_CHECK!>this@case_1 is T<!>)) throw Exception()
 }
 
-fun <T : Number, K : <!FINAL_UPPER_BOUND!>String<!>> T?.case_1(value: K?) {
+fun <T : Number, K : <!FINAL_UPPER_BOUND!>String<!>> T?.case_1(value_1: K?) {
     contract {
-        returns() implies (this@case_1 is T && value is K)
+        returns() implies (this@case_1 is T && value_1 is K)
     }
-    if (!(this@case_1 is T && value is K)) throw Exception()
+    if (!(this@case_1 is T && value_1 is K)) throw Exception()
 }

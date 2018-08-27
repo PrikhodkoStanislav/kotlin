@@ -14,9 +14,9 @@
 
 import kotlin.internal.contracts.*
 
-inline fun case_1(block2: () -> Unit) {
+inline fun case_1(block: () -> Unit) {
     contract test@ {
-        callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    return block2()
+    return block()
 }

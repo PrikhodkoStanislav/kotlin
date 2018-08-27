@@ -18,9 +18,9 @@
                 typeCheck:string
     smartcast:string
  */
-fun case_1(value: Any?) {
-    funWithReturns(value is String)
-    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+fun case_1(value_1: Any?) {
+    funWithReturns(value_1 is String)
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
 /*
@@ -30,9 +30,9 @@ fun case_1(value: Any?) {
             boolean:notNullCheck
     smartcast:notNull
  */
-fun case_2(value: Int?) {
-    funWithReturns(value != null)
-    println(<!DEBUG_INFO_SMARTCAST!>value<!>.inc())
+fun case_2(value_1: Int?) {
+    funWithReturns(value_1 != null)
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inc())
 }
 
 /*
@@ -42,9 +42,9 @@ fun case_2(value: Int?) {
             boolean:nullCheck
     smartcast:constant,null
  */
-fun case_3(value: Int?) {
-    funWithReturns(value == null)
-    println(<!DEBUG_INFO_CONSTANT!>value<!>)
+fun case_3(value_1: Int?) {
+    funWithReturns(value_1 == null)
+    println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
 }
 
 /*
@@ -54,9 +54,9 @@ fun case_3(value: Int?) {
             typeCheck:string
     smartcast:string
  */
-fun case_4(value: Any?) {
-    funWithReturnsAndTypeCheck(value)
-    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+fun case_4(value_1: Any?) {
+    funWithReturnsAndTypeCheck(value_1)
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
 /*
@@ -65,9 +65,9 @@ fun case_4(value: Any?) {
         returns:notNullCheck
     smartcast:notNull
  */
-fun case_5(value: String?) {
-    funWithReturnsAndNotNullCheck(value)
-    println(<!DEBUG_INFO_SMARTCAST!>value<!>.length)
+fun case_5(value_1: String?) {
+    funWithReturnsAndNotNullCheck(value_1)
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
 /*
@@ -76,9 +76,9 @@ fun case_5(value: String?) {
         returns:nullCheck
     smartcast:constant,null
  */
-fun case_6(value: String?) {
-    funWithReturnsAndNullCheck(value)
-    println(<!DEBUG_INFO_CONSTANT!>value<!>)
+fun case_6(value_1: String?) {
+    funWithReturnsAndNullCheck(value_1)
+    println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
 }
 
 /*
@@ -124,15 +124,15 @@ fun case_7() {
     smartcast:string
     if
  */
-fun case_8(value: Any?) {
-    if (!funWithReturnsTrue(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!funWithReturnsTrueAndInvertCondition(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalse(value is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsFalseAndInvertCondition(value !is String)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsNotNull(value is String) == null) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNotNull(value is String) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNull(value is String) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (funWithReturnsNull(value is String) != null) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_8(value_1: Any?) {
+    if (!funWithReturnsTrue(value_1 is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!funWithReturnsTrueAndInvertCondition(value_1 !is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalse(value_1 is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsFalseAndInvertCondition(value_1 !is String)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsNotNull(value_1 is String) == null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNotNull(value_1 is String) != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNull(value_1 is String) == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (funWithReturnsNull(value_1 is String) != null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -153,15 +153,15 @@ fun case_8(value: Any?) {
     smartcast:null,notNull
     if
  */
-fun case_9(value: String?) {
-    if (!funWithReturnsTrue(value != null)) println(value<!UNSAFE_CALL!>.<!>length)
-    if (!funWithReturnsTrueAndInvertCondition(value == null)) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsFalse(value != null)) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsFalseAndInvertCondition(value == null)) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsNotNull(value != null) == null) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsNotNullAndInvertCondition(value == null) == null) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsNull(value != null) != null) println(value<!UNSAFE_CALL!>.<!>length)
-    if (funWithReturnsNullAndInvertCondition(value == null) != null) println(value<!UNSAFE_CALL!>.<!>length)
+fun case_9(value_1: String?) {
+    if (!funWithReturnsTrue(value_1 != null)) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (!funWithReturnsTrueAndInvertCondition(value_1 == null)) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsFalse(value_1 != null)) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsFalseAndInvertCondition(value_1 == null)) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNotNull(value_1 != null) == null) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNotNullAndInvertCondition(value_1 == null) == null) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNull(value_1 != null) != null) println(value_1<!UNSAFE_CALL!>.<!>length)
+    if (funWithReturnsNullAndInvertCondition(value_1 == null) != null) println(value_1<!UNSAFE_CALL!>.<!>length)
 }
 
 /*
@@ -178,13 +178,13 @@ fun case_9(value: String?) {
     smartcast:string
     if
  */
-fun case_10(value: Any?) {
-    if (!funWithReturnsTrueAndTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!!funWithReturnsFalseAndTypeCheck(value)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNotNullAndTypeCheck(value) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!!(funWithReturnsNotNullAndTypeCheck(value) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!!(funWithReturnsNullAndTypeCheck(value) != null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!(funWithReturnsNullAndTypeCheck(value) == null)) println(value.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_10(value_1: Any?) {
+    if (!funWithReturnsTrueAndTypeCheck(value_1)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!funWithReturnsFalseAndTypeCheck(value_1)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNotNullAndTypeCheck(value_1) != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!(funWithReturnsNotNullAndTypeCheck(value_1) == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!!(funWithReturnsNullAndTypeCheck(value_1) != null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!(funWithReturnsNullAndTypeCheck(value_1) == null)) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -196,15 +196,15 @@ fun case_10(value: Any?) {
     smartcast:null,notNull
     if
  */
-fun case_11(value: Number?) {
-    if (!funWithReturnsTrueAndNotNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (!funWithReturnsTrueAndNullCheck(value)) println(value)
-    if (funWithReturnsFalseAndNotNullCheck(value)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (funWithReturnsFalseAndNullCheck(value)) println(value)
-    if ((funWithReturnsNotNullAndNotNullCheck(value) == null)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (!!!(funWithReturnsNotNullAndNotNullCheck(value) != null)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (!!(funWithReturnsNotNullAndNullCheck(value) == null)) println(value)
-    if (!(funWithReturnsNullAndNotNullCheck(value) == null)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (!!(funWithReturnsNullAndNotNullCheck(value) != null)) println(value<!UNSAFE_CALL!>.<!>toByte())
-    if (!!!(funWithReturnsNullAndNullCheck(value) == null)) println(value)
+fun case_11(value_1: Number?) {
+    if (!funWithReturnsTrueAndNotNullCheck(value_1)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (!funWithReturnsTrueAndNullCheck(value_1)) println(value_1)
+    if (funWithReturnsFalseAndNotNullCheck(value_1)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (funWithReturnsFalseAndNullCheck(value_1)) println(value_1)
+    if ((funWithReturnsNotNullAndNotNullCheck(value_1) == null)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (!!!(funWithReturnsNotNullAndNotNullCheck(value_1) != null)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (!!(funWithReturnsNotNullAndNullCheck(value_1) == null)) println(value_1)
+    if (!(funWithReturnsNullAndNotNullCheck(value_1) == null)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (!!(funWithReturnsNullAndNotNullCheck(value_1) != null)) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+    if (!!!(funWithReturnsNullAndNullCheck(value_1) == null)) println(value_1)
 }

@@ -23,23 +23,23 @@ fun <T : Any?> T?.case_1() {
     if (!(this is Number || this is Int)) throw Exception()
 }
 
-inline fun <reified T : Any?> T?.case_2(value2: Number, value3: Any?, value4: String?) {
+inline fun <reified T : Any?> T?.case_2(value_2: Number, value_3: Any?, value_4: String?) {
     contract {
-        returns() implies ((this@case_2 is Number || this@case_2 is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null)
+        returns() implies ((this@case_2 is Number || this@case_2 is Int) && value_2 is Int && value_3 != null && value_3 is Number && value_4 != null)
     }
-    if (!((this is Number || this is Int) && value2 is Int && value3 != null && value3 is Number && value4 != null)) throw Exception()
+    if (!((this is Number || this is Int) && value_2 is Int && value_3 != null && value_3 is Number && value_4 != null)) throw Exception()
 }
 
 // FILE: usages.kt
 
 import contracts.*
 
-fun case_1(value1: Any?) {
-    value1.case_1()
-    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_1(value_1: Any?) {
+    value_1.case_1()
+    println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-fun case_2(value1: Any?, value2: Number, value3: Any?, value4: String?) {
-    value1.case_2(value2, value3, value4)
-    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_2(value_1: Any?, value_2: Number, value_3: Any?, value_4: String?) {
+    value_1.case_2(value_2, value_3, value_4)
+    println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }

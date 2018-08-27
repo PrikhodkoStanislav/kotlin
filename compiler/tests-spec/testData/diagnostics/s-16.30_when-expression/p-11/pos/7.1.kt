@@ -18,7 +18,7 @@ fun case_1(dir: _EnumClass): String = when (dir) {
     _EnumClass.WEST -> ""
 }
 
-// CASE DESCRIPTION: Checking for exhaustive 'when' (single enum value covered).
-fun case_2(value: _EnumClassSingle): String = when (value) {
+// CASE DESCRIPTION: Checking for exhaustive 'when' (single enum value_1 covered).
+fun case_2(value_1: _EnumClassSingle): String = when (value_1) {
     _EnumClassSingle.EVERYTHING -> ""
 }

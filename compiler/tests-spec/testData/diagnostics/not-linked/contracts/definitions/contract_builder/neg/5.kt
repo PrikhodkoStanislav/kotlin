@@ -26,7 +26,7 @@ fun case_2(): Boolean {
 
 // CASE DESCRIPTION: expression before contract description
 fun case_3(): Boolean {
-    contract { returns(false) implies (<!TYPE_MISMATCH, ERROR_IN_CONTRACT_DESCRIPTION!>"..." + "$<!UNRESOLVED_REFERENCE!>value1<!>"<!>) }
+    contract { returns(false) implies (<!TYPE_MISMATCH, ERROR_IN_CONTRACT_DESCRIPTION!>"..." + "$<!UNRESOLVED_REFERENCE!>value_1<!>"<!>) }
     return false
 }
 
@@ -57,7 +57,7 @@ fun case_6(): Boolean? {
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_7(value1: Boolean): Boolean? {
-    contract { returns(null) implies <!TYPE_MISMATCH, ERROR_IN_CONTRACT_DESCRIPTION!>contract { returns(null) implies (!value1) }<!> }
+fun case_7(value_1: Boolean): Boolean? {
+    contract { returns(null) implies <!TYPE_MISMATCH, ERROR_IN_CONTRACT_DESCRIPTION!>contract { returns(null) implies (!value_1) }<!> }
     return null
 }

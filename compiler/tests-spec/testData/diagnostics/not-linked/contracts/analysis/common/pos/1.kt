@@ -24,15 +24,15 @@ import kotlin.internal.contracts.*
         returns:true:implies:notNullCheck
         callsInPlace:exactlyOnce
  */
-inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
+inline fun case_1(value_1: Int?, block: () -> Unit): Boolean {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        returns(true) implies (value1 != null)
+        returns(true) implies (value_1 != null)
     }
 
     block()
 
-    return value1 != null
+    return value_1 != null
 }
 
 /*
@@ -44,18 +44,18 @@ inline fun case_1(value1: Int?, block: () -> Unit): Boolean {
         returns:false:implies:nullableBooleanTypeCheck,receiverNotNullCheck
         callsInPlace:atLeastOnce
  */
-inline fun <T> T?.case_2(value1: Int?, value2: Any?, block: () -> Unit): Boolean? {
+inline fun <T> T?.case_2(value_1: Int?, value_2: Any?, block: () -> Unit): Boolean? {
     contract {
         callsInPlace(block, InvocationKind.AT_LEAST_ONCE)
-        returnsNotNull() implies (value1 != null)
-        returns(false) implies (value2 is Boolean?)
+        returnsNotNull() implies (value_1 != null)
+        returns(false) implies (value_2 is Boolean?)
         returns(false) implies (this@case_2 != null)
     }
 
     block()
 
-    if (value1 == null) return null
-    if (value2 is Boolean? || this != null) return false
+    if (value_1 == null) return null
+    if (value_2 is Boolean? || this != null) return false
 
     return true
 }
@@ -73,13 +73,13 @@ import contracts.*
     smartcast:notNull
     if:else
  */
-fun case_1(value1: Int?) {
-    val value3: Int
-    if (contracts.case_1(value1) { value3 = 10 }) {
-        <!DEBUG_INFO_SMARTCAST!>value1<!>.inv()
-        println(value3)
+fun case_1(value_1: Int?) {
+    val value_3: Int
+    if (contracts.case_1(value_1) { value_3 = 10 }) {
+        <!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()
+        println(value_3)
     } else {
-        println(value3)
+        println(value_3)
     }
 }
 
@@ -94,16 +94,16 @@ fun case_1(value1: Int?) {
     smartcast:notNull,nullableBoolean
     if:else,nested
  */
-fun case_2(value1: Int?, value2: Any?) {
-    var value3: Int
-    if (value1.case_2(value1, value2) { value3 = 10 } != null) {
-        <!DEBUG_INFO_SMARTCAST!>value1<!>.inv()
-        println(value3)
+fun case_2(value_1: Int?, value_2: Any?) {
+    var value_3: Int
+    if (value_1.case_2(value_1, value_2) { value_3 = 10 } != null) {
+        <!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()
+        println(value_3)
     } else {
-        if (value1.case_2(value1, value2) { value3 = 10 } == false) {
-            println(<!DEBUG_INFO_SMARTCAST!>value2<!>?.xor(true))
-            println(value3)
-            println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
+        if (value_1.case_2(value_1, value_2) { value_3 = 10 } == false) {
+            println(<!DEBUG_INFO_SMARTCAST!>value_2<!>?.xor(true))
+            println(value_3)
+            println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv())
         }
     }
 }

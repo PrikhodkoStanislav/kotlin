@@ -230,9 +230,9 @@ import contracts.*
         returns:invertTypeCheck:string
     smartcast:string
  */
-fun case_1(value1: Any?) {
-    value1.case_1()
-    println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_1(value_1: Any?) {
+    value_1.case_1()
+    println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -241,9 +241,9 @@ fun case_1(value1: Any?) {
         returns:invertTypeCheck:int
     smartcast:int
  */
-fun case_2(value1: Number) {
-    value1.case_2()
-    println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_2(value_1: Number) {
+    value_1.case_2()
+    println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 /*
@@ -252,11 +252,11 @@ fun case_2(value1: Number) {
         returns:nullCheck,notNullCheck
     smartcast:notNull,nullConstant
  */
-fun case_3(value1: String?, value2: String?) {
-    value1.case_3_1()
-    println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length)
-    value2.case_3_2()
-    println(value2)
+fun case_3(value_1: String?, value_2: String?) {
+    value_1.case_3_1()
+    println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
+    value_2.case_3_2()
+    println(value_2)
 }
 
 /*
@@ -265,11 +265,11 @@ fun case_3(value1: String?, value2: String?) {
         returns:nullCheck,notNullCheck
     smartcast:notNull,nullConstant
  */
-fun case_4(value1: String?, value2: String?) {
-    value1.case_4_1()
-    println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length)
-    value2.case_4_2()
-    println(value2)
+fun case_4(value_1: String?, value_2: String?) {
+    value_1.case_4_1()
+    println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
+    value_2.case_4_2()
+    println(value_2)
 }
 
 /*
@@ -282,11 +282,11 @@ fun case_4(value1: String?, value2: String?) {
     smartcast:string
     if
  */
-fun case_5(value1: Any?) {
-    if (value1.case_5_1()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!value1.case_5_2()) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value1.case_5_3() != null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value1.case_5_4() == null) println(value1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_5(value_1: Any?) {
+    if (value_1.case_5_1()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!value_1.case_5_2()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value_1.case_5_3() != null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (value_1.case_5_4() == null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 /*
@@ -299,11 +299,11 @@ fun case_5(value1: Any?) {
     smartcast:int
     when
  */
-fun case_6(value1: Number) {
-    when { value1.case_6_1() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
-    when { !value1.case_6_2() -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
-    when { value1.case_6_3() != null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
-    when { value1.case_6_4() != null -> println(value1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+fun case_6(value_1: Number) {
+    when { value_1.case_6_1() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { !value_1.case_6_2() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value_1.case_6_3() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value_1.case_6_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
 }
 
 /*
@@ -316,11 +316,11 @@ fun case_6(value1: Number) {
     smartcast:notNull,nullConstant
     if
  */
-fun case_7(value1: String?, value2: String?) {
-    if (value1.case_7_1()) println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length)
-    if (value2.case_7_2()) println(value2)
-    if (!(value2.case_7_3() == null)) println(value2)
-    if (value2.case_7_3() == null) println(value2)
+fun case_7(value_1: String?, value_2: String?) {
+    if (value_1.case_7_1()) println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
+    if (value_2.case_7_2()) println(value_2)
+    if (!(value_2.case_7_3() == null)) println(value_2)
+    if (value_2.case_7_3() == null) println(value_2)
 }
 
 /*
@@ -333,11 +333,11 @@ fun case_7(value1: String?, value2: String?) {
     smartcast:notNull,nullConstant
     when
  */
-fun case_8(value1: String?, value2: String?) {
-    when { value1.case_8_1() -> println(<!DEBUG_INFO_CONSTANT!>value1<!><!UNSAFE_CALL!>.<!>length) }
-    when { value2.case_8_2() -> println(value2) }
-    when { !(value2.case_8_3() == null) -> println(value2) }
-    when { value2.case_8_3() == null -> println(value2) }
+fun case_8(value_1: String?, value_2: String?) {
+    when { value_1.case_8_1() -> println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length) }
+    when { value_2.case_8_2() -> println(value_2) }
+    when { !(value_2.case_8_3() == null) -> println(value_2) }
+    when { value_2.case_8_3() == null -> println(value_2) }
 }
 
 /*
@@ -348,8 +348,8 @@ fun case_8(value1: String?, value2: String?) {
     smartcast:notNull,nullConstant
     if
  */
-fun case_9(value1: Number?) {
-    if (value1?.case_9() == null) println(value1<!UNSAFE_CALL!>.<!>toByte())
+fun case_9(value_1: Number?) {
+    if (value_1?.case_9() == null) println(value_1<!UNSAFE_CALL!>.<!>toByte())
 }
 
 /*
@@ -361,10 +361,10 @@ fun case_9(value1: Number?) {
     unreachableCode
     if
  */
-fun case_10(value1: Number?) {
-    if (value1?.case_10() == null) {
-        println(value1<!UNSAFE_CALL!>.<!>toByte())
+fun case_10(value_1: Number?) {
+    if (value_1?.case_10() == null) {
+        println(value_1<!UNSAFE_CALL!>.<!>toByte())
     } else {
-        <!UNREACHABLE_CODE!>println(<!><!DEBUG_INFO_SMARTCAST!>value1<!><!UNREACHABLE_CODE!>.toByte())<!>
+        <!UNREACHABLE_CODE!>println(<!><!DEBUG_INFO_SMARTCAST!>value_1<!><!UNREACHABLE_CODE!>.toByte())<!>
     }
 }

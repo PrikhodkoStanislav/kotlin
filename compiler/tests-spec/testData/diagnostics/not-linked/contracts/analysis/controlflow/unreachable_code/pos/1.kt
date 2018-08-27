@@ -138,11 +138,11 @@ fun case_6(args: Array<String>) {
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect and assignment function contract result
 fun case_7() {
-    <!UNREACHABLE_CODE!>val value =<!> funWithExactlyOnceCallsInPlace {
+    <!UNREACHABLE_CODE!>val value_1 =<!> funWithExactlyOnceCallsInPlace {
         throw Exception()
         <!UNREACHABLE_CODE!>println(1)<!>
     }
-    <!UNREACHABLE_CODE!>println(value)<!>
+    <!UNREACHABLE_CODE!>println(value_1)<!>
 }
 
 // CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect and use function contract result as argument

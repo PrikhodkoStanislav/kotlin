@@ -5,27 +5,27 @@
 
  SECTION: 16.30 When expression
  PARAGRAPH: 3
- SENTENCE: [1] When expression without bound value (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
+ SENTENCE: [1] When expression without bound value_1 (the form where the expression enclosed in parantheses is absent) evaluates one of the many different expressions based on corresponding conditions present in the same when entry.
  NUMBER: 2
  DESCRIPTION: 'When' with different variants of the logical expressions in the control structure body.
  */
 
-fun case_1(value: Int, value1: Boolean, value2: Boolean, value3: String, value4: Any?) {
-    val value5 = true
-    val value6 = false
+fun case_1(value_1: Int, value_1: Boolean, value_2: Boolean, value_3: String, value_4: Any?) {
+    val value_5 = true
+    val value_6 = false
 
     when {
-        value == 1 -> !value1
-        value == 2 -> value5 && value6 || value1 && !value3.isEmpty()
-        value == 3 -> value1 || value2
-        value == 4 -> true && value2
-        value == 5 -> !!(!!(value4 == null))
-        value == 6 -> value1 || !!!value5
-        value == 7 -> value1 && !!true && value5 && value6
-        value == 8 -> !!!!!!!!!value2
-        value == 9 -> !!!!value6
-        value == 10 -> {
-            value6 && value1 || value5 || value6 && !!!false
+        value_1 == 1 -> !value_1
+        value_1 == 2 -> value_5 && value_6 || value_1 && !value_3.isEmpty()
+        value_1 == 3 -> value_1 || value_2
+        value_1 == 4 -> true && value_2
+        value_1 == 5 -> !!(!!(value_4 == null))
+        value_1 == 6 -> value_1 || !!!value_5
+        value_1 == 7 -> value_1 && !!true && value_5 && value_6
+        value_1 == 8 -> !!!!!!!!!value_2
+        value_1 == 9 -> !!!!value_6
+        value_1 == 10 -> {
+            value_6 && value_1 || value_5 || value_6 && !!!false
         }
     }
 }

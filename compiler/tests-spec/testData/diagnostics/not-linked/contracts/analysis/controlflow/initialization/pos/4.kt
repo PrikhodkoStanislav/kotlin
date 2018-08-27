@@ -17,11 +17,11 @@
         nameShadowing:val
  */
 fun case_1() {
-    val <!UNUSED_VARIABLE!>value<!>: Int
+    val <!UNUSED_VARIABLE!>value_1<!>: Int
 
     funWithExactlyOnceCallsInPlace {
-        val <!NAME_SHADOWING!>value<!> = 10
-        value.inc()
+        val <!NAME_SHADOWING!>value_1<!> = 10
+        value_1.inc()
     }
 }
 
@@ -35,17 +35,17 @@ fun case_1() {
     smartcast:inited
  */
 fun case_2() {
-    val <!UNUSED_VARIABLE!>value<!>: Int
+    val <!UNUSED_VARIABLE!>value_1<!>: Int
 
     funWithExactlyOnceCallsInPlace {
-        val <!NAME_SHADOWING!>value<!>: Int
+        val <!NAME_SHADOWING!>value_1<!>: Int
         funWithExactlyOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithAtLeastOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 }
 
@@ -59,22 +59,22 @@ fun case_2() {
     smartcast:inited
  */
 fun case_3() {
-    val value: Int
+    val value_1: Int
 
     funWithAtLeastOnceCallsInPlace {
-        val <!NAME_SHADOWING!>value<!>: Int
+        val <!NAME_SHADOWING!>value_1<!>: Int
         funWithExactlyOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithAtMostOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
     funWithExactlyOnceCallsInPlace {
-        value = 10
+        value_1 = 10
     }
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -87,22 +87,22 @@ fun case_3() {
     smartcast:inited
  */
 fun case_4() {
-    val value: Int
+    val value_1: Int
 
     funWithAtMostOnceCallsInPlace {
-        val <!NAME_SHADOWING!>value<!>: Int
+        val <!NAME_SHADOWING!>value_1<!>: Int
         funWithExactlyOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithUnknownCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
     funWithExactlyOnceCallsInPlace {
-        value = 10
+        value_1 = 10
     }
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -115,21 +115,21 @@ fun case_4() {
     smartcast:inited
  */
 fun case_5() {
-    val value: Int
+    val value_1: Int
 
     funWithUnknownCallsInPlace {
-        val <!NAME_SHADOWING!>value<!>: Int
+        val <!NAME_SHADOWING!>value_1<!>: Int
         funWithExactlyOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithAtMostOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
     }
     funWithExactlyOnceCallsInPlace {
-        value = 10
+        value_1 = 10
     }
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -142,24 +142,24 @@ fun case_5() {
     smartcast:inited
  */
 fun case_6() {
-    var value: Int
+    var value_1: Int
 
     funWithAtLeastOnceCallsInPlace {
-        val <!NAME_SHADOWING!>value<!>: Int
+        val <!NAME_SHADOWING!>value_1<!>: Int
         funWithExactlyOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithAtMostOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 
     funWithAtLeastOnceCallsInPlace {
-        value = 1
+        value_1 = 1
     }
 
-    value.dec()
+    value_1.dec()
 }
 
 /*
@@ -172,24 +172,24 @@ fun case_6() {
     smartcast:inited
  */
 fun case_7() {
-    val value: Int
+    val value_1: Int
 
     funWithAtLeastOnceCallsInPlace {
-        var <!NAME_SHADOWING!>value<!>: Int
+        var <!NAME_SHADOWING!>value_1<!>: Int
         funWithAtLeastOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithUnknownCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 
     funWithExactlyOnceCallsInPlace {
-        value = 1
+        value_1 = 1
     }
 
-    value.dec()
+    value_1.dec()
 }
 
 /*
@@ -202,24 +202,24 @@ fun case_7() {
     smartcast:inited
  */
 fun case_8() {
-    var value: Int
+    var value_1: Int
 
     funWithAtLeastOnceCallsInPlace {
-        var <!NAME_SHADOWING!>value<!>: Int
+        var <!NAME_SHADOWING!>value_1<!>: Int
         funWithAtLeastOnceCallsInPlace {
-            value = 10
+            value_1 = 10
         }
         funWithAtLeastOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value++
+        value_1++
     }
 
     funWithAtLeastOnceCallsInPlace {
-        value = 1
+        value_1 = 1
     }
 
-    value--
+    value_1--
 }
 
 

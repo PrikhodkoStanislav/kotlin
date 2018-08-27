@@ -134,79 +134,79 @@ fun <T : Number?> T.case_10_2(): Boolean? {
 
 import contracts.*
 
-fun case_1(value1: Any?) {
-    value1.case_1()
-    println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+fun case_1(value_1: Any?) {
+    value_1.case_1()
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
-fun case_2(value1: Number) {
-    value1.case_2()
-    println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv())
+fun case_2(value_1: Number) {
+    value_1.case_2()
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv())
 }
 
-fun case_3(value1: String?, value2: String?) {
-    value1.case_3_1()
-    println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    value2.case_3_2()
-    println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+fun case_3(value_1: String?, value_2: String?) {
+    value_1.case_3_1()
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    value_2.case_3_2()
+    println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
 }
 
-fun case_4(value1: String?, value2: String?) {
-    value1.case_4_1()
-    println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    value2.case_4_2()
-    println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+fun case_4(value_1: String?, value_2: String?) {
+    value_1.case_4_1()
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    value_2.case_4_2()
+    println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
 }
 
-fun case_5(value1: Any?) {
-    if (value1.case_5_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    if (!value1.case_5_2()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    if (value1.case_5_3() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    if (value1.case_5_4() == null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
+fun case_5(value_1: Any?) {
+    if (value_1.case_5_1()) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    if (!value_1.case_5_2()) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    if (value_1.case_5_3() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    if (value_1.case_5_4() == null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
-fun case_6(value1: Number) {
-    when { value1.case_6_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
-    when { !value1.case_6_2() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
-    when { value1.case_6_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
-    when { value1.case_6_4() == null -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.inv()) }
+fun case_6(value_1: Number) {
+    when { value_1.case_6_1() -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()) }
+    when { !value_1.case_6_2() -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()) }
+    when { value_1.case_6_3() != null -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()) }
+    when { value_1.case_6_4() == null -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()) }
 }
 
-fun case_7(value1: String?, value2: String?) {
-    if (value1.case_7_1()) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length)
-    if (value2.case_7_2()) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
-    if (!(value2.case_7_3() == null)) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
-    if (!(value2.case_7_4() != null)) println(<!DEBUG_INFO_CONSTANT!>value2<!>)
+fun case_7(value_1: String?, value_2: String?) {
+    if (value_1.case_7_1()) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    if (value_2.case_7_2()) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
+    if (!(value_2.case_7_3() == null)) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
+    if (!(value_2.case_7_4() != null)) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
 }
 
-fun case_8(value1: String?, value2: String?) {
-    when { value1.case_8_1() -> println(<!DEBUG_INFO_SMARTCAST!>value1<!>.length) }
-    when { value2.case_8_2() -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
-    when { !(value2.case_8_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
-    when { !(value2.case_8_4() != null) -> println(<!DEBUG_INFO_CONSTANT!>value2<!>) }
+fun case_8(value_1: String?, value_2: String?) {
+    when { value_1.case_8_1() -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length) }
+    when { value_2.case_8_2() -> println(<!DEBUG_INFO_CONSTANT!>value_2<!>) }
+    when { !(value_2.case_8_3() == null) -> println(<!DEBUG_INFO_CONSTANT!>value_2<!>) }
+    when { !(value_2.case_8_4() != null) -> println(<!DEBUG_INFO_CONSTANT!>value_2<!>) }
 }
 
 /*
  UNEXPECTED BEHAVIOUR
  */
-fun case_9(value1: Number?) {
-    if (value1?.case_9_1() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
-    if (value1?.case_9_2() != null) println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+fun case_9(value_1: Number?) {
+    if (value_1?.case_9_1() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
+    if (value_1?.case_9_2() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
 }
 
 /*
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26382
  */
-fun case_10(value1: Number?, value2: Number?) {
-    if (value1?.case_10_1() == null) {
-        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+fun case_10(value_1: Number?, value_2: Number?) {
+    if (value_1?.case_10_1() == null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
     } else {
-        println(<!DEBUG_INFO_SMARTCAST!>value1<!>.toByte())
+        println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
     }
-    if (value2?.case_10_2() != null) {
-        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+    if (value_2?.case_10_2() != null) {
+        println(<!DEBUG_INFO_SMARTCAST!>value_2<!>.toByte())
     } else {
-        println(<!DEBUG_INFO_SMARTCAST!>value2<!>.toByte())
+        println(<!DEBUG_INFO_SMARTCAST!>value_2<!>.toByte())
     }
 }

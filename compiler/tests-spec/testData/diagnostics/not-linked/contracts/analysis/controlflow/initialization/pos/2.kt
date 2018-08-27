@@ -19,22 +19,22 @@
     smartcast:inited
  */
 fun case_1() {
-    val value: Int
+    val value_1: Int
 
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {
-            value = 1
+            value_1 = 1
             funWithExactlyOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
         }
         funWithExactlyOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -46,19 +46,19 @@ fun case_1() {
     smartcast:inited
  */
 fun case_2() {
-    val value: Int
+    val value_1: Int
 
     funWithAtMostOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {
-            value = 1
+            value_1 = 1
         }
         funWithAtLeastOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
         funWithUnknownCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 }
 
@@ -71,22 +71,22 @@ fun case_2() {
     smartcast:inited
  */
 fun case_3() {
-    var value: Int
+    var value_1: Int
 
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {
-            value = 1
+            value_1 = 1
             funWithExactlyOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
         }
         funWithExactlyOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -98,22 +98,22 @@ fun case_3() {
     smartcast:inited
  */
 fun case_4() {
-    var value: Int
+    var value_1: Int
 
     funWithAtMostOnceCallsInPlace {
         funWithAtLeastOnceCallsInPlace {
-            value = 1
+            value_1 = 1
         }
         funWithAtLeastOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
         funWithUnknownCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
         funWithExactlyOnceCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 }
 
@@ -126,22 +126,22 @@ fun case_4() {
     smartcast:inited
  */
 fun case_7() {
-    var value: Int
+    var value_1: Int
 
     funWithAtLeastOnceCallsInPlace {
         funWithAtLeastOnceCallsInPlace {
-            value = 1
+            value_1 = 1
             funWithAtMostOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
         }
         funWithUnknownCallsInPlace {
-            value.inc()
+            value_1.inc()
         }
-        value.inc()
+        value_1.inc()
     }
 
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -153,24 +153,24 @@ fun case_7() {
     smartcast:inited
  */
 fun case_8() {
-    var value: Int
+    var value_1: Int
 
     funWithUnknownCallsInPlace {
         funWithAtMostOnceCallsInPlace {
             funWithAtLeastOnceCallsInPlace {
-                value = 1
+                value_1 = 1
             }
             funWithExactlyOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
             funWithAtLeastOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
             funWithAtMostOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
             funWithUnknownCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
         }
     }
@@ -185,21 +185,21 @@ fun case_8() {
     smartcast:inited
  */
 fun case_9() {
-    var value: Int
+    var value_1: Int
 
     funWithAtMostOnceCallsInPlace {
         funWithUnknownCallsInPlace {
             funWithExactlyOnceCallsInPlace {
-                value = 1
+                value_1 = 1
             }
             funWithAtLeastOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
             funWithAtMostOnceCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
             funWithUnknownCallsInPlace {
-                value.inc()
+                value_1.inc()
             }
         }
     }

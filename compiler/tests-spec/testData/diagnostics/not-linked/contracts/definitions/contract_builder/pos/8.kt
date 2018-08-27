@@ -15,13 +15,13 @@
 import kotlin.internal.contracts.*
 
 // CASE DESCRIPTION: two callsInPlace effects — on the first and last function parameter lambda
-private inline fun case_1(block1: () -> Unit, block2: () -> Unit) {
+private inline fun case_1(block_1: () -> Unit, block_2: () -> Unit) {
     contract {
-        callsInPlace(block1, InvocationKind.EXACTLY_ONCE)
-        callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block_1, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block_2, InvocationKind.EXACTLY_ONCE)
     }
-    block1()
-    block2()
+    block_1()
+    block_2()
 }
 
 // CASE DESCRIPTION: one callsInPlace effects on the not last function parameter lambda

@@ -42,11 +42,11 @@ inline fun case_4(block: () -> Unit) {
 }
 
 // CASE DESCRIPTION: label before contract
-inline fun case_5(block2: () -> Unit) {
+inline fun case_5(block: () -> Unit) {
     <!REDUNDANT_LABEL_WARNING!>test@<!> contract {
-        callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    return block2()
+    return block()
 }
 
 // CASE DESCRIPTION: contract as Exception argement in the throw expression
@@ -63,14 +63,14 @@ inline fun case_7(block: () -> Unit) {
     })
 }
 
-inline fun case_8_exactlyOnceContractBuilder(block2: () -> Unit) = {
+inline fun case_8_exactlyOnceContractBuilder(block: () -> Unit) = {
     contract {
-        callsInPlace(block2, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 }
 
 // CASE DESCRIPTION: use custom function to contract constructing
-inline fun case_8(block2: () -> Unit) {
-    case_8_exactlyOnceContractBuilder(block2)()
-    return block2()
+inline fun case_8(block: () -> Unit) {
+    case_8_exactlyOnceContractBuilder(block)()
+    return block()
 }

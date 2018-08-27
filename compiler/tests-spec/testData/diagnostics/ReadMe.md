@@ -68,7 +68,7 @@ The case description is a single-line comment of the following format:
 ```
 Example:
 ```
-// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class subtypes and null value are covered).
+// CASE DESCRIPTION: Checking for exhaustive 'when' (all sealed class subtypes and null value_1 are covered).
 fun case_1(expr: Expr?): String = when (expr) {
     is Const -> <!DEBUG_INFO_SMARTCAST!>expr<!>.n
     is Sum -> <!DEBUG_INFO_SMARTCAST!>expr<!>.e1 + <!DEBUG_INFO_SMARTCAST!>expr<!>.e2

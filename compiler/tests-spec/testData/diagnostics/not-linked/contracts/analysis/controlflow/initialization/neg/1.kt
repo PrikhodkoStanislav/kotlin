@@ -19,11 +19,11 @@
     smartcast:inited
  */
 fun case_1() {
-    val value: Int
+    val value_1: Int
 
-    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value<!> = 10 }
+    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = 10 }
 
-    value.inc()
+    value_1.inc()
 }
 
 /*
@@ -35,11 +35,11 @@ fun case_1() {
     smartcast:inited
  */
 fun case_2() {
-    val value: Int
+    val value_1: Int
 
-    funWithAtMostOnceCallsInPlace { value = 10 }
+    funWithAtMostOnceCallsInPlace { value_1 = 10 }
 
-    <!UNINITIALIZED_VARIABLE!>value<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
 }
 
 /*
@@ -52,11 +52,11 @@ fun case_2() {
     smartcast:inited
  */
 fun case_3() {
-    val value: Int
+    val value_1: Int
 
-    funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value<!> = 10 }
+    funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = 10 }
 
-    <!UNINITIALIZED_VARIABLE!>value<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
 }
 
 /*
@@ -68,14 +68,14 @@ fun case_3() {
     smartcast:inited
  */
 fun case_4() {
-    var value1: Int
-    var value2: Int
+    var value_1: Int
+    var value_2: Int
 
-    funWithAtMostOnceCallsInPlace { value1 = 10 }
-    funWithUnknownCallsInPlace { value2 = 10 }
+    funWithAtMostOnceCallsInPlace { value_1 = 10 }
+    funWithUnknownCallsInPlace { value_2 = 10 }
 
-    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
-    <!UNINITIALIZED_VARIABLE!>value2<!>.div(10)
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>value_2<!>.div(10)
 }
 
 /*
@@ -90,18 +90,18 @@ fun case_4() {
         init
  */
 class case_5 {
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value1: Int<!>
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value2: Int<!>
-    val value3: Int
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value4: Int<!>
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value5: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value_1: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val value_2: Int<!>
+    val value_3: Int
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value_4: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value_5: Int<!>
 
     init {
-        funWithAtMostOnceCallsInPlace { value1 = 1 }
-        funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value2<!> = 1 }
-        funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value3<!> = 1 }
-        funWithAtMostOnceCallsInPlace { value4 = 2 }
-        funWithUnknownCallsInPlace { value5 = 3 }
+        funWithAtMostOnceCallsInPlace { value_1 = 1 }
+        funWithUnknownCallsInPlace { <!VAL_REASSIGNMENT!>value_2<!> = 1 }
+        funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value_3<!> = 1 }
+        funWithAtMostOnceCallsInPlace { value_4 = 2 }
+        funWithUnknownCallsInPlace { value_5 = 3 }
     }
 }
 
@@ -116,13 +116,13 @@ class case_5 {
     for
  */
 fun case_6() {
-    val value1: Int
+    val value_1: Int
 
     for (i in 0..1) {
-        funWithExactlyOnceCallsInPlace { <!VAL_REASSIGNMENT!>value1<!> = 10 }
+        funWithExactlyOnceCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = 10 }
     }
 
-    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
 }
 
 /*
@@ -135,15 +135,15 @@ fun case_6() {
     while
  */
 fun case_7() {
-    var value1: Int
+    var value_1: Int
     var i = 0
 
     while (i < 10) {
-        funWithExactlyOnceCallsInPlace { value1 = 10 }
+        funWithExactlyOnceCallsInPlace { value_1 = 10 }
         i++
     }
 
-    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
 }
 
 /*
@@ -156,11 +156,11 @@ fun case_7() {
     if
  */
 fun case_8() {
-    var value1: Int
+    var value_1: Int
 
     if (true) {
-        funWithAtLeastOnceCallsInPlace { value1 = 10 }
+        funWithAtLeastOnceCallsInPlace { value_1 = 10 }
     }
 
-    <!UNINITIALIZED_VARIABLE!>value1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
 }
