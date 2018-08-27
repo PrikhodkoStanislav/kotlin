@@ -18,116 +18,116 @@ import kotlin.internal.contracts.*
 
 fun <T> T.case_1() {
     contract { returns() implies (this@case_1 is String) }
-    if (this !is String) throw Exception()
+    if (!(this@case_1 is String)) throw Exception()
 }
 
 fun <T : Number> T.case_2() {
     contract { returns() implies (this@case_2 is Int) }
-    if (this !is Int) throw Exception()
+    if (!(this@case_2 is Int)) throw Exception()
 }
 
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_1() {
     contract { returns() implies (this@case_3_1 != null) }
-    if (this == null) throw Exception()
+    if (!(this@case_3_1 != null)) throw Exception()
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_2() {
     contract { returns() implies (this@case_3_2 == null) }
-    if (this != null) throw Exception()
+    if (!(this@case_3_2 == null)) throw Exception()
 }
 
 fun <T : String?> T.case_4_1() {
     contract { returns() implies (this@case_4_1 != null) }
-    if (this == null) throw Exception()
+    if (!(this@case_4_1 != null)) throw Exception()
 }
 fun <T : String?> T.case_4_2() {
     contract { returns() implies (this@case_4_2 == null) }
-    if (this != null) throw Exception()
+    if (!(this@case_4_2 == null)) throw Exception()
 }
 
 fun <T> T.case_5_1(): Boolean {
     contract { returns(true) implies (this@case_5_1 is String) }
-    return this is String
+    return this@case_5_1 is String
 }
 fun <T> T.case_5_2(): Boolean {
     contract { returns(false) implies (this@case_5_2 is String) }
-    return this is String
+    return !(this@case_5_2 is String)
 }
 fun <T> T.case_5_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_5_3 is String) }
-    return this is String
+    return if (this@case_5_3 is String) true else null
 }
 fun <T> T.case_5_4(): Boolean? {
     contract { returns(null) implies (this@case_5_4 is String) }
-    return this is String
+    return if (this@case_5_4 is String) null else true
 }
 
 fun <T : Number> T.case_6_1(): Boolean {
     contract { returns(true) implies (this@case_6_1 is Int) }
-    return this is Int
+    return this@case_6_1 is Int
 }
 fun <T : Number> T.case_6_2(): Boolean {
     contract { returns(false) implies (this@case_6_2 is Int) }
-    return this is Int
+    return !(this@case_6_2 is Int)
 }
 fun <T : Number> T.case_6_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_6_3 is Int) }
-    return this is Int
+    return if (this@case_6_3 is Int) true else null
 }
 fun <T : Number> T.case_6_4(): Boolean? {
     contract { returns(null) implies (this@case_6_4 is Int) }
-    return this is Int
+    return if (this@case_6_4 is Int) null else true
 }
 
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_1(): Boolean {
     contract { returns(true) implies (this@case_7_1 != null) }
-    return this != null
+    return this@case_7_1 != null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_2(): Boolean {
     contract { returns(true) implies (this@case_7_2 == null) }
-    return this == null
+    return this@case_7_2 == null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_7_3 == null) }
-    return this == null
+    return if (this@case_7_3 == null) true else null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_4(): Boolean? {
     contract { returns(null) implies (this@case_7_4 == null) }
-    return this == null
+    return if (this@case_7_4 == null) null else true
 }
 
 fun <T : String?> T.case_8_1(): Boolean {
     contract { returns(true) implies (this@case_8_1 != null) }
-    return this != null
+    return this@case_8_1 != null
 }
 fun <T : String?> T.case_8_2(): Boolean {
     contract { returns(true) implies (this@case_8_2 == null) }
-    return this == null
+    return this@case_8_2 == null
 }
 fun <T : String?> T.case_8_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_8_3 == null) }
-    return this == null
+    return if (this@case_8_3 == null) true else null
 }
 fun <T : String?> T.case_8_4(): Boolean? {
     contract { returns(null) implies (this@case_8_4 == null) }
-    return this == null
+    return if (this@case_8_4 == null) null else true
 }
 
 fun <T : Number?> T.case_9_1(): Boolean? {
     contract { returnsNotNull() implies (this@case_9_1 != null) }
-    return this != null
+    return if (this@case_9_1 != null) true else null
 }
 fun <T : Number?> T.case_9_2(): Boolean? {
     contract { returns(null) implies (this@case_9_2 != null) }
-    return this != null
+    return if (this@case_9_2 != null) null else true
 }
 
 fun <T : Number?> T.case_10_1(): Boolean? {
     contract { returns(null) implies (this@case_10_1 != null) }
-    return this != null
+    return if (this@case_10_1 != null) null else true
 }
 fun <T : Number?> T.case_10_2(): Boolean? {
     contract { returns(null) implies (this@case_10_2 != null) }
-    return this == null
+    return if (this@case_10_2 != null) null else true
 }
 
 // FILE: usages.kt

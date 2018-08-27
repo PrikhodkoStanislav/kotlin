@@ -20,7 +20,7 @@ import kotlin.internal.contracts.*
 
 fun <T : Any?> T?.case_1() {
     contract { returns() implies (this@case_1 is Number || this@case_1 is Int) }
-    if (!(this is Number || this is Int)) throw Exception()
+    if (!(this@case_1 is Number || this@case_1 is Int)) throw Exception()
 }
 
 inline fun <reified T : Any?> T?.case_2(value_2: Number, value_3: Any?, value_4: String?) {

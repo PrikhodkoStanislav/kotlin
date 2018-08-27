@@ -27,7 +27,7 @@ import kotlin.internal.contracts.*
  */
 fun case_1(value_1: Any?, value_2: Any?) {
     contract { returns() implies (value_1 !is String || value_2 !is Number) }
-    if (value_1 is String && value_2 is Number) throw Exception()
+    if (!(value_1 !is String || value_2 !is Number)) throw Exception()
 }
 
 /*
@@ -42,7 +42,7 @@ fun case_1(value_1: Any?, value_2: Any?) {
  */
 fun case_2(value_1: Any?, value_2: Any?) {
     contract { returns() implies (value_1 !is String || value_2 != null) }
-    if (value_1 is String && value_2 == null) throw Exception()
+    if (!(value_1 !is String || value_2 != null)) throw Exception()
 }
 
 /*
@@ -87,15 +87,15 @@ fun case_4_1(value_1: Any?, value_2: Any?): Boolean {
 }
 fun case_4_2(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(false) implies (value_1 !is String || value_2 !is Number) }
-    return value_1 !is String || value_2 !is Number
+    return !(value_1 !is String || value_2 !is Number)
 }
 fun case_4_3(value_1: Any?, value_2: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 !is String || value_2 !is Number) }
-    return value_1 !is String || value_2 !is Number
+    return if (value_1 !is String || value_2 !is Number) true else null
 }
 fun case_4_4(value_1: Any?, value_2: Any?): Boolean? {
     contract { returns(null) implies (value_1 !is String || value_2 !is Number) }
-    return value_1 !is String || value_2 !is Number
+    return if (value_1 !is String || value_2 !is Number) null else true
 }
 
 /*
@@ -129,15 +129,15 @@ fun case_5_1(value_1: Any?, value_2: Any?): Boolean {
 }
 fun case_5_2(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(false) implies (value_1 !is String || value_2 != null) }
-    return value_1 !is String || value_2 != null
+    return !(value_1 !is String || value_2 != null)
 }
 fun case_5_3(value_1: Any?, value_2: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 is String && value_2 == null) }
-    return value_1 !is String || value_2 != null
+    return if (value_1 is String && value_2 == null) true else null
 }
 fun case_5_4(value_1: Any?, value_2: Any?): Boolean? {
     contract { returns(null) implies (value_1 is String && value_2 == null) }
-    return value_1 !is String || value_2 != null
+    return if (value_1 is String && value_2 == null) null else true
 }
 
 /*
@@ -171,15 +171,15 @@ fun case_6_1(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolea
 }
 fun case_6_2(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
     contract { returns(false) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
-    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
+    return !(value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null)
 }
 fun case_6_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) }
-    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
+    return if (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) true else null
 }
 fun case_6_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
     contract { returns(null) implies (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) }
-    return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
+    return if (value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null) null else true
 }
 
 // FILE: usages.kt

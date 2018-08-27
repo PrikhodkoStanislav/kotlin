@@ -24,11 +24,11 @@ fun case_1(): Boolean {
 // CASE DESCRIPTION: assignment statement before contract description
 fun case_2(): Boolean {
     contract { returns(true) implies (true || false) }
-    return true
+    return true || false
 }
 
 // CASE DESCRIPTION: expression before contract description
-fun case_3(): Boolean {
+fun case_3(): Boolean? {
     contract { returnsNotNull() implies (<!NULL_FOR_NONNULL_TYPE!>null<!>) }
     return true
 }

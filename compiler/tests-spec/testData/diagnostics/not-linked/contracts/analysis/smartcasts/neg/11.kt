@@ -37,15 +37,15 @@ fun case_16_1(value_1: Any?, value_2: Any?): Boolean {
 }
 fun case_16_2(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(false) implies (value_1 !is String || value_2 !is Number) }
-    return value_1 is String && value_2 is Number
+    return !(value_1 !is String || value_2 !is Number)
 }
 fun case_16_3(value_1: Any?, value_2: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 !is String || value_2 !is Number) }
-    return value_1 is String && value_2 is Number
+    return if (value_1 !is String || value_2 !is Number) true else null
 }
 fun case_16_4(value_1: Any?, value_2: Any?): Boolean? {
     contract { returns(null) implies (value_1 !is String || value_2 !is Number) }
-    return value_1 is String && value_2 is Number
+    return if (value_1 !is String || value_2 !is Number) null else true
 }
 
 fun case_17_1(value_1: Any?, value_2: Any?): Boolean {
@@ -54,184 +54,184 @@ fun case_17_1(value_1: Any?, value_2: Any?): Boolean {
 }
 fun case_17_2(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(false) implies (value_1 !is String || value_2 != null) }
-    return value_1 is String && value_2 == null
+    return !(value_1 !is String || value_2 != null)
 }
 fun case_17_3(value_1: Any?, value_2: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 !is String || value_2 != null) }
-    return value_1 is String && value_2 == null
+    return if (value_1 !is String || value_2 != null) true else null
 }
 fun case_17_4(value_1: Any?, value_2: Any?): Boolean? {
     contract { returns(null) implies (value_1 !is String || value_2 != null) }
-    return value_1 is String && value_2 == null
+    return if (value_1 !is String || value_2 != null) null else true
 }
 
 fun case_18_1(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
-    contract { returns() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
+    contract { returns(true) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
     return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
 }
 fun case_18_2(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
     contract { returns(false) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
-    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+    return !(value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null)
 }
 fun case_18_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
     contract { returnsNotNull() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
-    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+    return if (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) true else null
 }
 fun case_18_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean? {
     contract { returns(null) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
-    return value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+    return if (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) null else true
 }
 
 fun <T> T.case_19_1(): Boolean {
     contract { returns(true) implies (this@case_19_1 !is String) }
-    return this !is String
+    return this@case_19_1 !is String
 }
 fun <T> T.case_19_2(): Boolean {
     contract { returns(false) implies (this@case_19_2 is String) }
-    return this is String
+    return !(this@case_19_2 is String)
 }
 fun <T> T.case_19_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_19_3 is String) }
-    return this is String
+    return if (this@case_19_3 is String) true else null
 }
 fun <T> T.case_19_4(): Boolean? {
     contract { returns(null) implies (this@case_19_4 is String) }
-    return this is String
+    return if (this@case_19_4 is String) null else true
 }
 
 fun <T : Number> T.case_20_1(): Boolean {
     contract { returns(true) implies (this@case_20_1 !is Int) }
-    return this !is Int
+    return this@case_20_1 !is Int
 }
 fun <T : Number> T.case_20_2(): Boolean {
     contract { returns(false) implies (this@case_20_2 is Int) }
-    return this is Int
+    return !(this@case_20_2 is Int)
 }
 fun <T : Number> T.case_20_3(): Boolean? {
     contract { returnsNotNull() implies (this@case_20_3 is Int) }
-    return this is Int
+    return if (this@case_20_3 is Int) true else null
 }
 fun <T : Number> T.case_20_4(): Boolean? {
     contract { returns(null) implies (this@case_20_4 is Int) }
-    return this is Int
+    return if (this@case_20_4 is Int) null else true
 }
 
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_1(): Boolean {
     contract { returns(true) implies (this@case_21_1 != null) }
-    return this != null
+    return this@case_21_1 != null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_2(): Boolean {
     contract { returns(true) implies (this@case_21_2 == null) }
-    return this == null
+    return this@case_21_2 == null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_3(): Boolean {
     contract { returns(false) implies (this@case_21_3 != null) }
-    return this != null
+    return !(this@case_21_3 != null)
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_4(): Boolean {
     contract { returns(false) implies (this@case_21_4 == null) }
-    return this == null
+    return !(this@case_21_4 == null)
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_5(): Boolean? {
     contract { returnsNotNull() implies (this@case_21_5 != null) }
-    return this != null
+    return if (this@case_21_5 != null) true else null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_6(): Boolean? {
     contract { returnsNotNull() implies (this@case_21_6 == null) }
-    return this == null
+    return if (this@case_21_6 == null) true else null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_7(): Boolean? {
     contract { returns(null) implies (this@case_21_7 != null) }
-    return this != null
+    return if (this@case_21_7 != null) null else true
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_8(): Boolean? {
     contract { returns(null) implies (this@case_21_8 == null) }
-    return this == null
+    return if (this@case_21_8 == null) null else true
 }
 
 fun <T : String?> T.case_22_1(): Boolean {
     contract { returns(true) implies (this@case_22_1 != null) }
-    return this != null
+    return this@case_22_1 != null
 }
 fun <T : String?> T.case_22_2(): Boolean {
     contract { returns(true) implies (this@case_22_2 == null) }
-    return this == null
+    return this@case_22_2 == null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_3(): Boolean {
     contract { returns(false) implies (this@case_22_3 != null) }
-    return this == null
+    return !(this@case_22_3 != null)
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_4(): Boolean {
     contract { returns(false) implies (this@case_22_4 == null) }
-    return this != null
+    return !(this@case_22_4 == null)
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_5(): Boolean? {
     contract { returnsNotNull() implies (this@case_22_5 != null) }
-    return this == null
+    return if (this@case_22_5 != null) true else null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_6(): Boolean? {
     contract { returnsNotNull() implies (this@case_22_6 == null) }
-    return this != null
+    return if (this@case_22_6 == null) true else null
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_7(): Boolean? {
     contract { returns(null) implies (this@case_22_7 != null) }
-    return this == null
+    return if (this@case_22_7 != null) null else true
 }
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_8(): Boolean? {
     contract { returns(null) implies (this@case_22_8 == null) }
-    return this != null
+    return if (this@case_22_8 == null) null else true
 }
 
 fun <T> T?.case_23_1(): Boolean {
     contract { returns(false) implies (this@case_23_1 == null || this@case_23_1 !is String) }
-    return this != null && this is String
+    return !(this@case_23_1 == null || this@case_23_1 !is String)
 }
 fun <T> T?.case_23_2(): Boolean? {
     contract { returnsNotNull() implies (this@case_23_2 == null || this@case_23_2 !is String) }
-    return this != null && this is String
+    return if (this@case_23_2 == null || this@case_23_2 !is String) true else null
 }
 fun <T> T?.case_23_3(): Boolean? {
     contract { returns(null) implies (this@case_23_3 == null || this@case_23_3 !is String) }
-    return this != null && this is String
+    return if (this@case_23_3 == null || this@case_23_3 !is String) null else true
 }
 
 fun <T : Number?> T.case_24_1(): Boolean {
     contract { returns(false) implies (this@case_24_1 !is Int || <!SENSELESS_COMPARISON!>this@case_24_1 == null<!>) }
-    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return !(this@case_24_1 !is Int || <!SENSELESS_COMPARISON!>this@case_24_1 == null<!>)
 }
 fun <T : Number?> T.case_24_2(): Boolean? {
     contract { returnsNotNull() implies (this@case_24_2 !is Int || <!SENSELESS_COMPARISON!>this@case_24_2 == null<!>) }
-    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return if (this@case_24_2 !is Int || <!SENSELESS_COMPARISON!>this@case_24_2 == null<!>) true else null
 }
 fun <T : Number?> T.case_24_3(): Boolean? {
     contract { returns(null) implies (this@case_24_3 !is Int || <!SENSELESS_COMPARISON!>this@case_24_3 == null<!>) }
-    return this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return if (this@case_24_3 !is Int || <!SENSELESS_COMPARISON!>this@case_24_3 == null<!>) null else true
 }
 
 inline fun <reified T : Any?> T?.case_25_1(): Boolean {
     contract { returns(false) implies (this@case_25_1 !is Number || this@case_25_1 !is Int || <!SENSELESS_COMPARISON!>this@case_25_1 == null<!>) }
-    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return !(this@case_25_1 !is Number || this@case_25_1 !is Int || <!SENSELESS_COMPARISON!>this@case_25_1 == null<!>)
 }
 inline fun <reified T : Any?> T?.case_25_2(): Boolean? {
     contract { returnsNotNull() implies (this@case_25_2 !is Number || this@case_25_2 !is Int || <!SENSELESS_COMPARISON!>this@case_25_2 == null<!>) }
-    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return if (this@case_25_2 !is Number || this@case_25_2 !is Int || <!SENSELESS_COMPARISON!>this@case_25_2 == null<!>) true else null
 }
 inline fun <reified T : Any?> T?.case_25_3(): Boolean? {
     contract { returns(null) implies (this@case_25_3 !is Number || this@case_25_3 !is Int || <!SENSELESS_COMPARISON!>this@case_25_3 == null<!>) }
-    return this is Number && this is Int && <!SENSELESS_COMPARISON!>this != null<!>
+    return if (this@case_25_3 !is Number || this@case_25_3 !is Int || <!SENSELESS_COMPARISON!>this@case_25_3 == null<!>) null else true
 }
 
 fun <T> T?.case_26_1(value_1: Int?): Boolean {
     contract { returns(false) implies (this@case_26_1 == null || this@case_26_1 !is String || value_1 == null) }
-    return this != null && this is String && value_1 != null
+    return !(this@case_26_1 == null || this@case_26_1 !is String || value_1 == null)
 }
 fun <T> T?.case_26_2(value_1: Int?): Boolean? {
     contract { returnsNotNull() implies (this@case_26_2 == null || this@case_26_2 !is String || value_1 == null) }
-    return this != null && this is String && value_1 != null
+    return if (this@case_26_2 == null || this@case_26_2 !is String || value_1 == null) true else null
 }
 fun <T> T?.case_26_3(value_1: Int?): Boolean? {
     contract { returns(null) implies (this@case_26_3 == null || this@case_26_3 !is String || value_1 == null) }
-    return this != null && this is String && value_1 != null
+    return if (this@case_26_3 == null || this@case_26_3 !is String || value_1 == null) null else true
 }
 
 // FILE: usages.kt

@@ -27,7 +27,7 @@ fun case_2(): Boolean {
 // CASE DESCRIPTION: expression before contract description
 fun case_3(): Boolean {
     contract { returns(false) implies (<!TYPE_MISMATCH, ERROR_IN_CONTRACT_DESCRIPTION!>"..." + "$<!UNRESOLVED_REFERENCE!>value_1<!>"<!>) }
-    return false
+    return true
 }
 
 /*

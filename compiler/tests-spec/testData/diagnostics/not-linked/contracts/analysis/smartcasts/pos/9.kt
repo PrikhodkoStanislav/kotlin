@@ -25,12 +25,22 @@ fun <T> T?.case_4(): Boolean {
 
 fun <T> T?.case_4_1(): Boolean {
     contract { returns(false) implies (this@case_4_1 != null) }
-    return this@case_4_1 != null
+    return !(this@case_4_1 != null)
 }
 
-fun <T> T?.case_4_2(): Boolean {
+fun <T> T?.case_4_2(): Boolean? {
     contract { returns(null) implies (this@case_4_2 is String) }
-    return this@case_4_2 != null
+    return if (this@case_4_2 is String) null else true
+}
+
+fun <T> T?.case_11_1(): Boolean {
+    contract { returns(false) implies (this@case_11_1 != null) }
+    return !(this@case_11_1 != null)
+}
+
+fun <T> T?.case_11_2(): Boolean? {
+    contract { returns(null) implies (this@case_11_2 is String) }
+    return if (this@case_11_2 is String) null else true
 }
 
 // FILE: usages.kt
@@ -59,7 +69,7 @@ fun case_3(value_1: Any?) {
  UNEXPECTED BEHAVIOUR
  */
 fun case_4(value_1: Any?) {
-    if (!value_1.case_4_1() && <!SENSELESS_COMPARISON!>value_1.case_4_2() == null<!>) {
+    if (!value_1.case_4_1() && value_1.case_4_2() == null) {
         println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
     }
 }
@@ -107,6 +117,12 @@ fun case_10(value_1: Any?) {
     if (funWithReturnsFalse(value_1 is String) || getBoolean()) {
 
     } else {
+        println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    }
+}
+
+fun case_11(value_1: Any?) {
+    if (!(value_1.case_11_1() || value_1.case_11_2() != null)) {
         println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
     }
 }
