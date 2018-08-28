@@ -7,34 +7,24 @@
  SECTION: Contracts
  CATEGORY: definitions, effects, returns
  NUMBER: 2
- DESCRIPTION: Using equality with literals as implies argument.
+ DESCRIPTION: Using equality with literals in implies.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26178
  */
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: equality with float as implies argument
 fun case_1(x: Any?): Boolean {
-    contract {
-        returns(true) implies (x == .15f)
-    }
+    contract { returns(true) implies (x == .15f) }
     return x == .15f
 }
 
-// CASE DESCRIPTION: equality with string as implies argument
 fun case_2(x: Any?) {
-    contract {
-        returns() implies (x == "...")
-    }
-
+    contract { returns() implies (x == "...") }
     if (x != "...") throw Exception()
 }
 
-// CASE DESCRIPTION: equality with char as implies argument
 fun case_3(x: Any?): Boolean {
-    contract {
-        returns(true) implies (x == '-')
-    }
+    contract { returns(true) implies (x == '-') }
     return x == '-'
 }

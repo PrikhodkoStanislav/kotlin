@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 3
- DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as implies parameter in contract definition.
+ DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions inside contract.
  */
 
 // FILE: contracts.kt

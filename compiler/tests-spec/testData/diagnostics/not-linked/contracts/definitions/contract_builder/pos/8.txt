@@ -1,9 +1,6 @@
 package
 
-private inline fun case_1(/*0*/ block_1: () -> kotlin.Unit, /*1*/ block_2: () -> kotlin.Unit): kotlin.Unit
-    CallsInPlace(block_1, EXACTLY_ONCE)
-    CallsInPlace(block_2, EXACTLY_ONCE)
-
-private inline fun case_2(/*0*/ block: () -> kotlin.Unit): kotlin.Unit
-    CallsInPlace(block, EXACTLY_ONCE)
-
+public fun case_1(/*0*/ value_1: kotlin.Boolean?): kotlin.Boolean
+public fun kotlin.Boolean.case_2(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
+public fun </*0*/ T : kotlin.Boolean?> T.case_3(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
+public fun kotlin.Boolean?.case_3(): kotlin.Boolean?

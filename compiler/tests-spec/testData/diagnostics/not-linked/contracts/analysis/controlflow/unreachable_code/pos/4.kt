@@ -7,17 +7,9 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, unreachable_code
  NUMBER: 4
- DESCRIPTION: Unreachable code detection based on the nested contract functions with callsInPlace effect
+ DESCRIPTION: Unreachable code detection using nested contract functions with CallsInPlace effect
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-        nested
-    throw
-    unrechableCode
- */
 fun case_1() {
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {
@@ -31,15 +23,6 @@ fun case_1() {
     <!UNREACHABLE_CODE!>println("3")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-        nested
-    unrechableCode
-    return:nonlocal
-    lambda:labeled
- */
 fun case_2() {
     funWithAtLeastOnceCallsInPlace {
         funWithAtLeastOnceCallsInPlace label_1@ {
@@ -56,14 +39,6 @@ fun case_2() {
     <!UNREACHABLE_CODE!>println("3")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-        nested
-    unrechableCode
-    return:local,labelClash
- */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         funWithExactlyOnceCallsInPlace {

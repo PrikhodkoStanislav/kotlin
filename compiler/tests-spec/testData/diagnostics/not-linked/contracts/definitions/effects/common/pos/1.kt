@@ -14,7 +14,6 @@
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: effect definition through a call of the additional lambda
 inline fun case_1(block: () -> Unit) {
     contract {
         { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }()
@@ -22,7 +21,6 @@ inline fun case_1(block: () -> Unit) {
     return block()
 }
 
-// CASE DESCRIPTION: effect definition through a call of the apply
 fun case_2(x: Any?): Boolean {
     contract {
          returns(true).apply { implies (x is Number) } // 'Returns' as result
@@ -30,7 +28,6 @@ fun case_2(x: Any?): Boolean {
     return x is Number
 }
 
-// CASE DESCRIPTION: effect definition through a call of the also
 fun case_3(x: Any?): Boolean {
     contract {
          returns(true).also { it implies (x is Number) } // 'Returns' as result
@@ -38,7 +35,6 @@ fun case_3(x: Any?): Boolean {
     return x is Number
 }
 
-// CASE DESCRIPTION: effect definition through a call of the let
 fun case_4(x: Any?): Boolean {
     contract {
          returns(true).let { it implies (x is Number) } // 'ConditionalEffect' as result
@@ -46,7 +42,6 @@ fun case_4(x: Any?): Boolean {
     return x is Number
 }
 
-// CASE DESCRIPTION: effect definition through a call of the run
 fun case_5(x: Any?): Boolean {
     contract {
         returns(true).run { implies (x is Number) } // 'ConditionalEffect' as result
@@ -54,7 +49,6 @@ fun case_5(x: Any?): Boolean {
     return x is Number
 }
 
-// CASE DESCRIPTION: effect definition as null using takeIf with return false
 fun case_6(x: Any?): Boolean {
     contract {
          returns(true).takeIf { it implies (x is Number); false } // null, must be unrecognized effect

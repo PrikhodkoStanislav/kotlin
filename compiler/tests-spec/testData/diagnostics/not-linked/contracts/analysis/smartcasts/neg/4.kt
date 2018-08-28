@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 4
- DESCRIPTION: Smartcast using returns effect with simple type checking and not-null conditions on receiver (extention function).
+ DESCRIPTION: Smartcasts using Returns effects with simple type checking and not-null conditions on receiver inside contract.
  */
 
 // FILE: contracts.kt
@@ -16,43 +16,16 @@ package contracts
 
 import kotlin.internal.contracts.*
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns
-            implies
-                invertTypeCheck:string
-    fun:extension:generic
- */
 fun <T> T.case_1() {
     contract { returns() implies (this@case_1 !is String) }
     if (!(this@case_1 !is String)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns
-            implies
-                invertTypeCheck:int
-    fun:extension:generic:upperBound
- */
 fun <T : Number> T.case_2() {
     contract { returns() implies (this@case_2 !is Int) }
     if (!(this@case_2 !is Int)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns:implies:nullCheck,notNullCheck
-    fun:extension
-        generic:upperBound
-        nullable
- */
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_1() {
     contract { returns() implies (this@case_3_1 == null) }
     if (!(this@case_3_1 == null)) throw Exception()
@@ -62,13 +35,6 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_3_2() {
     if (!(this@case_3_2 != null)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns:implies:nullCheck,notNullCheck
-    fun:extension:generic,nullable
- */
 fun <T : String?> T.case_4_1() {
     contract { returns() implies (this@case_4_1 == null) }
     if (!(this@case_4_1 == null)) throw Exception()
@@ -78,16 +44,6 @@ fun <T : String?> T.case_4_2() {
     if (!(this@case_4_2 != null)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue:implies:invertTypeCheck:string
-        returnsFalse:implies:invertTypeCheck:string
-        returnsNotNull:implies:invertTypeCheck:string
-        returnsNull:implies:invertTypeCheck:string
-    fun:extension:generic
- */
 fun <T> T.case_5_1(): Boolean {
     contract { returns(true) implies (this@case_5_1 !is String) }
     return this@case_5_1 !is String
@@ -105,16 +61,6 @@ fun <T> T.case_5_4(): Boolean? {
     return if (this@case_5_4 !is String) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue:implies:invertTypeCheck:int
-        returnsFalse:implies:invertTypeCheck:int
-        returnsNotNull:implies:invertTypeCheck:int
-        returnsNull:implies:invertTypeCheck:int
-    fun:extension:generic:upperBound
- */
 fun <T : Number> T.case_6_1(): Boolean {
     contract { returns(true) implies (this@case_6_1 !is Int) }
     return this@case_6_1 !is Int
@@ -132,18 +78,6 @@ fun <T : Number> T.case_6_4(): Boolean? {
     return if (this@case_6_4 !is Int) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue:implies:nullCheck
-        returnsFalse:implies:notNullCheck
-        returnsNotNull:implies:notNullCheck
-        returnsNull:implies:notNullCheck
-    fun:extension
-        generic:upperBound
-        nullable
- */
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_1(): Boolean {
     contract { returns(true) implies (this@case_7_1 == null) }
     return this@case_7_1 == null
@@ -161,18 +95,6 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_4(): Boolean? {
     return if (this@case_7_4 != null) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue:implies:nullCheck
-        returnsFalse:implies:notNullCheck
-        returnsNotNull:implies:notNullCheck
-        returnsNull:implies:notNullCheck
-    fun:extension
-        generic:upperBound
-        nullable
- */
 fun <T : String?> T.case_8_1(): Boolean {
     contract { returns(true) implies (this@case_8_1 == null) }
     return this@case_8_1 == null
@@ -190,31 +112,11 @@ fun <T : String?> T.case_8_4(): Boolean? {
     return if (this@case_8_4 != null) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsNotNull:implies:notNullCheck
-        returnsNull:implies:notNullCheck
-    fun:extension
-        generic:upperBound
-        nullable
- */
 fun <T : Number?> T.case_9(): Boolean? {
     contract { returnsNotNull() implies (this@case_9 != null) }
     return if (this@case_9 != null) true else null
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsNotNull:implies:nullCheck
-        returnsNull:implies:nullCheck
-    fun:extension
-        generic:upperBound
-        nullable
- */
 fun <T : Number?> T.case_10(): Boolean? {
     contract { returnsNotNull() implies (this@case_10 == null) }
     return if (this@case_10 == null) true else null
@@ -224,34 +126,16 @@ fun <T : Number?> T.case_10(): Boolean? {
 
 import contracts.*
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns:invertTypeCheck:string
-    smartcast:string
- */
 fun case_1(value_1: Any?) {
     value_1.case_1()
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns:invertTypeCheck:int
-    smartcast:int
- */
 fun case_2(value_1: Number) {
     value_1.case_2()
     println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns:nullCheck,notNullCheck
-    smartcast:notNull,nullConstant
- */
 fun case_3(value_1: String?, value_2: String?) {
     value_1.case_3_1()
     println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
@@ -259,12 +143,6 @@ fun case_3(value_1: String?, value_2: String?) {
     println(value_2)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns:nullCheck,notNullCheck
-    smartcast:notNull,nullConstant
- */
 fun case_4(value_1: String?, value_2: String?) {
     value_1.case_4_1()
     println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
@@ -272,16 +150,6 @@ fun case_4(value_1: String?, value_2: String?) {
     println(value_2)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue:invertTypeCheck:string
-        returnsFalse:invertTypeCheck:string
-        returnsNotNull:invertTypeCheck:string
-        returnsNull:invertTypeCheck:string
-    smartcast:string
-    if
- */
 fun case_5(value_1: Any?) {
     if (value_1.case_5_1()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     if (!value_1.case_5_2()) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -289,16 +157,6 @@ fun case_5(value_1: Any?) {
     if (value_1.case_5_4() == null) println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue:invertTypeCheck:int
-        returnsFalse:invertTypeCheck:int
-        returnsNotNull:invertTypeCheck:int
-        returnsNull:invertTypeCheck:int
-    smartcast:int
-    when
- */
 fun case_6(value_1: Number) {
     when { value_1.case_6_1() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
     when { !value_1.case_6_2() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
@@ -306,16 +164,6 @@ fun case_6(value_1: Number) {
     when { value_1.case_6_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue:nullCheck
-        returnsFalse:notNullCheck
-        returnsNotNull:notNullCheck
-        returnsNull:notNullCheck
-    smartcast:notNull,nullConstant
-    if
- */
 fun case_7(value_1: String?, value_2: String?) {
     if (value_1.case_7_1()) println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length)
     if (value_2.case_7_2()) println(value_2)
@@ -323,16 +171,6 @@ fun case_7(value_1: String?, value_2: String?) {
     if (value_2.case_7_3() == null) println(value_2)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue:nullCheck
-        returnsFalse:notNullCheck
-        returnsNotNull:notNullCheck
-        returnsNull:notNullCheck
-    smartcast:notNull,nullConstant
-    when
- */
 fun case_8(value_1: String?, value_2: String?) {
     when { value_1.case_8_1() -> println(<!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>length) }
     when { value_2.case_8_2() -> println(value_2) }
@@ -340,27 +178,10 @@ fun case_8(value_1: String?, value_2: String?) {
     when { value_2.case_8_3() == null -> println(value_2) }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsNotNull:notNullCheck
-        returnsNull:notNullCheck
-    smartcast:notNull,nullConstant
-    if
- */
 fun case_9(value_1: Number?) {
     if (value_1?.case_9() == null) println(value_1<!UNSAFE_CALL!>.<!>toByte())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsNotNull:nullCheck
-        returnsNull:nullCheck
-    smartcast:notNull,nullConstant
-    unreachableCode
-    if
- */
 fun case_10(value_1: Number?) {
     if (value_1?.case_10() == null) {
         println(value_1<!UNSAFE_CALL!>.<!>toByte())

@@ -20,19 +20,16 @@ internal inline fun ContractBuilder.callsInPlaceEffectBuilder(block: () -> Unit)
 internal fun ContractBuilder.returnsEffectBuilder(value_1: Int?) =
     returns(true) implies (value_1 != null)
 
-// CASE DESCRIPTION: contract with one effect as result of external function in the parentheses using with parameter name
 internal inline fun case_1(block: () -> Unit) {
     contract(builder = { callsInPlaceEffectBuilder(block) })
     return block()
 }
 
-// CASE DESCRIPTION: contract with one effect as result of external function outside the parentheses
 internal inline fun case_2(block: () -> Unit) {
     contract { callsInPlaceEffectBuilder(block) }
     return block()
 }
 
-// CASE DESCRIPTION: contract with two effects as result of external functions outside in the parentheses
 internal inline fun case_3(value_1: Int?, block: () -> Unit) {
     contract({ returnsEffectBuilder(value_1); callsInPlaceEffectBuilder(block) })
     return block()

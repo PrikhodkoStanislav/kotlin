@@ -18,13 +18,11 @@ internal inline fun contractBuilder(block: () -> Unit): ContractBuilder.() -> Un
     callsInPlace(block, InvocationKind.EXACTLY_ONCE)
 }
 
-// CASE DESCRIPTION: ContractBuilder as contract argument in the parentheses
 internal inline fun case_1(block: () -> Unit) {
     contract(contractBuilder(block))
     return block()
 }
 
-// CASE DESCRIPTION: ContractBuilder as contract argument in the parentheses and used explicitly name parameter
 internal inline fun case_2(block: () -> Unit) {
     contract(builder = contractBuilder(block))
     return block()

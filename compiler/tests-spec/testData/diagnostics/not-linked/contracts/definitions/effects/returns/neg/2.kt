@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: definitions, effects, returns
  NUMBER: 2
- DESCRIPTION: Using equality with expressions as implies argument.
+ DESCRIPTION: Using equality with not labeled 'this' in implies.
  */
 
 import kotlin.internal.contracts.*

@@ -7,53 +7,43 @@
  SECTION: Contracts
  CATEGORY: definitions, common
  NUMBER: 2
- DESCRIPTION: Check report about use contracts in literal functions or lambdas.
+ DESCRIPTION: Check report about use contracts in literal functions, lambdas or not top-level functions.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26149
  */
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: contract in literal fun
 fun case_1() {
-    val literalFunWithContract = fun(block: () -> Unit) {
-        contract {
-            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        }
+    val fun_1 = fun(block: () -> Unit) {
+        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         return block()
     }
 
-    literalFunWithContract { throw Exception() }
-    println("1") // not unreachable code
+    fun_1 { throw Exception() }
+    println("1")
 }
 
-// CASE DESCRIPTION: contract in lambda
 fun case_2() {
-    val f1 = { block: () -> Unit ->
-        contract {
-            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        }
+    val lambda_1 = { block: () -> Unit ->
+        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         block()
     }
 
-    f1 { throw Exception() }
-    println("1") // not unreachable code
+    lambda_1 { throw Exception() }
+    println("1")
 }
 
 object case_3 {
     fun case_3(block: () -> Unit) {
-        contract {
-            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        }
+        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         return block()
     }
 }
 
 class case_4 {
     fun case_4(block: () -> Unit) {
-        contract {
-            callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-        }
+        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         return block()
     }
 }

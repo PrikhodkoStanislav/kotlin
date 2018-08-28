@@ -15,25 +15,21 @@
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: contract in return expression
 internal inline fun case_1(block: () -> Unit) {
     return contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 }
 
-// CASE DESCRIPTION: empty contract as function result expression
 fun case_2() = contract { }
 
-// CASE DESCRIPTION: first statement is assignment with contract
 inline fun case_3(block: () -> Unit) {
-    val r = contract {
+    val value_1 = contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     block()
 }
 
-// CASE DESCRIPTION: contract in parentheses
 inline fun case_4(block: () -> Unit) {
     (contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -41,7 +37,6 @@ inline fun case_4(block: () -> Unit) {
     return block()
 }
 
-// CASE DESCRIPTION: label before contract
 inline fun case_5(block: () -> Unit) {
     <!REDUNDANT_LABEL_WARNING!>test@<!> contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -49,14 +44,12 @@ inline fun case_5(block: () -> Unit) {
     return block()
 }
 
-// CASE DESCRIPTION: contract as Exception argement in the throw expression
 inline fun case_6(block: () -> Unit) {
     throw Exception(contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }.toString())
 }
 
-// CASE DESCRIPTION: call custom function with contract as argument
 inline fun case_7(block: () -> Unit) {
     _funWithAnyArg(contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -69,7 +62,6 @@ inline fun case_8_exactlyOnceContractBuilder(block: () -> Unit) = {
     }
 }
 
-// CASE DESCRIPTION: use custom function to contract constructing
 inline fun case_8(block: () -> Unit) {
     case_8_exactlyOnceContractBuilder(block)()
     return block()

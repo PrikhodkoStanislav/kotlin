@@ -8,7 +8,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 11
- DESCRIPTION: Check smartcasts if double negation used (returnsFalse/invert type checking/not operator).
+ DESCRIPTION: Check smartcasts using double negation (returnsFalse/invert type checking/not operator).
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26176
  */
@@ -19,13 +19,11 @@ package contracts
 
 import kotlin.internal.contracts.*
 
-// CASE KEYWORDS: returnsTrue, numberInvertTypeCheck
 fun case_1(x: Any?): Boolean {
     contract { returns(true) implies (x !is Number) }
     return x !is Number
 }
 
-// CASE KEYWORDS: returnsTrue, nullableNumberInvertTypeCheck
 fun case_2(x: Any?): Boolean {
     contract { returns(true) implies (x !is Number?) }
     return x !is Number?
@@ -238,14 +236,12 @@ fun <T> T?.case_26_3(value_1: Int?): Boolean? {
 
 import contracts.*
 
-// CASE KEYWORDS: numberSmartCast
-fun case_1(t: Any?) {
-    if (!contracts.case_1(t)) println(t.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()) // no smartcast
+fun case_1(value_1: Any?) {
+    if (!contracts.case_1(value_1)) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()) // no smartcast
 }
 
-// CASE KEYWORDS: nullableNumberSmartCast
-fun case_2(t: Any?) {
-    if (!contracts.case_2(t)) println(t?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()) // no smartcast
+fun case_2(value_1: Any?) {
+    if (!contracts.case_2(value_1)) println(value_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()) // no smartcast
 }
 
 fun case_3(number: Int?) {
@@ -472,18 +468,10 @@ fun case_19(value_1: Any?) {
 }
 
 fun case_20(value_1: Number) {
-    when {
-        !value_1.case_20_1() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    }
-    when {
-        value_1.case_20_2() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    }
-    when {
-        value_1.case_20_3() == null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    }
-    when {
-        value_1.case_20_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    }
+    when { !value_1.case_20_1() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value_1.case_20_2() -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value_1.case_20_3() == null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
+    when { value_1.case_20_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
 }
 
 fun case_21(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
@@ -508,12 +496,8 @@ fun case_21(value_1: String?, value_2: String?, value_3: String?, value_4: Strin
 }
 
 fun case_22(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
-    when {
-        !value_1.case_22_1() -> println(value_1)
-    }
-    when {
-        !value_2.case_22_2() -> println(value_2<!UNSAFE_CALL!>.<!>length)
-    }
+    when { !value_1.case_22_1() -> println(value_1) }
+    when { !value_2.case_22_2() -> println(value_2<!UNSAFE_CALL!>.<!>length) }
     when {
         !value_3.case_22_3() -> println(value_3<!UNSAFE_CALL!>.<!>length)
         value_3.case_22_3() -> println(value_3)
@@ -541,33 +525,21 @@ fun case_22(value_1: String?, value_2: String?, value_3: String?, value_4: Strin
 }
 
 fun case_23(value_1: Any?, value_2: Any?) {
-    when {
-        value_1.case_23_1() -> println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
-    }
-    when {
-        value_2.case_23_2() == null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>)
-    }
-    when {
-        value_2.case_23_3() != null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>)
-    }
+    when { value_1.case_23_1() -> println(value_1.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { value_2.case_23_2() == null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>) }
+    when { value_2.case_23_3() != null -> println(value_2.<!UNRESOLVED_REFERENCE!>length<!>) }
 }
 
 fun case_24(value_1: Number?, value_2: Number?) {
-    if (value_1.case_24_1())
-        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value_2.case_24_2() == null)
-        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value_2.case_24_3() != null)
-        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_1.case_24_1()) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_24_2() == null) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_24_3() != null) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 fun case_25(value_1: Any?, value_2: Any?) {
-    if (value_1.case_25_1())
-        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value_2.case_25_2() != null)
-        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
-    if (value_2.case_25_3() == null)
-        println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_1.case_25_1()) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_25_2() != null) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+    if (value_2.case_25_3() == null) println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
 }
 
 fun case_26(value_1: Any?, value_2: Int?, value_3: Any?, value_4: Int?) {

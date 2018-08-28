@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 2
- DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as paremeter of contract function.
+ DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions outside contract (custom condition).
  */
 
 fun case_1(value_1: Any?, value_2: Any?) {

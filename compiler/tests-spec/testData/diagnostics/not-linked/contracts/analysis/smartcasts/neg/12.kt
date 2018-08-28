@@ -8,7 +8,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 12
- DESCRIPTION: Check smartcasts if pass same fields of instances of the same class in contract function with conjunction not-null condition.
+ DESCRIPTION: Check smartcasts with passing same fields of instances of the same class in contract function with conjunction not-null condition.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26300
  */
@@ -33,20 +33,20 @@ fun case_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean 
 
 import contracts.*
 
-class case_1_class {
+class case_1 {
     val prop_1: Int? = 10
     fun case_1(value_1: Any?, value_2: Number?) {
-        val o = case_1_class()
+        val o = case_1()
         funWithReturns(value_1 is Float? && value_1 != null && value_2 != null && o.prop_1 != null && this.prop_1 != null)
         println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
     }
 }
 
-class case_2_class {
+class case_2 {
     val prop_1: Int? = 10
     fun case_2(value_1: Any?, value_2: Number?) {
-        val o = case_2_class()
+        val o = case_2()
         if (funWithReturnsTrue(value_1 is Float? && value_1 != null && value_2 != null && o.prop_1 != null && this.prop_1 != null)) {
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
@@ -58,20 +58,20 @@ class case_2_class {
     }
 }
 
-class case_3_class {
+class case_3 {
     val prop_1: Int? = 10
     fun case_3(value_1: Any?, value_2: Number?) {
-        val o = case_3_class()
+        val o = case_3()
         contracts.case_3(value_1, value_2, o.prop_1, this.prop_1)
         println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
         println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))
     }
 }
 
-class case_4_class {
+class case_4 {
     val prop_1: Int? = 10
     fun case_4(value_1: Any?, value_2: Number?) {
-        val o = case_4_class()
+        val o = case_4()
         if (contracts.case_4(value_1, value_2, o.prop_1, this.prop_1)) {
             println(o.prop_1<!UNSAFE_CALL!>.<!>plus(3))
             println(this.prop_1<!UNSAFE_CALL!>.<!>plus(3))

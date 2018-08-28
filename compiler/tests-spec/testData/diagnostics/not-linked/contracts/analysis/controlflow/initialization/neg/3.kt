@@ -8,18 +8,9 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 3
- DESCRIPTION: Wrong assignments or uninitialized usages in compelx control flow inside/outside lambda of contract function with calls in place effect
+ DESCRIPTION: val/var reassignment and/or uninitialized variable usages with compelx control flow inside/outside lambda of contract function with CallsInPlace effect
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    uninitialized:val
-    smartInit:val
-    smartcast:inited
-    when:nonExhaustive
- */
 fun case_1(value_1: _EnumClass?) {
     val value_2: Int
 
@@ -33,16 +24,6 @@ fun case_1(value_1: _EnumClass?) {
     <!UNINITIALIZED_VARIABLE!>value_2<!>.inc()
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atMostOnce
-        nested
-    uninitialized:val
-    smartInit:val
-    smartcast:inited
-    if:else,elseIf
- */
 fun case_2(value_1: Any?) {
     val value_2: Int
 
@@ -59,18 +40,6 @@ fun case_2(value_1: Any?) {
     value_2.dec()
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeaseOnce,unknown
-    uninitialized:var
-    smartInit:var
-    smartcast:inited
-    if:else,elseIf
-    class:
-        fields:init,uninitialized
-        init
- */
 class case_3(value_1: Any?) {
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var value_2: Int<!>
 
@@ -89,16 +58,6 @@ class case_3(value_1: Any?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce,unknown,atMostOnce
-        nested
-    uninitialized:var
-    smartInit:var
-    smartcast:inited
-    when:exhaustive
- */
 fun case_4(value_1: _EnumClassSingle?) {
     var value_2: Int
 
@@ -117,15 +76,6 @@ fun case_4(value_1: _EnumClassSingle?) {
     value_2.minus(5)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atMostOnce,atLeastOnce
-    uninitialized:var
-    smartInit:var
-    smartcast:inited
-    try
- */
 fun case_5() {
     var value_2: Int
 
@@ -138,15 +88,6 @@ fun case_5() {
     <!UNINITIALIZED_VARIABLE!>value_2<!>++
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce
-    smartInit:var
-    smartcast:inited
-    try:finally
-    throw
- */
 fun case_6() {
     var value_2: Int
 
@@ -161,15 +102,6 @@ fun case_6() {
     value_2++
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce,atMostOnce
-    smartInit:var
-    smartcast:inited
-    try
-    return
- */
 fun case_7() {
     var value_1: Int
 
@@ -186,13 +118,6 @@ fun case_7() {
     println(<!UNINITIALIZED_VARIABLE!>value_1<!>.inc())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce,mostOnce
-    smartInit:val
-    smartcast:inited
- */
 fun case_8() {
     val x: Int
     funWithExactlyOnceCallsInPlace outer@ {
@@ -207,15 +132,6 @@ fun case_8() {
     println(x.inc())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce,atMostOnce,unknown
-    smartInit:val
-    smartcast:inited
-    return:nonlocal
-    throw
- */
 fun case_9() {
     val x: Int
     funWithExactlyOnceCallsInPlace outer@ {
@@ -230,14 +146,6 @@ fun case_9() {
     println(<!UNINITIALIZED_VARIABLE!>x<!>.inc())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce,exactlyOnce
-    smartInit:val
-    smartcast:inited
-    return:nonlocal
- */
 fun case_10() {
     val x: Int
     funWithExactlyOnceCallsInPlace outer@ {
@@ -249,14 +157,6 @@ fun case_10() {
     println(<!UNINITIALIZED_VARIABLE!>x<!>.inc())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce,unknown
-    smartInit:var
-    smartcast:inited
-    return:nonlocal
- */
 fun case_11() {
     var x: Int
     funWithAtLeastOnceCallsInPlace outer@ {

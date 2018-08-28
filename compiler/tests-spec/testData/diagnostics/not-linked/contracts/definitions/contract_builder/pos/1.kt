@@ -7,47 +7,33 @@
  SECTION: Contracts
  CATEGORY: definitions, contract_builder
  NUMBER: 1
- DESCRIPTION: Functions with contracts written simply.
+ DESCRIPTION: Functions with simple contracts.
  */
 
 import kotlin.internal.contracts.*
 
 /*
- CASE DESCRIPTION: empty contract
- DISCUSSION: whether to allow empty nonsensical contracts?
+ UNEXPECTED BEHAVIOUR
  */
 inline fun case_1(block: () -> Unit) {
     contract { }
     return block()
 }
 
-/*
- CASE DESCRIPTION: simple contract with one effect
- */
 inline fun case_2(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
     return block()
 }
 
-/*
- CASE DESCRIPTION: simple contract with two effects
- */
 inline fun case_3(value_1: Int?, block: () -> Unit): Boolean {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
         returns(true) implies (value_1 != null)
     }
-
     block()
-
     return value_1 != null
 }
 
-/*
- CASE DESCRIPTION: simple contract with four effects
- */
 inline fun <T> T?.case_4(value_1: Int?, value_2: Boolean, value_3: Int?, block: () -> Unit): Boolean? {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -55,8 +41,6 @@ inline fun <T> T?.case_4(value_1: Int?, value_2: Boolean, value_3: Int?, block: 
         returns(false) implies (!value_2)
         returnsNotNull() implies (this@case_4 != null && value_3 != null)
     }
-
     block()
-
     return value_1 != null
 }

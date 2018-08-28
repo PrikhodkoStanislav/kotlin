@@ -7,17 +7,9 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, unreachable_code
  NUMBER: 2
- DESCRIPTION: Check for lack of unreachable code report when 'at most once' and 'unknown' calls in place effect used.
+ DESCRIPTION: Check for lack of unreachable code report when 'at most once' and 'unknown' invokations in CallsInPlace effect used.
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atMostOnce
-    return
-    throw
-    unrechableCode
- */
 fun case_1() {
     funWithAtMostOnceCallsInPlace {
         throw Exception()
@@ -28,14 +20,6 @@ fun case_1() {
     println("1")
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:unknown
-    return
-    throw
-    unrechableCode
- */
 fun case_2() {
     funWithUnknownCallsInPlace {
         throw Exception()
@@ -46,29 +30,21 @@ fun case_2() {
     println("1")
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    return:local,nonlocal
-    unrechableCode
-    fun:nested
- */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         return@funWithExactlyOnceCallsInPlace
     }
     println("1")
     funWithExactlyOnceCallsInPlace {
-        fun nestedFun() {
-            return@nestedFun
+        fun nestedFun_1() {
+            return@nestedFun_1
         }
     }
     println("1")
-    fun case_3_nestedFun_1() {
-        fun case_3_nestedFun_2() {
+    fun nestedFun_3() {
+        fun nestedFun_4() {
             funWithExactlyOnceCallsInPlace {
-                return@case_3_nestedFun_2
+                return@nestedFun_4
             }
         }
         println("1")
@@ -76,29 +52,21 @@ fun case_3() {
     println("1")
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce
-    return:local,nonlocal
-    unrechableCode
-    fun:nested
- */
 fun case_4() {
     funWithAtLeastOnceCallsInPlace {
         return@funWithAtLeastOnceCallsInPlace
     }
     println("1")
     funWithAtLeastOnceCallsInPlace {
-        fun nestedFun() {
-            return@nestedFun
+        fun nestedFun_1() {
+            return@nestedFun_1
         }
     }
     println("1")
-    fun case_4_nestedFun_1() {
-        fun case_4_nestedFun_2() {
+    fun nestedFun_2() {
+        fun nestedFun_3() {
             funWithAtLeastOnceCallsInPlace {
-                return@case_4_nestedFun_2
+                return@nestedFun_3
             }
         }
         println("1")

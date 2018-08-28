@@ -8,7 +8,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 14
- DESCRIPTION: Smartcast using more of the various returns effects on the same values.
+ DESCRIPTION: Smartcast using many of the various Returns effects on the same values.
  */
 
 // FILE: contracts.kt

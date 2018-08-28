@@ -14,7 +14,6 @@
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: contract as part of the 'cast' expression and expression before it
 fun case_1(value_1: Int?) {
     println("!")
     contract {
@@ -22,7 +21,6 @@ fun case_1(value_1: Int?) {
     } <!CAST_NEVER_SUCCEEDS!>as<!> ContractBuilder
 }
 
-// CASE DESCRIPTION: contract as argument of the 'throw' expression and expression before it
 fun case_2(value_1: Int?) {
     100 + 10
     throw Exception(contract {
@@ -30,7 +28,6 @@ fun case_2(value_1: Int?) {
     }.toString())
 }
 
-// CASE DESCRIPTION: contract in 'return' expression and 'for' statement before it
 fun case_3(value_1: Int?) {
     for (i in 0..10) {
         println(i)
@@ -40,7 +37,6 @@ fun case_3(value_1: Int?) {
     }
 }
 
-// CASE DESCRIPTION: contract as right side of the assignment statement and other assignment statement before it
 fun case_4(value_1: Int?) {
     val f = 10 - 20
     val g = contract {
@@ -48,14 +44,10 @@ fun case_4(value_1: Int?) {
     }
 }
 
-/*
- CASE DESCRIPTION: contract as part of the 'cast' expression and use local variable in implies argument
- DISCUSSION: there is a report in implies about 'only references to parameters', but 'cond' isn't parameter and it's valid implies parameter.
- */
 fun case_5(number: Int?): Boolean {
-    val cond = number != null
+    val value_1 = number != null
     contract {
-        returns(false) implies (cond)
+        returns(false) implies (value_1)
     } <!CAST_NEVER_SUCCEEDS!>as<!> ContractBuilder
     return number == null
 }

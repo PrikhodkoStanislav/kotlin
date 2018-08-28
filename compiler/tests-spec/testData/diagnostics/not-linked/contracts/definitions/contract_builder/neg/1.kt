@@ -12,14 +12,12 @@
 
 import kotlin.internal.contracts.*
 
-// CASE DESCRIPTION: assignment statement before contract description
 inline fun case_1(block: () -> Unit) {
     val value_1 = 1
     <!CONTRACT_NOT_ALLOWED!>contract { }<!>
     return block()
 }
 
-// CASE DESCRIPTION: expression before contract description
 inline fun case_2(block: () -> Unit) {
     10 - 1
     <!CONTRACT_NOT_ALLOWED!>contract {
@@ -28,7 +26,6 @@ inline fun case_2(block: () -> Unit) {
     return block()
 }
 
-// CASE DESCRIPTION: throwing an exception before contract description
 inline fun case_3(block: () -> Unit) {
     throw Exception()
     <!CONTRACT_NOT_ALLOWED!>contract {
@@ -37,7 +34,6 @@ inline fun case_3(block: () -> Unit) {
     return block()
 }
 
-// CASE DESCRIPTION: contract in return expression after numeric literal
 // это в негативные,
 inline fun case_4(block: () -> Unit) {
     .0009

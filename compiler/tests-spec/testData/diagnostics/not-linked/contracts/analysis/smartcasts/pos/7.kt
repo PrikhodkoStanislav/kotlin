@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 7
- DESCRIPTION: Smartcast using more of the same returns effects on the same values.
+ DESCRIPTION: Smartcasts using Returns effects with nested or subsequent contract function calls.
  */
 
 // FILE: contracts.kt
@@ -217,27 +217,27 @@ fun case_1(value_1: Int?) {
     <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()<!>
 }
 
-fun case_2(t: Number?) {
-    case_2_1(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.toByte()
-    case_2_2(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.inv()
+fun case_2(value_1: Number?) {
+    case_2_1(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte()
+    case_2_2(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()
 }
 
-fun case_3(t: Any?) {
-    case_3_1(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.length
-    case_3_2(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.length
+fun case_3(value_1: Any?) {
+    case_3_1(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.length
+    case_3_2(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.length
 }
 
-fun case_4(t: Any?) {
-    case_4_1(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>?.toByte()
-    case_4_2(<!DEBUG_INFO_SMARTCAST!>t<!>)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.toByte()
-    case_4_3(<!DEBUG_INFO_SMARTCAST!>t<!>)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.inv()
+fun case_4(value_1: Any?) {
+    case_4_1(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>?.toByte()
+    case_4_2(<!DEBUG_INFO_SMARTCAST!>value_1<!>)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte()
+    case_4_3(<!DEBUG_INFO_SMARTCAST!>value_1<!>)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()
 }
 
 fun case_5(value_1: Int?, value_2: Int?) {

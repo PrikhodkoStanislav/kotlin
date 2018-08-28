@@ -7,82 +7,33 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 2
- DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as paremeter of contract function.
+ DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions outside contract (custom condition).
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            boolean
-                invertTypeCheck:string,number
-                disjunction
-    smartcast:string,number
- */
 fun case_1(value_1: Any?, value_2: Any?) {
     funWithReturns(value_1 !is String || value_2 !is Number)
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            boolean
-                typeCheck:string,number
-                conjunction
-    smartcast:string,number
- */
 fun case_2(value_1: Any?, value_2: Any?) {
     funWithReturnsAndInvertCondition(value_1 is String && value_2 is Number)
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            invertBoolean
-                typeCheck:string
-                conjunction
-                nullCheck
-    smartcast:string,notNull
- */
 fun case_3(value_1: Any?, value_2: Any?) {
     funWithReturnsAndInvertCondition(value_1 is String && value_2 == null)
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            boolean
-                invertTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-    smartcast:float,notNull
- */
 fun case_4(value_1: Any?, value_2: Number?) {
     funWithReturns(value_1 !is Float? || value_1 == null || value_2 == null)
     println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
     println(value_2?.toByte())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            boolean
-                invertTypeCheck:nullableFloat
-                disjunction
-                nullCheck:property
-    smartcast:float,notNull
-    class
- */
 class case_5_class {
     val prop_1: Int? = 10
 
@@ -95,27 +46,6 @@ class case_5_class {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            boolean
-                invertTypeCheck:string,number
-                disjunction
-        returnsFalse
-            boolean
-                invertTypeCheck:string,number
-                disjunction
-        returnsNotNull
-            boolean
-                invertTypeCheck:string,number
-                disjunction
-        returnsNull
-            boolean
-                invertTypeCheck:string,number
-                disjunction
-    smartcast:string,number
- */
 fun case_6(value_1: Any?, value_2: Any) {
     if (funWithReturnsTrue(value_1 !is String || value_2 !is Number)) {
         println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -135,27 +65,6 @@ fun case_6(value_1: Any?, value_2: Any) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertBoolean
-                typeCheck:string,number
-                conjunction
-        returnsFalse
-            invertBoolean
-                typeCheck:string,number
-                conjunction
-        returnsNotNull
-            invertBoolean
-                typeCheck:string,number
-                conjunction
-        returnsNull
-            invertBoolean
-                typeCheck:string,number
-                conjunction
-    smartcast:string,number
- */
 fun case_7(value_1: Any?, value_2: Any?) {
     if (funWithReturnsTrueAndInvertCondition(value_1 is String && value_2 is Number)) {
         println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -175,31 +84,6 @@ fun case_7(value_1: Any?, value_2: Any?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertBoolean
-                typeCheck:string
-                conjunction
-                notNullCheck
-        returnsFalse
-            invertBoolean
-                typeCheck:string
-                conjunction
-                notNullCheck
-        returnsNotNull
-            invertBoolean
-                typeCheck:string
-                conjunction
-                notNullCheck
-        returnsNull
-            invertBoolean
-                typeCheck:string
-                conjunction
-                notNullCheck
-    smartcast:string,notNull
- */
 fun case_8(value_1: Any?, value_2: Any?) {
     if (funWithReturnsTrueAndInvertCondition(value_1 is String && value_2 == null)) {
         println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -219,31 +103,6 @@ fun case_8(value_1: Any?, value_2: Any?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-        returnsFalse
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-        returnsNotNull
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-        returnsNull
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-    smartcast:string,notNull
- */
 fun case_9(value_1: Any?, value_2: Number?) {
     if (funWithReturnsTrue(value_1 !is Float? || value_1 == null || value_2 == null)) {
         println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
@@ -263,32 +122,6 @@ fun case_9(value_1: Any?, value_2: Number?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                conjunction
-                nullCheck:property
-        returnsFalse
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                conjunction
-                nullCheck:property
-        returnsNotNull
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                conjunction
-                nullCheck:property
-        returnsNull
-            invertBoolean
-                inverTypeCheck:nullableFloat
-                conjunction
-                nullCheck:property
-    smartcast:float,notNull
-    class
- */
 class case_10_class {
     val prop_1: Int? = 10
 

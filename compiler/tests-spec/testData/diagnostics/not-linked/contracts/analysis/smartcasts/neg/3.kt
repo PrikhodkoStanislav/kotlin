@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 3
- DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as implies parameter in contract definition.
+ DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions inside contract.
  */
 
 // FILE: contracts.kt
@@ -16,71 +16,21 @@ package contracts
 
 import kotlin.internal.contracts.*
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns
-            implies
-                invertTypeCheck:string,number
-                disjunction
- */
 fun case_1(value_1: Any?, value_2: Any?) {
     contract { returns() implies (value_1 !is String || value_2 !is Number) }
     if (!(value_1 !is String || value_2 !is Number)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns
-            implies
-                invertTypeCheck:string
-                disjunction
-                notNullCheck
- */
 fun case_2(value_1: Any?, value_2: Any?) {
     contract { returns() implies (value_1 !is String || value_2 != null) }
     if (!(value_1 !is String || value_2 != null)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returns
-            implies
-                invertTypeCheck:nullableFloat
-                disjunction
-                nullCheck
- */
 fun case_3(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?) {
     contract { returns() implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
     if (!(value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null)) throw Exception()
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue
-            implies
-                invertTypeCheck:string,number
-                disjunction
-        returnsFalse
-            implies
-                invertTypeCheck:string,number
-                disjunction
-        returnsNotNull
-            implies
-                invertTypeCheck:string,number
-                disjunction
-        returnsNull
-            implies
-                invertTypeCheck:string,number
-                disjunction
- */
 fun case_4_1(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(true) implies (value_1 !is String || value_2 !is Number) }
     return value_1 !is String || value_2 !is Number
@@ -98,31 +48,6 @@ fun case_4_4(value_1: Any?, value_2: Any?): Boolean? {
     return if (value_1 !is String || value_2 !is Number) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue
-            implies
-                invertTypeCheck:string
-                disjunction
-                notNullCheck
-        returnsFalse
-            implies
-                invertTypeCheck:string
-                disjunction
-                notNullCheck
-        returnsNotNull
-            implies
-                typeCheck:string
-                conjunction
-                nullCheck
-        returnsNull
-            implies
-                typeCheck:string
-                conjunction
-                nullCheck
- */
 fun case_5_1(value_1: Any?, value_2: Any?): Boolean {
     contract { returns(true) implies (value_1 !is String || value_2 != null) }
     return value_1 !is String || value_2 != null
@@ -140,31 +65,6 @@ fun case_5_4(value_1: Any?, value_2: Any?): Boolean? {
     return if (value_1 is String && value_2 == null) null else true
 }
 
-/*
- CASE KEYWORDS:
-    effectsDefinition
-        1
-        returnsTrue
-            implies
-                invertTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-        returnsFalse
-            implies
-                invertTypeCheck:nullableFloat
-                disjunction
-                nullCheck
-        returnsNotNull
-            implies
-                typeCheck:nullableFloat
-                conjunction
-                notNullCheck
-        returnsNull
-            implies
-                typeCheck:nullableFloat
-                conjunction
-                notNullCheck
- */
 fun case_6_1(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolean {
     contract { returns(true) implies (value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null) }
     return value_1 !is Float? || value_1 == null || value_2 == null || value_3 == null || value_4 == null
@@ -186,45 +86,18 @@ fun case_6_4(value_1: Any?, value_2: Any?, value_3: Any?, value_4: Any?): Boolea
 
 import contracts.*
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            invertTypeCheck:string,number
-            disjunction
-    smartcast:string,number
- */
 fun case_1(value_1: Any?, value_2: Any?) {
     contracts.case_1(value_1, value_2)
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            invertTypeCheck:string
-            disjunction
-            notNull
-    smartcast:string,notNull
- */
 fun case_2(value_1: Any?, value_2: Any?) {
     contracts.case_2(value_1, value_2)
     println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returns
-            invertTypeCheck:nullableFloat
-            disjunction
-            nullCheck
-    smartcast:string,notNull,property
-    class
- */
 class case_3_class {
     val prop_1: Int? = 10
     fun case_3(value_1: Any?, value_2: Number?) {
@@ -236,23 +109,6 @@ class case_3_class {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertTypeCheck:string,number
-            disjunction
-        returnsFalse
-            invertTypeCheck:string,number
-            disjunction
-        returnsNotNull
-            invertTypeCheck:string,number
-            disjunction
-        returnsNull
-            invertTypeCheck:string,number
-            disjunction
-    smartcast:string,number
- */
 fun case_4(value_1: Any?, value_2: Any?) {
     if (contracts.case_4_1(value_1, value_2)) {
         println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -272,27 +128,6 @@ fun case_4(value_1: Any?, value_2: Any?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertTypeCheck:string
-            disjunction
-            notNullCheck
-        returnsFalse
-            invertTypeCheck:string
-            disjunction
-            notNullCheck
-        returnsNotNull
-            typeCheck:string
-            conjunction
-            nullCheck
-        returnsNull
-            typeCheck:string
-            conjunction
-            nullCheck
-    smartcast:string,notNull
- */
 fun case_5(value_1: Any?, value_2: Any?) {
     if (contracts.case_5_1(value_1, value_2)) {
         println(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
@@ -312,28 +147,6 @@ fun case_5(value_1: Any?, value_2: Any?) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        returnsTrue
-            invertTypeCheck:nullableFloat
-            disjunction
-            nullCheck
-        returnsFalse
-            invertTypeCheck:nullableFloat
-            disjunction
-            nullCheck
-        returnsNotNull
-            typeCheck:nullableFloat
-            conjunction
-            notNullCheck
-        returnsNull
-            typeCheck:nullableFloat
-            conjunction
-            notNullCheck
-    smartcast:nullableFloat,notNull,property
-    class
- */
 class case_6_class {
     val prop_1: Int? = 10
     fun case_6(value_1: Any?, value_2: Number?) {

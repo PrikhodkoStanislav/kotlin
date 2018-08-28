@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 7
- DESCRIPTION: Smartcast using more of the same returns effects on the same values.
+ DESCRIPTION: Smartcasts using Returns effects with nested or subsequent contract function calls.
  */
 
 // FILE: contracts.kt
@@ -217,27 +217,27 @@ fun case_1(value_1: Int?) {
     <!UNREACHABLE_CODE!><!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()<!>
 }
 
-fun case_2(t: Number?) {
-    case_2_1(t)
-    t<!UNSAFE_CALL!>.<!>toByte()
-    case_2_2(t)
-    t.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
+fun case_2(value_1: Number?) {
+    case_2_1(value_1)
+    value_1<!UNSAFE_CALL!>.<!>toByte()
+    case_2_2(value_1)
+    value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
 }
 
-fun case_3(t: Any?) {
-    case_3_1(t)
-    t.<!UNRESOLVED_REFERENCE!>length<!>
-    case_3_2(t)
-    <!DEBUG_INFO_SMARTCAST!>t<!>.length
+fun case_3(value_1: Any?) {
+    case_3_1(value_1)
+    value_1.<!UNRESOLVED_REFERENCE!>length<!>
+    case_3_2(value_1)
+    <!DEBUG_INFO_SMARTCAST!>value_1<!>.length
 }
 
-fun case_4(t: Any?) {
-    case_4_1(t)
-    t?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()
-    case_4_2(<!TYPE_MISMATCH!>t<!>)
-    <!DEBUG_INFO_CONSTANT!>t<!><!UNSAFE_CALL!>.<!>toByte()
-    case_4_3(<!TYPE_MISMATCH, DEBUG_INFO_CONSTANT!>t<!>)
-    <!DEBUG_INFO_CONSTANT!>t<!><!UNSAFE_CALL!>.<!><!MISSING_DEPENDENCY_CLASS, MISSING_DEPENDENCY_CLASS!>inv<!>()
+fun case_4(value_1: Any?) {
+    case_4_1(value_1)
+    value_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>()
+    case_4_2(<!TYPE_MISMATCH!>value_1<!>)
+    <!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!>toByte()
+    case_4_3(<!TYPE_MISMATCH, DEBUG_INFO_CONSTANT!>value_1<!>)
+    <!DEBUG_INFO_CONSTANT!>value_1<!><!UNSAFE_CALL!>.<!><!MISSING_DEPENDENCY_CLASS, MISSING_DEPENDENCY_CLASS!>inv<!>()
 }
 
 fun case_5(value_1: Int?) {

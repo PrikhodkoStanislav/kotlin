@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, common
  NUMBER: 2
- DESCRIPTION: Smartcast using returns effect with complex type checking and not-null conditions as implies parameter in contract definition.
+ DESCRIPTION: Recursion in the lambda of contract function.
  */
 
 fun case_1(x: Int): Unit = funWithExactlyOnceCallsInPlace {

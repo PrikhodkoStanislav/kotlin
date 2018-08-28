@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: definitions, common
  NUMBER: 3
- DESCRIPTION: before declaration
+ DESCRIPTION: Contract function usage before declaration it
  */
 
 import kotlin.internal.contracts.*

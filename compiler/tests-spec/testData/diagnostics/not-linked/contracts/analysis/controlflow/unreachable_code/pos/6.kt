@@ -10,22 +10,9 @@
  DESCRIPTION: Check for lack of unreachable code report when in complex control flow of contract function lambda not all branches are doing non-local return
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    unrechableCode
-    return:local,nonlocal
-    smartcast:notNull
-    throw
-    when:exhaustive
-    if:else
- */
 fun case_1(b: Boolean?, c: Boolean) {
     funWithExactlyOnceCallsInPlace {
-        if (b == null) {
-            return
-        }
+        if (b == null) return
 
         try {
             <!DEBUG_INFO_IMPLICIT_EXHAUSTIVE!>when (<!DEBUG_INFO_SMARTCAST!>b<!>) {
@@ -50,16 +37,6 @@ fun case_1(b: Boolean?, c: Boolean) {
     println(3)
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atMostOnce,atLeastOnce,exactlyOnce
-    unrechableCode
-    return
-    throw
-    when:exhaustive
-    if:else
- */
 fun case_2(b: Boolean?, c: Boolean) {
     funWithAtLeastOnceCallsInPlace {
         when (b) {

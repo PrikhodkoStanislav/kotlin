@@ -9,7 +9,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 9
- DESCRIPTION: Smartcast using more of the various returns effects on the same values.
+ DESCRIPTION: Smartcast using complex condition with some contract functions (Returns effect).
  */
 
 // FILE: contracts.kt
@@ -41,6 +41,11 @@ fun <T> T?.case_11_1(): Boolean {
 fun <T> T?.case_11_2(): Boolean? {
     contract { returns(null) implies (this@case_11_2 is String) }
     return if (this@case_11_2 is String) null else true
+}
+
+fun <T> T?.case_12(): Boolean {
+    contract { returns(false) implies (this@case_12 is String) }
+    return if (this@case_12 is String) false else true
 }
 
 // FILE: usages.kt
@@ -123,6 +128,15 @@ fun case_10(value_1: Any?) {
 
 fun case_11(value_1: Any?) {
     if (!(value_1.case_11_1() || value_1.case_11_2() != null)) {
+        println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    }
+}
+
+fun case_12(value_1: Any?) {
+    if (!value_1.case_12() || !value_1.case_12()) {
+        println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    }
+    if (!value_1.case_12() && !<!DEBUG_INFO_SMARTCAST!>value_1<!>.case_12()) {
         println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
     }
 }

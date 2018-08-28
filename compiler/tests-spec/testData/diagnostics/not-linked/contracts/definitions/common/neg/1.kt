@@ -7,16 +7,13 @@
  SECTION: Contracts
  CATEGORY: definitions, common
  NUMBER: 1
- DESCRIPTION: Check that recursion is forbidden in contract functions with callsInPlace effect.
+ DESCRIPTION: Check that recursion isn't allowed in contract functions with CallsInPlace effect.
  */
 
 import kotlin.internal.contracts.*
 
 inline fun case_1(block: () -> Unit) {
-    contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
-
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
     block()
     <!RECURSION_IN_INLINE!>case_1<!>(block)
 }

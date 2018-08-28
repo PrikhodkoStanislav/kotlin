@@ -8,7 +8,7 @@
  SECTION: Contracts
  CATEGORY: definitions, contract_builder
  NUMBER: 6
- DESCRIPTION: contract functions is not top-level
+ DESCRIPTION: Contracts with not function parameters in implies.
  */
 
 import kotlin.internal.contracts.*

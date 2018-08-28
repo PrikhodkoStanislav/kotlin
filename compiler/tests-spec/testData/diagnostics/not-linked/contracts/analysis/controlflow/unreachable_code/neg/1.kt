@@ -7,19 +7,11 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, unreachable_code
  NUMBER: 1
- DESCRIPTION: Unreachable code detection based on the local functions or labdas combined with contract functions with callsInPlace effect
+ DESCRIPTION: Using not allowed break and continue inside lambda of contract function
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    while
-        break:labeled
-    unrechableCode
- */
-fun case_1(cond: Boolean) {
-    while (cond) {
+fun case_1(value_1: Boolean) {
+    while (value_1) {
         funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>break<!>
         }
@@ -34,15 +26,7 @@ fun case_1(cond: Boolean) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    for
-        continue:labeled
-    unrechableCode
- */
-fun case_2(cond: Boolean) {
+fun case_2(value_1: Boolean) {
     for (i in 0..10) {
         funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>continue<!>
@@ -50,7 +34,7 @@ fun case_2(cond: Boolean) {
         println("1")
     }
 
-    loop@ while (cond) {
+    loop@ while (value_1) {
         funWithExactlyOnceCallsInPlace {
             <!BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY!>continue@loop<!>
         }

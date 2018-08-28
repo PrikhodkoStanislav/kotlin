@@ -8,16 +8,9 @@
  SECTION: Contracts
  CATEGORY: analysis, controlflow, unreachable_code
  NUMBER: 1
- DESCRIPTION: Unreachable code detection based on the callsInPlace effect
+ DESCRIPTION: Unreachable code detection using contract function with CallsInPlace effect
  */
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    throw
-    unrechableCode
- */
 fun case_1() {
     funWithExactlyOnceCallsInPlace {
         throw Exception()
@@ -25,13 +18,6 @@ fun case_1() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce
-    throw
-    unrechableCode
- */
 fun case_2() {
     funWithAtLeastOnceCallsInPlace {
         throw Exception()
@@ -39,13 +25,6 @@ fun case_2() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    return:nonlocal
-    unrechableCode
- */
 fun case_3() {
     funWithExactlyOnceCallsInPlace {
         return
@@ -53,13 +32,6 @@ fun case_3() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce
-    return:nonlocal
-    unrechableCode
- */
 fun case_4() {
     funWithAtLeastOnceCallsInPlace {
         return
@@ -67,23 +39,14 @@ fun case_4() {
     <!UNREACHABLE_CODE!>println("1")<!>
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:atLeastOnce
-    return:labeled,nonlocal
-    unrechableCode
-    fun:nested
-    lambda
- */
 fun case_5(args: Array<String>) {
-    fun case_5_nestedFun_1() {
+    fun nestedFun_1() {
         funWithAtLeastOnceCallsInPlace {
-            return@case_5_nestedFun_1
+            return@nestedFun_1
         }
         <!UNREACHABLE_CODE!>println("1")<!>
     }
-    fun case_5_nestedFun_3() {
+    fun nestedFun_2() {
         args.forEach {
             funWithAtLeastOnceCallsInPlace {
                 return@forEach
@@ -91,10 +54,10 @@ fun case_5(args: Array<String>) {
             <!UNREACHABLE_CODE!>println("1")<!>
         }
     }
-    fun case_5_nestedFun_5() {
-        fun case_5_nestedFun_6() {
+    fun nestedFun_3() {
+        fun nestedFun_4() {
             funWithAtLeastOnceCallsInPlace {
-                return@case_5_nestedFun_6
+                return@nestedFun_4
             }
             <!UNREACHABLE_CODE!>println("1")<!>
         }
@@ -102,15 +65,6 @@ fun case_5(args: Array<String>) {
     }
 }
 
-/*
- CASE KEYWORDS:
-    effectsUsage
-        callsInPlace:exactlyOnce
-    return:labeled,nonlocal
-    unrechableCode
-    fun:nested
-    lambda
- */
 fun case_6(args: Array<String>) {
     args.forEach {
         funWithExactlyOnceCallsInPlace {
@@ -119,15 +73,15 @@ fun case_6(args: Array<String>) {
         <!UNREACHABLE_CODE!>println("1")<!>
     }
     args.forEach {
-        fun case_6_nestedFun_2() {
+        fun nestedFun_1() {
             funWithExactlyOnceCallsInPlace {
-                return@case_6_nestedFun_2
+                return@nestedFun_1
             }
             <!UNREACHABLE_CODE!>println("1")<!>
         }
     }
     args.forEach {
-        fun case_6_nestedFun_3() {
+        fun nestedFun_2() {
             funWithExactlyOnceCallsInPlace {
                 return
             }
@@ -136,7 +90,6 @@ fun case_6(args: Array<String>) {
     }
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect and assignment function contract result
 fun case_7() {
     <!UNREACHABLE_CODE!>val value_1 =<!> funWithExactlyOnceCallsInPlace {
         throw Exception()
@@ -145,7 +98,6 @@ fun case_7() {
     <!UNREACHABLE_CODE!>println(value_1)<!>
 }
 
-// CASE DESCRIPTION: unreachable code detection with 'exactly once' calls in place effect and use function contract result as argument
 
 fun case_8() {
     <!UNREACHABLE_CODE!>println(<!>funWithExactlyOnceCallsInPlace { return; <!UNREACHABLE_CODE!>println(1)<!> }<!UNREACHABLE_CODE!>)<!>

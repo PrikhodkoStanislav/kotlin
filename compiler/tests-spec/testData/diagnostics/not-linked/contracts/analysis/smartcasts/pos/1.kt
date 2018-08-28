@@ -7,7 +7,7 @@
  SECTION: Contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 1
- DESCRIPTION: Smartcast using returns effect with simple type checking and not-null conditions.
+ DESCRIPTION: Smartcasts using Returns effects with simple type checking, not-null conditions and custom condition (condition for smartcast outside contract).
  */
 
 fun case_1(value_1: Any?) {

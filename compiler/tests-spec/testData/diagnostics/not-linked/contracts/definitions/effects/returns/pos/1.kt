@@ -8,7 +8,7 @@
  SECTION: Contracts
  CATEGORY: definitions, effects, returns
  NUMBER: 1
- DESCRIPTION: Using reference equality as implies argument.
+ DESCRIPTION: Using reference equality in implies.
  UNEXPECTED BEHAVIOUR
  ISSUES: KT-26177
  */

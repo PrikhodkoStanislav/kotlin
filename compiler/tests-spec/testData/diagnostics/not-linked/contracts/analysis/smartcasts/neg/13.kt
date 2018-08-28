@@ -24,9 +24,7 @@ fun <T : Any?> T?.case_1() {
 }
 
 inline fun <reified T : Any?> T?.case_2(value_2: Number, value_3: Any?, value_4: String?) {
-    contract {
-        returns() implies ((this@case_2 is Number || this@case_2 is Int) && value_2 is Int && value_3 != null && value_3 is Number && value_4 != null)
-    }
+    contract { returns() implies ((this@case_2 is Number || this@case_2 is Int) && value_2 is Int && value_3 != null && value_3 is Number && value_4 != null) }
     if (!((this is Number || this is Int) && value_2 is Int && value_3 != null && value_3 is Number && value_4 != null)) throw Exception()
 }
 
