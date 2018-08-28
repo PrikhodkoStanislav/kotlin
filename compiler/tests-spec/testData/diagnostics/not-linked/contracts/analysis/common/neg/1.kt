@@ -47,17 +47,22 @@ inline fun case_1(value_1: Int?, block: () -> Unit): Boolean {
 inline fun <T> T?.case_2(value_1: Int?, value_2: Any?, block: () -> Unit): Boolean? {
     contract {
         callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-        returnsNotNull() implies (value_1 != null)
-        returns(false) implies (value_2 is Boolean?)
-        returns(false) implies (this@case_2 != null)
+        returns(true) implies (value_1 != null && this@case_2 != null && value_2 is Boolean?)
+        returns(false) implies (value_1 != null && this@case_2 != null && value_2 !is Boolean?)
+        returns(null) implies (value_1 != null && this@case_2 == null && value_2 is Boolean?)
+        returns(false) implies (value_1 != null && this@case_2 == null && value_2 !is Boolean?)
+        returns(null) implies (value_1 == null && this@case_2 != null && value_2 is Boolean?)
+        returns(false) implies (value_1 == null && this@case_2 != null && value_2 !is Boolean?)
+        returns(null) implies (value_1 == null && this@case_2 == null && value_2 is Boolean?)
+        returns(false) implies (value_1 == null && this@case_2 == null && value_2 !is Boolean?)
     }
 
     block()
 
-    if (value_1 == null) return null
-    if (value_2 is Boolean? || this != null) return false
+    if (value_1 != null && this != null && value_2 is Boolean?) return true
+    if (value_2 !is Boolean?) return false
 
-    return true
+    return null
 }
 
 // FILE: usages.kt
@@ -100,14 +105,14 @@ fun case_1(value_1: Int?) {
  */
 fun case_2(value_1: Int?, value_2: Any?) {
     var value_3: Int
-    if (value_1.case_2(value_1, value_2) { value_3 = 10 } != null) {
-        if (value_1.case_2(value_1, value_2) { value_3 = 10 } == false) {
-            println(<!DEBUG_INFO_SMARTCAST!>value_2<!>?.xor(true))
+
+    when (value_1.case_2(value_1, value_2) { value_3 = 10 }) {
+        true -> {
+            println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>xor<!>(true))
             println(<!UNINITIALIZED_VARIABLE!>value_3<!>)
-            println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv())
+            println(value_1<!UNSAFE_CALL!>.<!>inv())
         }
-        println(value_3)
-    } else {
-        value_1<!UNSAFE_CALL!>.<!>inv()
+        false -> value_1<!UNSAFE_CALL!>.<!>inv()
+        else -> println(value_3)
     }
 }
