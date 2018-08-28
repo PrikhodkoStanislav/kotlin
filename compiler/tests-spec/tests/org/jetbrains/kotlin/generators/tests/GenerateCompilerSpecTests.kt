@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.parsing.AbstractParsingTestSpec
 fun main(args: Array<String>) {
     testGroup("compiler/tests-spec/tests", "compiler/tests-spec/testData") {
         testClass<AbstractDiagnosticsTestSpec> {
-            model("diagnostics", excludeDirs = listOf("_helpers"))
+            model("diagnostics", excludeDirs = listOf("helpers"))
         }
 
         testClass<AbstractParsingTestSpec> {
-            model("psi", testMethod = "doParsingTest", excludeDirs = listOf("_helpers"))
+            model("psi", testMethod = "doParsingTest", excludeDirs = listOf("helpers"))
         }
     }
 }

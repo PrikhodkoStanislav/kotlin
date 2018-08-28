@@ -29,13 +29,12 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         )
 
         private val withDescriptorsTestGroups = listOf(
-            "not-linked/contracts/definitions/"
+            "notLinked/contracts/declarations/"
         )
 
         private const val MODULE_PATH = "compiler/tests-spec"
-        private const val TESTDATA_PATH = "$MODULE_PATH/testData"
-        private const val DIAGNOSTICS_TESTDATA_PATH = "$TESTDATA_PATH/diagnostics"
-        private const val HELPERS_PATH = "$TESTDATA_PATH/helpers/diagnostics"
+        private const val DIAGNOSTICS_TESTDATA_PATH = "$MODULE_PATH/testData/diagnostics"
+        private const val HELPERS_PATH = "$DIAGNOSTICS_TESTDATA_PATH/helpers"
     }
 
     private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>

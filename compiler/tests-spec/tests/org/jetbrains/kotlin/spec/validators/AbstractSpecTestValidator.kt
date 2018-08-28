@@ -62,7 +62,7 @@ enum class SpecTestValidationFailedReason(val description: String) {
     FILENAME_NOT_VALID(
         "Incorrect test filename or folder name.\n" +
                 "It must match the following path pattern: " +
-                "testsData/<diagnostic|psi|codegen>/s<sectionNumber>_<sectionName>/p-<paragraph>/<pos|neg>/<sentence>_<testNumber>.kt " +
+                "testsData/<diagnostic|psi|codegen>/<sectionName>/p-<paragraph>/<pos|neg>/<sentence>_<testNumber>.kt " +
                 "(example: testsData/diagnostic/s-16.30_when-expression/p-3/pos/1.3.kt)"
     ),
     TESTINFO_NOT_VALID("Test info is incorrect."),

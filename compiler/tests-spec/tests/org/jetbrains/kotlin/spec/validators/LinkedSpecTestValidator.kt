@@ -33,7 +33,6 @@ enum class LinkedSpecTestFileInfoElementType(
 class LinkedSpecTest(
     testArea: TestArea,
     testType: TestType,
-    val sectionNumber: String,
     sectionName: String,
     val paragraphNumber: Int,
     val sentenceNumber: Int,
@@ -50,7 +49,6 @@ class LinkedSpecTest(
     private fun checkConsistency(other: LinkedSpecTest): Boolean {
         return this.testArea == other.testArea
                 && this.testType == other.testType
-                && this.sectionNumber == other.sectionNumber
                 && this.testNumber == other.testNumber
                 && this.paragraphNumber == other.paragraphNumber
                 && this.sentenceNumber == other.sentenceNumber
@@ -66,8 +64,7 @@ class LinkedSpecTestValidator(
         Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
 
     companion object : SpecTestValidatorHelperObject {
-        override val pathPartRegex =
-            """(?:s-(?<sectionNumber>(?:$INTEGER_REGEX)(?:\.$INTEGER_REGEX)*)_(?<sectionName>[\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX))"""
+        override val pathPartRegex = """linked/(?<sectionName>[\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX)"""
         override val filenameRegex = """(?<sentenceNumber>$INTEGER_REGEX)\.(?<testNumber>$INTEGER_REGEX)\.kt"""
 
         override fun getPathPattern(): Pattern = Pattern.compile(
@@ -88,7 +85,6 @@ class LinkedSpecTestValidator(
         return LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
-            sectionMatcher.group("number"),
             sectionMatcher.group("name"),
             testInfoElements[LinkedSpecTestFileInfoElementType.PARAGRAPH]!!.content.toInt(),
             sentenceMatcher.group("number").toInt(),
@@ -105,7 +101,6 @@ class LinkedSpecTestValidator(
         return LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.fromValue(testInfoMatcher.group("testType"))!!,
-            testInfoMatcher.group("sectionNumber"),
             testInfoMatcher.group("sectionName"),
             testInfoMatcher.group("paragraphNumber").toInt(),
             testInfoMatcher.group("sentenceNumber").toInt(),
@@ -120,7 +115,7 @@ class LinkedSpecTestValidator(
         if (testInfoByContent.unexpectedBehavior!!)
             println("(!!!) HAS UNEXPECTED BEHAVIOUR (!!!)")
         println("$testArea ${testInfoByFilename.testType} SPEC TEST")
-        println("SECTION: ${testInfoByFilename.sectionNumber} ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber})")
+        println("SECTION: ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber})")
         println("SENTENCE ${testInfoByContent.sentenceNumber}: ${testInfoByContent.sentence}")
         println("TEST NUMBER: ${testInfoByContent.testNumber}")
         println("NUMBER OF TEST CASES: ${testInfoByContent.cases!!.size}")

@@ -58,7 +58,7 @@ class NotLinkedSpecTestValidator(
 
     companion object : SpecTestValidatorHelperObject {
         override val pathPartRegex =
-            """not-linked/(?<sectionName>[\w-]+)/(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
+            """notLinked/(?<sectionName>[\w-]+)/(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
         override val filenameRegex = """(?<testNumber>$INTEGER_REGEX)\.kt"""
 
         override fun getPathPattern(): Pattern = Pattern.compile(
@@ -73,7 +73,6 @@ class NotLinkedSpecTestValidator(
         unexpectedBehavior: Boolean,
         issues: Set<String>?
     ): NotLinkedSpecTest {
-
         return NotLinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
