@@ -1,7 +1,7 @@
 /*
  KOTLIN PSI SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [1] Type test condition: type checking operator followed by type.
  NUMBER: 1

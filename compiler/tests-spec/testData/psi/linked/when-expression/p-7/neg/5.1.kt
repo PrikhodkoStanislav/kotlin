@@ -1,7 +1,7 @@
 /*
  KOTLIN PSI SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [5] Any other expression.
  NUMBER: 1

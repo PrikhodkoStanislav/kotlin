@@ -1,7 +1,7 @@
 /*
  KOTLIN PSI SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [7] The else condition, which works the exact same way as it would in the form without bound expression.
  NUMBER: 1
