@@ -41,6 +41,88 @@ public class ParsingTestSpecGenerated extends AbstractParsingTestSpec {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/psi/linked"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
         }
 
+        @TestMetadata("compiler/tests-spec/testData/psi/linked/constant-literals")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Constant_literals extends AbstractParsingTestSpec {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInConstant_literals() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/psi/linked/constant-literals"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+            }
+
+            @TestMetadata("compiler/tests-spec/testData/psi/linked/constant-literals/p-3")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class P_3 extends AbstractParsingTestSpec {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+                }
+
+                public void testAllFilesPresentInP_3() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/psi/linked/constant-literals/p-3"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                }
+
+                @TestMetadata("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/neg")
+                @TestDataPath("$PROJECT_ROOT")
+                @RunWith(JUnit3RunnerWithInners.class)
+                public static class Neg extends AbstractParsingTestSpec {
+                    private void runTest(String testDataFilePath) throws Exception {
+                        KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+                    }
+
+                    @TestMetadata("1.1.kt")
+                    public void test1_1() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/neg/1.1.kt");
+                    }
+
+                    @TestMetadata("1.2.kt")
+                    public void test1_2() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/neg/1.2.kt");
+                    }
+
+                    @TestMetadata("2.1.kt")
+                    public void test2_1() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/neg/2.1.kt");
+                    }
+
+                    public void testAllFilesPresentInNeg() throws Exception {
+                        KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/neg"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                    }
+                }
+
+                @TestMetadata("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/pos")
+                @TestDataPath("$PROJECT_ROOT")
+                @RunWith(JUnit3RunnerWithInners.class)
+                public static class Pos extends AbstractParsingTestSpec {
+                    private void runTest(String testDataFilePath) throws Exception {
+                        KotlinTestUtils.runTest(this::doParsingTest, TargetBackend.ANY, testDataFilePath);
+                    }
+
+                    @TestMetadata("1.1.kt")
+                    public void test1_1() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/pos/1.1.kt");
+                    }
+
+                    @TestMetadata("1.2.kt")
+                    public void test1_2() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/pos/1.2.kt");
+                    }
+
+                    @TestMetadata("1.3.kt")
+                    public void test1_3() throws Exception {
+                        runTest("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/pos/1.3.kt");
+                    }
+
+                    public void testAllFilesPresentInPos() throws Exception {
+                        KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/tests-spec/testData/psi/linked/constant-literals/p-3/pos"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                    }
+                }
+            }
+        }
+
         @TestMetadata("compiler/tests-spec/testData/psi/linked/when-expression")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
