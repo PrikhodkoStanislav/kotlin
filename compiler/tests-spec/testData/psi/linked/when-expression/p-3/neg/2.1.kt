@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE: [2] Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 1
- DESCRIPTION: 'When' without bound value_1 and with invalid 'else' branch.
+ DESCRIPTION: 'When' without bound value and with invalid 'else' branch.
  */
 
 // CASE DESCRIPTION: 'When' with only one invalid 'else' branch.

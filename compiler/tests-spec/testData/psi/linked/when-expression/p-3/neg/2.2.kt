@@ -5,7 +5,7 @@
  PARAGRAPH: 3
  SENTENCE: [2] Each entry consists of a boolean condition (or a special else condition), each of which is checked and evaluated in order of appearance.
  NUMBER: 2
- DESCRIPTION: 'When' without bound value_1 and with invalid list of the boolean conditions in 'when entry'.
+ DESCRIPTION: 'When' without bound value and with invalid list of the boolean conditions in 'when entry'.
  */
 
 // CASE DESCRIPTION: 'When' with list of expressions and an extra comma at the end.

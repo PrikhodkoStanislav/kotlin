@@ -3,9 +3,9 @@
 
  SECTION: when-expression
  PARAGRAPH: 6
- SENTENCE: [1] When expression with bound value_1 (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value_1, but use different syntax for conditions.
+ SENTENCE: [1] When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 1
- DESCRIPTION: 'When' with bound value_1 and empty control structure body.
+ DESCRIPTION: 'When' with bound value and empty control structure body.
  */
 
 fun case_1(value_1: Int) {

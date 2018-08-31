@@ -3,9 +3,9 @@
 
  SECTION: when-expression
  PARAGRAPH: 6
- SENTENCE: [1] When expression with bound value_1 (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value_1, but use different syntax for conditions.
+ SENTENCE: [1] When expression with bound value (the form where the expression enclosed in parantheses is present) are very similar to the form without bound value, but use different syntax for conditions.
  NUMBER: 3
- DESCRIPTION: 'When' with bound value_1 and with invalid list of the conditions in 'when entry'.
+ DESCRIPTION: 'When' with bound value and with invalid list of the conditions in 'when entry'.
  */
 
 fun case_1(value_1: Int, value_2: _BasicTypesProvider): String {
