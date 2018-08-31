@@ -13,7 +13,6 @@ object ParsingTestTypeValidator {
     private fun checkErrorElement(psi: PsiElement): Boolean =
         psi.children.any { it is PsiErrorElement || checkErrorElement(it) }
 
-    fun computeTestType(psiFile: PsiFile): TestType {
-        return if (checkErrorElement(psiFile)) TestType.NEGATIVE else TestType.POSITIVE
-    }
+    fun computeTestType(psiFile: PsiFile) =
+        if (checkErrorElement(psiFile)) TestType.NEGATIVE else TestType.POSITIVE
 }

@@ -1,11 +1,12 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !WITH_CONTRACT_FUNCTIONS
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 8
  DESCRIPTION: Smartcasts using some Returns effects.
@@ -15,7 +16,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun <T> T?.case_3(value_1: Int?, value_2: Boolean): Boolean {
     contract {

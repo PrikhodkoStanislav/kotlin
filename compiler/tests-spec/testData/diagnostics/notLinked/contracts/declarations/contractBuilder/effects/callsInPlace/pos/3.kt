@@ -1,42 +1,25 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
-// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -UNUSED_VARIABLE
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, effects, callsInPlace
  NUMBER: 3
- DESCRIPTION: contract functions with CallsInPlace with dynamic InvocationKind.
+ DESCRIPTION: Contract with 'this' in first parameter of CallsInPlace.
  UNEXPECTED BEHAVIOUR
- ISSUES: KT-26152
+ ISSUES: KT-26294
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
-internal val invocationKind: InvocationKind = InvocationKind.EXACTLY_ONCE
-
-internal object SampleObject {
-    val invocationKind = InvocationKind.EXACTLY_ONCE
+inline fun <T : Function<*>> T.case_1(block: () -> Unit) {
+    contract {
+        callsInPlace(this@case_1, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    block()
+    (this@case_1 as kotlin.reflect.KFunction<*>).call()
 }
-
-internal inline fun case_1(invocationKind: InvocationKind, block: () -> Unit) {
-    contract { callsInPlace(block, invocationKind) }
-    return block()
-}
-
-inline fun <T : InvocationKind> case_2(invocationKind: T, block: () -> Unit) {
-    contract { callsInPlace(block, invocationKind) }
-    return block()
-}
-
-internal inline fun case_3(block: () -> Unit) {
-    contract { callsInPlace(block, invocationKind) }
-    return block()
-}
-
-internal inline fun case_4(block: () -> Unit) {
-    contract { callsInPlace(block, SampleObject.invocationKind) }
-    return block()
-}
-

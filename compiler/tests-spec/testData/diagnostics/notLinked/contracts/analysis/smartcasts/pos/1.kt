@@ -1,10 +1,12 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 1
  DESCRIPTION: Smartcasts using Returns effects with simple type checking, not-null conditions and custom condition (condition for smartcast outside contract).
@@ -74,9 +76,10 @@ fun case_10(value_1: Any?) {
     if (!(funWithReturnsNotNullAndTypeCheck(value_1) == null)) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
 }
 
-fun case_11(value_1: Number?) {
+fun case_11(value_1: Number?, value_2: Int?) {
     if (funWithReturnsTrueAndNotNullCheck(value_1)) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
     if (funWithReturnsTrueAndNullCheck(value_1)) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    if (!funWithReturnsFalseAndNotNullCheck(value_2)) <!DEBUG_INFO_SMARTCAST!>value_2<!>.inc()
     if (!funWithReturnsFalseAndNotNullCheck(value_1)) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())
     if (!funWithReturnsFalseAndNullCheck(value_1)) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
     if (!(funWithReturnsNotNullAndNotNullCheck(value_1) == null)) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())

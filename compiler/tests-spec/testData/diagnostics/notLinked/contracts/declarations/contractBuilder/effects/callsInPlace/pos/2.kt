@@ -1,10 +1,11 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, effects, callsInPlace
  NUMBER: 2
  DESCRIPTION: functions with contract and duplicate CallsInPlace.
@@ -12,7 +13,7 @@
  ISSUES: KT-26150
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 inline fun case_1(block: () -> Unit) {
     contract {

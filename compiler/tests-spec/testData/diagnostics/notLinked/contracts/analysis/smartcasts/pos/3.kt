@@ -1,10 +1,11 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 3
  DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions inside contract.
@@ -14,7 +15,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun case_1(value_1: Any?, value_2: Any?) {
     contract { returns() implies (value_1 is String && value_2 is Number) }

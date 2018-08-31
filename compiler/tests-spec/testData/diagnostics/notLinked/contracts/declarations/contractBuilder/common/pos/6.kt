@@ -1,36 +1,26 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
-// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -UNUSED_VARIABLE -UNUSED_PARAMETER -UNREACHABLE_CODE -UNUSED_EXPRESSION
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 6
- DESCRIPTION: Functions with contracts and external effect builder.
+ DESCRIPTION: contracts with not allowed conditions with boolean constants or constant expressions in implies.
  UNEXPECTED BEHAVIOUR
- ISSUES: KT-26186
+ ISSUES: KT-26491
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
-internal inline fun ContractBuilder.callsInPlaceEffectBuilder(block: () -> Unit) =
-    callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-
-internal fun ContractBuilder.returnsEffectBuilder(value_1: Int?) =
-    returns(true) implies (value_1 != null)
-
-internal inline fun case_1(block: () -> Unit) {
-    contract(builder = { callsInPlaceEffectBuilder(block) })
-    return block()
+fun case_1(): Boolean {
+    contract { returns(true) implies true }
+    return true
 }
 
-internal inline fun case_2(block: () -> Unit) {
-    contract { callsInPlaceEffectBuilder(block) }
-    return block()
-}
-
-internal inline fun case_3(value_1: Int?, block: () -> Unit) {
-    contract({ returnsEffectBuilder(value_1); callsInPlaceEffectBuilder(block) })
-    return block()
+fun case_2(): Boolean {
+    contract { returns(true) implies (true || false) }
+    return true || false
 }

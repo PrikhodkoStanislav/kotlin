@@ -6,9 +6,11 @@
 package org.jetbrains.kotlin.spec.tasks
 
 import org.jetbrains.kotlin.spec.SpecTestsStatElement
+import org.jetbrains.kotlin.spec.SpecTestsStatElementType
 import org.jetbrains.kotlin.spec.TestsStatisticCollector
 import org.jetbrains.kotlin.spec.validators.SpecTestLinkedType
-import org.jetbrains.kotlin.spec.validators.TestType
+
+const val PRINT_BASE_INDENT = "  "
 
 fun linkedSpecTestsPrint() {
     println("SPEC TESTS STATISTIC")
@@ -18,41 +20,30 @@ fun linkedSpecTestsPrint() {
 
     for ((areaName, areaElement) in statistic) {
         println("$areaName: ${areaElement.number} tests")
-
         for ((sectionName, sectionElement) in areaElement.elements) {
             println("  $sectionName: ${sectionElement.number} tests")
-
             for ((paragraphName, paragraphElement) in sectionElement.elements) {
                 val testsStatByType = mutableListOf<String>()
-
-                for ((typeName, typeElement) in paragraphElement.elements) {
-                    testsStatByType.add("$typeName: ${typeElement.number}")
-                }
-
-                println("    PARAGRAPH $paragraphName: ${paragraphElement.number} tests (${testsStatByType.joinToString(", ")})")
+                for ((typeName, typeElement) in paragraphElement.elements)
+                    testsStatByType.add(" [ $typeName: ${typeElement.number} ]")
+                print(PRINT_BASE_INDENT.repeat(2))
+                println("PARAGRAPH $paragraphName: ${paragraphElement.number} tests${testsStatByType.joinToString("")}")
             }
         }
     }
 }
 
-fun notLinkedSpecTestsPrintCategory(elements: Map<Any, SpecTestsStatElement>, level: Int = 0) {
+fun notLinkedSpecTestsCategoriesPrint(elements: Map<Any, SpecTestsStatElement>, level: Int = 1) {
     for ((name, element) in elements) {
-        print("   ")
-        for (i in 0..level) print("  ")
-        print("$name: ${element.number} tests")
-        val isTypeChildElements = element.elements[TestType.POSITIVE.type] != null || element.elements[TestType.NEGATIVE.type] != null
-        if (isTypeChildElements) {
-            val testsStatByType = mutableListOf<String>()
-
-            for ((typeName, typeElement) in element.elements) {
-                testsStatByType.add("$typeName: ${typeElement.number}")
-            }
-            print(" (${testsStatByType.joinToString(", ")})")
-            println()
-        } else if (element.elements.isNotEmpty()) {
-            println()
-            notLinkedSpecTestsPrintCategory(element.elements, level + 1)
+        if (element.type == SpecTestsStatElementType.TYPE) {
+            print(" [ $name: ${element.number} ]")
+            continue
         }
+
+        println()
+        print("${PRINT_BASE_INDENT.repeat(level)}$name: ${element.number} tests")
+
+        notLinkedSpecTestsCategoriesPrint(element.elements, level + 1)
     }
 }
 
@@ -64,23 +55,18 @@ fun notLinkedSpecTestsPrint() {
 
     for ((areaName, areaElement) in statistic) {
         println("$areaName: ${areaElement.number} tests")
-
         for ((sectionName, sectionElement) in areaElement.elements) {
-            println("  $sectionName: ${sectionElement.number} tests")
-            notLinkedSpecTestsPrintCategory(sectionElement.elements)
+            print("  $sectionName: ${sectionElement.number} tests")
+            notLinkedSpecTestsCategoriesPrint(sectionElement.elements)
+            println()
         }
     }
 }
 
 fun main(args: Array<String>) {
-    val testLinkType = SpecTestLinkedType.NOT_LINKED
-
-    println("--------------------------------------------------")
-
-    when (testLinkType) {
-        SpecTestLinkedType.LINKED -> linkedSpecTestsPrint()
-        SpecTestLinkedType.NOT_LINKED -> notLinkedSpecTestsPrint()
-    }
-
-    println("--------------------------------------------------")
+    println("==================================================")
+    linkedSpecTestsPrint()
+    println("==================================================")
+    notLinkedSpecTestsPrint()
+    println("==================================================")
 }

@@ -2,11 +2,12 @@
 // !WITH_CONTRACT_FUNCTIONS
 // !WITH_BASIC_TYPES
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 9
  DESCRIPTION: Smartcast using complex condition with some contract functions (Returns effect).
@@ -16,7 +17,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun <T> T?.case_4(): Boolean {
     contract { returns(true) implies (this@case_4 != null) }
@@ -70,9 +71,6 @@ fun case_3(value_1: Any?) {
     }
 }
 
-/*
- UNEXPECTED BEHAVIOUR
- */
 fun case_4(value_1: Any?) {
     if (!value_1.case_4_1() && value_1.case_4_2() == null) {
         println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)

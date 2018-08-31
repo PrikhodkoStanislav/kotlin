@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.JavaSdk
 import com.intellij.openapi.projectRoots.JavaSdkVersion
 import com.intellij.openapi.projectRoots.ProjectJdkTable
+import com.intellij.openapi.roots.ExternalProjectSystemRegistry
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ModuleRootModel
 import com.intellij.openapi.util.io.FileUtil
@@ -81,14 +82,21 @@ fun KotlinFacetSettings.initializeIfNeeded(
 
     if (shouldInferLanguageLevel) {
         languageLevel = (if (useProjectSettings) LanguageVersion.fromVersionString(commonArguments.languageVersion) else null)
-                ?: getDefaultLanguageLevel(module, compilerVersion)
+                ?: getDefaultLanguageLevel(module, compilerVersion, coerceRuntimeLibraryVersionToReleased = compilerVersion == null)
     }
 
     if (shouldInferAPILevel) {
         apiLevel = if (useProjectSettings) {
             LanguageVersion.fromVersionString(commonArguments.apiVersion) ?: languageLevel
         } else {
-            languageLevel!!.coerceAtMost(getLibraryLanguageLevel(module, rootModel, targetPlatformKind))
+            languageLevel!!.coerceAtMost(
+                getLibraryLanguageLevel(
+                    module,
+                    rootModel,
+                    targetPlatformKind,
+                    coerceRuntimeLibraryVersionToReleased = compilerVersion == null
+                )
+            )
         }
     }
 }
@@ -124,13 +132,17 @@ val mavenLibraryIdToPlatform: Map<String, TargetPlatformKind<*>> by lazy {
 fun Module.getOrCreateFacet(
     modelsProvider: IdeModifiableModelsProvider,
     useProjectSettings: Boolean,
+    externalSystemId: String? = null,
     commitModel: Boolean = false
 ): KotlinFacet {
     val facetModel = modelsProvider.getModifiableFacetModel(this)
 
     val facet = facetModel.findFacet(KotlinFacetType.TYPE_ID, KotlinFacetType.INSTANCE.defaultFacetName)
             ?: with(KotlinFacetType.INSTANCE) { createFacet(this@getOrCreateFacet, defaultFacetName, createDefaultConfiguration(), null) }
-                .apply { facetModel.addFacet(this) }
+                .apply {
+                    val externalSource = externalSystemId?.let { ExternalProjectSystemRegistry.getInstance().getSourceById(it) }
+                    facetModel.addFacet(this, externalSource)
+                }
     facet.configuration.settings.useProjectSettings = useProjectSettings
     if (commitModel) {
         runWriteAction {
@@ -161,7 +173,7 @@ fun KotlinFacet.configureFacet(
         if (languageLevel != null && apiLevel != null && apiLevel > languageLevel) {
             this.apiLevel = languageLevel
         }
-        this.coroutineSupport = coroutineSupport
+        this.coroutineSupport = if (languageLevel != null && languageLevel < LanguageVersion.KOTLIN_1_3) coroutineSupport else null
     }
 
     module.externalCompilerVersion = compilerVersion
@@ -193,8 +205,11 @@ private val jvmSpecificUIExposedFields = listOf(
     K2JVMCompilerArguments::destination.name,
     K2JVMCompilerArguments::classpath.name
 )
+private val jvmSpecificUIHiddenFields = listOf(
+    K2JVMCompilerArguments::friendPaths.name
+)
 val jvmUIExposedFields = commonUIExposedFields + jvmSpecificUIExposedFields
-private val jvmPrimaryFields = commonPrimaryFields + jvmSpecificUIExposedFields
+private val jvmPrimaryFields = commonPrimaryFields + jvmSpecificUIExposedFields + jvmSpecificUIHiddenFields
 
 private val jsSpecificUIExposedFields = listOf(
     K2JSCompilerArguments::sourceMap.name,
@@ -253,14 +268,31 @@ fun parseCompilerArgumentsToFacet(
     kotlinFacet: KotlinFacet,
     modelsProvider: IdeModifiableModelsProvider?
 ) {
+    val compilerArgumentsClass = kotlinFacet.configuration.settings.compilerArguments?.javaClass ?: return
+    val currentArgumentsBean = compilerArgumentsClass.newInstance()
+    val defaultArgumentsBean = compilerArgumentsClass.newInstance()
+    parseCommandLineArguments(defaultArguments, defaultArgumentsBean)
+    parseCommandLineArguments(arguments, currentArgumentsBean)
+    applyCompilerArgumentsToFacet(currentArgumentsBean, defaultArgumentsBean, kotlinFacet, modelsProvider)
+}
+
+fun applyCompilerArgumentsToFacet(
+    arguments: CommonCompilerArguments,
+    defaultArguments: CommonCompilerArguments?,
+    kotlinFacet: KotlinFacet,
+    modelsProvider: IdeModifiableModelsProvider?
+) {
     with(kotlinFacet.configuration.settings) {
         val compilerArguments = this.compilerArguments ?: return
 
-        val defaultCompilerArguments = compilerArguments::class.java.newInstance()
-        parseCommandLineArguments(defaultArguments, defaultCompilerArguments)
+        val defaultCompilerArguments = defaultArguments?.let { copyBean(it) } ?: compilerArguments::class.java.newInstance()
         defaultCompilerArguments.convertPathsToSystemIndependent()
 
-        parseCommandLineArguments(arguments, compilerArguments)
+        val oldPluginOptions = compilerArguments.pluginOptions
+
+        val emptyArgs = compilerArguments::class.java.newInstance()
+        copyBeanTo(arguments, compilerArguments) { property, value -> value != property.get(emptyArgs) }
+        compilerArguments.pluginOptions = joinPluginOptions(oldPluginOptions, arguments.pluginOptions)
 
         compilerArguments.convertPathsToSystemIndependent()
 
@@ -299,4 +331,16 @@ fun parseCompilerArgumentsToFacet(
 
         updateMergedArguments()
     }
+}
+
+private fun joinPluginOptions(old: Array<String>?, new: Array<String>?): Array<String>? {
+    if (old == null && new == null) {
+        return old
+    } else if (new == null) {
+        return old
+    } else if (old == null) {
+        return new
+    }
+
+    return (old + new).distinct().toTypedArray()
 }

@@ -1,10 +1,11 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 4
  DESCRIPTION: Smartcasts using Returns effects with simple type checking and not-null conditions on receiver inside contract.
@@ -14,7 +15,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun <T> T.case_1() {
     contract { returns() implies (this@case_1 is String) }
@@ -94,6 +95,34 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_4(): Boolean? {
     contract { returns(null) implies (this@case_7_4 == null) }
     return if (this@case_7_4 == null) null else true
 }
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_5(): Boolean {
+    contract { returns(false) implies (this@case_7_5 == null) }
+    return !(this@case_7_5 == null)
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_6(): Boolean? {
+    contract { returnsNotNull() implies (this@case_7_6 != null) }
+    return if (this@case_7_6 != null) true else null
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_7(): Boolean? {
+    contract { returns(null) implies (this@case_7_7 != null) }
+    return if (this@case_7_7 != null) null else true
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_8(): Boolean {
+    contract { returns(false) implies (this@case_7_8 != null) }
+    return !(this@case_7_8 != null)
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_9(): Boolean {
+    contract { returns(false) implies (this@case_7_9 == null) }
+    return !(this@case_7_9 == null)
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_10(): Boolean? {
+    contract { returnsNotNull() implies (this@case_7_10 == null) }
+    return if (this@case_7_10 == null) true else null
+}
+fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_7_11(): Boolean? {
+    contract { returns(null) implies (this@case_7_11 == null) }
+    return if (this@case_7_11 == null) null else true
+}
 
 fun <T : String?> T.case_8_1(): Boolean {
     contract { returns(true) implies (this@case_8_1 != null) }
@@ -172,11 +201,35 @@ fun case_6(value_1: Number) {
     when { value_1.case_6_4() == null -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv()) }
 }
 
-fun case_7(value_1: String?, value_2: String?) {
+fun case_7(value_1: String?) {
     if (value_1.case_7_1()) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
-    if (value_2.case_7_2()) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
-    if (!(value_2.case_7_3() == null)) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
-    if (!(value_2.case_7_4() != null)) println(<!DEBUG_INFO_CONSTANT!>value_2<!>)
+    if (value_1.case_7_2()) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    if (!(value_1.case_7_3() == null)) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    if (!(value_1.case_7_4() != null)) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    if (!value_1.case_7_5()) println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+        else println(value_1)
+    when (value_1.case_7_6() == null) {
+        true -> println(value_1)
+        false -> println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    }
+    if (value_1.case_7_7() != null) println(value_1)
+        else println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.length)
+    when {
+        !value_1.case_7_8() -> println(value_1)
+        value_1.case_7_8() -> println(value_1)
+    }
+    when {
+        !value_1.case_7_9() -> println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+        value_1.case_7_9() -> println(value_1)
+    }
+    when {
+        value_1.case_7_10() == null -> println(value_1)
+        <!DEBUG_INFO_CONSTANT!>value_1<!>.case_7_10() != null -> println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    }
+    when {
+        value_1.case_7_11() != null -> println(value_1)
+        <!DEBUG_INFO_CONSTANT!>value_1<!>.case_7_11() == null -> println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
+    }
 }
 
 fun case_8(value_1: String?, value_2: String?) {
@@ -188,6 +241,7 @@ fun case_8(value_1: String?, value_2: String?) {
 
 /*
  UNEXPECTED BEHAVIOUR
+ KT-26382
  */
 fun case_9(value_1: Number?) {
     if (value_1?.case_9_1() != null) println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.toByte())

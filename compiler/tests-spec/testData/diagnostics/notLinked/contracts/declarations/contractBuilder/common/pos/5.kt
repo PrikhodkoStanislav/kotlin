@@ -1,29 +1,21 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
-// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -UNUSED_VARIABLE -UNUSED_PARAMETER -UNREACHABLE_CODE -UNUSED_EXPRESSION
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 5
- DESCRIPTION: Functions with contracts and external contract builder.
+ DESCRIPTION: Contract function with CallsInPlace effect with not allowed implies.
  UNEXPECTED BEHAVIOUR
- ISSUES: KT-26186
+ ISSUES: KT-26409
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
-internal inline fun contractBuilder(block: () -> Unit): ContractBuilder.() -> Unit = {
-    callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-}
-
-internal inline fun case_1(block: () -> Unit) {
-    contract(contractBuilder(block))
-    return block()
-}
-
-internal inline fun case_2(block: () -> Unit) {
-    contract(builder = contractBuilder(block))
-    return block()
+fun case_1(value_1: Any?, block: () -> Unit) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) implies (value_1 != null) }
+    if (value_1 != null) block()
 }

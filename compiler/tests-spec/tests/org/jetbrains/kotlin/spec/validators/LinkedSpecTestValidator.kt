@@ -13,10 +13,7 @@ enum class LinkedSpecTestFileInfoElementType(
     override val valuePattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
-    SECTION(
-        valuePattern = Pattern.compile("""(?<number>(?:${AbstractSpecTestValidator.INTEGER_REGEX})(?:\.${AbstractSpecTestValidator.INTEGER_REGEX})*)(?<name>.*?)"""),
-        required = true
-    ),
+    SECTION(required = true),
     PARAGRAPH(required = true),
     SENTENCE(
         valuePattern = Pattern.compile("""\[(?<number>${AbstractSpecTestValidator.INTEGER_REGEX})\](?<text>.*?)"""),
@@ -33,7 +30,7 @@ enum class LinkedSpecTestFileInfoElementType(
 class LinkedSpecTest(
     testArea: TestArea,
     testType: TestType,
-    sectionName: String,
+    section: String,
     val paragraphNumber: Int,
     val sentenceNumber: Int,
     val sentence: String? = null,
@@ -42,34 +39,27 @@ class LinkedSpecTest(
     cases: List<SpecTestCase>? = null,
     unexpectedBehavior: Boolean? = null,
     issues: Set<String>? = null
-) : AbstractSpecTest(testArea, testType, sectionName, testNumber, description, cases, unexpectedBehavior, issues) {
+) : AbstractSpecTest(testArea, testType, section, testNumber, description, cases, unexpectedBehavior, issues) {
     override fun checkConsistency(other: AbstractSpecTest) =
-        if (other is LinkedSpecTest) checkConsistency(other) else false
-
-    private fun checkConsistency(other: LinkedSpecTest): Boolean {
-        return this.testArea == other.testArea
+        other is LinkedSpecTest
+                && this.section == other.section
+                && this.testArea == other.testArea
                 && this.testType == other.testType
                 && this.testNumber == other.testNumber
                 && this.paragraphNumber == other.paragraphNumber
                 && this.sentenceNumber == other.sentenceNumber
-    }
 }
 
-class LinkedSpecTestValidator(
-    private val testDataFile: File,
-    private val testArea: TestArea
-) : AbstractSpecTestValidator<LinkedSpecTest>(testDataFile, testArea) {
+class LinkedSpecTestValidator(testDataFile: File) : AbstractSpecTestValidator<LinkedSpecTest>(testDataFile) {
     override val testPathPattern = getPathPattern()
     override val testInfoPattern: Pattern =
-        Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
+        Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex SPEC TEST \($testTypeRegex\)$lineSeparator(?<infoElements>[\s\S]*?$lineSeparator)"""))
 
     companion object : SpecTestValidatorHelperObject {
-        override val pathPartRegex = """linked/(?<sectionName>[\w-]+)/p-(?<paragraphNumber>$INTEGER_REGEX)"""
+        override val pathPartRegex =
+            """${dirsByLinkedType[SpecTestLinkedType.LINKED]}$pathSeparator(?<section>[\w-]+)${pathSeparator}p-(?<paragraphNumber>$INTEGER_REGEX)"""
         override val filenameRegex = """(?<sentenceNumber>$INTEGER_REGEX)\.(?<testNumber>$INTEGER_REGEX)\.kt"""
-
-        override fun getPathPattern(): Pattern = Pattern.compile(
-            testPathRegexTemplate.format(pathPartRegex, filenameRegex)
-        )
+        override fun getPathPattern(): Pattern = Pattern.compile(testPathRegexTemplate.format(pathPartRegex, filenameRegex))
     }
 
     override fun getTestInfo(
@@ -79,13 +69,12 @@ class LinkedSpecTestValidator(
         unexpectedBehavior: Boolean,
         issues: Set<String>?
     ): LinkedSpecTest {
-        val sectionMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.SECTION]!!.additionalMatcher!!
         val sentenceMatcher = testInfoElements[LinkedSpecTestFileInfoElementType.SENTENCE]!!.additionalMatcher!!
 
         return LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
-            sectionMatcher.group("name"),
+            testInfoElements[LinkedSpecTestFileInfoElementType.SECTION]!!.content,
             testInfoElements[LinkedSpecTestFileInfoElementType.PARAGRAPH]!!.content.toInt(),
             sentenceMatcher.group("number").toInt(),
             sentenceMatcher.group("text"),
@@ -97,16 +86,15 @@ class LinkedSpecTestValidator(
         )
     }
 
-    override fun getTestInfo(testInfoMatcher: Matcher): LinkedSpecTest {
-        return LinkedSpecTest(
+    override fun getTestInfo(testInfoMatcher: Matcher) =
+        LinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.fromValue(testInfoMatcher.group("testType"))!!,
-            testInfoMatcher.group("sectionName"),
+            testInfoMatcher.group("section"),
             testInfoMatcher.group("paragraphNumber").toInt(),
             testInfoMatcher.group("sentenceNumber").toInt(),
             testNumber = testInfoMatcher.group("testNumber").toInt()
         )
-    }
 
     override fun parseTestInfo() = parseTestInfo(LinkedSpecTestFileInfoElementType.values())
 
@@ -114,15 +102,14 @@ class LinkedSpecTestValidator(
         println("--------------------------------------------------")
         if (testInfoByContent.unexpectedBehavior!!)
             println("(!!!) HAS UNEXPECTED BEHAVIOUR (!!!)")
-        println("$testArea ${testInfoByFilename.testType} SPEC TEST")
-        println("SECTION: ${testInfoByContent.sectionName} (paragraph: ${testInfoByFilename.paragraphNumber})")
+        println("${testInfoByFilename.testArea} ${testInfoByFilename.testType} SPEC TEST")
+        println("SECTION: ${testInfoByContent.section} (paragraph: ${testInfoByFilename.paragraphNumber})")
         println("SENTENCE ${testInfoByContent.sentenceNumber}: ${testInfoByContent.sentence}")
         println("TEST NUMBER: ${testInfoByContent.testNumber}")
         println("NUMBER OF TEST CASES: ${testInfoByContent.cases!!.size}")
         println("DESCRIPTION: ${testInfoByContent.description}")
-        if (testInfoByContent.issues!!.isNotEmpty()) {
-            println("LINKED ISSUES: ${testInfoByContent.issues!!.joinToString(", ")}")
-        }
+        if (testInfoByContent.issues!!.isNotEmpty())
+            println("LINKED ISSUES: ${testInfoByContent.issues!!.map { ISSUE_TRACKER + it }.joinToString(", ")}")
     }
 
     override fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) =

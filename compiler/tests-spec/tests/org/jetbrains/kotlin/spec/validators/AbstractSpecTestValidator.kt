@@ -59,12 +59,7 @@ data class SpecTestCase(
 )
 
 enum class SpecTestValidationFailedReason(val description: String) {
-    FILENAME_NOT_VALID(
-        "Incorrect test filename or folder name.\n" +
-                "It must match the following path pattern: " +
-                "testsData/<diagnostic|psi|codegen>/<sectionName>/p-<paragraph>/<pos|neg>/<sentence>_<testNumber>.kt " +
-                "(example: testsData/diagnostic/s-16.30_when-expression/p-3/pos/1.3.kt)"
-    ),
+    FILENAME_NOT_VALID("Incorrect test filename or folder name."),
     TESTINFO_NOT_VALID("Test info is incorrect."),
     FILEPATH_AND_TESTINFO_IN_FILE_NOT_CONSISTENCY("Test info from filepath and file content is not consistency"),
     TEST_IS_NOT_POSITIVE("Test is not positive because it contains error elements (PsiErrorElement or diagnostic with error severity)."),
@@ -79,15 +74,15 @@ class SpecTestValidationException(reason: SpecTestValidationFailedReason, detail
 typealias SpecTestInfoElements<T> = Map<T, SpecTestInfoElementContent>
 
 interface SpecTestValidatorHelperObject {
-    abstract val pathPartRegex: String
-    abstract val filenameRegex: String
-    abstract fun getPathPattern(): Pattern
+    val pathPartRegex: String
+    val filenameRegex: String
+    fun getPathPattern(): Pattern
 }
 
 abstract class AbstractSpecTest(
     val testArea: TestArea,
     val testType: TestType,
-    val sectionName: String,
+    val section: String,
     val testNumber: Int,
     val description: String? = null,
     val cases: List<SpecTestCase>? = null,
@@ -97,11 +92,8 @@ abstract class AbstractSpecTest(
     abstract fun checkConsistency(other: AbstractSpecTest): Boolean
 }
 
-abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
-    private val testDataFile: File,
-    private val testArea: TestArea
-) {
-    private val testInfo by lazy { testInfoByContent }
+abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(private val testDataFile: File) {
+    val testInfo by lazy { testInfoByContent }
 
     protected lateinit var testInfoByFilename: T
     protected lateinit var testInfoByContent: T
@@ -109,36 +101,35 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
     abstract val testInfoPattern: Pattern
 
     companion object {
+        const val ISSUE_TRACKER = "https://youtrack.jetbrains.com/issue/"
         const val INTEGER_REGEX = """[1-9]\d*"""
-        const val TESTCASE_INFO_REGEX = """(?<infoElements>CASE DESCRIPTION:[\s\S]*?\n)"""
-        const val SINGLELINE_COMMENT_REGEX = """\/\/\s*%s"""
-        const val MULTILINE_COMMENT_REGEX = """\/\*\s*%s\s+\*\/\n*"""
+        const val MULTILINE_COMMENT_REGEX = """\/\*\s*%s\s+\*\/"""
+        private const val SINGLELINE_COMMENT_REGEX = """\/\/\s*%s"""
 
+        val pathSeparator: String = Pattern.quote(File.separator)
+        val lineSeparator: String = System.lineSeparator()
         val testAreaRegex = """(?<testArea>${TestArea.values().joinToString("|")})"""
         val testTypeRegex = """(?<testType>${TestType.values().joinToString("|")})"""
-        val testInfoElementPattern: Pattern = Pattern.compile("""\s*(?<name>[A-Z ]+?):\s*(?<value>.*?)\n""")
+        val dirsByLinkedType = mapOf(
+            SpecTestLinkedType.LINKED to "linked",
+            SpecTestLinkedType.NOT_LINKED to "notLinked"
+        )
+        private val testInfoElementPattern: Pattern = Pattern.compile("""\s*(?<name>[A-Z ]+?)(?::\s*(?<value>.*?))?$lineSeparator""")
+        private val testCaseInfoRegex = """(?<infoElements>CASE DESCRIPTION:[\s\S]*?$lineSeparator)$lineSeparator*"""
+        private val testPathBaseRegexTemplate = """^.*?$pathSeparator(?<testArea>diagnostics|psi|codegen)$pathSeparator%s"""
+        val testPathRegexTemplate = """$testPathBaseRegexTemplate$pathSeparator(?<testType>pos|neg)/%s$"""
+        val testCaseInfoSingleLinePattern: Pattern = Pattern.compile(SINGLELINE_COMMENT_REGEX.format(testCaseInfoRegex))
+        val testCaseInfoMultilinePattern: Pattern = Pattern.compile(MULTILINE_COMMENT_REGEX.format(testCaseInfoRegex))
 
-        val testPathBaseRegexTemplate = """^.*?/(?<testArea>diagnostics|psi|codegen)/%s"""
-        val testPathRegexTemplate = """$testPathBaseRegexTemplate/(?<testType>pos|neg)/%s$"""
-        val testCaseInfoSinglelinePattern: Pattern = Pattern.compile(
-            SINGLELINE_COMMENT_REGEX.format(
-                TESTCASE_INFO_REGEX
-            ))
-        val testCaseInfoMultilinePattern: Pattern = Pattern.compile(
-            MULTILINE_COMMENT_REGEX.format(
-                TESTCASE_INFO_REGEX
-            ))
-
-        fun getInstanceByType(testFile: File, testArea: TestArea) = when {
+        fun getInstanceByType(testFile: File) = when {
             Pattern.compile(testPathBaseRegexTemplate.format(LinkedSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
-                LinkedSpecTestValidator(testFile, testArea)
+                LinkedSpecTestValidator(testFile)
             Pattern.compile(testPathBaseRegexTemplate.format(NotLinkedSpecTestValidator.pathPartRegex)).matcher(testFile.absolutePath).find() ->
-                NotLinkedSpecTestValidator(testFile, testArea)
+                NotLinkedSpecTestValidator(testFile)
             else -> throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
         }
 
-        fun getInstanceByType(testPath: String, testArea: TestArea) =
-            getInstanceByType(File(testPath), testArea)
+        fun getInstanceByType(testPath: String) = getInstanceByType(File(testPath))
 
         private fun getTestInfoElements(
             testInfoElementRules: Array<out SpecTestInfoElementType>,
@@ -166,7 +157,7 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
                     )
 
                 testInfoElementsMap[testInfoElementName] =
-                        SpecTestInfoElementContent(testInfoElementValue, testInfoElementValueMatcher)
+                        SpecTestInfoElementContent(testInfoElementValue ?: "", testInfoElementValueMatcher)
             }
 
             testInfoElementRules.forEach {
@@ -227,13 +218,12 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
 
     abstract fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) : SpecTestCase
 
-    fun testInfoFilter(fileContent: String): String {
-        val fileContentWithoutTestInfo = testInfoPattern.matcher(fileContent).replaceAll("")
-        val fileContentWithoutSinglelineCasesInfo = testCaseInfoSinglelinePattern.matcher(fileContentWithoutTestInfo).replaceAll("")
-        val fileContentWithoutCasesInfo = testCaseInfoMultilinePattern.matcher(fileContentWithoutSinglelineCasesInfo).replaceAll("")
-
-        return fileContentWithoutCasesInfo
-    }
+    fun testInfoFilter(fileContent: String): String =
+        testInfoPattern.matcher(fileContent).replaceAll("").also {
+            testCaseInfoSingleLinePattern.matcher(it).replaceAll("").also {
+                testCaseInfoMultilinePattern.matcher(it).replaceAll("")
+            }
+        }
 
     abstract fun getTestInfo(
         testInfoMatcher: Matcher,
@@ -250,7 +240,7 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
     abstract fun printTestInfo()
 
     fun parseTestInfo(testInfoElementsRules: Array<out SpecTestInfoElementType>) {
-        val testInfoByFilenameMatcher = testPathPattern.matcher(testDataFile.path)
+        val testInfoByFilenameMatcher = testPathPattern.matcher(testDataFile.canonicalPath)
 
         if (!testInfoByFilenameMatcher.find())
             throw SpecTestValidationException(SpecTestValidationFailedReason.FILENAME_NOT_VALID)
@@ -265,7 +255,7 @@ abstract class AbstractSpecTestValidator<T : AbstractSpecTest>(
             testInfoElementsRules,
             testInfoByContentMatcher.group("infoElements")
         )
-        val testCases = getTestCasesInfo(testCaseInfoSinglelinePattern.matcher(fileContent), testInfoElements) +
+        val testCases = getTestCasesInfo(testCaseInfoSingleLinePattern.matcher(fileContent), testInfoElements) +
                 getTestCasesInfo(testCaseInfoMultilinePattern.matcher(fileContent), testInfoElements)
 
         testInfoByFilename = getTestInfo(testInfoByFilenameMatcher)

@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.codegen.state.GenerationState;
 import org.jetbrains.kotlin.codegen.state.KotlinTypeMapper;
 import org.jetbrains.kotlin.config.JvmDefaultMode;
 import org.jetbrains.kotlin.config.JvmTarget;
+import org.jetbrains.kotlin.config.LanguageFeature;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.descriptors.annotations.Annotated;
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor;
@@ -58,7 +59,6 @@ import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodParameterSignature
 import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.TypeUtils;
-import org.jetbrains.kotlin.utils.StringsKt;
 import org.jetbrains.org.objectweb.asm.*;
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter;
 import org.jetbrains.org.objectweb.asm.commons.Method;
@@ -77,8 +77,8 @@ import static org.jetbrains.kotlin.descriptors.annotations.AnnotationUseSiteTarg
 import static org.jetbrains.kotlin.descriptors.annotations.AnnotationUtilKt.isEffectivelyInlineOnly;
 import static org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.getSourceFromDescriptor;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.*;
-import static org.jetbrains.kotlin.resolve.annotations.AnnotationUtilKt.hasJvmDefaultAnnotation;
 import static org.jetbrains.kotlin.resolve.jvm.AsmTypes.OBJECT_TYPE;
+import static org.jetbrains.kotlin.resolve.jvm.annotations.JvmAnnotationUtilKt.hasJvmDefaultAnnotation;
 import static org.jetbrains.kotlin.types.expressions.ExpressionTypingUtils.*;
 import static org.jetbrains.org.objectweb.asm.Opcodes.*;
 
@@ -196,6 +196,10 @@ public class FunctionCodegen {
             return;
         }
 
+        if (!shouldGenerateMethodInsideInlineClass(origin, functionDescriptor, contextKind, containingDeclaration)) {
+            return;
+        }
+
         boolean hasSpecialBridge = hasSpecialBridgeMethod(functionDescriptor);
         JvmMethodGenericSignature jvmSignature = strategy.mapMethodSignature(functionDescriptor, typeMapper, contextKind, hasSpecialBridge);
         Method asmMethod = jvmSignature.getAsmMethod();
@@ -228,7 +232,7 @@ public class FunctionCodegen {
             v.getSerializationBindings().put(METHOD_FOR_FUNCTION, CodegenUtilKt.unwrapFrontendVersion(functionDescriptor), asmMethod);
         }
 
-        generateMethodAnnotations(functionDescriptor, asmMethod, mv);
+        generateMethodAnnotations(functionDescriptor, asmMethod, mv, memberCodegen, typeMapper);
 
         generateParameterAnnotations(functionDescriptor, mv, jvmSignature);
         GenerateJava8ParameterNamesKt.generateParameterNames(functionDescriptor, mv, jvmSignature, state, (flags & ACC_SYNTHETIC) != 0);
@@ -255,7 +259,7 @@ public class FunctionCodegen {
                     origin, functionDescriptor, methodContext, strategy, mv, jvmSignature, asmMethod, flags, staticInCompanionObject
             );
         }
-        else if (shouldDelegateMethodBodyToInlineClass(origin, functionDescriptor, contextKind, containingDeclaration, bindingContext)) {
+        else if (canDelegateMethodBodyToInlineClass(origin, functionDescriptor, contextKind, containingDeclaration)) {
             generateMethodInsideInlineClassWrapper(origin, functionDescriptor, (ClassDescriptor) containingDeclaration, mv, typeMapper);
         }
         else {
@@ -277,12 +281,21 @@ public class FunctionCodegen {
         return v.newMethod(origin, access, name, desc, signature, exceptions);
     }
 
-    private static boolean shouldDelegateMethodBodyToInlineClass(
+    private static boolean shouldGenerateMethodInsideInlineClass(
             @NotNull JvmDeclarationOrigin origin,
             @NotNull FunctionDescriptor functionDescriptor,
             @NotNull OwnerKind contextKind,
-            @NotNull DeclarationDescriptor containingDeclaration,
-            @NotNull BindingContext bindingContext
+            @NotNull DeclarationDescriptor containingDeclaration
+    ) {
+        return !canDelegateMethodBodyToInlineClass(origin, functionDescriptor, contextKind, containingDeclaration) ||
+               !functionDescriptor.getOverriddenDescriptors().isEmpty();
+    }
+
+    private static boolean canDelegateMethodBodyToInlineClass(
+            @NotNull JvmDeclarationOrigin origin,
+            @NotNull FunctionDescriptor functionDescriptor,
+            @NotNull OwnerKind contextKind,
+            @NotNull DeclarationDescriptor containingDeclaration
     ) {
         // special kind / function
         if (contextKind == OwnerKind.ERASED_INLINE_CLASS) return false;
@@ -419,7 +432,8 @@ public class FunctionCodegen {
         }
 
         if (!functionDescriptor.isExternal()) {
-            generateMethodBody(mv, functionDescriptor, methodContext, jvmSignature, strategy, memberCodegen, state.getJvmDefaultMode());
+            generateMethodBody(mv, functionDescriptor, methodContext, jvmSignature, strategy, memberCodegen, state.getJvmDefaultMode(),
+                               state.getLanguageVersionSettings().supportsFeature(LanguageFeature.ReleaseCoroutines));
         }
         else if (staticInCompanionObject) {
             // native @JvmStatic foo() in companion object should delegate to the static native function moved to the outer class
@@ -458,14 +472,6 @@ public class FunctionCodegen {
                     return null;
                 }
         );
-    }
-
-    private void generateMethodAnnotations(
-            @NotNull FunctionDescriptor functionDescriptor,
-            Method asmMethod,
-            MethodVisitor mv
-    ) {
-        generateMethodAnnotations(functionDescriptor, asmMethod, mv, memberCodegen, typeMapper);
     }
 
     public static void generateMethodAnnotations(
@@ -602,7 +608,8 @@ public class FunctionCodegen {
             @NotNull JvmMethodSignature signature,
             @NotNull FunctionGenerationStrategy strategy,
             @NotNull MemberCodegen<?> parentCodegen,
-            @NotNull JvmDefaultMode jvmDefaultMode
+            @NotNull JvmDefaultMode jvmDefaultMode,
+            boolean isReleaseCoroutines
     ) {
         mv.visitCode();
 
@@ -612,7 +619,8 @@ public class FunctionCodegen {
         KotlinTypeMapper typeMapper = parentCodegen.typeMapper;
         if (BuiltinSpecialBridgesUtil.shouldHaveTypeSafeBarrier(functionDescriptor, typeMapper::mapAsmMethod)) {
             generateTypeCheckBarrierIfNeeded(
-                    new InstructionAdapter(mv), functionDescriptor, signature.getReturnType(), null, typeMapper);
+                    new InstructionAdapter(mv), functionDescriptor, signature.getReturnType(), null, typeMapper,
+                    isReleaseCoroutines);
         }
 
         Label methodEnd;
@@ -836,12 +844,12 @@ public class FunctionCodegen {
 
             if (kind == JvmMethodParameterKind.VALUE) {
                 ValueParameterDescriptor parameter = valueParameterIterator.next();
-                List<VariableDescriptor> destructuringVariables = ValueParameterDescriptorImpl.getDestructuringVariablesOrNull(parameter);
+                String nameForDestructuredParameter = ValueParameterDescriptorImpl.getNameForDestructuredParameterOrNull(parameter);
 
                 parameterName =
-                        destructuringVariables == null
+                        nameForDestructuredParameter == null
                         ? computeParameterName(i, parameter)
-                        : "$" + joinParameterNames(destructuringVariables);
+                        : nameForDestructuredParameter;
             }
             else {
                 String lowercaseKind = kind.name().toLowerCase();
@@ -891,11 +899,11 @@ public class FunctionCodegen {
             List<ValueParameterDescriptor> destructuredParametersForSuspendLambda
     ) {
         for (ValueParameterDescriptor parameter : destructuredParametersForSuspendLambda) {
-            List<VariableDescriptor> destructuringVariables = ValueParameterDescriptorImpl.getDestructuringVariablesOrNull(parameter);
-            if (destructuringVariables == null) continue;
+            String nameForDestructuredParameter = ValueParameterDescriptorImpl.getNameForDestructuredParameterOrNull(parameter);
+            if (nameForDestructuredParameter == null) continue;
 
             Type type = typeMapper.mapType(parameter.getType());
-            mv.visitLocalVariable("$" + joinParameterNames(destructuringVariables), type.getDescriptor(), null, methodBegin, methodEnd, shift);
+            mv.visitLocalVariable(nameForDestructuredParameter, type.getDescriptor(), null, methodBegin, methodEnd, shift);
             shift += type.getSize();
         }
         return shift;
@@ -908,14 +916,6 @@ public class FunctionCodegen {
         }
 
         return parameter.getName().asString();
-    }
-
-    private static String joinParameterNames(@NotNull List<VariableDescriptor> variables) {
-        // stub for anonymous destructuring declaration entry
-        return StringsKt.join(
-                CollectionsKt.map(variables, descriptor -> descriptor.getName().isSpecial() ? "$_$" : descriptor.getName().asString()),
-                "_"
-        );
     }
 
     private static void generateFacadeDelegateMethodBody(
@@ -1443,7 +1443,8 @@ public class FunctionCodegen {
         MemberCodegen.markLineNumberForDescriptor(owner.getThisDescriptor(), iv);
 
         if (delegateTo.getArgumentTypes().length > 0 && isSpecialBridge) {
-            generateTypeCheckBarrierIfNeeded(iv, descriptor, bridge.getReturnType(), delegateTo.getArgumentTypes(), typeMapper);
+            generateTypeCheckBarrierIfNeeded(iv, descriptor, bridge.getReturnType(), delegateTo.getArgumentTypes(), typeMapper,
+                                             state.getLanguageVersionSettings().supportsFeature(LanguageFeature.ReleaseCoroutines));
         }
 
         iv.load(0, OBJECT_TYPE);
@@ -1488,7 +1489,8 @@ public class FunctionCodegen {
             @NotNull FunctionDescriptor descriptor,
             @NotNull Type returnType,
             @Nullable Type[] delegateParameterTypes,
-            @NotNull KotlinTypeMapper typeMapper
+            @NotNull KotlinTypeMapper typeMapper,
+            boolean isReleaseCoroutines
     ) {
         BuiltinMethodsWithSpecialGenericSignature.TypeSafeBarrierDescription typeSafeBarrierDescription =
                 BuiltinMethodsWithSpecialGenericSignature.getDefaultValueForOverriddenBuiltinFunction(descriptor);
@@ -1522,7 +1524,7 @@ public class FunctionCodegen {
                 } else {
                     targetBoxedType = boxType(delegateParameterTypes[i]);
                 }
-                CodegenUtilKt.generateIsCheck(iv, kotlinType, targetBoxedType);
+                CodegenUtilKt.generateIsCheck(iv, kotlinType, targetBoxedType, isReleaseCoroutines);
                 iv.ifeq(defaultBranch);
             }
         }

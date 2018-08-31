@@ -1,22 +1,24 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 3
- DESCRIPTION: Contract with label after 'contract' keyword.
- UNEXPECTED BEHAVIOUR
- ISSUES: KT-26153
+ DESCRIPTION: Functions with contract and builder lambda in parentheses.
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 inline fun case_1(block: () -> Unit) {
-    contract test@ {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-    }
+    contract({ callsInPlace(block, InvocationKind.EXACTLY_ONCE) })
+    return block()
+}
+
+inline fun case_2(block: () -> Unit) {
+    contract(builder = { callsInPlace(block, InvocationKind.EXACTLY_ONCE) })
     return block()
 }

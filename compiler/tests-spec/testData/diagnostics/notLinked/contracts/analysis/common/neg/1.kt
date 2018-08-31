@@ -1,10 +1,11 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, common
  NUMBER: 1
  DESCRIPTION: Analysis by contracts with mixed CallsInPlace and Returns effects.
@@ -14,7 +15,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 inline fun case_1(value_1: Int?, block: () -> Unit): Boolean {
     contract {

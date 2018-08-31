@@ -12,7 +12,7 @@ abstract class AbstractParsingTestSpec : AbstractParsingTest() {
     private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>
 
     override fun doParsingTest(filePath: String) {
-        testValidator = AbstractSpecTestValidator.getInstanceByType(filePath, TestArea.PSI)
+        testValidator = AbstractSpecTestValidator.getInstanceByType(filePath)
 
         try {
             testValidator.parseTestInfo()

@@ -114,8 +114,8 @@ public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
 
         // Move fake runtime jar to default library path to pretend library is already configured
         FileUtil.copy(
-                new File(getProject().getBasePath() + "/lib/kotlin-runtime.jar"),
-                new File(Companion.getJAVA_CONFIGURATOR().getDefaultPathToJarFile(getProject()) + "/kotlin-runtime.jar"));
+                new File(getProject().getBasePath() + "/lib/kotlin-stdlib.jar"),
+                new File(Companion.getJAVA_CONFIGURATOR().getDefaultPathToJarFile(getProject()) + "/kotlin-stdlib.jar"));
 
         Companion.assertNotConfigured(module, Companion.getJAVA_CONFIGURATOR());
         Companion.getJAVA_CONFIGURATOR().configure(myProject, Collections.<Module>emptyList());
@@ -331,7 +331,7 @@ public class ConfigureKotlinTest extends AbstractConfigureKotlinTest {
     private void configureFacetAndCheckJvm(JvmTarget jvmTarget) {
         IdeModifiableModelsProviderImpl modelsProvider = new IdeModifiableModelsProviderImpl(getProject());
         try {
-            KotlinFacet facet = FacetUtilsKt.getOrCreateFacet(getModule(), modelsProvider, false, false);
+            KotlinFacet facet = FacetUtilsKt.getOrCreateFacet(getModule(), modelsProvider, false, null, false);
             TargetPlatformKind.Jvm platformKind = TargetPlatformKind.Jvm.Companion.get(jvmTarget);
             FacetUtilsKt.configureFacet(
                     facet,

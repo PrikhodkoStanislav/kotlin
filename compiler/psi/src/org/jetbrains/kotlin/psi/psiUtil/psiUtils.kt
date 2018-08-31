@@ -26,10 +26,7 @@ import com.intellij.psi.search.SearchScope
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.kotlin.diagnostics.PsiDiagnosticUtils
 import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtFileAnnotationList
-import org.jetbrains.kotlin.psi.KtModifierList
-import org.jetbrains.kotlin.psi.KtModifierListOwner
+import org.jetbrains.kotlin.psi.*
 import java.util.*
 
 // NOTE: in this file we collect only LANGUAGE INDEPENDENT methods working with PSI and not modifying it
@@ -131,6 +128,10 @@ inline fun <reified T : PsiElement, reified V : PsiElement> PsiElement.getParent
 
 inline fun <reified T : PsiElement, reified V : PsiElement, reified U : PsiElement> PsiElement.getParentOfTypes3(): PsiElement? {
     return PsiTreeUtil.getParentOfType(this, T::class.java, V::class.java, U::class.java)
+}
+
+inline fun <reified T : PsiElement> PsiElement.getParentOfType(strict: Boolean, vararg stopAt: Class<out PsiElement>): T? {
+    return PsiTreeUtil.getParentOfType(this, T::class.java, strict, *stopAt)
 }
 
 inline fun <reified T : PsiElement> PsiElement.getStrictParentOfType(): T? {
@@ -293,6 +294,13 @@ val PsiElement.startOffset: Int
 
 val PsiElement.endOffset: Int
     get() = textRange.endOffset
+
+val KtPureElement.pureStartOffset: Int
+    get() = psiOrParent.textRange.startOffset
+
+val KtPureElement.pureEndOffset: Int
+    get() = psiOrParent.textRange.endOffset
+
 
 fun PsiElement.getStartOffsetIn(ancestor: PsiElement): Int {
     var offset = 0

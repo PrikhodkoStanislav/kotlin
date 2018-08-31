@@ -1,30 +1,35 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
-// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -FINAL_UPPER_BOUND
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
+// !WITH_CLASSES
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, effects, returns
  NUMBER: 2
- DESCRIPTION: Using equality with literals in implies.
- UNEXPECTED BEHAVIOUR
- ISSUES: KT-26178
+ DESCRIPTION: Returns effect with complex conditions (using conjunction and disjuntion).
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
-fun case_1(x: Any?): Boolean {
-    contract { returns(true) implies (x == .15f) }
-    return x == .15f
+fun case_1(cond1: Boolean, cond2: Boolean, cond3: Boolean) {
+    contract { returns() implies (cond1 && !cond2 || cond3) }
+    if (!(cond1 && !cond2 || cond3)) throw Exception()
 }
 
-fun case_2(x: Any?) {
-    contract { returns() implies (x == "...") }
-    if (x != "...") throw Exception()
+fun case_2(value_1: Any?, value_2: Any?, value_3: Any?) {
+    contract { returns() implies (value_1 is String? || value_2 !is Int && value_3 !is Nothing?) }
+    if (!(value_1 is String? || value_2 !is Int && value_3 !is Nothing?)) throw Exception()
 }
 
-fun case_3(x: Any?): Boolean {
-    contract { returns(true) implies (x == '-') }
-    return x == '-'
+fun case_3(value_1: Any?, value_2: Any?, value_3: Any?) {
+    contract { returns() implies (value_1 == null || value_2 != null && value_3 == null) }
+    if (!(value_1 == null || value_2 != null && value_3 == null)) throw Exception()
+}
+
+fun <T>T.case_4(): Boolean {
+    contract { returns(false) implies (this@case_4 is Char || this@case_4 == null) }
+    return !(this is Char || this == null)
 }

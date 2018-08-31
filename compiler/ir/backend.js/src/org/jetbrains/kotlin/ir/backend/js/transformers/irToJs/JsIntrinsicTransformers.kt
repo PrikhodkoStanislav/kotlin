@@ -90,7 +90,7 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
                 jsAssignment(JsNameRef(fieldNameLiteral, receiver), fieldValue)
             }
 
-            add(intrinsics.jsToJsType) { call, context ->
+            add(intrinsics.jsClass) { call, context ->
                 val typeName = context.getNameForSymbol(call.getTypeArgument(0)!!.classifierOrFail)
                 typeName.makeRef()
             }
@@ -131,6 +131,17 @@ class JsIntrinsicTransformers(backendContext: JsIrBackendContext) {
                 val receiver = args[1]
                 val value = args[2]
                 JsInvocation(JsNameRef(Namer.KPROPERTY_SET, reference), listOf(receiver, value))
+            }
+
+            add(intrinsics.jsGetContinuation) { _, context: JsGenerationContext ->
+                context.continuation
+            }
+
+            add(intrinsics.jsCoroutineContext) { _, context: JsGenerationContext ->
+                val contextGetter = backendContext.coroutineGetContext
+                val getterName = context.getNameForSymbol(contextGetter)
+                val continuation = context.continuation
+                JsInvocation(JsNameRef(getterName, continuation))
             }
         }
     }

@@ -1,10 +1,12 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 2
  DESCRIPTION: Smartcasts using Returns effects with complex (conjunction/disjunction) type checking and not-null conditions outside contract (custom condition).
@@ -122,10 +124,6 @@ fun case_9(value_1: Any?, value_2: Number?) {
     }
 }
 
-/*
- UNEXPECTED BEHAVIOUR: in the commented last line
- ISSUES: KT-26300
- */
 class case_10_class {
     val prop_1: Int? = 10
 

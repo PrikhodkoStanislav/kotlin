@@ -25,6 +25,7 @@ import com.intellij.openapi.roots.LibraryOrderEntry
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderRootType
 import com.intellij.openapi.roots.impl.libraries.LibraryEx
+import junit.framework.TestCase
 import org.jetbrains.kotlin.caches.resolve.KotlinCacheService
 import org.jetbrains.kotlin.cli.common.arguments.K2JSCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
@@ -1209,7 +1210,11 @@ compileTestKotlin {
         }
 
         val rootManager = ModuleRootManager.getInstance(getModule("js-module"))
-        val stdlib = rootManager.orderEntries.filterIsInstance<LibraryOrderEntry>().single().library!!
+        val stdlib = rootManager
+            .orderEntries
+            .filterIsInstance<LibraryOrderEntry>()
+            .first { it.libraryName?.startsWith("Gradle: kotlin-stdlib-js-") ?: false }
+            .library!!
         assertTrue(stdlib.getFiles(OrderRootType.CLASSES).isNotEmpty())
         assertEquals(JSLibraryKind, (stdlib as LibraryEx).kind)
     }
@@ -1975,6 +1980,263 @@ compileTestKotlin {
         checkStableModuleName("project", "project", JvmPlatform, isProduction = false)
 
         assertAllModulesConfigured()
+    }
+
+    @Test
+    fun testNoFriendPathsAreShown() {
+        createProjectSubFile(
+            "build.gradle", """
+            buildscript {
+                repositories {
+                    mavenCentral()
+                    maven {
+                        url 'http://dl.bintray.com/kotlin/kotlin-dev'
+                    }
+                }
+
+                dependencies {
+                    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.70-eap-4")
+                }
+            }
+
+            apply plugin: 'kotlin'
+
+            repositories {
+                mavenCentral()
+                maven {
+                    url 'http://dl.bintray.com/kotlin/kotlin-dev'
+                }
+            }
+
+            dependencies {
+                compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.70-eap-4"
+            }
+        """
+        )
+        importProject()
+
+        Assert.assertEquals(
+            "-version",
+            testFacetSettings.compilerSettings!!.additionalArguments
+        )
+
+        assertAllModulesConfigured()
+    }
+
+    @Test
+    fun testSharedLanguageVersion() {
+        createProjectSubFile(
+            "build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-common'
+
+                repositories {
+                        mavenCentral()
+                    }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib-common:1.2.60"
+                }
+
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "settings.gradle",
+            """
+                    rootProject.name = 'MultiTest'
+                    include 'MultiTest-jvm', 'MultiTest-js'
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "MultiTest-js/build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-js'
+
+                sourceSets {
+                    myMain {
+                        kotlin {
+                            srcDir 'src'
+                        }
+                    }
+                    myTest {
+                        kotlin {
+                            srcDir 'test'
+                        }
+                    }
+                }
+
+                repositories {
+                        mavenCentral()
+                    }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib-js:1.2.60"
+                    implement project(":")
+                }
+
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "MultiTest-jvm/build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-jvm'
+
+                repositories {
+                    mavenCentral()
+                }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.60"
+                    implement project(":")
+                }
+
+                """.trimIndent()
+        )
+
+        val holder = KotlinCommonCompilerArgumentsHolder.getInstance(myProject)
+
+        holder.update { languageVersion = "1.1" }
+
+        importProject()
+
+        TestCase.assertEquals("1.2", holder.settings.languageVersion)
+    }
+
+    @Test
+    fun testNonSharedLanguageVersion() {
+        createProjectSubFile(
+            "build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-common'
+
+                repositories {
+                    mavenCentral()
+                }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib-common:1.2.60"
+                }
+
+                compileKotlinCommon {
+                    kotlinOptions.languageVersion = "1.1"
+                }
+
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "settings.gradle",
+            """
+                    rootProject.name = 'MultiTest'
+                    include 'MultiTest-jvm', 'MultiTest-js'
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "MultiTest-js/build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-js'
+
+                repositories {
+                    mavenCentral()
+                }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib-js:1.2.60"
+                    implement project(":")
+                }
+
+                """.trimIndent()
+        )
+        createProjectSubFile(
+            "MultiTest-jvm/build.gradle",
+            """
+                buildscript {
+                    repositories {
+                        mavenCentral()
+                    }
+                    dependencies {
+                        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.60")
+                    }
+                }
+
+                apply plugin: 'kotlin-platform-jvm'
+
+                sourceSets {
+                    myMain {
+                        kotlin {
+                            srcDir 'src'
+                        }
+                    }
+                    myTest {
+                        kotlin {
+                            srcDir 'test'
+                        }
+                    }
+                }
+
+                repositories {
+                        mavenCentral()
+                    }
+
+                dependencies {
+                    compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.60"
+                    implement project(":")
+                }
+
+                """.trimIndent()
+        )
+
+        val holder = KotlinCommonCompilerArgumentsHolder.getInstance(myProject)
+
+        holder.update { languageVersion = "1.1" }
+
+        importProject()
+
+        TestCase.assertEquals("1.1", holder.settings.languageVersion)
     }
 
     private fun checkStableModuleName(projectName: String, expectedName: String, platform: TargetPlatform, isProduction: Boolean) {

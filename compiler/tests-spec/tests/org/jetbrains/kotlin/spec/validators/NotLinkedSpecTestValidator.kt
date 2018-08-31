@@ -29,41 +29,33 @@ enum class NotLinkedSpecTestFileInfoElementType(
 class NotLinkedSpecTest(
     testArea: TestArea,
     testType: TestType,
-    sectionName: String,
+    section: String,
     val categories: List<String>,
     testNumber: Int,
     description: String? = null,
     cases: List<SpecTestCase>? = null,
     unexpectedBehavior: Boolean? = null,
     issues: Set<String>? = null
-) : AbstractSpecTest(testArea, testType, sectionName, testNumber, description, cases, unexpectedBehavior, issues) {
+) : AbstractSpecTest(testArea, testType, section, testNumber, description, cases, unexpectedBehavior, issues) {
     override fun checkConsistency(other: AbstractSpecTest) =
-        if (other is NotLinkedSpecTest) checkConsistency(other) else false
-
-    private fun checkConsistency(other: NotLinkedSpecTest): Boolean {
-        return this.testArea == other.testArea
+        other is NotLinkedSpecTest
+                && this.section == other.section
+                && this.testArea == other.testArea
                 && this.testType == other.testType
                 && this.categories.joinToString(",") == other.categories.joinToString(",")
                 && this.testNumber == other.testNumber
-    }
 }
 
-class NotLinkedSpecTestValidator(
-    private val testDataFile: File,
-    private val testArea: TestArea
-) : AbstractSpecTestValidator<NotLinkedSpecTest>(testDataFile, testArea) {
+class NotLinkedSpecTestValidator(testDataFile: File) : AbstractSpecTestValidator<NotLinkedSpecTest>(testDataFile) {
     override val testPathPattern = getPathPattern()
     override val testInfoPattern: Pattern =
-        Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex NOT LINKED SPEC TEST \($testTypeRegex\)\n(?<infoElements>[\s\S]*?\n)"""))
+        Pattern.compile(MULTILINE_COMMENT_REGEX.format("""KOTLIN $testAreaRegex NOT LINKED SPEC TEST \($testTypeRegex\)$lineSeparator(?<infoElements>[\s\S]*?$lineSeparator)"""))
 
     companion object : SpecTestValidatorHelperObject {
         override val pathPartRegex =
-            """notLinked/(?<sectionName>[\w-]+)/(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
+            """${dirsByLinkedType[SpecTestLinkedType.NOT_LINKED]}$pathSeparator(?<section>[\w-]+)$pathSeparator(?<categories>(?:[\w-]+)(?:/[\w-]+)*?)"""
         override val filenameRegex = """(?<testNumber>$INTEGER_REGEX)\.kt"""
-
-        override fun getPathPattern(): Pattern = Pattern.compile(
-            testPathRegexTemplate.format(pathPartRegex, filenameRegex)
-        )
+        override fun getPathPattern(): Pattern = Pattern.compile(testPathRegexTemplate.format(pathPartRegex, filenameRegex))
     }
 
     override fun getTestInfo(
@@ -72,8 +64,8 @@ class NotLinkedSpecTestValidator(
         testCases: List<SpecTestCase>,
         unexpectedBehavior: Boolean,
         issues: Set<String>?
-    ): NotLinkedSpecTest {
-        return NotLinkedSpecTest(
+    ) =
+        NotLinkedSpecTest(
             TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
             TestType.valueOf(testInfoMatcher.group("testType")),
             testInfoElements[NotLinkedSpecTestFileInfoElementType.SECTION]!!.content,
@@ -84,15 +76,15 @@ class NotLinkedSpecTestValidator(
             unexpectedBehavior,
             issues
         )
-    }
 
-    override fun getTestInfo(testInfoMatcher: Matcher) = NotLinkedSpecTest(
-        TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
-        TestType.fromValue(testInfoMatcher.group("testType"))!!,
-        testInfoMatcher.group("sectionName"),
-        testInfoMatcher.group("categories").split("/"),
-        testNumber = testInfoMatcher.group("testNumber").toInt()
-    )
+    override fun getTestInfo(testInfoMatcher: Matcher) =
+        NotLinkedSpecTest(
+            TestArea.valueOf(testInfoMatcher.group("testArea").toUpperCase()),
+            TestType.fromValue(testInfoMatcher.group("testType"))!!,
+            testInfoMatcher.group("section"),
+            testInfoMatcher.group("categories").split("/"),
+            testNumber = testInfoMatcher.group("testNumber").toInt()
+        )
 
     override fun parseTestInfo() = parseTestInfo(NotLinkedSpecTestFileInfoElementType.values())
 
@@ -100,15 +92,14 @@ class NotLinkedSpecTestValidator(
         println("--------------------------------------------------")
         if (testInfoByContent.unexpectedBehavior!!)
             println("(!!!) HAS UNEXPECTED BEHAVIOUR (!!!)")
-        println("$testArea ${testInfoByFilename.testType} NOT LINKED SPEC TEST")
-        println("SECTION: ${testInfoByContent.sectionName}")
+        println("${testInfoByFilename.testArea} ${testInfoByFilename.testType} NOT LINKED SPEC TEST")
+        println("SECTION: ${testInfoByContent.section}")
         println("CATEGORIES: ${testInfoByContent.categories.joinToString(", ")}")
         println("TEST NUMBER: ${testInfoByContent.testNumber}")
         println("NUMBER OF TEST CASES: ${testInfoByContent.cases!!.size}")
         println("DESCRIPTION: ${testInfoByContent.description}")
-        if (testInfoByContent.issues!!.isNotEmpty()) {
-            println("LINKED ISSUES: ${testInfoByContent.issues!!.joinToString(", ")}")
-        }
+        if (testInfoByContent.issues!!.isNotEmpty())
+            println("LINKED ISSUES: ${testInfoByContent.issues!!.map { ISSUE_TRACKER + it }.joinToString(", ")}")
     }
 
     override fun getSingleTestCase(testInfoElements: SpecTestInfoElements<SpecTestInfoElementType>) =

@@ -18,18 +18,18 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     companion object {
         // map of pairs: source helper filename - target helper filename
         private val directives = mapOf(
-            "WITH_BASIC_TYPES" to Pair("basicTypes.kt", "BASIC_TYPES.kt"),
-            "WITH_CLASSES" to Pair("classes.kt", "CLASSES.kt"),
-            "WITH_ENUM_CLASSES" to Pair("enumClasses.kt", "ENUM_CLASSES.kt"),
-            "WITH_SEALED_CLASSES" to Pair("sealedClasses.kt", "SEALED_CLASSES.kt"),
-            "WITH_FUNCTIONS" to Pair("funs.kt", "FUNS.kt"),
-            "WITH_OBJECTS" to Pair("objects.kt", "OBJECTS.kt"),
-            "WITH_TYPEALIASES" to Pair("typeAliases.kt", "TYPE_ALIASES.kt"),
-            "WITH_CONTRACT_FUNCTIONS" to Pair("contractFunctions.kt", "CONTRACT_FUNCTIONS.kt")
+            "WITH_BASIC_TYPES" to "basicTypes.kt",
+            "WITH_CLASSES" to "classes.kt",
+            "WITH_ENUM_CLASSES" to "enumClasses.kt",
+            "WITH_SEALED_CLASSES" to "sealedClasses.kt",
+            "WITH_FUNCTIONS" to "functions.kt",
+            "WITH_OBJECTS" to "objects.kt",
+            "WITH_TYPEALIASES" to "typeAliases.kt",
+            "WITH_CONTRACT_FUNCTIONS" to "contractFunctions.kt"
         )
 
-        private val withDescriptorsTestGroups = listOf(
-            "notLinked/contracts/declarations/"
+        private val withoutDescriptorsTestGroups = listOf(
+            "linked/when-expression"
         )
 
         private const val MODULE_PATH = "compiler/tests-spec"
@@ -44,7 +44,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
         testFiles.any { it.directives.contains(directive) }
 
     private fun enableDescriptorsGenerationIfNeeded(testDataFile: File) {
-        skipDescriptors = !withDescriptorsTestGroups.any {
+        skipDescriptors = withoutDescriptorsTestGroups.any {
             val testGroupAbsolutePath = File("$DIAGNOSTICS_TESTDATA_PATH/$it").absolutePath
             testDataFile.absolutePath.startsWith(testGroupAbsolutePath)
         }
@@ -52,21 +52,16 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
 
     override fun getConfigurationKind() = ConfigurationKind.ALL
 
-    override fun skipDescriptorsValidation(): Boolean {
-        println(skipDescriptors)
-        return skipDescriptors
-    }
+    override fun skipDescriptorsValidation() = skipDescriptors
 
     override fun getKtFiles(testFiles: List<TestFile>, includeExtras: Boolean): List<KtFile> {
         val ktFiles = super.getKtFiles(testFiles, includeExtras) as ArrayList
 
         if (includeExtras) {
-            for ((name, filenames) in directives) {
+            for ((name, filename) in directives) {
                 if (checkDirective(name, testFiles)) {
-                    val (sourceFilename, targetFilename) = filenames
-                    val declarations = File("$HELPERS_PATH/$sourceFilename").readText()
-
-                    ktFiles.add(KotlinTestUtils.createFile(targetFilename, declarations, project))
+                    val declarations = File("$HELPERS_PATH/$filename").readText()
+                    ktFiles.add(KotlinTestUtils.createFile(filename, declarations, project))
                 }
             }
         }
@@ -77,7 +72,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     override fun analyzeAndCheck(testDataFile: File, files: List<TestFile>) {
         enableDescriptorsGenerationIfNeeded(testDataFile)
 
-        testValidator = AbstractSpecTestValidator.getInstanceByType(testDataFile, TestArea.DIAGNOSTICS)
+        testValidator = AbstractSpecTestValidator.getInstanceByType(testDataFile)
 
         try {
             testValidator.parseTestInfo()

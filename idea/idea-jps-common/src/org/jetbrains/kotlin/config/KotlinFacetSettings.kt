@@ -54,7 +54,7 @@ object CoroutineSupport {
 
     fun byCompilerArgumentsOrNull(arguments: CommonCompilerArguments?): LanguageFeature.State? = when (arguments?.coroutinesState) {
         CommonCompilerArguments.ENABLE -> LanguageFeature.State.ENABLED
-        CommonCompilerArguments.WARN -> LanguageFeature.State.ENABLED_WITH_WARNING
+        CommonCompilerArguments.WARN, CommonCompilerArguments.DEFAULT -> LanguageFeature.State.ENABLED_WITH_WARNING
         CommonCompilerArguments.ERROR -> LanguageFeature.State.ENABLED_WITH_ERROR
         else -> null
     }
@@ -74,7 +74,7 @@ sealed class VersionView : DescriptionAware {
     abstract val version: LanguageVersion
 
     object LatestStable : VersionView() {
-        override val version: LanguageVersion = LanguageVersion.LATEST_STABLE
+        override val version: LanguageVersion = RELEASED_VERSION
 
         override val description: String
             get() = "Latest stable (${version.versionString})"
@@ -90,6 +90,15 @@ sealed class VersionView : DescriptionAware {
     }
 
     companion object {
+        val RELEASED_VERSION by lazy {
+            val latestStable = LanguageVersion.LATEST_STABLE
+            if (latestStable.isPreRelease()) {
+                val versions = LanguageVersion.values()
+                val index = versions.indexOf(latestStable)
+                versions.getOrNull(index - 1) ?: LanguageVersion.KOTLIN_1_0
+            } else latestStable
+        }
+
         fun deserialize(value: String?, isAutoAdvance: Boolean): VersionView {
             if (isAutoAdvance) return VersionView.LatestStable
             val languageVersion = LanguageVersion.fromVersionString(value)
@@ -111,6 +120,15 @@ var CommonCompilerArguments.apiVersionView: VersionView
         apiVersion = value.version.versionString
         autoAdvanceApiVersion = value == VersionView.LatestStable
     }
+
+enum class KotlinModuleKind {
+    DEFAULT,
+    SOURCE_SET_HOLDER,
+    COMPILATION_AND_SOURCE_SET_HOLDER;
+
+    val isNewMPP: Boolean
+        get() = this != DEFAULT
+}
 
 class KotlinFacetSettings {
     companion object {
@@ -178,14 +196,15 @@ class KotlinFacetSettings {
             }
         }
 
-    var coroutineSupport: LanguageFeature.State
+    var coroutineSupport: LanguageFeature.State?
         get() {
             val languageVersion = languageLevel ?: return LanguageFeature.Coroutines.defaultState
             if (languageVersion < LanguageFeature.Coroutines.sinceVersion!!) return LanguageFeature.State.DISABLED
-            return CoroutineSupport.byCompilerArguments(compilerArguments)
+            return CoroutineSupport.byCompilerArgumentsOrNull(compilerArguments)
         }
         set(value) {
             compilerArguments!!.coroutinesState = when (value) {
+                null -> CommonCompilerArguments.DEFAULT
                 LanguageFeature.State.ENABLED -> CommonCompilerArguments.ENABLE
                 LanguageFeature.State.ENABLED_WITH_WARNING -> CommonCompilerArguments.WARN
                 LanguageFeature.State.ENABLED_WITH_ERROR, LanguageFeature.State.DISABLED -> CommonCompilerArguments.ERROR
@@ -196,6 +215,9 @@ class KotlinFacetSettings {
 
     var productionOutputPath: String? = null
     var testOutputPath: String? = null
+
+    var kind: KotlinModuleKind = KotlinModuleKind.DEFAULT
+    var sourceSetNames: List<String> = emptyList()
 }
 
 fun TargetPlatformKind<*>.createCompilerArguments(init: CommonCompilerArguments.() -> Unit = {}): CommonCompilerArguments {

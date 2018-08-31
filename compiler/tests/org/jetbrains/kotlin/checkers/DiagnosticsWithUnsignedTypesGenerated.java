@@ -64,6 +64,11 @@ public class DiagnosticsWithUnsignedTypesGenerated extends AbstractDiagnosticsWi
         runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/unsignedLiteralsInsideConstVals.kt");
     }
 
+    @TestMetadata("unsignedLiteralsOn1_2.kt")
+    public void testUnsignedLiteralsOn1_2() throws Exception {
+        runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/unsignedLiteralsOn1_2.kt");
+    }
+
     @TestMetadata("unsignedLiteralsOverflowSignedBorder.kt")
     public void testUnsignedLiteralsOverflowSignedBorder() throws Exception {
         runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/unsignedLiteralsOverflowSignedBorder.kt");
@@ -99,6 +104,21 @@ public class DiagnosticsWithUnsignedTypesGenerated extends AbstractDiagnosticsWi
         @TestMetadata("conversionOfSignedToUnsigned.kt")
         public void testConversionOfSignedToUnsigned() throws Exception {
             runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/conversions/conversionOfSignedToUnsigned.kt");
+        }
+
+        @TestMetadata("inferenceForSignedAndUnsignedTypes.kt")
+        public void testInferenceForSignedAndUnsignedTypes() throws Exception {
+            runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/conversions/inferenceForSignedAndUnsignedTypes.kt");
+        }
+
+        @TestMetadata("overloadResolutionForSignedAndUnsignedTypes.kt")
+        public void testOverloadResolutionForSignedAndUnsignedTypes() throws Exception {
+            runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/conversions/overloadResolutionForSignedAndUnsignedTypes.kt");
+        }
+
+        @TestMetadata("signedToUnsignedConversionWithExpectedType.kt")
+        public void testSignedToUnsignedConversionWithExpectedType() throws Exception {
+            runTest("compiler/testData/diagnostics/testsWithUnsignedTypes/conversions/signedToUnsignedConversionWithExpectedType.kt");
         }
     }
 }

@@ -1,4 +1,4 @@
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 inline fun <T> funWithExactlyOnceCallsInPlace(block: () -> T): T {
     contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }

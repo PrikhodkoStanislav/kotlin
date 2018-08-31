@@ -1,17 +1,6 @@
 /*
- * Copyright 2010-2017 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the license/LICENSE.txt file.
  */
 
 package org.jetbrains.kotlin.resolve.calls
@@ -50,6 +39,7 @@ import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfo
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory
 import org.jetbrains.kotlin.resolve.calls.tasks.TracingStrategy
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
+import org.jetbrains.kotlin.resolve.constants.IntegerValueTypeConstant
 import org.jetbrains.kotlin.resolve.constants.IntegerValueTypeConstructor
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.expressions.DataFlowAnalyzer
@@ -309,9 +299,7 @@ class CallCompleter(
 
     private fun createTypeForConvertableConstant(constant: CompileTimeConstant<*>): SimpleType? {
         val value = constant.getValue(TypeUtils.NO_EXPECTED_TYPE).safeAs<Number>()?.toLong() ?: return null
-        val typeConstructor = IntegerValueTypeConstructor(
-            value, moduleDescriptor, constant.parameters
-        )
+        val typeConstructor = IntegerValueTypeConstructor(value, moduleDescriptor, constant.parameters)
         return KotlinTypeFactory.simpleTypeWithNonTrivialMemberScope(
             Annotations.EMPTY, typeConstructor, emptyList(), false,
             ErrorUtils.createErrorScope("Scope for number value type ($typeConstructor)", true)
@@ -332,11 +320,17 @@ class CallCompleter(
         var updatedType: KotlinType? = recordedType
 
         val results = completeCallForArgument(deparenthesized, context)
+
         if (results != null && results.isSingleResult) {
             val resolvedCall = results.resultingCall
-            updatedType = if (resolvedCall.hasInferredReturnType()) {
-                resolvedCall.makeNullableTypeIfSafeReceiver(resolvedCall.resultingDescriptor?.returnType, context)
-            } else null
+            val constant = context.trace[BindingContext.COMPILE_TIME_VALUE, deparenthesized]
+            if (constant !is IntegerValueTypeConstant || !constant.convertedFromSigned) {
+                updatedType =
+                        if (resolvedCall.hasInferredReturnType())
+                            resolvedCall.makeNullableTypeIfSafeReceiver(resolvedCall.resultingDescriptor?.returnType, context)
+                        else
+                            null
+            }
         }
 
         // For the cases like 'foo(1)' the type of '1' depends on expected type (it can be Int, Byte, etc.),
@@ -362,7 +356,7 @@ class CallCompleter(
         // While the expected type is not known, the function literal arguments are not analyzed (to analyze function literal bodies once),
         // but they should be analyzed when the expected type is known (during the call completion).
         ArgumentTypeResolver.getFunctionLiteralArgumentIfAny(expression, context)?.let { functionLiteralArgument ->
-            argumentTypeResolver.getFunctionLiteralTypeInfo(expression, functionLiteralArgument, context, RESOLVE_FUNCTION_ARGUMENTS)
+            argumentTypeResolver.getFunctionLiteralTypeInfo(expression, functionLiteralArgument, context, RESOLVE_FUNCTION_ARGUMENTS, false)
         }
 
         // While the expected type is not known, (possibly overloaded) callable references can have placeholder types

@@ -30,6 +30,11 @@ public class QuickFixMultiModuleTestGenerated extends AbstractQuickFixMultiModul
         runTest("idea/testData/multiModuleQuickFix/abstract/");
     }
 
+    @TestMetadata("actualWithoutExpect")
+    public void testActualWithoutExpect() throws Exception {
+        runTest("idea/testData/multiModuleQuickFix/actualWithoutExpect/");
+    }
+
     @TestMetadata("addActualToClass")
     public void testAddActualToClass() throws Exception {
         runTest("idea/testData/multiModuleQuickFix/addActualToClass/");
@@ -139,6 +144,11 @@ public class QuickFixMultiModuleTestGenerated extends AbstractQuickFixMultiModul
         runTest("idea/testData/multiModuleQuickFix/convertExpectSealedClassToEnum/");
     }
 
+    @TestMetadata("convertPropertyGetterToInitializer")
+    public void testConvertPropertyGetterToInitializer() throws Exception {
+        runTest("idea/testData/multiModuleQuickFix/convertPropertyGetterToInitializer/");
+    }
+
     @TestMetadata("createFunInExpectClass")
     public void testCreateFunInExpectClass() throws Exception {
         runTest("idea/testData/multiModuleQuickFix/createFunInExpectClass/");
@@ -222,6 +232,11 @@ public class QuickFixMultiModuleTestGenerated extends AbstractQuickFixMultiModul
     @TestMetadata("implementAbstractExpectMemberInheritedFromInterface")
     public void testImplementAbstractExpectMemberInheritedFromInterface() throws Exception {
         runTest("idea/testData/multiModuleQuickFix/implementAbstractExpectMemberInheritedFromInterface/");
+    }
+
+    @TestMetadata("implementMembersInActualClassNoExpectMember")
+    public void testImplementMembersInActualClassNoExpectMember() throws Exception {
+        runTest("idea/testData/multiModuleQuickFix/implementMembersInActualClassNoExpectMember/");
     }
 
     @TestMetadata("implementMembersInImplClassNonImplInheritor")

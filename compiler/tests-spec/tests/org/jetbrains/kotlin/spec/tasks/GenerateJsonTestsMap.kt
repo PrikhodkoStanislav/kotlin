@@ -5,8 +5,31 @@
 
 package org.jetbrains.kotlin.spec.tasks
 
-import org.jetbrains.kotlin.spec.TestsJsonMapGenerator
+import com.google.gson.JsonObject
+import org.jetbrains.kotlin.spec.TestsJsonMapBuilder
+import org.jetbrains.kotlin.spec.validators.LinkedSpecTestValidator
+import org.jetbrains.kotlin.spec.validators.SpecTestValidationException
+import java.io.File
+
+private const val TEST_DATA_DIR = "./testData"
+private const val OUT_DIR = "./out"
+private const val OUT_FILENAME = "testsMap.json"
 
 fun main(args: Array<String>) {
-    TestsJsonMapGenerator.generate()
+    val testsMap = JsonObject()
+
+    File(TEST_DATA_DIR).walkTopDown().forEach {
+        val specTestValidator = LinkedSpecTestValidator(it)
+
+        try {
+            specTestValidator.parseTestInfo()
+        } catch (e: SpecTestValidationException) {
+            return@forEach
+        }
+
+        TestsJsonMapBuilder.buildJsonElement(specTestValidator.testInfo, testsMap)
+    }
+
+    File(OUT_DIR).mkdir()
+    File("$OUT_DIR/$OUT_FILENAME").writeText(testsMap.toString())
 }

@@ -1,49 +1,37 @@
-// !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !LANGUAGE: +AllowContractsForCustomFunctions +UseReturnsEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractFunction
  NUMBER: 2
- DESCRIPTION: Check report about use contracts in literal functions, lambdas or not top-level functions.
- UNEXPECTED BEHAVIOUR
- ISSUES: KT-26149
+ DESCRIPTION: Contract function usage before declaration it
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
-fun case_1() {
-    val fun_1 = fun(block: () -> Unit) {
-        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-        return block()
-    }
-
-    fun_1 { throw Exception() }
-    println("1")
-}
-
-fun case_2() {
-    val lambda_1 = { block: () -> Unit ->
-        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-        block()
-    }
-
-    lambda_1 { throw Exception() }
-    println("1")
-}
-
-object case_3 {
-    fun case_3(block: () -> Unit) {
-        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-        return block()
+fun case_1_1(x: Any?) {
+    if (case_1_2(x)) {
+        <!DEBUG_INFO_SMARTCAST!>x<!>.length
     }
 }
 
-class case_4 {
-    fun case_4(block: () -> Unit) {
-        contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-        return block()
-    }
+fun case_2_1(x: Number?) {
+    case_2_2(x)
+    println(<!DEBUG_INFO_SMARTCAST!>x<!>.toByte())
 }
+
+fun case_1_2(x: Any?): Boolean {
+    contract { returns(true) implies (x is String) }
+    return x is String
+}
+
+fun case_2_2(x: Any?) {
+    contract { returns() implies(x != null) }
+    if (x == null) throw Exception()
+}
+
+

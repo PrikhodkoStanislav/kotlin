@@ -1,16 +1,17 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER -UNUSED_VARIABLE -UNUSED_PARAMETER -UNREACHABLE_CODE -UNUSED_EXPRESSION
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 3
- DESCRIPTION: Contracts with not allowed complex conditions in implies.
+ DESCRIPTION: contracts with not allowed complex conditions in implies.
  */
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun case_1(value_1: Boolean?): Boolean {
     contract { returns(true) implies (value_1 != null && <!ERROR_IN_CONTRACT_DESCRIPTION!>value_1 == false<!>) }
@@ -33,11 +34,11 @@ fun case_4(value_1: Nothing?, value_2: Boolean?): Boolean? {
 }
 
 fun case_5(value_1: Any?, value_2: String?): Boolean? {
-    contract { returns(null) implies (value_1 != null && value_2 != null || value_2 == ".") }
+    <!ERROR_IN_CONTRACT_DESCRIPTION!>contract<!> { returns(null) implies (value_1 != null && value_2 != null || value_2 == ".") }
     return if (value_1 != null && value_2 != null || value_2 == ".") null else true
 }
 
 fun case_6(value_1: Boolean, value_2: Int?): Boolean? {
-    contract { returns(null) implies (value_2 == null && value_1 || value_2 == 0) }
+    <!ERROR_IN_CONTRACT_DESCRIPTION!>contract<!> { returns(null) implies (value_2 == null && value_1 || value_2 == 0) }
     return if (value_2 == null && value_1 || value_2 == 0) null else true
 }

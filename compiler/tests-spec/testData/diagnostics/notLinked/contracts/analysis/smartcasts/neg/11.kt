@@ -1,11 +1,12 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 11
  DESCRIPTION: Check smartcasts using double negation (returnsFalse/invert type checking/not operator).
@@ -17,7 +18,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun case_1(x: Any?): Boolean {
     contract { returns(true) implies (x !is Number) }
@@ -126,26 +127,6 @@ fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_3(): Boolean {
     contract { returns(false) implies (this@case_21_3 != null) }
     return !(this@case_21_3 != null)
 }
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_4(): Boolean {
-    contract { returns(false) implies (this@case_21_4 == null) }
-    return !(this@case_21_4 == null)
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_5(): Boolean? {
-    contract { returnsNotNull() implies (this@case_21_5 != null) }
-    return if (this@case_21_5 != null) true else null
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_6(): Boolean? {
-    contract { returnsNotNull() implies (this@case_21_6 == null) }
-    return if (this@case_21_6 == null) true else null
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_7(): Boolean? {
-    contract { returns(null) implies (this@case_21_7 != null) }
-    return if (this@case_21_7 != null) null else true
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_21_8(): Boolean? {
-    contract { returns(null) implies (this@case_21_8 == null) }
-    return if (this@case_21_8 == null) null else true
-}
 
 fun <T : String?> T.case_22_1(): Boolean {
     contract { returns(true) implies (this@case_22_1 != null) }
@@ -155,29 +136,13 @@ fun <T : String?> T.case_22_2(): Boolean {
     contract { returns(true) implies (this@case_22_2 == null) }
     return this@case_22_2 == null
 }
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_3(): Boolean {
-    contract { returns(false) implies (this@case_22_3 != null) }
-    return !(this@case_22_3 != null)
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_4(): Boolean {
-    contract { returns(false) implies (this@case_22_4 == null) }
-    return !(this@case_22_4 == null)
-}
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_5(): Boolean? {
     contract { returnsNotNull() implies (this@case_22_5 != null) }
     return if (this@case_22_5 != null) true else null
 }
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_6(): Boolean? {
-    contract { returnsNotNull() implies (this@case_22_6 == null) }
-    return if (this@case_22_6 == null) true else null
-}
 fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_7(): Boolean? {
     contract { returns(null) implies (this@case_22_7 != null) }
     return if (this@case_22_7 != null) null else true
-}
-fun <T : <!FINAL_UPPER_BOUND!>String<!>> T?.case_22_8(): Boolean? {
-    contract { returns(null) implies (this@case_22_8 == null) }
-    return if (this@case_22_8 == null) null else true
 }
 
 fun <T> T?.case_23_1(): Boolean {
@@ -246,10 +211,6 @@ fun case_2(value_1: Any?) {
 
 fun case_3(number: Int?) {
     if (!funWithReturnsTrueAndNullCheck(number)) number<!UNSAFE_CALL!>.<!>inc() // nullable receiver
-}
-
-fun case_4(number: Int?) {
-    if (!funWithReturnsFalseAndNotNullCheck(number)) number<!UNSAFE_CALL!>.<!>inc()
 }
 
 fun case_5(value_1: Any?) {
@@ -474,53 +435,25 @@ fun case_20(value_1: Number) {
     when { value_1.case_20_4() != null -> println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()) }
 }
 
-fun case_21(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
+fun case_21(value_1: String?, value_2: String?, value_3: String?, value_4: String?) {
     if (!value_1.case_21_1()) println(value_1)
     if (!value_2.case_21_2()) println(value_2<!UNSAFE_CALL!>.<!>length)
     when (value_3.case_21_3()) {
-        true -> println(value_6<!UNSAFE_CALL!>.<!>length)
+        true -> println(value_4<!UNSAFE_CALL!>.<!>length)
         false -> println(value_3)
     }
-    if (!value_4.case_21_4()) println(value_4<!UNSAFE_CALL!>.<!>length)
-        else println(value_4)
-    when (value_5.case_21_5() == null) {
-        true -> println(value_5)
-        false -> println(value_5<!UNSAFE_CALL!>.<!>length)
-    }
-    if (value_6.case_21_6() == null) println(value_6<!UNSAFE_CALL!>.<!>length)
-        else println(value_6)
-    if (value_5.case_21_7() != null) println(value_5)
-        else println(value_5<!UNSAFE_CALL!>.<!>length)
-    if (value_6.case_21_8() != null) println(value_6<!UNSAFE_CALL!>.<!>length)
-        else println(value_6)
 }
 
-fun case_22(value_1: String?, value_2: String?, value_3: String?, value_4: String?, value_5: String?, value_6: String?) {
+fun case_22(value_1: String?) {
     when { !value_1.case_22_1() -> println(value_1) }
-    when { !value_2.case_22_2() -> println(value_2<!UNSAFE_CALL!>.<!>length) }
+    when { !value_1.case_22_2() -> println(value_1<!UNSAFE_CALL!>.<!>length) }
     when {
-        !value_3.case_22_3() -> println(value_3<!UNSAFE_CALL!>.<!>length)
-        value_3.case_22_3() -> println(value_3)
+        value_1.case_22_5() == null ->  println(value_1<!UNSAFE_CALL!>.<!>length)
+        value_1.case_22_5() != null ->  println(value_1)
     }
     when {
-        !value_4.case_22_4() -> println(value_4)
-        value_4.case_22_4() -> println(value_4<!UNSAFE_CALL!>.<!>length)
-    }
-    when {
-        value_5.case_22_5() == null ->  println(value_5<!UNSAFE_CALL!>.<!>length)
-        value_5.case_22_5() != null ->  println(value_5)
-    }
-    when {
-        value_6.case_22_6() == null -> println(value_6)
-        value_6.case_22_6() != null -> println(value_6<!UNSAFE_CALL!>.<!>length)
-    }
-    when {
-        value_5.case_22_7() != null ->  println(value_5<!UNSAFE_CALL!>.<!>length)
-        value_5.case_22_7() == null ->  println(value_5)
-    }
-    when {
-        value_6.case_22_8() != null -> println(value_6)
-        value_6.case_22_8() == null -> println(value_6<!UNSAFE_CALL!>.<!>length)
+        value_1.case_22_7() != null ->  println(value_1<!UNSAFE_CALL!>.<!>length)
+        value_1.case_22_7() == null ->  println(value_1)
     }
 }
 
@@ -563,16 +496,22 @@ fun case_26(value_1: Any?, value_2: Int?, value_3: Any?, value_4: Int?) {
     }
 }
 
+/*
+ UNEXPECTED BEHAVIOUR
+ */
 fun case_27(value_1: Any?, value_2: Any?, value_3: Any?) {
     funWithReturnsAndInvertCondition(value_1 !is String? || value_2 !is Number && value_3 !is Float)
-    println(value_1!!.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!>!!.<!UNRESOLVED_REFERENCE!>length<!>)
     println(value_2.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
 }
 
+/*
+ UNEXPECTED BEHAVIOUR
+ */
 fun case_28(value_1: Any?, value_2: Any?, value_3: Any?) {
     funWithReturnsAndInvertCondition(value_1 !is String || value_2 !is Number || <!USELESS_IS_CHECK!>value_3 !is Any?<!>)
-    println(value_1!!.<!UNRESOLVED_REFERENCE!>length<!>)
-    println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    println(<!DEBUG_INFO_SMARTCAST!>value_1<!><!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>.<!UNRESOLVED_REFERENCE!>length<!>)
+    println(<!DEBUG_INFO_SMARTCAST!>value_2<!><!UNNECESSARY_SAFE_CALL!>?.<!>toByte())
     println(value_3.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>dec<!>())
 }
