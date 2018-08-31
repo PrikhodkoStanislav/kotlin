@@ -1,11 +1,13 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, unreachableCode
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, unreachableCode
  NUMBER: 1
  DESCRIPTION: Using not allowed break and continue inside lambda of contract function
  */

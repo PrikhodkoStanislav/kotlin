@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 7
  DESCRIPTION: Contract isn't in the first position.

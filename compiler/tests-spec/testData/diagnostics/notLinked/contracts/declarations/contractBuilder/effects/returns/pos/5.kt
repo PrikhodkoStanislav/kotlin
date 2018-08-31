@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, effects, returns
  NUMBER: 5
  DESCRIPTION: Returns effect with conditions on receiver.

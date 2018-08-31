@@ -1,12 +1,14 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
 // !WITH_ENUM_CLASSES
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, initialization
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, initialization
  NUMBER: 3
  DESCRIPTION: val/var assignments or subsequent usages with compelx control flow inside/outside lambda of contract function with CallsInPlace effect
  */

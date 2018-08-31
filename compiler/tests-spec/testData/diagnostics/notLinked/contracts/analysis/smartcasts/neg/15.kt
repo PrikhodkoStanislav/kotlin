@@ -5,7 +5,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, smartcasts
  NUMBER: 15
  DESCRIPTION: Smartcasts with correspond contract function with default value in last parameter.

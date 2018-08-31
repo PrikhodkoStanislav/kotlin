@@ -5,7 +5,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [1] Type test condition: type checking operator followed by type.
  NUMBER: 3

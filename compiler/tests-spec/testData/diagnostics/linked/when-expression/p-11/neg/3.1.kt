@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 11
  SENTENCE: [3] The bound expression is of type kotlin.Boolean and the conditions contain both:
  NUMBER: 1

@@ -1,14 +1,14 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
 // !DIAGNOSTICS: -INVISIBLE_REFERENCE -INVISIBLE_MEMBER
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, unreachableCode
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, unreachableCode
  NUMBER: 7
  DESCRIPTION: Smart initialization with correspond contract function with default value before lambda.
- UNEXPECTED BEHAVIOUR
  ISSUES: KT-26444
  */
 
@@ -16,7 +16,7 @@
 
 package contracts
 
-import kotlin.internal.contracts.*
+import kotlin.contracts.*
 
 fun case_1(x: Double = 1.0, block: () -> Unit): Double {
     contract { callsInPlace(block, InvocationKind.AT_LEAST_ONCE) }
@@ -29,5 +29,5 @@ import contracts.*
 
 fun case_1() {
     contracts.case_1 { throw Exception() }
-    println(1) // not unreachable code
+    <!UNREACHABLE_CODE!>println(1)<!>
 }

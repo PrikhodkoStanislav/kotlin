@@ -3,7 +3,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 11
  SENTENCE: [1] It has an else entry;
  NUMBER: 1

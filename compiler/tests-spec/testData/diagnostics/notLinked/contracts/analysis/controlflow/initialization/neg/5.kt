@@ -1,11 +1,13 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, initialization
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, initialization
  NUMBER: 5
  DESCRIPTION: CallsInPlace contract functions with invalid lambda passing to function parameter.
  */

@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 11
  SENTENCE: [8] The bound expression is of a nullable type and one of the cases above is met for its non-nullable counterpart and, in addition, there is a condition containing literal null.
  NUMBER: 2

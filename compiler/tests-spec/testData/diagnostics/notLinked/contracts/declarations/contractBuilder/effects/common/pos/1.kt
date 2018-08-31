@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, effects, common
  NUMBER: 1
  DESCRIPTION: Indirect effect functions call.

@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 11
  SENTENCE: [6] The bound expression is of a sealed class type and all its possible subtypes are covered using type test conditions of this expression;
  NUMBER: 1

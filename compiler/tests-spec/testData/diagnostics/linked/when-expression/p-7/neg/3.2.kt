@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (NEGATIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [3] Contains test condition: containment operator followed by an expression.
  NUMBER: 2

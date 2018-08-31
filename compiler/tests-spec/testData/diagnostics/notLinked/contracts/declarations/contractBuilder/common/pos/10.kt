@@ -5,7 +5,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 10
  DESCRIPTION: Contract function with 'this' labeled by not current extensible object

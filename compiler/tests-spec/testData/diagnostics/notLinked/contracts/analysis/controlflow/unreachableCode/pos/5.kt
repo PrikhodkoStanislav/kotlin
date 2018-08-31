@@ -1,11 +1,13 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, unreachableCode
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, unreachableCode
  NUMBER: 5
  DESCRIPTION: Unreachable code detection using contract functions with complex control flow inside
  */

@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractFunction
  NUMBER: 3
  DESCRIPTION: Contract function usage before declaration it

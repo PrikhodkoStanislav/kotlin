@@ -1,11 +1,13 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, initialization
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, initialization
  NUMBER: 1
  DESCRIPTION: val/var reassignment and/or uninitialized variable usages based on CallsInPlace effect with wrong invocation kind
  */

@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: declarations, contractBuilder, common
  NUMBER: 9
  DESCRIPTION: Contract function with CallsInPlace effect with not allowed implies.

@@ -1,11 +1,13 @@
 // !LANGUAGE: +AllowContractsForCustomFunctions +UseCallsInPlaceEffect
+// !USE_EXPERIMENTAL: kotlin.contracts.ExperimentalContracts
 // !WITH_CONTRACT_FUNCTIONS
+// SKIP_TXT
 
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (POSITIVE)
 
- SECTION: Contracts
- CATEGORY: analysis, controlflow, unreachableCode
+ SECTION: contracts
+ CATEGORY: analysis, controlFlow, unreachableCode
  NUMBER: 2
  DESCRIPTION: Check for lack of unreachable code report when 'at most once' and 'unknown' invokations in CallsInPlace effect used.
  */

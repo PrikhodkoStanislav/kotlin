@@ -4,7 +4,7 @@
 /*
  KOTLIN DIAGNOSTICS NOT LINKED SPEC TEST (NEGATIVE)
 
- SECTION: Contracts
+ SECTION: contracts
  CATEGORY: analysis, controlflow, initialization
  NUMBER: 7
  DESCRIPTION: Smart initialization with correspond contract function with default value before lambda.

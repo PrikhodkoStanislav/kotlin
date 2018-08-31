@@ -5,7 +5,7 @@
 /*
  KOTLIN DIAGNOSTICS SPEC TEST (POSITIVE)
 
- SECTION: 16.30 When expression
+ SECTION: when-expression
  PARAGRAPH: 7
  SENTENCE: [5] Any other expression.
  NUMBER: 2
