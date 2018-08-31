@@ -128,7 +128,7 @@ fun case_14(value_1: Any, value_2: _Class, value_3: _Class?, value_4: Int) {
     fun __fun_1(): () -> Unit { return fun() { } }
 
     when (value_1) {
-        _fun(), __fun_1()(), value_2.fun_2(value_4) -> {}
+        _funWithoutArgs(), __fun_1()(), value_2.fun_2(value_4) -> {}
         value_3?.fun_2(value_4), value_3!!.fun_2(value_4) -> {}
     }
 }

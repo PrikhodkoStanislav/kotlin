@@ -125,11 +125,11 @@ fun case_6(value_1: Number, value_2: String?, value_3: Any?) {
     when (value_3.case_6(value_1, value_2)) {
         true -> {
             println(<!DEBUG_INFO_SMARTCAST!>value_3<!>.equals(""))
-            // println(value_2.length)
+            println(value_2.length)
         }
         false -> {
             println(<!DEBUG_INFO_SMARTCAST!>value_3<!>.length)
-            // println(value_2.length)
+            println(value_2.length)
         }
         null -> {
             println(<!DEBUG_INFO_SMARTCAST!>value_1<!>.inv())

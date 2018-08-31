@@ -190,7 +190,7 @@ fun case_16(value_1: Int, value_2: _Class, value_3: _Class?, value_4: Int) {
     fun __fun_1(): () -> Unit { return fun() { } }
 
     when {
-        value_1 == 1 -> _fun()
+        value_1 == 1 -> _funWithoutArgs()
         value_1 == 2 -> __fun_1()()
         value_1 == 3 -> value_2.fun_2(value_4)
         value_1 == 4 -> value_3?.fun_2(value_4)
