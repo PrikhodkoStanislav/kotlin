@@ -318,7 +318,7 @@ fun main(args: Array<String>) {
         }
 
         testClass<AbstractTypeBindingTest> {
-            model("type/binding")
+            model("directiveType/binding")
         }
 
         testClass<AbstractLineNumberTest> {

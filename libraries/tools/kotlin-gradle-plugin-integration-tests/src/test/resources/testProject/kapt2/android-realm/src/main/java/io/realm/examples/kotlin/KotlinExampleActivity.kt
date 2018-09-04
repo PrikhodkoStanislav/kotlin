@@ -198,7 +198,7 @@ class KotlinExampleActivity : Activity() {
         // Realm implements the Closable interface, therefore we can make use of Kotlin's built-in
         // extension method 'use' (pun intended).
         Realm.getInstance(realmConfig).use {
-            // 'it' is the implicit lambda parameter of type Realm
+            // 'it' is the implicit lambda parameter of directiveType Realm
             status += "\nNumber of persons: ${it.where(Person::class.java).count()}"
 
             // Find all persons where age between 7 and 9 and name begins with "Person".

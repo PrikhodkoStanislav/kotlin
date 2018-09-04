@@ -17,6 +17,8 @@
 package org.jetbrains.kotlin.ir
 
 import org.jetbrains.kotlin.checkers.AbstractDiagnosticsTest
+import org.jetbrains.kotlin.checkers.TestFile
+import org.jetbrains.kotlin.checkers.TestModule
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
 import org.jetbrains.kotlin.ir.util.dump

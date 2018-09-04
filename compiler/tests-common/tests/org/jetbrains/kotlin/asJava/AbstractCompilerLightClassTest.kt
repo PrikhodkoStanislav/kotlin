@@ -19,6 +19,7 @@ package org.jetbrains.kotlin.asJava
 import com.intellij.psi.PsiClass
 import com.intellij.psi.search.GlobalSearchScope
 import org.jetbrains.kotlin.asJava.finder.JavaElementFinder
+import org.jetbrains.kotlin.checkers.Directive
 import org.jetbrains.kotlin.checkers.KotlinMultiFileTestWithJava
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.name.FqName
@@ -49,7 +50,7 @@ abstract class AbstractCompilerLightClassTest : KotlinMultiFileTestWithJava<Void
 
     override fun createTestModule(name: String): Void? = null
 
-    override fun createTestFile(module: Void?, fileName: String, text: String, directives: Map<String, String>): Void? = null
+    override fun createTestFile(module: Void?, fileName: String, text: String, directives: Map<Directive, String>): Void? = null
 
     companion object {
         fun findLightClass(allowFrontendExceptions: Boolean, environment: KotlinCoreEnvironment, fqname: String): PsiClass? {

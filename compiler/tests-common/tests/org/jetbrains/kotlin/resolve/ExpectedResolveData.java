@@ -316,7 +316,7 @@ public abstract class ExpectedResolveData {
                 }
             }
 
-            assertNotNull(expression.getText() + " type is null", expressionType);
+            assertNotNull(expression.getText() + " directiveType is null", expressionType);
             assertTypeConstructorEquals("At " + position + ": ", expectedTypeConstructor, expressionType.getConstructor());
         }
     }

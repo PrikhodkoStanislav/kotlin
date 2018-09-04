@@ -126,7 +126,7 @@ class BuildCacheIT : BaseGradleIT() {
             assertContains(":compileKotlin FROM-CACHE")
         }
 
-        // Change the return type of foo() from Int to String in foo.kt, and check that fooUsage.kt is recompiled as well:
+        // Change the return directiveType of foo() from Int to String in foo.kt, and check that fooUsage.kt is recompiled as well:
         File(projectDir, "src/main/kotlin/foo.kt").modify { it.replace("Int = 1", "String = \"abc\"") }
         build("assemble") {
             assertSuccessful()

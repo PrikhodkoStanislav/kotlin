@@ -145,7 +145,7 @@ public final class DebugJsProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Header}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Header}
    */
   public static final class Header extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -637,7 +637,7 @@ public final class DebugJsProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Header}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Header}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -1638,7 +1638,7 @@ public final class DebugJsProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.js.File}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.File}
    */
   public static final class File extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -1928,7 +1928,7 @@ public final class DebugJsProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.js.File}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.File}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2422,7 +2422,7 @@ public final class DebugJsProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Files}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Files}
    */
   public static final class Files extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2675,7 +2675,7 @@ public final class DebugJsProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Files}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Files}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -3111,7 +3111,7 @@ public final class DebugJsProtoBuf {
     int getClassName(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Classes}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Classes}
    */
   public static final class Classes extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -3385,7 +3385,7 @@ public final class DebugJsProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Classes}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Classes}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -3671,7 +3671,7 @@ public final class DebugJsProtoBuf {
         getImportedModuleBytes(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Library}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Library}
    */
   public static final class Library extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -3879,7 +3879,7 @@ public final class DebugJsProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -4113,7 +4113,7 @@ public final class DebugJsProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.js.Library}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.js.Library}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements

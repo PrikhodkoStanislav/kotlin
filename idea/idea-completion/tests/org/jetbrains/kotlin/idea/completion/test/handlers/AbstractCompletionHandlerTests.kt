@@ -74,7 +74,7 @@ abstract class AbstractCompletionHandlerTest(private val defaultCompletionType: 
                 when (field.type.name) {
                     "boolean" -> field.setBoolean(settings, settingValue.toBoolean())
                     "int" -> field.setInt(settings, settingValue.toInt())
-                    else -> error("Unsupported setting type: ${field.type}")
+                    else -> error("Unsupported setting directiveType: ${field.type}")
                 }
             }
 

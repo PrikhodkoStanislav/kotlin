@@ -228,7 +228,7 @@ abstract class AbstractIrTextTestCase : AbstractIrGeneratorTestCase() {
         }
 
         override fun visitTypeOperator(expression: IrTypeOperatorCall) {
-            expression.typeOperandClassifier.checkBinding("type operand", expression)
+            expression.typeOperandClassifier.checkBinding("directiveType operand", expression)
         }
     }
 

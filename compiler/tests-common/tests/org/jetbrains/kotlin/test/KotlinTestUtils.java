@@ -41,6 +41,7 @@ import org.jetbrains.kotlin.builtins.DefaultBuiltIns;
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns;
 import org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettings;
 import org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettingsKt;
+import org.jetbrains.kotlin.checkers.Directive;
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys;
 import org.jetbrains.kotlin.cli.common.config.ContentRootsKt;
 import org.jetbrains.kotlin.cli.common.config.KotlinSourceRoot;
@@ -698,7 +699,7 @@ public class KotlinTestUtils {
     }
 
     public interface TestFileFactory<M, F> {
-        F createFile(@Nullable M module, @NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives);
+        F createFile(@Nullable M module, @NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives);
         M createModule(@NotNull String name, @NotNull List<String> dependencies, @NotNull List<String> friends);
     }
 
@@ -708,13 +709,13 @@ public class KotlinTestUtils {
                 @Nullable Void module,
                 @NotNull String fileName,
                 @NotNull String text,
-                @NotNull Map<String, String> directives
+                @NotNull Map<Directive, String> directives
         ) {
             return create(fileName, text, directives);
         }
 
         @NotNull
-        public abstract F create(@NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives);
+        public abstract F create(@NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives);
 
         @Override
         public Void createModule(@NotNull String name, @NotNull List<String> dependencies, @NotNull List<String> friends) {
@@ -735,7 +736,7 @@ public class KotlinTestUtils {
     @NotNull
     public static <M, F> List<F> createTestFiles(String testFileName, String expectedText, TestFileFactory<M, F> factory,
             boolean preserveLocations, String coroutinesPackage) {
-        Map<String, String> directives = parseDirectives(expectedText);
+        Map<Directive, String> directives = parseDirectives(expectedText);
 
         List<F> testFiles = Lists.newArrayList();
         Matcher matcher = FILE_OR_MODULE_PATTERN.matcher(expectedText);
@@ -832,17 +833,17 @@ public class KotlinTestUtils {
     }
 
     @NotNull
-    public static Map<String, String> parseDirectives(String expectedText) {
-        Map<String, String> directives = new HashMap<>();
+    public static Map<Directive, String> parseDirectives(String expectedText) {
+        Map<Directive, String> directives = new HashMap<>();
         Matcher directiveMatcher = DIRECTIVE_PATTERN.matcher(expectedText);
         int start = 0;
         while (directiveMatcher.find()) {
             if (directiveMatcher.start() != start) {
-                Assert.fail("Directives should only occur at the beginning of a file: " + directiveMatcher.group());
+                Assert.fail("Directive should only occur at the beginning of a file: " + directiveMatcher.group());
             }
             String name = directiveMatcher.group(1);
             String value = directiveMatcher.group(3);
-            String oldValue = directives.put(name, value);
+            String oldValue = directives.put(Directive.valueOf(name), value);
             Assert.assertNull("Directive overwritten: " + name + " old value: " + oldValue + " new value: " + value, oldValue);
             start = directiveMatcher.end() + 1;
         }
@@ -862,7 +863,7 @@ public class KotlinTestUtils {
         List<String> files = createTestFiles("", content, new TestFileFactoryNoModules<String>() {
             @NotNull
             @Override
-            public String create(@NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives) {
+            public String create(@NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives) {
                 int firstLineEnd = text.indexOf('\n');
                 return StringUtil.trimTrailing(text.substring(firstLineEnd + 1));
             }
@@ -940,7 +941,7 @@ public class KotlinTestUtils {
 
         if (comments.isEmpty() && assertMustExist) {
             throw new AssertionError(String.format(
-                    "Test file '%s' should end in a comment of type %s; last node was: %s", file.getName(), commentType, lastChild));
+                    "Test file '%s' should end in a comment of directiveType %s; last node was: %s", file.getName(), commentType, lastChild));
         }
 
         return comments;

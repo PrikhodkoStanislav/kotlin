@@ -59,7 +59,7 @@ class TestAnnotationProcessor : AbstractProcessor() {
 
     fun Element.toTypeElementOrNull(): TypeElement? {
         if (this !is TypeElement) {
-            processingEnv.messager.printMessage(ERROR, "Invalid element type, class expected", this)
+            processingEnv.messager.printMessage(ERROR, "Invalid element directiveType, class expected", this)
             return null
         }
 

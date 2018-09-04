@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.model
 import java.io.Serializable
 
 /**
- * Wraps models of a given type for all different projects inside a Gradle multi project.
+ * Wraps models of a given directiveType for all different projects inside a Gradle multi project.
  */
 class ModelContainer<T> : Serializable {
     // Key is the project path

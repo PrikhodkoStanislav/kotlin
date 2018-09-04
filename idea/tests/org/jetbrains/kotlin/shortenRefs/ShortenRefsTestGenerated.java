@@ -399,7 +399,7 @@ public class ShortenRefsTestGenerated extends AbstractShortenRefsTest {
         }
     }
 
-    @TestMetadata("idea/testData/shortenRefs/type")
+    @TestMetadata("idea/testData/shortenRefs/directiveType")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class Type extends AbstractShortenRefsTest {
@@ -408,97 +408,97 @@ public class ShortenRefsTestGenerated extends AbstractShortenRefsTest {
         }
 
         public void testAllFilesPresentInType() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("idea/testData/shortenRefs/type"), Pattern.compile("^([^.]+)\\.kt$"), TargetBackend.ANY, true);
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("idea/testData/shortenRefs/directiveType"), Pattern.compile("^([^.]+)\\.kt$"), TargetBackend.ANY, true);
         }
 
         @TestMetadata("ClassNameInsideArguments.kt")
         public void testClassNameInsideArguments() throws Exception {
-            runTest("idea/testData/shortenRefs/type/ClassNameInsideArguments.kt");
+            runTest("idea/testData/shortenRefs/directiveType/ClassNameInsideArguments.kt");
         }
 
         @TestMetadata("ClassNameInsideLambda.kt")
         public void testClassNameInsideLambda() throws Exception {
-            runTest("idea/testData/shortenRefs/type/ClassNameInsideLambda.kt");
+            runTest("idea/testData/shortenRefs/directiveType/ClassNameInsideLambda.kt");
         }
 
         @TestMetadata("ClassSameNameAsPackage.kt")
         public void testClassSameNameAsPackage() throws Exception {
-            runTest("idea/testData/shortenRefs/type/ClassSameNameAsPackage.kt");
+            runTest("idea/testData/shortenRefs/directiveType/ClassSameNameAsPackage.kt");
         }
 
         @TestMetadata("delegationSpecifier.kt")
         public void testDelegationSpecifier() throws Exception {
-            runTest("idea/testData/shortenRefs/type/delegationSpecifier.kt");
+            runTest("idea/testData/shortenRefs/directiveType/delegationSpecifier.kt");
         }
 
         @TestMetadata("FunctionType.kt")
         public void testFunctionType() throws Exception {
-            runTest("idea/testData/shortenRefs/type/FunctionType.kt");
+            runTest("idea/testData/shortenRefs/directiveType/FunctionType.kt");
         }
 
         @TestMetadata("GenericType.kt")
         public void testGenericType() throws Exception {
-            runTest("idea/testData/shortenRefs/type/GenericType.kt");
+            runTest("idea/testData/shortenRefs/directiveType/GenericType.kt");
         }
 
         @TestMetadata("GenericType2.kt")
         public void testGenericType2() throws Exception {
-            runTest("idea/testData/shortenRefs/type/GenericType2.kt");
+            runTest("idea/testData/shortenRefs/directiveType/GenericType2.kt");
         }
 
         @TestMetadata("GenericType3.kt")
         public void testGenericType3() throws Exception {
-            runTest("idea/testData/shortenRefs/type/GenericType3.kt");
+            runTest("idea/testData/shortenRefs/directiveType/GenericType3.kt");
         }
 
         @TestMetadata("LeaveQualified.kt")
         public void testLeaveQualified() throws Exception {
-            runTest("idea/testData/shortenRefs/type/LeaveQualified.kt");
+            runTest("idea/testData/shortenRefs/directiveType/LeaveQualified.kt");
         }
 
         @TestMetadata("NestedClass.kt")
         public void testNestedClass() throws Exception {
-            runTest("idea/testData/shortenRefs/type/NestedClass.kt");
+            runTest("idea/testData/shortenRefs/directiveType/NestedClass.kt");
         }
 
         @TestMetadata("NestedClassRefInImport.kt")
         public void testNestedClassRefInImport() throws Exception {
-            runTest("idea/testData/shortenRefs/type/NestedClassRefInImport.kt");
+            runTest("idea/testData/shortenRefs/directiveType/NestedClassRefInImport.kt");
         }
 
         @TestMetadata("NoImportNeeded.kt")
         public void testNoImportNeeded() throws Exception {
-            runTest("idea/testData/shortenRefs/type/NoImportNeeded.kt");
+            runTest("idea/testData/shortenRefs/directiveType/NoImportNeeded.kt");
         }
 
         @TestMetadata("NoImportNeeded2.kt")
         public void testNoImportNeeded2() throws Exception {
-            runTest("idea/testData/shortenRefs/type/NoImportNeeded2.kt");
+            runTest("idea/testData/shortenRefs/directiveType/NoImportNeeded2.kt");
         }
 
         @TestMetadata("NullableType.kt")
         public void testNullableType() throws Exception {
-            runTest("idea/testData/shortenRefs/type/NullableType.kt");
+            runTest("idea/testData/shortenRefs/directiveType/NullableType.kt");
         }
 
         @TestMetadata("OtherClassWithThisNameImported.kt")
         public void testOtherClassWithThisNameImported() throws Exception {
-            runTest("idea/testData/shortenRefs/type/OtherClassWithThisNameImported.kt");
+            runTest("idea/testData/shortenRefs/directiveType/OtherClassWithThisNameImported.kt");
         }
 
         @TestMetadata("SameClassTwice.kt")
         public void testSameClassTwice() throws Exception {
-            runTest("idea/testData/shortenRefs/type/SameClassTwice.kt");
+            runTest("idea/testData/shortenRefs/directiveType/SameClassTwice.kt");
         }
 
         @TestMetadata("SimpleAddImport.kt")
         public void testSimpleAddImport() throws Exception {
-            runTest("idea/testData/shortenRefs/type/SimpleAddImport.kt");
+            runTest("idea/testData/shortenRefs/directiveType/SimpleAddImport.kt");
         }
 
         @TestMetadata("TwoClassesSameNames.kt")
         public void testTwoClassesSameNames() throws Exception {
-            runTest("idea/testData/shortenRefs/type/TwoClassesSameNames.kt");
+            runTest("idea/testData/shortenRefs/directiveType/TwoClassesSameNames.kt");
         }
     }
 

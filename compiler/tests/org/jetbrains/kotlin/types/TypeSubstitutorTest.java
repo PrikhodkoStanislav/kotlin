@@ -79,7 +79,7 @@ public class TypeSubstitutorTest extends KotlinTestWithEnvironment {
 
     private LexicalScope getContextScope() throws IOException {
         // todo comments
-        String text = FileUtil.loadFile(new File("compiler/testData/type-substitutor.kt"), true);
+        String text = FileUtil.loadFile(new File("compiler/testData/directiveType-substitutor.kt"), true);
         KtFile ktFile = KtPsiFactoryKt.KtPsiFactory(getProject()).createFile(text);
         AnalysisResult analysisResult = JvmResolveUtil.analyze(ktFile, getEnvironment());
         ModuleDescriptor module = analysisResult.getModuleDescriptor();
@@ -133,8 +133,8 @@ public class TypeSubstitutorTest extends KotlinTestWithEnvironment {
             String replacementProjectionString = pair.second;
 
             ClassifierDescriptor classifier = ScopeUtilsKt.findClassifier(scope, Name.identifier(typeParameterName), NoLookupLocation.FROM_TEST);
-            assertNotNull("No type parameter named " + typeParameterName, classifier);
-            assertTrue(typeParameterName + " is not a type parameter: " + classifier, classifier instanceof TypeParameterDescriptor);
+            assertNotNull("No directiveType parameter named " + typeParameterName, classifier);
+            assertTrue(typeParameterName + " is not a directiveType parameter: " + classifier, classifier instanceof TypeParameterDescriptor);
 
             String typeStr = "C<" + replacementProjectionString + ">";
             KotlinType typeWithArgument = resolveType(typeStr);

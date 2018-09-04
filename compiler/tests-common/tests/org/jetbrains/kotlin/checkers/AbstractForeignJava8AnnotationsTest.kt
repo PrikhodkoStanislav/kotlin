@@ -44,7 +44,7 @@ abstract class AbstractForeignJava8AnnotationsNoAnnotationInClasspathWithFastCla
     }
 }
 
-private fun skipForCompiledVersion(files: List<BaseDiagnosticsTest.TestFile>) =
+private fun skipForCompiledVersion(files: List<TestFile>) =
         files.any { file -> InTextDirectivesUtils.isDirectiveDefined(file.expectedText, "// SKIP_COMPILED_JAVA") }
 
 

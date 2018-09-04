@@ -2551,7 +2551,7 @@ class KotlinMavenImporterTest : MavenImportingTestCase() {
                     <dependency>
                         <groupId>test-group</groupId>
                         <artifactId>module-with-java</artifactId>
-                        <type>test-jar</type>
+                        <directiveType>test-jar</directiveType>
                         <scope>compile</scope>
                     </dependency>
                 </dependencies>
@@ -2653,7 +2653,7 @@ class KotlinMavenImporterTest : MavenImportingTestCase() {
                             <groupId>test-group</groupId>
                             <artifactId>module-with-java</artifactId>
                             <version>${"$"}{project.version}</version>
-                            <type>test-jar</type>
+                            <directiveType>test-jar</directiveType>
                             <scope>test</scope>
                         </dependency>
                     </dependencies>

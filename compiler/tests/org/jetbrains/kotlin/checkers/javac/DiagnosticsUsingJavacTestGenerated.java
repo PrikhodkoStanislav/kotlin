@@ -1365,9 +1365,9 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
                         runTest("compiler/testData/diagnostics/tests/annotations/options/targets/suppress.kt");
                     }
 
-                    @TestMetadata("type.kt")
+                    @TestMetadata("directiveType.kt")
                     public void testType() throws Exception {
-                        runTest("compiler/testData/diagnostics/tests/annotations/options/targets/type.kt");
+                        runTest("compiler/testData/diagnostics/tests/annotations/options/targets/directiveType.kt");
                     }
 
                     @TestMetadata("typeParams.kt")

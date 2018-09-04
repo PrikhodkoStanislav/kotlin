@@ -53,7 +53,7 @@ abstract class AbstractMoveTest : AbstractMultifileRefactoringTest() {
 }
 
 fun runMoveRefactoring(path: String, config: JsonObject, rootDir: VirtualFile, project: Project) {
-    runRefactoringTest(path, config, rootDir, project, MoveAction.valueOf(config.getString("type")))
+    runRefactoringTest(path, config, rootDir, project, MoveAction.valueOf(config.getString("directiveType")))
 }
 
 enum class MoveAction : AbstractMultifileRefactoringTest.RefactoringAction {

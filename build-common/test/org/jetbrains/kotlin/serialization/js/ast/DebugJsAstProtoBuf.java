@@ -83,7 +83,7 @@ public final class DebugJsAstProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -174,7 +174,7 @@ public final class DebugJsAstProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -319,7 +319,7 @@ public final class DebugJsAstProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -358,7 +358,7 @@ public final class DebugJsAstProtoBuf {
     int getStartChar();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Location}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Location}
    */
   public static final class Location extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -616,7 +616,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Location}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Location}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -1137,7 +1137,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.InstantiationOrBuilder getInstantiationOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Expression}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Expression}
    */
   public static final class Expression extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2550,7 +2550,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Expression}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Expression}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -5737,7 +5737,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ThisLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ThisLiteral}
    */
   public static final class ThisLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -5929,7 +5929,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ThisLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ThisLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -6050,7 +6050,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NullLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NullLiteral}
    */
   public static final class NullLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -6242,7 +6242,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NullLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NullLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -6363,7 +6363,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.TrueLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.TrueLiteral}
    */
   public static final class TrueLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -6555,7 +6555,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.TrueLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.TrueLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -6676,7 +6676,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.FalseLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.FalseLiteral}
    */
   public static final class FalseLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -6868,7 +6868,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.FalseLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.FalseLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -7007,7 +7007,7 @@ public final class DebugJsAstProtoBuf {
     int getFlagsStringId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral}
    */
   public static final class RegExpLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -7261,7 +7261,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.RegExpLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -7496,7 +7496,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral}
    */
   public static final class ArrayLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -7749,7 +7749,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ArrayLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -8193,7 +8193,7 @@ public final class DebugJsAstProtoBuf {
     boolean getMultiline();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral}
    */
   public static final class ObjectLiteral extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -8475,7 +8475,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteral}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -8955,7 +8955,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getValueOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry}
    */
   public static final class ObjectLiteralEntry extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -9249,7 +9249,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ObjectLiteralEntry}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -9713,7 +9713,7 @@ public final class DebugJsAstProtoBuf {
     boolean getLocal();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Function}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Function}
    */
   public static final class Function extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -10073,7 +10073,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Function}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Function}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -10728,7 +10728,7 @@ public final class DebugJsAstProtoBuf {
     boolean getHasDefaultValue();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Parameter}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Parameter}
    */
   public static final class Parameter extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -10982,7 +10982,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Parameter}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Parameter}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -11217,7 +11217,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DocComment}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DocComment}
    */
   public static final class DocComment extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -11470,7 +11470,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DocComment}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DocComment}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -11912,7 +11912,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getExpressionOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DocCommentTag}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DocCommentTag}
    */
   public static final class DocCommentTag extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -12252,7 +12252,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DocCommentTag}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DocCommentTag}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -12666,16 +12666,16 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getRightOrBuilder();
 
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
      */
     boolean hasType();
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
      */
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type getType();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.BinaryOperation}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.BinaryOperation}
    */
   public static final class BinaryOperation extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -13174,7 +13174,7 @@ public final class DebugJsAstProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -13236,13 +13236,13 @@ public final class DebugJsAstProtoBuf {
     public static final int TYPE_FIELD_NUMBER = 3;
     private org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type type_;
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type getType() {
       return type_;
@@ -13395,7 +13395,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.BinaryOperation}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.BinaryOperation}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -13803,19 +13803,19 @@ public final class DebugJsAstProtoBuf {
 
       private org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type type_ = org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type.MUL;
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type getType() {
         return type_;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
        */
       public Builder setType(org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.BinaryOperation.Type value) {
         if (value == null) {
@@ -13827,7 +13827,7 @@ public final class DebugJsAstProtoBuf {
         return this;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type type = 3;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.BinaryOperation.Type directiveType = 3;</code>
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -13865,11 +13865,11 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getOperandOrBuilder();
 
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
      */
     boolean hasType();
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
      */
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type getType();
 
@@ -13883,7 +13883,7 @@ public final class DebugJsAstProtoBuf {
     boolean getPostfix();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.UnaryOperation}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.UnaryOperation}
    */
   public static final class UnaryOperation extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -14131,7 +14131,7 @@ public final class DebugJsAstProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -14172,13 +14172,13 @@ public final class DebugJsAstProtoBuf {
     public static final int TYPE_FIELD_NUMBER = 2;
     private org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type type_;
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+     * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
      */
     public org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type getType() {
       return type_;
@@ -14342,7 +14342,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.UnaryOperation}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.UnaryOperation}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -14621,19 +14621,19 @@ public final class DebugJsAstProtoBuf {
 
       private org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type type_ = org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type.BIT_NOT;
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
        */
       public org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type getType() {
         return type_;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
        */
       public Builder setType(org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.UnaryOperation.Type value) {
         if (value == null) {
@@ -14645,7 +14645,7 @@ public final class DebugJsAstProtoBuf {
         return this;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type type = 2;</code>
+       * <code>required .org.jetbrains.kotlin.serialization.js.ast.UnaryOperation.Type directiveType = 2;</code>
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -14741,7 +14741,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getElseExpressionOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Conditional}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Conditional}
    */
   public static final class Conditional extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -15085,7 +15085,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Conditional}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Conditional}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -15662,7 +15662,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getIndexOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ArrayAccess}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ArrayAccess}
    */
   public static final class ArrayAccess extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -15956,7 +15956,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ArrayAccess}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ArrayAccess}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -16396,7 +16396,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.InlineStrategy getInlineStrategy();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameReference}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameReference}
    */
   public static final class NameReference extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -16704,7 +16704,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameReference}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameReference}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -17089,7 +17089,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.InlineStrategy getInlineStrategy();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.PropertyReference}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.PropertyReference}
    */
   public static final class PropertyReference extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -17397,7 +17397,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.PropertyReference}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.PropertyReference}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -17797,7 +17797,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.InlineStrategy getInlineStrategy();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Invocation}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Invocation}
    */
   public static final class Invocation extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -18135,7 +18135,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Invocation}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Invocation}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -18771,7 +18771,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Instantiation}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Instantiation}
    */
   public static final class Instantiation extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -19075,7 +19075,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Instantiation}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Instantiation}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -19895,7 +19895,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.EmptyOrBuilder getEmptyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Statement}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Statement}
    */
   public static final class Statement extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -21168,7 +21168,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Statement}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Statement}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -24263,7 +24263,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getValueOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Return}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Return}
    */
   public static final class Return extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -24505,7 +24505,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Return}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Return}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -24783,7 +24783,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getExceptionOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Throw}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Throw}
    */
   public static final class Throw extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -25027,7 +25027,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Throw}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Throw}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -25303,7 +25303,7 @@ public final class DebugJsAstProtoBuf {
     int getLabelId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Break}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Break}
    */
   public static final class Break extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -25525,7 +25525,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Break}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Break}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -25700,7 +25700,7 @@ public final class DebugJsAstProtoBuf {
     int getLabelId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Continue}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Continue}
    */
   public static final class Continue extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -25922,7 +25922,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Continue}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Continue}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -26088,7 +26088,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Debugger}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Debugger}
    */
   public static final class Debugger extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -26280,7 +26280,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Debugger}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Debugger}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -26423,7 +26423,7 @@ public final class DebugJsAstProtoBuf {
     int getExportedTagId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement}
    */
   public static final class ExpressionStatement extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -26695,7 +26695,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ExpressionStatement}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -27045,7 +27045,7 @@ public final class DebugJsAstProtoBuf {
     int getExportedPackageId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Vars}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Vars}
    */
   public static final class Vars extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -27355,7 +27355,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Vars}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Vars}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -27894,7 +27894,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.LocationOrBuilder getLocationOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.VarDeclaration}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.VarDeclaration}
    */
   public static final class VarDeclaration extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -28244,7 +28244,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.VarDeclaration}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.VarDeclaration}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -28759,7 +28759,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Block}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Block}
    */
   public static final class Block extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -29012,7 +29012,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Block}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Block}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -29447,7 +29447,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.GlobalBlock}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.GlobalBlock}
    */
   public static final class GlobalBlock extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -29700,7 +29700,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.GlobalBlock}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.GlobalBlock}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -30133,7 +30133,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getInnerStatementOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Label}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Label}
    */
   public static final class Label extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -30409,7 +30409,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Label}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Label}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -30760,7 +30760,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getElseStatementOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.If}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.If}
    */
   public static final class If extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -31102,7 +31102,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.If}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.If}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -31688,7 +31688,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Switch}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Switch}
    */
   public static final class Switch extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -31992,7 +31992,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Switch}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Switch}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -32606,7 +32606,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.LocationOrBuilder getLocationOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.SwitchEntry}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.SwitchEntry}
    */
   public static final class SwitchEntry extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -32984,7 +32984,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.SwitchEntry}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.SwitchEntry}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -33744,7 +33744,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getBodyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.While}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.While}
    */
   public static final class While extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -34038,7 +34038,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.While}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.While}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -34473,7 +34473,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getBodyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DoWhile}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DoWhile}
    */
   public static final class DoWhile extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -34767,7 +34767,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.DoWhile}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.DoWhile}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -35254,7 +35254,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getBodyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.For}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.For}
    */
   public static final class For extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -35777,7 +35777,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.For}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.For}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -36797,7 +36797,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.EmptyInit}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.EmptyInit}
    */
   public static final class EmptyInit extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -36989,7 +36989,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.EmptyInit}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.EmptyInit}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -37158,7 +37158,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getBodyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ForIn}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ForIn}
    */
   public static final class ForIn extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -37566,7 +37566,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ForIn}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ForIn}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -38232,7 +38232,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getFinallyBlockOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Try}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Try}
    */
   public static final class Try extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -38572,7 +38572,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Try}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Try}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -39145,7 +39145,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.StatementOrBuilder getBodyOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Catch}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Catch}
    */
   public static final class Catch extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -39439,7 +39439,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Catch}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Catch}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -39848,7 +39848,7 @@ public final class DebugJsAstProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Empty}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Empty}
    */
   public static final class Empty extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -40040,7 +40040,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Empty}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Empty}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -40344,7 +40344,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Fragment}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Fragment}
    */
   public static final class Fragment extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -41042,7 +41042,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Fragment}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Fragment}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -43346,7 +43346,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getPlainReferenceOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ImportedModule}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ImportedModule}
    */
   public static final class ImportedModule extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -43652,7 +43652,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ImportedModule}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ImportedModule}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -44029,7 +44029,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.ExpressionOrBuilder getExpressionOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Import}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Import}
    */
   public static final class Import extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -44305,7 +44305,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Import}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Import}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -44635,7 +44635,7 @@ public final class DebugJsAstProtoBuf {
     int getNameId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameBinding}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameBinding}
    */
   public static final class NameBinding extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -44893,7 +44893,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameBinding}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameBinding}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -45152,7 +45152,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.GlobalBlockOrBuilder getPostDeclarationBlockOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ClassModel}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ClassModel}
    */
   public static final class ClassModel extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -45513,7 +45513,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.ClassModel}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.ClassModel}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -45965,7 +45965,7 @@ public final class DebugJsAstProtoBuf {
     int getExpressionId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.InlineModule}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.InlineModule}
    */
   public static final class InlineModule extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -46223,7 +46223,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.InlineModule}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.InlineModule}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -46457,7 +46457,7 @@ public final class DebugJsAstProtoBuf {
         getEntryBytes(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.StringTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.StringTable}
    */
   public static final class StringTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -46704,7 +46704,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.StringTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.StringTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -46961,7 +46961,7 @@ public final class DebugJsAstProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameTable}
    */
   public static final class NameTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -47214,7 +47214,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.NameTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.NameTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -47670,7 +47670,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.SpecialFunction getSpecialFunction();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Name}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Name}
    */
   public static final class Name extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -48014,7 +48014,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Name}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Name}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -48390,7 +48390,7 @@ public final class DebugJsAstProtoBuf {
     org.jetbrains.kotlin.serialization.js.ast.DebugJsAstProtoBuf.FragmentOrBuilder getFragmentOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Chunk}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Chunk}
    */
   public static final class Chunk extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -48730,7 +48730,7 @@ public final class DebugJsAstProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.serialization.js.ast.Chunk}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.serialization.js.ast.Chunk}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements

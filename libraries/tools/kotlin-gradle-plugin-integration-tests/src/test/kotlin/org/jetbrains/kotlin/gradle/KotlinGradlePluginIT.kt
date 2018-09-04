@@ -692,7 +692,7 @@ class KotlinGradleIT : BaseGradleIT() {
 
             File(projectDir, "build.gradle").appendText(
                 """${'\n'}
-                task sourcesJar(type: Jar) {
+                task sourcesJar(directiveType: Jar) {
                     from sourceSets.main.allSource
                     classifier 'source'
                     duplicatesStrategy = 'fail' // fail in case of Java source duplication, see KT-17564

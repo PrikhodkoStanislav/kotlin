@@ -99,7 +99,7 @@ abstract class AbstractPartialBodyResolveTest : KotlinLightCodeInsightFixtureTes
             builder.append("Resolve target: ${target2.presentation(type2)}\n")
         }
         else {
-            builder.append("Expression type:${type2.presentation()}\n")
+            builder.append("Expression directiveType:${type2.presentation()}\n")
         }
         builder.append("----------------------------------------------\n")
 
@@ -173,7 +173,7 @@ abstract class AbstractPartialBodyResolveTest : KotlinLightCodeInsightFixtureTes
     }
 
     private fun KotlinType?.presentation()
-            = if (this != null) DescriptorRenderer.COMPACT.renderType(this) else "unknown type"
+            = if (this != null) DescriptorRenderer.COMPACT.renderType(this) else "unknown directiveType"
 
     private fun KtExpression.compactPresentation(): String {
         val text = text

@@ -4264,7 +4264,7 @@ public class LoadJavaUsingJavacTestGenerated extends AbstractLoadJavaUsingJavacT
             }
         }
 
-        @TestMetadata("compiler/testData/loadJava/compiledKotlin/type")
+        @TestMetadata("compiler/testData/loadJava/compiledKotlin/directiveType")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class Type extends AbstractLoadJavaUsingJavacTest {
@@ -4273,162 +4273,162 @@ public class LoadJavaUsingJavacTestGenerated extends AbstractLoadJavaUsingJavacT
             }
 
             public void testAllFilesPresentInType() throws Exception {
-                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/loadJava/compiledKotlin/type"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/loadJava/compiledKotlin/directiveType"), Pattern.compile("^(.+)\\.kt$"), TargetBackend.ANY, true);
             }
 
             @TestMetadata("Any.kt")
             public void testAny() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/Any.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/Any.kt");
             }
 
             @TestMetadata("AnyQ.kt")
             public void testAnyQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/AnyQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/AnyQ.kt");
             }
 
             @TestMetadata("ArrayOfInNumber.kt")
             public void testArrayOfInNumber() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfInNumber.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfInNumber.kt");
             }
 
             @TestMetadata("ArrayOfInt.kt")
             public void testArrayOfInt() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfInt.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfInt.kt");
             }
 
             @TestMetadata("ArrayOfInteger.kt")
             public void testArrayOfInteger() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfInteger.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfInteger.kt");
             }
 
             @TestMetadata("ArrayOfOutNumber.kt")
             public void testArrayOfOutNumber() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfOutNumber.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfOutNumber.kt");
             }
 
             @TestMetadata("ArrayOfOutT.kt")
             public void testArrayOfOutT() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfOutT.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfOutT.kt");
             }
 
             @TestMetadata("ArrayOfString.kt")
             public void testArrayOfString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ArrayOfString.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ArrayOfString.kt");
             }
 
             @TestMetadata("Function1IntString.kt")
             public void testFunction1IntString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/Function1IntString.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/Function1IntString.kt");
             }
 
             @TestMetadata("Int.kt")
             public void testInt() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/Int.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/Int.kt");
             }
 
             @TestMetadata("IntArray.kt")
             public void testIntArray() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/IntArray.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/IntArray.kt");
             }
 
             @TestMetadata("IntQ.kt")
             public void testIntQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/IntQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/IntQ.kt");
             }
 
             @TestMetadata("jlInteger.kt")
             public void testJlInteger() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlInteger.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlInteger.kt");
             }
 
             @TestMetadata("jlIntegerQ.kt")
             public void testJlIntegerQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlIntegerQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlIntegerQ.kt");
             }
 
             @TestMetadata("jlNumber.kt")
             public void testJlNumber() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlNumber.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlNumber.kt");
             }
 
             @TestMetadata("jlObject.kt")
             public void testJlObject() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlObject.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlObject.kt");
             }
 
             @TestMetadata("jlObjectQ.kt")
             public void testJlObjectQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlObjectQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlObjectQ.kt");
             }
 
             @TestMetadata("jlString.kt")
             public void testJlString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlString.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlString.kt");
             }
 
             @TestMetadata("jlStringQ.kt")
             public void testJlStringQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/jlStringQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/jlStringQ.kt");
             }
 
             @TestMetadata("ListOfAny.kt")
             public void testListOfAny() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ListOfAny.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ListOfAny.kt");
             }
 
             @TestMetadata("ListOfAnyQ.kt")
             public void testListOfAnyQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ListOfAnyQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ListOfAnyQ.kt");
             }
 
             @TestMetadata("ListOfStar.kt")
             public void testListOfStar() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ListOfStar.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ListOfStar.kt");
             }
 
             @TestMetadata("ListOfString.kt")
             public void testListOfString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ListOfString.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ListOfString.kt");
             }
 
             @TestMetadata("ListOfjlString.kt")
             public void testListOfjlString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/ListOfjlString.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/ListOfjlString.kt");
             }
 
             @TestMetadata("Nothing.kt")
             public void testNothing() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/Nothing.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/Nothing.kt");
             }
 
             @TestMetadata("NothingQ.kt")
             public void testNothingQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/NothingQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/NothingQ.kt");
             }
 
             @TestMetadata("platform.kt")
             public void testPlatform() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/platform.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/platform.kt");
             }
 
             @TestMetadata("String.kt")
             public void testString() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/String.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/String.kt");
             }
 
             @TestMetadata("StringQ.kt")
             public void testStringQ() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/StringQ.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/StringQ.kt");
             }
 
             @TestMetadata("SuspendFunction.kt")
             public void testSuspendFunction() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/SuspendFunction.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/SuspendFunction.kt");
             }
 
             @TestMetadata("Unit.kt")
             public void testUnit() throws Exception {
-                runTest("compiler/testData/loadJava/compiledKotlin/type/Unit.kt");
+                runTest("compiler/testData/loadJava/compiledKotlin/directiveType/Unit.kt");
             }
         }
 

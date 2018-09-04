@@ -180,7 +180,7 @@ public class DirectiveTestUtils {
             }
 
             String message = "Function " + functionName + " contains " + actualCount +
-                             " nodes of type " + klass.getName() +
+                             " nodes of directiveType " + klass.getName() +
                              ", but expected count is " + expectedCount;
             assertEquals(message, expectedCount, actualCount);
         }

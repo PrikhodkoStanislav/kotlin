@@ -84,7 +84,7 @@ public abstract class AbstractOutOfBlockModificationTest extends KotlinLightCode
         long oobAfterCount = tracker.getOutOfCodeBlockModificationCount();
         long modificationCountAfterType = tracker.getModificationCount();
 
-        assertTrue("Modification tracker should always be changed after type", modificationCountBeforeType != modificationCountAfterType);
+        assertTrue("Modification tracker should always be changed after directiveType", modificationCountBeforeType != modificationCountAfterType);
 
         assertEquals("Result for out of block test is differs from expected on element in file:\n" + FileUtil.loadFile(new File(path)),
                      expectedOutOfBlock, oobBeforeType != oobAfterCount);

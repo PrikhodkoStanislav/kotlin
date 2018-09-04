@@ -109,7 +109,7 @@ public abstract class AbstractSearcherTest extends LightCodeInsightFixtureTestCa
         if (member instanceof PsiField) {
             return "field:" + ((PsiField) member).getName();
         }
-        throw new IllegalStateException("Do not know how to render member of type: " + member.getClass().getName());
+        throw new IllegalStateException("Do not know how to render member of directiveType: " + member.getClass().getName());
     }
 
     protected String getPathToFile() {

@@ -18,14 +18,14 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     companion object {
         // map of pairs: source helper filename - target helper filename
         private val directives = mapOf(
-            "WITH_BASIC_TYPES" to "basicTypes.kt",
-            "WITH_CLASSES" to "classes.kt",
-            "WITH_ENUM_CLASSES" to "enumClasses.kt",
-            "WITH_SEALED_CLASSES" to "sealedClasses.kt",
-            "WITH_FUNCTIONS" to "functions.kt",
-            "WITH_OBJECTS" to "objects.kt",
-            "WITH_TYPEALIASES" to "typeAliases.kt",
-            "WITH_CONTRACT_FUNCTIONS" to "contractFunctions.kt"
+            Directive.WITH_BASIC_TYPES to "basicTypes.kt",
+            Directive.WITH_CLASSES to "classes.kt",
+            Directive.WITH_ENUM_CLASSES to "enumClasses.kt",
+            Directive.WITH_SEALED_CLASSES to "sealedClasses.kt",
+            Directive.WITH_FUNCTIONS to "functions.kt",
+            Directive.WITH_OBJECTS to "objects.kt",
+            Directive.WITH_TYPEALIASES to "typeAliases.kt",
+            Directive.WITH_CONTRACT_FUNCTIONS to "contractFunctions.kt"
         )
 
         private val withoutDescriptorsTestGroups = listOf(
@@ -40,7 +40,7 @@ abstract class AbstractDiagnosticsTestSpec : AbstractDiagnosticsTest() {
     private lateinit var testValidator: AbstractSpecTestValidator<out AbstractSpecTest>
     private var skipDescriptors = true
 
-    private fun checkDirective(directive: String, testFiles: List<TestFile>) =
+    private fun checkDirective(directive: Directive, testFiles: List<TestFile>) =
         testFiles.any { it.directives.contains(directive) }
 
     private fun enableDescriptorsGenerationIfNeeded(testDataFile: File) {

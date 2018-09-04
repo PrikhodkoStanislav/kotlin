@@ -13,15 +13,6 @@ import java.io.File
 import java.util.regex.Pattern
 import kotlin.collections.HashMap
 
-const val LANGUAGE_DIRECTIVE = "LANGUAGE"
-const val API_VERSION_DIRECTIVE = "API_VERSION"
-
-const val EXPERIMENTAL_DIRECTIVE = "EXPERIMENTAL"
-const val USE_EXPERIMENTAL_DIRECTIVE = "USE_EXPERIMENTAL"
-const val IGNORE_DATA_FLOW_IN_ASSERT_DIRECTIVE = "IGNORE_DATA_FLOW_IN_ASSERT"
-const val JVM_DEFAULT_MODE = "JVM_DEFAULT_MODE"
-const val SKIP_METADATA_VERSION_CHECK = "SKIP_METADATA_VERSION_CHECK"
-
 data class CompilerTestLanguageVersionSettings(
         private val initialLanguageFeatures: Map<LanguageFeature, LanguageFeature.State>,
         override val apiVersion: ApiVersion,
@@ -47,17 +38,17 @@ private fun specificFeaturesForTests(): Map<LanguageFeature, LanguageFeature.Sta
         emptyMap()
 }
 
-fun parseLanguageVersionSettingsOrDefault(directiveMap: Map<String, String>): CompilerTestLanguageVersionSettings =
+fun parseLanguageVersionSettingsOrDefault(directiveMap: Map<Directive, String>): CompilerTestLanguageVersionSettings =
     parseLanguageVersionSettings(directiveMap) ?: defaultLanguageVersionSettings()
 
-fun parseLanguageVersionSettings(directiveMap: Map<String, String>): CompilerTestLanguageVersionSettings? {
-    val apiVersionString = directiveMap[API_VERSION_DIRECTIVE]
-    val languageFeaturesString = directiveMap[LANGUAGE_DIRECTIVE]
-    val experimental = directiveMap[EXPERIMENTAL_DIRECTIVE]?.split(' ')?.let { AnalysisFlag.experimental to it }
-    val useExperimental = directiveMap[USE_EXPERIMENTAL_DIRECTIVE]?.split(' ')?.let { AnalysisFlag.useExperimental to it }
-    val ignoreDataFlowInAssert = AnalysisFlag.ignoreDataFlowInAssert to directiveMap.containsKey(IGNORE_DATA_FLOW_IN_ASSERT_DIRECTIVE)
-    val enableJvmDefault = directiveMap[JVM_DEFAULT_MODE]?.let { AnalysisFlag.jvmDefaultMode to JvmDefaultMode.fromStringOrNull(it)!! }
-    val skipMetadataVersionCheck = AnalysisFlag.skipMetadataVersionCheck to directiveMap.containsKey(SKIP_METADATA_VERSION_CHECK)
+fun parseLanguageVersionSettings(directiveMap: Map<Directive, String>): CompilerTestLanguageVersionSettings? {
+    val apiVersionString = directiveMap[Directive.API_VERSION]
+    val languageFeaturesString = directiveMap[Directive.LANGUAGE]
+    val experimental = directiveMap[Directive.EXPERIMENTAL]?.split(' ')?.let { AnalysisFlag.experimental to it }
+    val useExperimental = directiveMap[Directive.USE_EXPERIMENTAL]?.split(' ')?.let { AnalysisFlag.useExperimental to it }
+    val ignoreDataFlowInAssert = AnalysisFlag.ignoreDataFlowInAssert to directiveMap.containsKey(Directive.IGNORE_DATA_FLOW_IN_ASSERT)
+    val enableJvmDefault = directiveMap[Directive.JVM_DEFAULT_MODE]?.let { AnalysisFlag.jvmDefaultMode to JvmDefaultMode.fromStringOrNull(it)!! }
+    val skipMetadataVersionCheck = AnalysisFlag.skipMetadataVersionCheck to directiveMap.containsKey(Directive.SKIP_METADATA_VERSION_CHECK)
 
     if (apiVersionString == null && languageFeaturesString == null && experimental == null && useExperimental == null && !ignoreDataFlowInAssert.second) return null
 
@@ -82,7 +73,7 @@ fun defaultLanguageVersionSettings(): CompilerTestLanguageVersionSettings =
     CompilerTestLanguageVersionSettings(emptyMap(), ApiVersion.LATEST_STABLE, LanguageVersion.LATEST_STABLE)
 
 fun setupLanguageVersionSettingsForMultifileCompilerTests(files: List<File>, environment: KotlinCoreEnvironment) {
-    val allDirectives = HashMap<String, String>()
+    val allDirectives = HashMap<Directive, String>()
     for (file in files) {
         allDirectives.putAll(KotlinTestUtils.parseDirectives(file.readText()))
     }
@@ -101,7 +92,7 @@ private fun collectLanguageFeatureMap(directives: String): Map<LanguageFeature, 
     val matcher = languagePattern.matcher(directives)
     if (!matcher.find()) {
         Assert.fail(
-                "Wrong syntax in the '// !$LANGUAGE_DIRECTIVE: ...' directive:\n" +
+                "Wrong syntax in the '// !${Directive.LANGUAGE}: ...' directive:\n" +
                 "found: '$directives'\n" +
                 "Must be '((+|-|warn:)LanguageFeatureName)+'\n" +
                 "where '+' means 'enable', '-' means 'disable', 'warn:' means 'enable with warning'\n" +

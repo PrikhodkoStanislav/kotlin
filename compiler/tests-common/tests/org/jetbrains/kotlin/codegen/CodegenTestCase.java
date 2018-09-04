@@ -22,6 +22,7 @@ import org.jetbrains.kotlin.backend.common.output.OutputFile;
 import org.jetbrains.kotlin.backend.common.output.SimpleOutputFileCollection;
 import org.jetbrains.kotlin.checkers.CheckerTestUtil;
 import org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettings;
+import org.jetbrains.kotlin.checkers.Directive;
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys;
 import org.jetbrains.kotlin.cli.common.output.OutputUtilsKt;
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles;
@@ -68,7 +69,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettingsKt.API_VERSION_DIRECTIVE;
 import static org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettingsKt.parseLanguageVersionSettings;
 import static org.jetbrains.kotlin.cli.common.output.OutputUtilsKt.writeAllTo;
 import static org.jetbrains.kotlin.codegen.CodegenTestUtil.*;
@@ -196,12 +196,12 @@ public abstract class CodegenTestCase extends KtUsefulTestCase {
                 }
             }
 
-            Map<String, String> directives = KotlinTestUtils.parseDirectives(testFile.content);
+            Map<Directive, String> directives = KotlinTestUtils.parseDirectives(testFile.content);
 
             if (InTextDirectivesUtils.isDirectiveDefined(testFile.content, "WITH_UNSIGNED")) {
                 assertDirectivesToNull(explicitLanguageVersionSettings, explicitLanguageVersion);
                 explicitLanguageVersion = LanguageVersion.KOTLIN_1_3;
-                directives.put(API_VERSION_DIRECTIVE, ApiVersion.KOTLIN_1_3.getVersionString());
+                directives.put(Directive.API_VERSION, ApiVersion.KOTLIN_1_3.getVersionString());
             }
 
             LanguageVersionSettings fileLanguageVersionSettings = parseLanguageVersionSettings(directives);
@@ -818,7 +818,7 @@ public abstract class CodegenTestCase extends KtUsefulTestCase {
         return KotlinTestUtils.createTestFiles(file.getName(), expectedText, new KotlinTestUtils.TestFileFactoryNoModules<TestFile>() {
             @NotNull
             @Override
-            public TestFile create(@NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives) {
+            public TestFile create(@NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives) {
                 if (fileName.endsWith(".java")) {
                     if (javaFilesDir.isNull()) {
                         try {

@@ -43,7 +43,7 @@ class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
     override fun createEnvironment(): KotlinCoreEnvironment = createEnvironmentWithMockJdk(ConfigurationKind.JDK_ONLY)
 
     fun doTest(filePath: String, vararg substitutions: String) {
-        assert(substitutions.size in 1..2) { "Captured type approximation test requires substitutions for (T) or (T, R)" }
+        assert(substitutions.size in 1..2) { "Captured directiveType approximation test requires substitutions for (T) or (T, R)" }
         val oneTypeVariable = substitutions.size == 1
 
         val declarationsText = KotlinTestUtils.doLoadFile(File(testDataPath + "/declarations.kt"))

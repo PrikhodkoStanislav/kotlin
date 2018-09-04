@@ -22,6 +22,7 @@ import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.analyzer.AnalysisResult;
+import org.jetbrains.kotlin.checkers.Directive;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.config.CommonConfigurationKeysKt;
 import org.jetbrains.kotlin.config.CompilerConfiguration;
@@ -47,10 +48,6 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public abstract class AbstractDiagnosticMessageTest extends KotlinTestWithEnvironment {
-    private static final String DIAGNOSTICS_NUMBER_DIRECTIVE = "DIAGNOSTICS_NUMBER";
-    private static final String DIAGNOSTICS_DIRECTIVE = "DIAGNOSTICS";
-    private static final String MESSAGE_TYPE_DIRECTIVE = "MESSAGE_TYPE";
-
     private enum MessageType {
         TEXT("TEXT", "txt"), HTML("HTML", "html");
 
@@ -91,7 +88,7 @@ public abstract class AbstractDiagnosticMessageTest extends KotlinTestWithEnviro
         String fileName = file.getName();
 
         String fileData = KotlinTestUtils.doLoadFile(file);
-        Map<String,String> directives = KotlinTestUtils.parseDirectives(fileData);
+        Map<Directive,String> directives = KotlinTestUtils.parseDirectives(fileData);
         int diagnosticNumber = getDiagnosticNumber(directives);
         final Set<DiagnosticFactory<?>> diagnosticFactories = getDiagnosticFactories(directives);
         MessageType messageType = getMessageTypeDirective(directives);
@@ -134,21 +131,21 @@ public abstract class AbstractDiagnosticMessageTest extends KotlinTestWithEnviro
         }
     }
 
-    private static int getDiagnosticNumber(Map<String, String> directives) {
-        String diagnosticsNumber = directives.get(DIAGNOSTICS_NUMBER_DIRECTIVE);
-        assert diagnosticsNumber != null : DIAGNOSTICS_NUMBER_DIRECTIVE + " should be present.";
+    private static int getDiagnosticNumber(Map<Directive, String> directives) {
+        String diagnosticsNumber = directives.get(Directive.DIAGNOSTICS_NUMBER);
+        assert diagnosticsNumber != null : Directive.DIAGNOSTICS_NUMBER + " should be present.";
         try {
             return Integer.parseInt(diagnosticsNumber);
         }
         catch (NumberFormatException e) {
-            throw new AssertionError(DIAGNOSTICS_NUMBER_DIRECTIVE + " should contain number as its value.");
+            throw new AssertionError(Directive.DIAGNOSTICS_NUMBER + " should contain number as its value.");
         }
     }
 
     @NotNull
-    private Set<DiagnosticFactory<?>> getDiagnosticFactories(Map<String, String> directives) {
-        String diagnosticsData = directives.get(DIAGNOSTICS_DIRECTIVE);
-        assert diagnosticsData != null : DIAGNOSTICS_DIRECTIVE + " should be present.";
+    private Set<DiagnosticFactory<?>> getDiagnosticFactories(Map<Directive, String> directives) {
+        String diagnosticsData = directives.get(Directive.DIAGNOSTICS);
+        assert diagnosticsData != null : Directive.DIAGNOSTICS + " should be present.";
         Set<DiagnosticFactory<?>> diagnosticFactories = new HashSet<>();
         String[] diagnostics = diagnosticsData.split(" ");
         for (String diagnosticName : diagnostics) {
@@ -191,14 +188,14 @@ public abstract class AbstractDiagnosticMessageTest extends KotlinTestWithEnviro
     }
 
     @Nullable
-    private static MessageType getMessageTypeDirective(Map<String, String> directives) {
-        String messageType = directives.get(MESSAGE_TYPE_DIRECTIVE);
+    private static MessageType getMessageTypeDirective(Map<Directive, String> directives) {
+        String messageType = directives.get(Directive.MESSAGE_TYPE);
         if (messageType == null) return null;
         try {
             return MessageType.valueOf(messageType);
         }
         catch (IllegalArgumentException e) {
-            throw new AssertionError(MESSAGE_TYPE_DIRECTIVE + " should be " + MessageType.TEXT.directive + " or " +
+            throw new AssertionError(Directive.MESSAGE_TYPE + " should be " + MessageType.TEXT.directive + " or " +
                                      MessageType.HTML.directive + ". But was: \"" + messageType + "\".");
         }
     }

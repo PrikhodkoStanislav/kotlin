@@ -100,7 +100,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -226,7 +226,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -334,7 +334,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+          "EnumValueDescriptor is not for this directiveType.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -374,7 +374,7 @@ public final class DebugProtoBuf {
         getStringBytes(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.StringTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.StringTable}
    */
   public static final class StringTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -621,7 +621,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.StringTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.StringTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -878,7 +878,7 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.QualifiedNameTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.QualifiedNameTable}
    */
   public static final class QualifiedNameTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -1019,7 +1019,7 @@ public final class DebugProtoBuf {
       org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind getKind();
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName}
      */
     public static final class QualifiedName extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -1205,7 +1205,7 @@ public final class DebugProtoBuf {
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
-              "EnumValueDescriptor is not for this type.");
+              "EnumValueDescriptor is not for this directiveType.");
           }
           return VALUES[desc.getIndex()];
         }
@@ -1406,7 +1406,7 @@ public final class DebugProtoBuf {
         return builder;
       }
       /**
-       * Protobuf type {@code org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName}
+       * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName}
        */
       public static final class Builder extends
           org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -1824,7 +1824,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.QualifiedNameTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.QualifiedNameTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2268,7 +2268,7 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation}
    */
   public static final class Annotation extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2401,7 +2401,7 @@ public final class DebugProtoBuf {
       org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder getValueOrBuilder();
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation.Argument}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation.Argument}
      */
     public static final class Argument extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2514,22 +2514,22 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.MessageOrBuilder {
 
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
          *
          * <pre>
          * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
          * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-         * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+         * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
          * </pre>
          */
         boolean hasType();
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
          *
          * <pre>
          * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
          * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-         * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+         * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
          * </pre>
          */
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type getType();
@@ -2574,7 +2574,7 @@ public final class DebugProtoBuf {
          * <code>optional int32 class_id = 6;</code>
          *
          * <pre>
-         * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+         * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
          * </pre>
          */
         boolean hasClassId();
@@ -2582,7 +2582,7 @@ public final class DebugProtoBuf {
          * <code>optional int32 class_id = 6;</code>
          *
          * <pre>
-         * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+         * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
          * </pre>
          */
         int getClassId();
@@ -2651,7 +2651,7 @@ public final class DebugProtoBuf {
         int getFlags();
       }
       /**
-       * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation.Argument.Value}
+       * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation.Argument.Value}
        */
       public static final class Value extends
           org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2976,7 +2976,7 @@ public final class DebugProtoBuf {
               org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
             if (desc.getType() != getDescriptor()) {
               throw new java.lang.IllegalArgumentException(
-                "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this directiveType.");
             }
             return VALUES[desc.getIndex()];
           }
@@ -2996,24 +2996,24 @@ public final class DebugProtoBuf {
         public static final int TYPE_FIELD_NUMBER = 1;
         private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type type_;
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
          *
          * <pre>
          * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
          * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-         * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+         * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
          * </pre>
          */
         public boolean hasType() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
          *
          * <pre>
          * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
          * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-         * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+         * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
          * </pre>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type getType() {
@@ -3086,7 +3086,7 @@ public final class DebugProtoBuf {
          * <code>optional int32 class_id = 6;</code>
          *
          * <pre>
-         * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+         * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
          * </pre>
          */
         public boolean hasClassId() {
@@ -3096,7 +3096,7 @@ public final class DebugProtoBuf {
          * <code>optional int32 class_id = 6;</code>
          *
          * <pre>
-         * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+         * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
          * </pre>
          */
         public int getClassId() {
@@ -3392,7 +3392,7 @@ public final class DebugProtoBuf {
           return builder;
         }
         /**
-         * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation.Argument.Value}
+         * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation.Argument.Value}
          */
         public static final class Builder extends
             org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -3647,36 +3647,36 @@ public final class DebugProtoBuf {
 
           private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type type_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type.BYTE;
           /**
-           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
            *
            * <pre>
            * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
            * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-           * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+           * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
            * </pre>
            */
           public boolean hasType() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
           /**
-           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
            *
            * <pre>
            * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
            * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-           * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+           * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
            * </pre>
            */
           public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type getType() {
             return type_;
           }
           /**
-           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
            *
            * <pre>
            * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
            * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-           * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+           * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
            * </pre>
            */
           public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type value) {
@@ -3689,12 +3689,12 @@ public final class DebugProtoBuf {
             return this;
           }
           /**
-           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type type = 1;</code>
+           * <code>optional .org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type directiveType = 1;</code>
            *
            * <pre>
            * Note: a *Value* has a Type, not an Argument! This is done for future language features which may involve using arrays
            * of elements of different types. Such entries are allowed in the constant pool of JVM class files.
-           * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
+           * However, to save space, this field is optional: in case of homogeneous arrays, only the directiveType of the first element is required
            * </pre>
            */
           public Builder clearType() {
@@ -3837,7 +3837,7 @@ public final class DebugProtoBuf {
            * <code>optional int32 class_id = 6;</code>
            *
            * <pre>
-           * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+           * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
            * </pre>
            */
           public boolean hasClassId() {
@@ -3847,7 +3847,7 @@ public final class DebugProtoBuf {
            * <code>optional int32 class_id = 6;</code>
            *
            * <pre>
-           * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+           * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
            * </pre>
            */
           public int getClassId() {
@@ -3857,7 +3857,7 @@ public final class DebugProtoBuf {
            * <code>optional int32 class_id = 6;</code>
            *
            * <pre>
-           * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+           * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
            * </pre>
            */
           public Builder setClassId(int value) {
@@ -3870,7 +3870,7 @@ public final class DebugProtoBuf {
            * <code>optional int32 class_id = 6;</code>
            *
            * <pre>
-           * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
+           * If directiveType = CLASS, FQ name of the referenced class; if directiveType = ENUM, FQ name of the enum class
            * </pre>
            */
           public Builder clearClassId() {
@@ -4495,7 +4495,7 @@ public final class DebugProtoBuf {
         return builder;
       }
       /**
-       * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation.Argument}
+       * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation.Argument}
        */
       public static final class Builder extends
           org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -4982,7 +4982,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Annotation}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Annotation}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -5477,7 +5477,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 flexible_type_capabilities_id = 4;</code>
      *
      * <pre>
-     * If this field is set, the type is flexible.
+     * If this field is set, the directiveType is flexible.
      * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
      * </pre>
      */
@@ -5486,7 +5486,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 flexible_type_capabilities_id = 4;</code>
      *
      * <pre>
-     * If this field is set, the type is flexible.
+     * If this field is set, the directiveType is flexible.
      * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
      * </pre>
      */
@@ -5527,7 +5527,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter = 7;</code>
      *
      * <pre>
-     * id of the type parameter
+     * id of the directiveType parameter
      * </pre>
      */
     boolean hasTypeParameter();
@@ -5535,7 +5535,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter = 7;</code>
      *
      * <pre>
-     * id of the type parameter
+     * id of the directiveType parameter
      * </pre>
      */
     int getTypeParameter();
@@ -5544,7 +5544,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter_name = 9;</code>
      *
      * <pre>
-     * Name of the type parameter in the immediate owner
+     * Name of the directiveType parameter in the immediate owner
      * </pre>
      */
     boolean hasTypeParameterName();
@@ -5552,7 +5552,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter_name = 9;</code>
      *
      * <pre>
-     * Name of the type parameter in the immediate owner
+     * Name of the directiveType parameter in the immediate owner
      * </pre>
      */
     int getTypeParameterName();
@@ -5580,7 +5580,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     boolean hasOuterType();
@@ -5588,7 +5588,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getOuterType();
@@ -5596,7 +5596,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getOuterTypeOrBuilder();
@@ -5650,7 +5650,7 @@ public final class DebugProtoBuf {
     int getFlags();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Type}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Type}
    */
   public static final class Type extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -5855,26 +5855,26 @@ public final class DebugProtoBuf {
       org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection getProjection();
 
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       boolean hasType();
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType();
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder();
@@ -5889,7 +5889,7 @@ public final class DebugProtoBuf {
       int getTypeId();
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Type.Argument}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Type.Argument}
      */
     public static final class Argument extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -6092,7 +6092,7 @@ public final class DebugProtoBuf {
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
-              "EnumValueDescriptor is not for this type.");
+              "EnumValueDescriptor is not for this directiveType.");
           }
           return VALUES[desc.getIndex()];
         }
@@ -6127,30 +6127,30 @@ public final class DebugProtoBuf {
       public static final int TYPE_FIELD_NUMBER = 2;
       private org.jetbrains.kotlin.metadata.DebugProtoBuf.Type type_;
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType() {
         return type_;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
        *
        * <pre>
-       * When projection is STAR, no type is written, otherwise type must be specified
+       * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder() {
@@ -6305,7 +6305,7 @@ public final class DebugProtoBuf {
         return builder;
       }
       /**
-       * Protobuf type {@code org.jetbrains.kotlin.metadata.Type.Argument}
+       * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Type.Argument}
        */
       public static final class Builder extends
           org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -6495,20 +6495,20 @@ public final class DebugProtoBuf {
         private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Type, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> typeBuilder_;
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public boolean hasType() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType() {
@@ -6519,10 +6519,10 @@ public final class DebugProtoBuf {
           }
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -6539,10 +6539,10 @@ public final class DebugProtoBuf {
           return this;
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public Builder setType(
@@ -6557,10 +6557,10 @@ public final class DebugProtoBuf {
           return this;
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -6580,10 +6580,10 @@ public final class DebugProtoBuf {
           return this;
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public Builder clearType() {
@@ -6597,10 +6597,10 @@ public final class DebugProtoBuf {
           return this;
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getTypeBuilder() {
@@ -6609,10 +6609,10 @@ public final class DebugProtoBuf {
           return getTypeFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder() {
@@ -6623,10 +6623,10 @@ public final class DebugProtoBuf {
           }
         }
         /**
-         * <code>optional .org.jetbrains.kotlin.metadata.Type type = 2;</code>
+         * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 2;</code>
          *
          * <pre>
-         * When projection is STAR, no type is written, otherwise type must be specified
+         * When projection is STAR, no directiveType is written, otherwise directiveType must be specified
          * </pre>
          */
         private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
@@ -6743,7 +6743,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 flexible_type_capabilities_id = 4;</code>
      *
      * <pre>
-     * If this field is set, the type is flexible.
+     * If this field is set, the directiveType is flexible.
      * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
      * </pre>
      */
@@ -6754,7 +6754,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 flexible_type_capabilities_id = 4;</code>
      *
      * <pre>
-     * If this field is set, the type is flexible.
+     * If this field is set, the directiveType is flexible.
      * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
      * </pre>
      */
@@ -6819,7 +6819,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter = 7;</code>
      *
      * <pre>
-     * id of the type parameter
+     * id of the directiveType parameter
      * </pre>
      */
     public boolean hasTypeParameter() {
@@ -6829,7 +6829,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter = 7;</code>
      *
      * <pre>
-     * id of the type parameter
+     * id of the directiveType parameter
      * </pre>
      */
     public int getTypeParameter() {
@@ -6842,7 +6842,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter_name = 9;</code>
      *
      * <pre>
-     * Name of the type parameter in the immediate owner
+     * Name of the directiveType parameter in the immediate owner
      * </pre>
      */
     public boolean hasTypeParameterName() {
@@ -6852,7 +6852,7 @@ public final class DebugProtoBuf {
      * <code>optional int32 type_parameter_name = 9;</code>
      *
      * <pre>
-     * Name of the type parameter in the immediate owner
+     * Name of the directiveType parameter in the immediate owner
      * </pre>
      */
     public int getTypeParameterName() {
@@ -6890,7 +6890,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     public boolean hasOuterType() {
@@ -6900,7 +6900,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getOuterType() {
@@ -6910,7 +6910,7 @@ public final class DebugProtoBuf {
      * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
      *
      * <pre>
-     * Outer type may be present only if class_name or type_alias_name is present
+     * Outer directiveType may be present only if class_name or type_alias_name is present
      * </pre>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getOuterTypeOrBuilder() {
@@ -7239,7 +7239,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Type}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Type}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -7841,7 +7841,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 flexible_type_capabilities_id = 4;</code>
        *
        * <pre>
-       * If this field is set, the type is flexible.
+       * If this field is set, the directiveType is flexible.
        * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
        * </pre>
        */
@@ -7852,7 +7852,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 flexible_type_capabilities_id = 4;</code>
        *
        * <pre>
-       * If this field is set, the type is flexible.
+       * If this field is set, the directiveType is flexible.
        * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
        * </pre>
        */
@@ -7863,7 +7863,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 flexible_type_capabilities_id = 4;</code>
        *
        * <pre>
-       * If this field is set, the type is flexible.
+       * If this field is set, the directiveType is flexible.
        * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
        * </pre>
        */
@@ -7877,7 +7877,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 flexible_type_capabilities_id = 4;</code>
        *
        * <pre>
-       * If this field is set, the type is flexible.
+       * If this field is set, the directiveType is flexible.
        * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
        * </pre>
        */
@@ -8073,7 +8073,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter = 7;</code>
        *
        * <pre>
-       * id of the type parameter
+       * id of the directiveType parameter
        * </pre>
        */
       public boolean hasTypeParameter() {
@@ -8083,7 +8083,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter = 7;</code>
        *
        * <pre>
-       * id of the type parameter
+       * id of the directiveType parameter
        * </pre>
        */
       public int getTypeParameter() {
@@ -8093,7 +8093,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter = 7;</code>
        *
        * <pre>
-       * id of the type parameter
+       * id of the directiveType parameter
        * </pre>
        */
       public Builder setTypeParameter(int value) {
@@ -8106,7 +8106,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter = 7;</code>
        *
        * <pre>
-       * id of the type parameter
+       * id of the directiveType parameter
        * </pre>
        */
       public Builder clearTypeParameter() {
@@ -8121,7 +8121,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter_name = 9;</code>
        *
        * <pre>
-       * Name of the type parameter in the immediate owner
+       * Name of the directiveType parameter in the immediate owner
        * </pre>
        */
       public boolean hasTypeParameterName() {
@@ -8131,7 +8131,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter_name = 9;</code>
        *
        * <pre>
-       * Name of the type parameter in the immediate owner
+       * Name of the directiveType parameter in the immediate owner
        * </pre>
        */
       public int getTypeParameterName() {
@@ -8141,7 +8141,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter_name = 9;</code>
        *
        * <pre>
-       * Name of the type parameter in the immediate owner
+       * Name of the directiveType parameter in the immediate owner
        * </pre>
        */
       public Builder setTypeParameterName(int value) {
@@ -8154,7 +8154,7 @@ public final class DebugProtoBuf {
        * <code>optional int32 type_parameter_name = 9;</code>
        *
        * <pre>
-       * Name of the type parameter in the immediate owner
+       * Name of the directiveType parameter in the immediate owner
        * </pre>
        */
       public Builder clearTypeParameterName() {
@@ -8223,7 +8223,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public boolean hasOuterType() {
@@ -8233,7 +8233,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getOuterType() {
@@ -8247,7 +8247,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public Builder setOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -8267,7 +8267,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public Builder setOuterType(
@@ -8285,7 +8285,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public Builder mergeOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -8308,7 +8308,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public Builder clearOuterType() {
@@ -8325,7 +8325,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getOuterTypeBuilder() {
@@ -8337,7 +8337,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getOuterTypeOrBuilder() {
@@ -8351,7 +8351,7 @@ public final class DebugProtoBuf {
        * <code>optional .org.jetbrains.kotlin.metadata.Type outer_type = 10;</code>
        *
        * <pre>
-       * Outer type may be present only if class_name or type_alias_name is present
+       * Outer directiveType may be present only if class_name or type_alias_name is present
        * </pre>
        */
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
@@ -8686,7 +8686,7 @@ public final class DebugProtoBuf {
     int getUpperBoundId(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeParameter}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeParameter}
    */
   public static final class TypeParameter extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -8913,7 +8913,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -9236,7 +9236,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeParameter}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeParameter}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -10223,7 +10223,7 @@ public final class DebugProtoBuf {
     org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTableOrBuilder getVersionRequirementTableOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Class}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Class}
    */
   public static final class Class extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -10647,7 +10647,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -11462,7 +11462,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Class}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Class}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -14517,7 +14517,7 @@ public final class DebugProtoBuf {
     org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTableOrBuilder getVersionRequirementTableOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Package}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Package}
    */
   public static final class Package extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -14991,7 +14991,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Package}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Package}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -16260,25 +16260,25 @@ public final class DebugProtoBuf {
       org.jetbrains.kotlin.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> 
         getTypeList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType(int index);
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     int getTypeCount();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
         getTypeOrBuilderList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder(
         int index);
@@ -16303,7 +16303,7 @@ public final class DebugProtoBuf {
     int getFirstNullable();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeTable}
    */
   public static final class TypeTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -16413,32 +16413,32 @@ public final class DebugProtoBuf {
     public static final int TYPE_FIELD_NUMBER = 1;
     private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> type_;
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> getTypeList() {
       return type_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
         getTypeOrBuilderList() {
       return type_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     public int getTypeCount() {
       return type_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType(int index) {
       return type_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder(
         int index) {
@@ -16595,7 +16595,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -16774,7 +16774,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> typeBuilder_;
 
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> getTypeList() {
         if (typeBuilder_ == null) {
@@ -16784,7 +16784,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public int getTypeCount() {
         if (typeBuilder_ == null) {
@@ -16794,7 +16794,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType(int index) {
         if (typeBuilder_ == null) {
@@ -16804,7 +16804,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder setType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -16821,7 +16821,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder setType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -16835,7 +16835,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder addType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
         if (typeBuilder_ == null) {
@@ -16851,7 +16851,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder addType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -16868,7 +16868,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder addType(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -16882,7 +16882,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder addType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -16896,7 +16896,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder addAllType(
           java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
@@ -16911,7 +16911,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder clearType() {
         if (typeBuilder_ == null) {
@@ -16924,7 +16924,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public Builder removeType(int index) {
         if (typeBuilder_ == null) {
@@ -16937,14 +16937,14 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getTypeBuilder(
           int index) {
         return getTypeFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder(
           int index) {
@@ -16954,7 +16954,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
            getTypeOrBuilderList() {
@@ -16965,14 +16965,14 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder addTypeBuilder() {
         return getTypeFieldBuilder().addBuilder(
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder addTypeBuilder(
           int index) {
@@ -16980,7 +16980,7 @@ public final class DebugProtoBuf {
             index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type directiveType = 1;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder> 
            getTypeBuilderList() {
@@ -17140,7 +17140,7 @@ public final class DebugProtoBuf {
     int getVersionRequirement(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Constructor}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Constructor}
    */
   public static final class Constructor extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -17515,7 +17515,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Constructor}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Constructor}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -18309,7 +18309,7 @@ public final class DebugProtoBuf {
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ContractOrBuilder getContractOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Function}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Function}
    */
   public static final class Function extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -19068,7 +19068,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Function}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Function}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -20919,7 +20919,7 @@ public final class DebugProtoBuf {
     int getVersionRequirement(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Property}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Property}
    */
   public static final class Property extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -21654,7 +21654,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Property}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Property}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -23040,15 +23040,15 @@ public final class DebugProtoBuf {
     int getName();
 
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     boolean hasType();
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType();
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder();
 
@@ -23084,7 +23084,7 @@ public final class DebugProtoBuf {
     int getVarargElementTypeId();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.ValueParameter}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.ValueParameter}
    */
   public static final class ValueParameter extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -23269,19 +23269,19 @@ public final class DebugProtoBuf {
     public static final int TYPE_FIELD_NUMBER = 3;
     private org.jetbrains.kotlin.metadata.DebugProtoBuf.Type type_;
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType() {
       return type_;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder() {
       return type_;
@@ -23514,7 +23514,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.ValueParameter}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.ValueParameter}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -23813,13 +23813,13 @@ public final class DebugProtoBuf {
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> typeBuilder_;
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getType() {
         if (typeBuilder_ == null) {
@@ -23829,7 +23829,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
         if (typeBuilder_ == null) {
@@ -23845,7 +23845,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public Builder setType(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -23859,7 +23859,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
         if (typeBuilder_ == null) {
@@ -23878,7 +23878,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public Builder clearType() {
         if (typeBuilder_ == null) {
@@ -23891,7 +23891,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getTypeBuilder() {
         bitField0_ |= 0x00000004;
@@ -23899,7 +23899,7 @@ public final class DebugProtoBuf {
         return getTypeFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getTypeOrBuilder() {
         if (typeBuilder_ != null) {
@@ -23909,7 +23909,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Type directiveType = 3;</code>
        */
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
@@ -24267,7 +24267,7 @@ public final class DebugProtoBuf {
     int getVersionRequirement(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeAlias}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeAlias}
    */
   public static final class TypeAlias extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -24884,7 +24884,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.TypeAlias}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.TypeAlias}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -26180,7 +26180,7 @@ public final class DebugProtoBuf {
     int getName();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.EnumEntry}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.EnumEntry}
    */
   public static final class EnumEntry extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableMessage<
@@ -26412,7 +26412,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.EnumEntry}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.EnumEntry}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.ExtendableBuilder<
@@ -26694,7 +26694,7 @@ public final class DebugProtoBuf {
     org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind getVersionKind();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.VersionRequirement}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.VersionRequirement}
    */
   public static final class VersionRequirement extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -26901,7 +26901,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -26992,7 +26992,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -27306,7 +27306,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.VersionRequirement}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.VersionRequirement}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -27819,7 +27819,7 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.VersionRequirementTable}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.VersionRequirementTable}
    */
   public static final class VersionRequirementTable extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -28066,7 +28066,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.VersionRequirementTable}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.VersionRequirementTable}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -28535,7 +28535,7 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.PackageFragment}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.PackageFragment}
    *
    * <pre>
    * A part of the package, which is used to serialize .kjsm/.meta.js, .kotlin_builtins and .kotlin_metadata files.
@@ -28942,7 +28942,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.PackageFragment}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.PackageFragment}
      *
      * <pre>
      * A part of the package, which is used to serialize .kjsm/.meta.js, .kotlin_builtins and .kotlin_metadata files.
@@ -29804,7 +29804,7 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Contract}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Contract}
    */
   public static final class Contract extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -30057,7 +30057,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Contract}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Contract}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -30538,7 +30538,7 @@ public final class DebugProtoBuf {
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind getKind();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Effect}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Effect}
    */
   public static final class Effect extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -30783,7 +30783,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -30874,7 +30874,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -31139,7 +31139,7 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Effect}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Effect}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -31876,7 +31876,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     boolean hasIsInstanceType();
@@ -31885,7 +31885,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getIsInstanceType();
@@ -31894,7 +31894,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getIsInstanceTypeOrBuilder();
@@ -32017,11 +32017,11 @@ public final class DebugProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.Expression}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Expression}
    *
    * <pre>
    * We use some trickery to optimize memory footprint of contract-expressions:
-   * exact type of Expression is determined based on its contents.
+   * exact directiveType of Expression is determined based on its contents.
    * </pre>
    */
   public static final class Expression extends
@@ -32248,7 +32248,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this directiveType.");
         }
         return VALUES[desc.getIndex()];
       }
@@ -32337,7 +32337,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     public boolean hasIsInstanceType() {
@@ -32348,7 +32348,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getIsInstanceType() {
@@ -32359,7 +32359,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-     * and with type encoded in either one of next two fields as RHS.
+     * and with directiveType encoded in either one of next two fields as RHS.
      * </pre>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getIsInstanceTypeOrBuilder() {
@@ -32688,11 +32688,11 @@ public final class DebugProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.Expression}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.Expression}
      *
      * <pre>
      * We use some trickery to optimize memory footprint of contract-expressions:
-     * exact type of Expression is determined based on its contents.
+     * exact directiveType of Expression is determined based on its contents.
      * </pre>
      */
     public static final class Builder extends
@@ -33105,7 +33105,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public boolean hasIsInstanceType() {
@@ -33116,7 +33116,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getIsInstanceType() {
@@ -33131,7 +33131,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public Builder setIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -33152,7 +33152,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public Builder setIsInstanceType(
@@ -33171,7 +33171,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public Builder mergeIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
@@ -33195,7 +33195,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public Builder clearIsInstanceType() {
@@ -33213,7 +33213,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getIsInstanceTypeBuilder() {
@@ -33226,7 +33226,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getIsInstanceTypeOrBuilder() {
@@ -33241,7 +33241,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * present =&gt; this expression is IsInstancePredicate,  with 'variableName' as LHS
-       * and with type encoded in either one of next two fields as RHS.
+       * and with directiveType encoded in either one of next two fields as RHS.
        * </pre>
        */
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
@@ -34168,7 +34168,7 @@ public final class DebugProtoBuf {
       "e_alias_name\030\014 \001(\005B\004\220\265\030\001\0227\n\nouter_type\030\n",
       " \001(\0132#.org.jetbrains.kotlin.metadata.Typ" +
       "e\022\025\n\router_type_id\030\013 \001(\005\022=\n\020abbreviated_" +
-      "type\030\r \001(\0132#.org.jetbrains.kotlin.metada" +
+      "directiveType\030\r \001(\0132#.org.jetbrains.kotlin.metada" +
       "ta.Type\022\033\n\023abbreviated_type_id\030\016 \001(\005\022\r\n\005" +
       "flags\030\001 \001(\005\032\322\001\n\010Argument\022P\n\nprojection\030\001" +
       " \001(\01627.org.jetbrains.kotlin.metadata.Typ" +
@@ -34223,7 +34223,7 @@ public final class DebugProtoBuf {
       "\033\n\023version_requirement\030\037 \003(\005*\006\010d\020\270\224\001\"\232\004\n" +
       "\010Function\022\020\n\005flags\030\t \001(\005:\0016\022\024\n\told_flags" +
       "\030\001 \001(\005:\0016\022\022\n\004name\030\002 \002(\005B\004\210\265\030\001\0228\n\013return_" +
-      "type\030\003 \001(\0132#.org.jetbrains.kotlin.metada" +
+      "directiveType\030\003 \001(\0132#.org.jetbrains.kotlin.metada" +
       "ta.Type\022\026\n\016return_type_id\030\007 \001(\005\022D\n\016type_" +
       "parameter\030\004 \003(\0132,.org.jetbrains.kotlin.m",
       "etadata.TypeParameter\022:\n\rreceiver_type\030\005" +

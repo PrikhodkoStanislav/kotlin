@@ -82,7 +82,7 @@ abstract class AbstractClsStubBuilderTest : LightCodeInsightFixtureTestCase() {
         val extraOptions = ArrayList<String>()
         extraOptions.add("-Xallow-kotlin-package")
         if (isUseStringTable) {
-            extraOptions.add("-Xuse-type-table")
+            extraOptions.add("-Xuse-directiveType-table")
         }
 
         MockLibraryUtil.compileKotlin(sourcePath, outDir, extraOptions = extraOptions)

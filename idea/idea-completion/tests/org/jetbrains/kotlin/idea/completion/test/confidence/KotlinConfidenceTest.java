@@ -118,7 +118,7 @@ public class KotlinConfidenceTest extends LightCompletionTestCase {
                 assertContainsItems(ArrayUtil.toStringArray(expectedElements));
                 return;
             }
-            assertNotNull("You must type something, use // TYPE:", typeText);
+            assertNotNull("You must directiveType something, use // TYPE:", typeText);
             type(typeText);
             checkResultByFile(getAfterFileName());
         }

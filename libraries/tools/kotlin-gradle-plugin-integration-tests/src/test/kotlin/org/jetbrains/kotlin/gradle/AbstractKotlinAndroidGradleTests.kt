@@ -176,7 +176,7 @@ abstract class AbstractKotlinAndroidGradleTests(private val androidGradlePluginV
 
         project.build("assembleDebug", "test") {
             assertSuccessful()
-            // Before 3.0 AGP test only modules are compiled only against one flavor and one build type,
+            // Before 3.0 AGP test only modules are compiled only against one flavor and one build directiveType,
             // and contain only the compileDebugKotlin task.
             // After 3.0 AGP test only modules contain a compile<Variant>Kotlin task for each variant.
             tasks.addAll(findTasksByPattern(":Test:compile[\\w\\d]+Kotlin"))

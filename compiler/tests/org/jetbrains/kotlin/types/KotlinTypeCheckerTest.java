@@ -72,7 +72,7 @@ public class KotlinTypeCheckerTest extends KotlinTestWithEnvironment {
         typeResolver = container.getTypeResolver();
         expressionTypingServices = container.getExpressionTypingServices();
 
-        scopeWithImports = getDeclarationsScope("compiler/testData/type-checker-test.kt");
+        scopeWithImports = getDeclarationsScope("compiler/testData/directiveType-checker-test.kt");
     }
 
     @Override

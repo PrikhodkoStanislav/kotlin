@@ -268,7 +268,7 @@ public class KotlinJavaFacadeTest extends KotlinLightCodeInsightFixtureTestCase 
 
         T caretElement = PsiTreeUtil.getParentOfType(elementAt, elementClass);
         assertNotNull(
-                String.format("Caret should be placed to element of type: %s, but was at element '%s' of type %s",
+                String.format("Caret should be placed to element of directiveType: %s, but was at element '%s' of directiveType %s",
                               elementClass, elementAt, elementAt.getClass()),
                 caretElement);
 

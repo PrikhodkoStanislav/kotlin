@@ -39,12 +39,12 @@ abstract class AbstractMultiModuleRenameTest : KotlinMultiFileTestCase() {
             val mainFile = rootDir.findFileByRelativePath(file)!!
             val psiFile = PsiManager.getInstance(project).findFile(mainFile)!!
 
-            val renameType = renameParamsObject.getString("type")
+            val renameType = renameParamsObject.getString("directiveType")
 
             when (RenameType.valueOf(renameType)) {
                 RenameType.FILE -> runRenameProcessor(project, newName, psiFile, renameParamsObject, true, true)
                 RenameType.MARKED_ELEMENT -> doRenameMarkedElement(renameParamsObject, psiFile)
-                else -> TestCase.fail("Unexpected rename type: $renameType")
+                else -> TestCase.fail("Unexpected rename directiveType: $renameType")
             }
         }
     }

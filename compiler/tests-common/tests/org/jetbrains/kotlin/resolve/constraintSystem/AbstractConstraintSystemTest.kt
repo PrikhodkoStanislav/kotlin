@@ -86,7 +86,7 @@ abstract class AbstractConstraintSystemTest : KotlinTestWithEnvironment() {
 
         fun getType(typeString: String): KotlinType {
             val type = testDeclarations.getType(typeString).apply {
-                assert(!ErrorUtils.containsErrorType(this)) { "Type $this is resolved to or contains error type" }
+                assert(!ErrorUtils.containsErrorType(this)) { "Type $this is resolved to or contains error directiveType" }
             }
             return substitutor.substitute(type, Variance.INVARIANT) ?: error("Failed to substitute $type")
         }

@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.resolve;
 
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.kotlin.checkers.Directive;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.psi.KtFile;
 import org.jetbrains.kotlin.test.ConfigurationKind;
@@ -45,7 +46,7 @@ public abstract class ExtensibleResolveTestCase extends KotlinTestWithEnvironmen
         List<KtFile> files = KotlinTestUtils.createTestFiles("file.kt", text, new KotlinTestUtils.TestFileFactoryNoModules<KtFile>() {
             @NotNull
             @Override
-            public KtFile create(@NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives) {
+            public KtFile create(@NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives) {
                 return expectedResolveData.createFileFromMarkedUpText(fileName, text);
             }
         }, "");

@@ -139,7 +139,7 @@ class ModuleInfo(
         val actualRootType = sourceFolder.rootType
         if (actualRootType != rootType) {
             messageCollector.report(
-                "Module '${module.name}', source root '$pathInProject': Expected root type $rootType doesn't match the actual one: $actualRootType"
+                "Module '${module.name}', source root '$pathInProject': Expected root directiveType $rootType doesn't match the actual one: $actualRootType"
             )
             return
         }

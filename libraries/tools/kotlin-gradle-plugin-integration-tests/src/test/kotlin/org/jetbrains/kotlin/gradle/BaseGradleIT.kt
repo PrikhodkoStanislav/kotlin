@@ -246,7 +246,7 @@ abstract class BaseGradleIT {
     }
 
     // Basically the same as `Project.build`, tells gradle to wait for debug on 5005 port
-    // Faster to type than `project.build("-Dorg.gradle.debug=true")` or `project.build(options = defaultBuildOptions().copy(debug = true))`
+    // Faster to directiveType than `project.build("-Dorg.gradle.debug=true")` or `project.build(options = defaultBuildOptions().copy(debug = true))`
     fun Project.debug(vararg params: String, options: BuildOptions = defaultBuildOptions(), check: CompiledProject.() -> Unit) {
         build(*params, options = options.copy(debug = true), check = check)
     }
@@ -557,7 +557,7 @@ abstract class BaseGradleIT {
                 add("-Pkapt.use.worker.api=${kaptOptions.useWorkers}")
             }
 
-            // Workaround: override a console type set in the user machine gradle.properties (since Gradle 4.3):
+            // Workaround: override a console directiveType set in the user machine gradle.properties (since Gradle 4.3):
             add("--console=plain")
 
             addAll(options.freeCommandLineArgs)

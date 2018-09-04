@@ -232,7 +232,7 @@ abstract class AbstractDiagnosticsTest : BaseDiagnosticsTest() {
             if (current != null) {
                 if (result != null && result != current) {
                     Assert.fail(
-                        "More than one file in the module has $LANGUAGE_DIRECTIVE or $API_VERSION_DIRECTIVE directive specified. " +
+                        "More than one file in the module has ${Directive.LANGUAGE} or ${Directive.API_VERSION} directive specified. " +
                                 "This is not supported. Please move all directives into one file"
                     )
                 }

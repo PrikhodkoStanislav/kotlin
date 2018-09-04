@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.spec.validators
 
+import org.jetbrains.kotlin.checkers.TestArea
 import java.io.File
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -17,12 +18,6 @@ enum class TestType(val type: String) {
         private val map = TestType.values().associateBy(TestType::type)
         fun fromValue(type: String) = map[type]
     }
-}
-
-enum class TestArea {
-    PSI,
-    DIAGNOSTICS,
-    CODEGEN
 }
 
 enum class SpecTestLinkedType {
@@ -63,7 +58,7 @@ enum class SpecTestValidationFailedReason(val description: String) {
     TESTINFO_NOT_VALID("Test info is incorrect."),
     FILEPATH_AND_TESTINFO_IN_FILE_NOT_CONSISTENCY("Test info from filepath and file content is not consistency"),
     TEST_IS_NOT_POSITIVE("Test is not positive because it contains error elements (PsiErrorElement or diagnostic with error severity)."),
-    TEST_IS_NOT_NEGATIVE("Test is not negative because it not contains error type elements (PsiErrorElement or diagnostic with error severity)."),
+    TEST_IS_NOT_NEGATIVE("Test is not negative because it not contains error directiveType elements (PsiErrorElement or diagnostic with error severity)."),
     UNKNOWN("Unknown validation error.")
 }
 

@@ -182,8 +182,8 @@ abstract class AbstractLocalInspectionTest : KotlinLightCodeInsightFixtureTestCa
         }
         if (expectedHighlightType != null) {
             Assert.assertTrue(
-                "Expected the following problem highlight type: $expectedHighlightType\n" +
-                        "Actual type: ${highlightInfos.joinToString { it.type.toString() }}",
+                "Expected the following problem highlight directiveType: $expectedHighlightType\n" +
+                        "Actual directiveType: ${highlightInfos.joinToString { it.type.toString() }}",
                 highlightInfos.all { expectedHighlightType in it.type.toString() }
             )
         }

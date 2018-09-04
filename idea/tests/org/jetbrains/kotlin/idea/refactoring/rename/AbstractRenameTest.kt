@@ -114,7 +114,7 @@ abstract class AbstractRenameTest : KotlinLightCodeInsightFixtureTestCase() {
         val testFile = File(path)
         val renameObject = loadTestConfiguration(testFile)
 
-        val renameTypeStr = renameObject.getString("type")
+        val renameTypeStr = renameObject.getString("directiveType")
 
         val hintDirective = renameObject.getNullableString("hint")
 

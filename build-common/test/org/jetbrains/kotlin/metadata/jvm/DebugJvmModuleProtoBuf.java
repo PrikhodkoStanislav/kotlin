@@ -210,7 +210,7 @@ public final class DebugJvmModuleProtoBuf {
         int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.Module}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.Module}
    */
   public static final class Module extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -808,7 +808,7 @@ public final class DebugJvmModuleProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.Module}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.Module}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2641,7 +2641,7 @@ public final class DebugJvmModuleProtoBuf {
     int getClassWithJvmPackageNamePackageId(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.PackageParts}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.PackageParts}
    */
   public static final class PackageParts extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -3297,7 +3297,7 @@ public final class DebugJvmModuleProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.PackageParts}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.PackageParts}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements

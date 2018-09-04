@@ -28,7 +28,7 @@ class FlexibleTypeAssertionsEnabledTest : KotlinTestWithEnvironmentManagement() 
         try {
             KotlinTypeFactory.flexibleType(builtIns.intType, builtIns.stringType).arguments
         } catch (e: AssertionError) {
-            assertEquals("Lower bound Int of a flexible type must be a subtype of the upper bound String", e.message)
+            assertEquals("Lower bound Int of a flexible directiveType must be a subtype of the upper bound String", e.message)
             return
         }
 

@@ -6,10 +6,11 @@
 package org.jetbrains.kotlin.spec.validators
 
 import org.jetbrains.kotlin.checkers.BaseDiagnosticsTest
+import org.jetbrains.kotlin.checkers.TestFile
 import org.jetbrains.kotlin.diagnostics.Diagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
 
-class DiagnosticTestTypeValidator(testFiles: List<BaseDiagnosticsTest.TestFile>) {
+class DiagnosticTestTypeValidator(testFiles: List<TestFile>) {
     private val diagnostics = mutableListOf<Diagnostic>()
     private val diagnosticStats = mutableMapOf<String, Int>()
     private val diagnosticSeverityStats = mutableMapOf<Severity, Int>()
@@ -25,7 +26,7 @@ class DiagnosticTestTypeValidator(testFiles: List<BaseDiagnosticsTest.TestFile>)
         }
     }
 
-    private fun collectDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
+    private fun collectDiagnostics(files: List<TestFile>) {
         files.forEach {
             it.actualDiagnostics.forEach {
                 val diagnosticName = it.diagnostic.factory.name

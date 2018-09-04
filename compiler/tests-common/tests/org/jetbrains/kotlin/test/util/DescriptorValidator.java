@@ -98,12 +98,12 @@ public class DescriptorValidator {
                 @NotNull DiagnosticCollector collector
         ) {
             if (type == null) {
-                report(collector, descriptor, "No type");
+                report(collector, descriptor, "No directiveType");
                 return;
             }
 
             if (!allowErrorTypes && KotlinTypeKt.isError(type)) {
-                report(collector, descriptor, "Error type: " + type);
+                report(collector, descriptor, "Error directiveType: " + type);
                 return;
             }
 
@@ -295,7 +295,7 @@ public class DescriptorValidator {
             visitFunctionDescriptor(constructorDescriptor, collector);
 
             assertEqualTypes(constructorDescriptor, collector,
-                             "return type",
+                             "return directiveType",
                              constructorDescriptor.getContainingDeclaration().getDefaultType(),
                              constructorDescriptor.getReturnType());
 
@@ -317,14 +317,14 @@ public class DescriptorValidator {
 
             PropertyGetterDescriptor getter = descriptor.getGetter();
             if (getter != null) {
-                assertEqualTypes(getter, collector, "getter return type", descriptor.getType(), getter.getReturnType());
+                assertEqualTypes(getter, collector, "getter return directiveType", descriptor.getType(), getter.getReturnType());
                 validateAccessor(descriptor, collector, getter, "getter");
             }
 
             PropertySetterDescriptor setter = descriptor.getSetter();
             if (setter != null) {
                 assertEquals(setter, collector, "setter parameter count", 1, setter.getValueParameters().size());
-                assertEqualTypes(setter, collector, "setter parameter type", descriptor.getType(), setter.getValueParameters().get(0).getType());
+                assertEqualTypes(setter, collector, "setter parameter directiveType", descriptor.getType(), setter.getValueParameters().get(0).getType());
                 assertEquals(setter, collector, "corresponding property", descriptor, setter.getCorrespondingProperty());
             }
 

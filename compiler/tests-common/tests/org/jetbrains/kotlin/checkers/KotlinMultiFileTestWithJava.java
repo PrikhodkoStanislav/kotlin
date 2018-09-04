@@ -153,7 +153,7 @@ public abstract class KotlinMultiFileTestWithJava<M, F> extends KtUsefulTestCase
 
     protected abstract M createTestModule(@NotNull String name);
 
-    protected abstract F createTestFile(M module, String fileName, String text, Map<String, String> directives);
+    protected abstract F createTestFile(M module, String fileName, String text, Map<Directive, String> directives);
 
     protected abstract void doMultiFileTest(File file, Map<String, ModuleAndDependencies> modules, List<F> files) throws Exception;
 
@@ -164,7 +164,7 @@ public abstract class KotlinMultiFileTestWithJava<M, F> extends KtUsefulTestCase
                     @Nullable M module,
                     @NotNull String fileName,
                     @NotNull String text,
-                    @NotNull Map<String, String> directives
+                    @NotNull Map<Directive, String> directives
             ) {
                 if (fileName.endsWith(".java")) {
                     writeSourceFile(fileName, text, javaFilesDir);

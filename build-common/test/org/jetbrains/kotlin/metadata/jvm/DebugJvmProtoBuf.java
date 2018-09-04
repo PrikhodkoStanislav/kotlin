@@ -75,7 +75,7 @@ public final class DebugJvmProtoBuf {
     int getLocalName(int index);
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes}
    */
   public static final class StringTableTypes extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -341,7 +341,7 @@ public final class DebugJvmProtoBuf {
       int getReplaceChar(int index);
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record}
      */
     public static final class Record extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -601,7 +601,7 @@ public final class DebugJvmProtoBuf {
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
-              "EnumValueDescriptor is not for this type.");
+              "EnumValueDescriptor is not for this directiveType.");
           }
           return VALUES[desc.getIndex()];
         }
@@ -999,7 +999,7 @@ public final class DebugJvmProtoBuf {
         return builder;
       }
       /**
-       * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record}
+       * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes.Record}
        */
       public static final class Builder extends
           org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -1850,7 +1850,7 @@ public final class DebugJvmProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.StringTableTypes}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2392,7 +2392,7 @@ public final class DebugJvmProtoBuf {
     int getDesc();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature}
    */
   public static final class JvmMethodSignature extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -2650,7 +2650,7 @@ public final class DebugJvmProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmMethodSignature}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -2885,7 +2885,7 @@ public final class DebugJvmProtoBuf {
      * <code>optional int32 desc = 2;</code>
      *
      * <pre>
-     * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+     * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
      * </pre>
      */
     boolean hasDesc();
@@ -2893,13 +2893,13 @@ public final class DebugJvmProtoBuf {
      * <code>optional int32 desc = 2;</code>
      *
      * <pre>
-     * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+     * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
      * </pre>
      */
     int getDesc();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature}
    */
   public static final class JvmFieldSignature extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -3021,7 +3021,7 @@ public final class DebugJvmProtoBuf {
      * <code>optional int32 desc = 2;</code>
      *
      * <pre>
-     * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+     * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
      * </pre>
      */
     public boolean hasDesc() {
@@ -3031,7 +3031,7 @@ public final class DebugJvmProtoBuf {
      * <code>optional int32 desc = 2;</code>
      *
      * <pre>
-     * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+     * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
      * </pre>
      */
     public int getDesc() {
@@ -3157,7 +3157,7 @@ public final class DebugJvmProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmFieldSignature}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -3321,7 +3321,7 @@ public final class DebugJvmProtoBuf {
        * <code>optional int32 desc = 2;</code>
        *
        * <pre>
-       * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+       * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
        * </pre>
        */
       public boolean hasDesc() {
@@ -3331,7 +3331,7 @@ public final class DebugJvmProtoBuf {
        * <code>optional int32 desc = 2;</code>
        *
        * <pre>
-       * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+       * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
        * </pre>
        */
       public int getDesc() {
@@ -3341,7 +3341,7 @@ public final class DebugJvmProtoBuf {
        * <code>optional int32 desc = 2;</code>
        *
        * <pre>
-       * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+       * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
        * </pre>
        */
       public Builder setDesc(int value) {
@@ -3354,7 +3354,7 @@ public final class DebugJvmProtoBuf {
        * <code>optional int32 desc = 2;</code>
        *
        * <pre>
-       * JVM descriptor of the field type, e.g. 'Ljava/lang/String;'
+       * JVM descriptor of the field directiveType, e.g. 'Ljava/lang/String;'
        * </pre>
        */
       public Builder clearDesc() {
@@ -3444,7 +3444,7 @@ public final class DebugJvmProtoBuf {
     org.jetbrains.kotlin.metadata.jvm.DebugJvmProtoBuf.JvmMethodSignatureOrBuilder getSetterOrBuilder();
   }
   /**
-   * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmPropertySignature}
+   * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmPropertySignature}
    */
   public static final class JvmPropertySignature extends
       org.jetbrains.kotlin.protobuf.GeneratedMessage implements
@@ -3818,7 +3818,7 @@ public final class DebugJvmProtoBuf {
       return builder;
     }
     /**
-     * Protobuf type {@code org.jetbrains.kotlin.metadata.jvm.JvmPropertySignature}
+     * Protobuf directiveType {@code org.jetbrains.kotlin.metadata.jvm.JvmPropertySignature}
      */
     public static final class Builder extends
         org.jetbrains.kotlin.protobuf.GeneratedMessage.Builder<Builder> implements

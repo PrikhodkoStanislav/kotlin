@@ -99,7 +99,7 @@ abstract class AbstractTypeBindingTest : KotlinTestWithEnvironment() {
             }
 
             println("psi: ${binding.psiElement.text}")
-            println("type: ${binding.type.render()}")
+            println("directiveType: ${binding.type.render()}")
 
             printCollection(binding.arguments) {
                 print(it)

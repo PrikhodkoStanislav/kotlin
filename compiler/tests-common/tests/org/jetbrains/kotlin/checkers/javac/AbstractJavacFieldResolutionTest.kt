@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.checkers.javac
 
 import org.jetbrains.kotlin.checkers.AbstractDiagnosticsTest
+import org.jetbrains.kotlin.checkers.TestFile
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import java.io.File
 

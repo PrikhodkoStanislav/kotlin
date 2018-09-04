@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.analyzer.AnalysisResult;
 import org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettings;
 import org.jetbrains.kotlin.checkers.CompilerTestLanguageVersionSettingsKt;
+import org.jetbrains.kotlin.checkers.Directive;
 import org.jetbrains.kotlin.cli.common.config.ContentRootsKt;
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
@@ -148,7 +149,7 @@ public abstract class AbstractLoadJavaTest extends TestCaseWithTmpdir {
     }
 
     private static void updateConfigurationWithDirectives(String content, CompilerConfiguration configuration) {
-        Map<String, String> directives = KotlinTestUtils.parseDirectives(content);
+        Map<Directive, String> directives = KotlinTestUtils.parseDirectives(content);
         LanguageVersionSettings languageVersionSettings = CompilerTestLanguageVersionSettingsKt.parseLanguageVersionSettings(directives);
         if (languageVersionSettings == null) {
             if (InTextDirectivesUtils.isDirectiveDefined(content, "WITH_UNSIGNED")) {
@@ -269,7 +270,7 @@ public abstract class AbstractLoadJavaTest extends TestCaseWithTmpdir {
                 new TestFileFactoryNoModules<File>() {
                     @NotNull
                     @Override
-                    public File create(@NotNull String fileName, @NotNull String text, @NotNull Map<String, String> directives) {
+                    public File create(@NotNull String fileName, @NotNull String text, @NotNull Map<Directive, String> directives) {
                         File targetFile = new File(srcDir, fileName);
                         try {
                             FileUtil.writeToFile(targetFile, text);

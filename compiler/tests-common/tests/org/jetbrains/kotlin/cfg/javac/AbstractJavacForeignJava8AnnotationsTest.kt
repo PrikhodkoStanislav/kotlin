@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.checkers.javac
 
 import org.jetbrains.kotlin.checkers.AbstractForeignJava8AnnotationsTest
+import org.jetbrains.kotlin.checkers.TestFile
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.test.InTextDirectivesUtils
 import java.io.File

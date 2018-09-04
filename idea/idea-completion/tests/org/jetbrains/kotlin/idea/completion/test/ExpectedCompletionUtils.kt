@@ -216,7 +216,7 @@ object ExpectedCompletionUtils {
             "BASIC" -> CompletionType.BASIC
             "SMART" -> CompletionType.SMART
             null -> null
-            else -> error("Unknown completion type: $completionTypeString")
+            else -> error("Unknown completion directiveType: $completionTypeString")
         }
     }
 

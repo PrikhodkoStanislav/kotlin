@@ -53,7 +53,7 @@ class MemoryOptimizationsTest : KtUsefulTestCase() {
         val upperBound = parameterType.upperIfFlexible()
 
         assertTrue(upperBound.javaClass.simpleName == "NullableSimpleType")
-        // NullableSimpleType should store and return the same instance as lower bound of flexible type
+        // NullableSimpleType should store and return the same instance as lower bound of flexible directiveType
         assertTrue(parameterType.lowerIfFlexible() === upperBound.makeNullableAsSpecified(false))
     }
 

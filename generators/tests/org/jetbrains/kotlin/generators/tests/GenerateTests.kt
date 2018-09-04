@@ -339,7 +339,7 @@ fun main(args: Array<String>) {
         }
 
         testClass<AbstractHierarchyTest> {
-            model("hierarchy/class/type", extension = null, recursive = false, testMethod = "doTypeClassHierarchyTest")
+            model("hierarchy/class/directiveType", extension = null, recursive = false, testMethod = "doTypeClassHierarchyTest")
             model("hierarchy/class/super", extension = null, recursive = false, testMethod = "doSuperClassHierarchyTest")
             model("hierarchy/class/sub", extension = null, recursive = false, testMethod = "doSubClassHierarchyTest")
             model("hierarchy/calls/callers", extension = null, recursive = false, testMethod = "doCallerHierarchyTest")
